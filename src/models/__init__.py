@@ -3,6 +3,7 @@
 from .registry import (
     get_model_adapter,
     load_model,
+    load_model_adapter,
     register_model_adapter,
     register_model_loader,
     registered_model_adapters,
@@ -16,6 +17,7 @@ __all__ = [
     "FastWAMAdapter",
     "get_model_adapter",
     "load_model",
+    "load_model_adapter",
     "register_model_adapter",
     "register_model_loader",
     "registered_model_adapters",

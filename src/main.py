@@ -6,7 +6,7 @@ from pathlib import Path
 
 from wam_interp.config import RunConfig
 from wam_interp.data.npz import load_observation_npz
-from wam_interp.models import get_model_adapter, load_model
+from wam_interp.models import load_model_adapter
 from wam_interp.tracing.recorder import TraceRecorder
 from wam_interp.types import InferenceRequest
 
@@ -14,7 +14,7 @@ from wam_interp.types import InferenceRequest
 def run(config: RunConfig):
     config.validate()
     root = Path(__file__).resolve().parents[1]
-    model = load_model(
+    adapter = load_model_adapter(
         config.backend, task=config.task, repository_root=root,
         checkpoint=config.checkpoint, device=config.device, dtype=config.dtype,
     )
@@ -30,7 +30,6 @@ def run(config: RunConfig):
         trace_modules=config.trace_modules,
     )
     recorder = TraceRecorder() if config.trace_modules else None
-    adapter = get_model_adapter(config.backend, model=model)
     result = adapter.predict_action(request, recorder=recorder)
     payload = {
         "metadata": result.metadata,

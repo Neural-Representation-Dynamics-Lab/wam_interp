@@ -40,6 +40,16 @@ def load_model(name: str, **kwargs: Any):
     return loader(**kwargs)
 
 
+def load_model_adapter(name: str, **loader_kwargs: Any):
+    """Load a backend model and wrap it in its model-neutral inference adapter.
+
+    Call this once per model instance, then reuse the returned adapter for as
+    many InferenceRequests as needed.
+    """
+    model = load_model(name, **loader_kwargs)
+    return get_model_adapter(name, model=model)
+
+
 def registered_model_adapters() -> tuple[str, ...]:
     return tuple(sorted(_ADAPTERS))
 

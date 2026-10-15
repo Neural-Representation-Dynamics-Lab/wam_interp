@@ -33,6 +33,10 @@ python -m pip install -e ".[all]"
 
 This installs the repository and the dependencies currently declared for FastWAM. It does not download a checkpoint or pretrained model assets, install LIBERO or RoboTwin, or set up their simulators. The current development workflow uses an editable install from a checkout, so the repository's Hydra config files remain available to the loader.
 
+In notebooks, restart the runtime after installing or changing packages. The running Python process can keep older modules loaded even after their files have been replaced.
+
+For a complete Colab example that clones the repository, downloads the released FastWAM checkpoint, and loads it through the adapter, see [the FastWAM Colab guide](docs/fastwam_colab.md). The model-specific README at [src/models/fastwam/README.md](src/models/fastwam/README.md) explains the model variants and config naming.
+
 The package import name is `wam_interp`:
 
 ```python

@@ -3,7 +3,7 @@ requires = ["setuptools>=68"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "wam-interp"
+name = "wam_interp"
 version = "0.1.0"
 description = "Modular causal interpretability research infrastructure for world-action models"
 requires-python = ">=3.10"
@@ -36,7 +36,7 @@ all = [
 ]
 
 [project.scripts]
-wam-interp = "wam_interp.main:main"
+wam_interp = "wam_interp.main:main"
 
 [tool.setuptools]
 packages = [

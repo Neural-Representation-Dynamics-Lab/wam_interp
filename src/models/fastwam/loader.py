@@ -6,16 +6,37 @@ from typing import Any
 from wam_interp.models.registry import register_model_loader
 
 
-def compose_fastwam_config(task: str, repository_root: str | Path,
+def _default_repository_root() -> Path:
+    """Return this checkout's root without assuming its directory name."""
+    return Path(__file__).resolve().parents[3]
+
+
+def _fastwam_config_dir(repository_root: str | Path | None) -> Path:
+    if repository_root is None:
+        roots = [_default_repository_root()]
+    else:
+        roots = [Path(repository_root).expanduser().resolve(), _default_repository_root()]
+
+    for root in roots:
+        config_dir = root / "configs" / "fastwam"
+        try:
+            if config_dir.is_dir():
+                return config_dir
+        except OSError:
+            continue
+
+    expected = roots[0] / "configs" / "fastwam"
+    raise FileNotFoundError(f"FastWAM config directory not found: {expected}")
+
+
+def compose_fastwam_config(task: str, repository_root: str | Path | None = None,
                            overrides: list[str] | None = None):
     try:
         from hydra import compose, initialize_config_dir
     except ImportError as exc:
-        raise RuntimeError("Install wam-interp[fastwam] to compose FastWAM configs") from exc
+        raise RuntimeError("Install the repository with its FastWAM dependencies to compose configs") from exc
 
-    config_dir = (Path(repository_root) / "configs" / "fastwam").resolve()
-    if not config_dir.is_dir():
-        raise FileNotFoundError(f"FastWAM config directory not found: {config_dir}")
+    config_dir = _fastwam_config_dir(repository_root)
     extra = [f"task={task}", "EVALUATION.compile_action_infer=false"]
     extra.extend(overrides or [])
     with initialize_config_dir(version_base=None, config_dir=str(config_dir)):
@@ -38,7 +59,7 @@ def load_fastwam(config: Any, checkpoint: str | Path, *, device: str = "cuda",
     try:
         from hydra.utils import instantiate
     except ImportError as exc:
-        raise RuntimeError("Install wam-interp[fastwam] to load FastWAM") from exc
+        raise RuntimeError("Install the repository with its FastWAM dependencies to load FastWAM") from exc
 
     model = instantiate(config.model, model_dtype=_resolve_dtype(dtype), device=device)
     model.load_checkpoint(str(checkpoint))
@@ -48,7 +69,7 @@ def load_fastwam(config: Any, checkpoint: str | Path, *, device: str = "cuda",
 
 
 @register_model_loader("fastwam")
-def load_fastwam_backend(*, task: str, repository_root: str | Path,
+def load_fastwam_backend(*, task: str, repository_root: str | Path | None = None,
                          checkpoint: str | Path, device: str = "cuda",
                          dtype: str = "bfloat16"):
     config = compose_fastwam_config(task, repository_root)

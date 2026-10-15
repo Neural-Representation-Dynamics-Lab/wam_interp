@@ -1,41 +1,66 @@
 # Architecture and model integration
 
-## Package boundaries
+## The boundary between shared and model-specific code
 
-- main: orchestration only; constructs config, prepares observation, loads selected adapter, runs inference, records outputs.
-- data: converts raw or stored observations into explicit model inputs. The first NPZ path accepts already-normalized proprio and camera-preprocessed pixels.
-- models: model-neutral protocol and registry. Each model package owns its loader and translates a shared request to the model’s API.
-- tracing: records data and passive hooks, without model-specific imports.
-- interventions: scoped transformations at named module outputs. Later model backends should expose stronger semantic boundaries through explicit callbacks.
-- experiments: paired inference helpers; environment evaluation is not yet implemented.
-- docs: research questions, controls, and provenance requirements.
+Evaluation code should be able to ask a model for an action without knowing how that model is implemented. The shared request and result types provide that boundary:
 
-The research package source lives directly in `src/` and is installed under the Python import name `wam_interp`. The FastWAM Hydra configuration used by this project lives in `configs/fastwam`. FastWAM model code is an external runtime dependency; it is not bundled or copied into this repository. This keeps the research tools and model-specific integration separate while allowing other WAM adapters to be added independently.
+- `PreparedObservation` carries the image, normalized proprioception, task prompt, and optional input metadata.
+- `InferenceRequest` adds the requested condition, action horizon, inference settings, and optional module paths to trace.
+- `InferenceResult` returns the normalized action chunk, run metadata, and any captured trace events.
+- `ModelAdapter.predict_action()` turns one request into one model inference call.
 
-## FastWAM adapter contract
+The adapter owns model-specific prompt formatting, argument names, inference modes, and unsupported combinations. The evaluator owns the environment, observation collection and preprocessing, action post-processing, stepping, and task-success measurement. Keeping those responsibilities separate lets a new benchmark use an existing adapter and lets a new model use an existing evaluator.
 
-The loader composes `configs/fastwam/sim_libero.yaml` with a selected task group, instantiates `cfg.model` through the FastWAM Hydra target, then calls `model.load_checkpoint(checkpoint)`. It does not reproduce checkpoint mapping, scheduler setup, or model initialization. The FastWAM package, its dependencies, pretrained assets, and a compatible checkpoint must be available in the runtime environment.
+## Where code lives
 
-FastWAM Optional IDM exposes action_infer_mode values idm and first_frame. idm requires num_video_frames and uses the IDM implementation; first_frame delegates to FastWAM action-only inference. The ordinary FastWAM config supports first_frame but not the IDM selector. The adapter detects the method signature and raises a clear error if an unsupported mode is requested.
+- `src/types.py`: shared observation, request, and result data structures.
+- `src/models/base.py`: the model adapter protocol.
+- `src/models/registry.py`: loader and adapter registration, plus `load_model_adapter()`.
+- `src/models/<name>/`: a backend's loader, adapter, and any model-specific runtime code.
+- `configs/<name>/`: Hydra configuration groups when a backend needs them.
+- `src/data/`: helpers for turning stored data into `PreparedObservation` objects.
+- `src/experiments/`: small model-neutral inference helpers, such as paired conditions.
+- `src/tracing/`: passive hooks and trace recording.
+- `src/interventions/`: scoped changes at named module outputs.
 
-The shared observation prompt is a task instruction; the FastWAM adapter wraps it in FastWAM's robot-video instruction template. Other adapters may format language differently. Inputs to `infer_action` are the prompt, `[3,H,W]` image in `[-1,1]`, normalized proprioception, action horizon, frame count for IDM, inference steps, seed, and scheduler/guidance options. Output actions remain normalized. This package does not apply dataset statistics or environment gripper transforms.
+Importing `wam_interp.models` imports the built-in backend adapters and loaders so their registration decorators run. Keep heavyweight imports such as PyTorch, Hydra, and model code out of the shared registry; load them in the backend path that needs them.
 
-## Trace limitations
+## FastWAM loading and inference
 
-Passive PyTorch module hooks capture calls to named modules. FastWAM MoT also invokes projections directly and calls functional scaled-dot-product attention, so wrapper hooks may not run and attention probabilities are not returned. Hooks on Q/K/V projection modules can be useful, but are not post-RoPE cached K/V. The recorder labels captures as module outputs. Exact per-layer post-RoPE cache, action-attention, denoising-step, and residual-stream traces require semantic observer points in the FastWAM runtime; do not infer them from generic module hooks.
+FastWAM's model code is in `src/models/fastwam/model_code/`. Its Hydra configuration groups are in `configs/fastwam/`. Checkpoints and pretrained assets are not stored in the repository.
 
-Compilation is disabled by the scaffold when tracing is requested because Python hooks and compiled graphs do not compose reliably. Keep an uninstrumented production path for timing.
+For `load_model_adapter("fastwam", ...)`, the registry calls the FastWAM loader and wraps the resulting model with `FastWAMAdapter`:
 
-## Extension contract for another WAM
+1. The loader composes `configs/fastwam/sim_libero.yaml` with the selected `task` group. These task files choose a model config as well as task and training values; the name is not merely a LIBERO benchmark task identifier.
+2. Hydra instantiates the selected model target in `src/models/fastwam/runtime.py`. The factory turns the composed config into the arguments expected by the corresponding FastWAM class and loads its pretrained base assets.
+3. The loader applies the supplied checkpoint with the model's `load_checkpoint()` method, then moves the model to the requested device and evaluation mode.
+4. The adapter translates an `InferenceRequest` into `infer_action()` arguments and returns the action tensor with metadata.
 
-Implement the ModelAdapter protocol with:
-- stable model name and checkpoint/config provenance;
-- model-ready observation contract;
-- named inference condition/mode support;
-- normalized action output plus metadata;
-- optional trace recorder integration;
-- explicit unsupported-feature errors.
+The task config chooses which FastWAM variant is constructed. For Optional IDM, the request's `condition` chooses between `first_frame` and `idm` inference on that already-selected model. A fixed IDM or Joint model does not become Optional IDM by changing `condition`; it supports its configured inference path. The adapter checks for unsupported combinations and the IDM frame-count constraint.
 
-Do not make shared experiment code depend on FastWAM internals. Dataset/environment preprocessing and action denormalization belong to adapters, not the model-neutral runner.
+The config directory is resolved from the checkout containing the loader, so callers usually do not need to pass `repository_root`. An explicit root is used when it contains `configs/fastwam`; otherwise the loader falls back to the current checkout's config directory.
 
+## Current input and output boundary
 
+The NPZ helper accepts an `image` array and a `proprio` array. It converts `uint8` RGB pixels to `[-1, 1]`, accepts floating-point pixels only when already in that range, converts HWC images to CHW, and requires image dimensions divisible by 16. Proprioception must be a one-dimensional vector already normalized for the selected checkpoint. The task prompt is passed through the adapter's model-specific template.
+
+FastWAM returns normalized actions. The single-observation runner writes those actions and metadata to a JSON file. It does not read dataset statistics, denormalize actions, convert gripper values, control replanning, start LIBERO or RoboTwin, or calculate success. An environment evaluator must own those steps and preserve both the raw model output and the action actually sent to the environment.
+
+## Tracing and interventions
+
+Generic tracing registers PyTorch forward hooks on named modules. It records module inputs and outputs and can summarize their shapes and dtypes. It does not guarantee visibility into every operation. FastWAM's MoT code can call projections directly and uses functional scaled-dot-product attention, so a module hook may not see attention probabilities, post-RoPE keys and values, or each denoising update.
+
+Use the generic hook when a module boundary answers the question. For exact attention/cache values, per-layer action-to-video interactions, or denoising-step states, add explicit observer points in the FastWAM runtime. Keep these observers model-specific and pass their results through the shared recorder where possible. A hook on a Q/K/V projection is a projection output; do not label it as a cached post-RoPE value unless that is where the hook actually sits.
+
+`src/interventions/` can replace outputs at named module boundaries. This is useful for scoped projection-level edits, but it cannot intervene on a value that never passes through the hooked module. Compiled action inference is disabled for traced requests because Python hooks do not reliably compose with compiled graphs.
+
+## Adding a backend
+
+1. Create `src/models/<name>/loader.py` to build the model and load its checkpoint. Register it with `register_model_loader("<name>")`.
+2. Create `src/models/<name>/adapter.py`. Register an adapter with `register_model_adapter("<name>")` and implement `predict_action(request, recorder=None)`.
+3. Translate the shared request into model inputs in the adapter. Return normalized actions, model/checkpoint details, and trace data through `InferenceResult`. Raise a clear error for a condition the model does not support.
+4. Import the adapter and loader from `src/models/__init__.py`, so the registrations are available after `import wam_interp.models`.
+5. Add `configs/<name>/` only if the backend needs configuration files. Keep environment-specific preprocessing and action transforms in the evaluator, not in the shared model registry.
+6. Check that the backend can load a known checkpoint and produce an action for one prepared observation before connecting it to an environment loop.
+
+The shared loader and adapter registries are deliberately small. A backend can use Hydra or a different configuration system; Hydra is a FastWAM choice, not a requirement for every model.

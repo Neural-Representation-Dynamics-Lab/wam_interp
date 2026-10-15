@@ -1,52 +1,41 @@
 # WAM Interpretability
 
-A modular research scaffold for testing whether and how imagined futures causally influence WAM action policies. The core question is faithfulness: when a WAM predicts or represents a future, does the action policy use that content as an internal reasoning trace, and which parts of it matter?
+This project provides a research scaffold for studying how world-action models (WAMs) use predicted futures when producing actions. It focuses on three questions: what information a future representation contains, whether the action pathway uses that information, and whether doing so improves task performance or robustness. These are separate claims and require separate evidence. Predicted video is treated as a candidate internal representation, not assumed to be a faithful explanation.
 
-The project is model-neutral at its interfaces. FastWAM is the first concrete adapter because this checkout includes FastWAM and an optional-IDM model that exposes both IDM and first-frame action inference modes. This is an initial testbed, not evidence that results generalize to all WAMs. We must add independent model adapters before making cross-family claims.
+FastWAM Optional IDM is the first supported backend. Its `first_frame` and `idm` inference modes make it possible to compare action-only and future-conditioned inference within one model family. That comparison measures a change in inference path; by itself, it does not isolate the causal effect of future content or show that imagination improves behavior. Results from this backend alone do not establish how other WAMs work.
 
-## Research questions
+## Repository structure
 
-1. Are actions causally dependent on imagined future content, or does future processing help through extra computation, learned registers, or another mechanism?
-2. At which denoising steps, layers, and tokens does the action pathway read future representations?
-3. Which future content matters: gripper pose, contact, object motion, or coarse scene layout?
-4. What happens when the future is truncated, corrupted, swapped between matched scenes, or replaced with a content-destroyed control?
-5. Can a validated mechanism support adaptive imagination, using it when the current observation is out of distribution?
+- `src/` contains the shared request and result types, input handling, model registry, FastWAM adapter, tracing hooks, intervention helpers, and paired-inference utility. The package is installed under the import name `wam_interp`.
+- `configs/fastwam/` contains the FastWAM Hydra configuration used by the adapter.
+- `docs/` describes the architecture, research questions, and experimental controls.
 
-Treat imagined video as a candidate reasoning trace, not as faithful reasoning by definition. Compare models and inference modes with matched prompts, observations, seeds, normalization, checkpoints, and evaluation conditions. Keep in-distribution performance, OOD robustness, latency, and intervention effects as separate outcomes.
+FastWAM model code is an external runtime dependency and is not bundled in this repository. The FastWAM Python package, its dependencies and pretrained assets, and a compatible checkpoint must be available in the environment used to run inference.
 
-## First implementation target
+## Install
 
-The FastWAM Optional IDM config supports inference modes **idm** (denoise future video, then condition action prediction on it) and **first_frame** (use the Fast-WAM action-only path). This is useful for a controlled initial contrast. The FastWAM source has optimized action inference and IDM teacher-forcing paths; the adapter preserves their existing implementations rather than reimplementing model math.
+From the repository root, install the scaffold and its FastWAM-facing dependencies:
 
-The initial runner consumes a preprocessed NPZ observation: image in CHW or HWC layout and uint8 [0,255] or float [-1,1], plus already normalized proprioception. It returns normalized model actions. Environment-specific transforms, action denormalization, gripper mapping, and robot stepping belong in separate adapters and are not silently applied by this runner.
+```bash
+python -m pip install -e '.[fastwam]'
+```
 
-## Layout
+This installs the scaffold, PyTorch, Hydra, OmegaConf, and NumPy. It does not install FastWAM, download model assets, or provide a checkpoint or simulator. Follow the FastWAM project’s setup instructions to make its runtime and required assets available in the same Python environment.
 
-- **src/wam_interp/main.py**: orchestration; compose config, prepare input, load model, run inference, save outputs.
-- **src/wam_interp/data/**: model-ready observations and input loading.
-- **src/wam_interp/models/**: model-neutral interface/registry and FastWAM adapter/loader.
-- **src/wam_interp/tracing/**: passive module-output capture and trace records.
-- **src/wam_interp/interventions/**: scoped module-output intervention primitives.
-- **src/wam_interp/experiments/**: paired-condition execution helpers.
-- **docs/**: research framing, architecture boundaries, reproducibility protocol.
+## Input format
 
-FastWAM itself remains under the parent repository’s src/fastwam package. The scaffold is installed separately and imports FastWAM lazily.
+The initial runner accepts one prepared observation in an `.npz` file with two arrays:
 
-## Setup
+- `image`: a camera-preprocessed RGB image in CHW or HWC layout. `uint8` values in `[0, 255]` are scaled to `[-1, 1]`; floating-point values must already be in `[-1, 1]`. Height and width must be divisible by 16.
+- `proprio`: a one-dimensional, already normalized state vector compatible with the selected checkpoint.
 
-From the repository root, install the scaffold in editable mode with the FastWAM extra:
+The image montage, camera order, image preprocessing, and state normalization must match the selected model and checkpoint. The runner does not apply dataset statistics, denormalize actions, convert gripper values, or step a robot environment.
 
-~~~bash
-python -m pip install -e 'wam-interp[fastwam]'
-~~~
+## Run one observation
 
-The parent repository’s dependencies and model assets are still required to load FastWAM. The extra declares the adapter-facing runtime dependencies; it does not install simulator assets or download a checkpoint.
+With FastWAM and its required assets available, run from the repository root:
 
-## Input format and first run
-
-Create an NPZ with keys **image** and **proprio**. Image must be camera-preprocessed, in CHW or HWC layout; uint8 is scaled to [-1,1], while floating image data must already lie in [-1,1]. Proprio must be a 1-D, already normalized state vector compatible with the selected checkpoint. Supply the same image montage and processor normalization used by the evaluator.
-
-~~~bash
+```bash
 python -m wam_interp.main \
   --task libero_optional_idm_2cam224_1e-4 \
   --checkpoint /path/to/checkpoint.pt \
@@ -55,11 +44,17 @@ python -m wam_interp.main \
   --condition first_frame \
   --seed 0 \
   --output results/first_frame.json
-~~~
+```
 
-Use **--condition idm** for optional future denoising. IDM requires a valid num_video_frames value (default 33). Set **--trace-module** to a full PyTorch module path to capture its input/output. Module hooks are passive and do not expose every internal attention/cache boundary; see docs/architecture.md.
+Use `--condition idm` to select Optional IDM’s future-denoising path. The default video frame count is 33; IDM requires `(num_video_frames - 1) % 4 == 0`. Use `--trace-module` one or more times to capture input and output tensors at named PyTorch module boundaries. Tracing is passive and does not expose all attention or cache internals; see [the architecture notes](docs/architecture.md).
 
-This first CLI path does offline single-observation inference. It does not launch LIBERO or claim environment success. Checkpoint/config compatibility, model downloads, CUDA, and the provided preprocessed inputs must be valid.
+The command performs one offline action inference call. It does not launch LIBERO, run episodes, or report task success. It writes normalized actions and run metadata to the JSON output; when tracing is enabled, it also writes a `.trace.pt` file beside that output.
+
+## Research and evaluation
+
+The project keeps representation content, causal action dependence, and task-level benefit distinct. A difference between inference modes is not sufficient evidence for any one of these claims. Controlled content interventions, suitable negative and compute-matched controls, and environment evaluation are needed for stronger conclusions. See [the research questions](docs/research_questions.md) and [the experiment protocol](docs/experiment_protocol.md) before interpreting results.
+
+The current runner is a single-observation inference tool. It does not provide a LIBERO environment loop, task/trial management, observation collection, action post-processing, or success logging.
 
 ## References
 

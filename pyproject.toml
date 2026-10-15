@@ -20,10 +20,23 @@ fastwam = [
 [project.scripts]
 wam-interp = "wam_interp.main:main"
 
-[tool.setuptools.package-dir]
-"" = "src"
+[tool.setuptools]
+packages = [
+  "wam_interp",
+  "wam_interp.data",
+  "wam_interp.experiments",
+  "wam_interp.interventions",
+  "wam_interp.models",
+  "wam_interp.models.fastwam",
+  "wam_interp.tracing",
+]
 
-[tool.setuptools.packages.find]
-where = ["src"]
-include = ["wam_interp*"]
+[tool.setuptools.package-dir]
+wam_interp = "src"
+"wam_interp.data" = "src/data"
+"wam_interp.experiments" = "src/experiments"
+"wam_interp.interventions" = "src/interventions"
+"wam_interp.models" = "src/models"
+"wam_interp.models.fastwam" = "src/models/fastwam"
+"wam_interp.tracing" = "src/tracing"
 

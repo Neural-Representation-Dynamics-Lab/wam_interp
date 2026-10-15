@@ -28,4 +28,3 @@ class RunConfig:
             raise ValueError("action_horizon and num_inference_steps must be positive")
         if not self.prompt.strip():
             raise ValueError("A task prompt is required")
-

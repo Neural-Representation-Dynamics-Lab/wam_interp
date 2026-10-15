@@ -1,4 +1,4 @@
-"""Reuse the parent repository's Hydra configs and FastWAM checkpoint API."""
+"""Compose this project's FastWAM configs and use the FastWAM checkpoint API."""
 
 from pathlib import Path
 from typing import Any
@@ -13,7 +13,7 @@ def compose_fastwam_config(task: str, repository_root: str | Path,
     except ImportError as exc:
         raise RuntimeError("Install wam-interp[fastwam] to compose FastWAM configs") from exc
 
-    config_dir = (Path(repository_root) / "configs").resolve()
+    config_dir = (Path(repository_root) / "configs" / "fastwam").resolve()
     if not config_dir.is_dir():
         raise FileNotFoundError(f"FastWAM config directory not found: {config_dir}")
     extra = [f"task={task}", "EVALUATION.compile_action_infer=false"]

@@ -13,7 +13,7 @@ from wam_interp.types import InferenceRequest
 
 def run(config: RunConfig):
     config.validate()
-    root = Path(__file__).resolve().parents[3]
+    root = Path(__file__).resolve().parents[1]
     model = load_model(
         config.backend, task=config.task, repository_root=root,
         checkpoint=config.checkpoint, device=config.device, dtype=config.dtype,

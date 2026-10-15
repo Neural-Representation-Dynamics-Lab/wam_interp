@@ -1,8 +1,8 @@
-_target_: fastwam.runtime.create_fastwam_idm
+_target_: wam_interp.models.fastwam.runtime.create_fastwam_idm
 model_id: Wan-AI/Wan2.2-TI2V-5B
 tokenizer_model_id: Wan-AI/Wan2.1-T2V-1.3B
 tokenizer_max_len: 128
-load_text_encoder: false
+load_text_encoder: true
 proprio_dim: ${data.train.processor.proprio_output_dim}
 redirect_common_files: true
 mot_checkpoint_mixed_attn: false

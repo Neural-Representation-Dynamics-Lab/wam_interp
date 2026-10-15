@@ -47,10 +47,24 @@ class FastWAMAdapter:
             if request.condition == "idm" and (request.num_video_frames - 1) % 4:
                 raise ValueError("FastWAM IDM requires num_video_frames satisfying (frames - 1) % 4 == 0")
             kwargs["action_infer_mode"] = request.condition
+        elif "num_video_frames" in parameters:
+            # Fixed IDM and Joint models always use their native future-conditioned path.
+            # Optional IDM exposes action_infer_mode above and is handled separately.
+            native_condition = "joint" if type(self.model).__name__ == "FastWAMJoint" else "idm"
+            if request.condition != native_condition:
+                raise ValueError(
+                    f"{type(self.model).__name__} uses its native '{native_condition}' condition; "
+                    f"got {request.condition!r}."
+                )
+            if (request.num_video_frames - 1) % 4:
+                raise ValueError(
+                    "FastWAM video-conditioned inference requires "
+                    "num_video_frames satisfying (frames - 1) % 4 == 0"
+                )
         elif request.condition != "first_frame":
             raise ValueError(
-                f"{type(self.model).__name__} does not expose condition selection; "
-                "only its native first-frame inference is available through this adapter."
+                f"{type(self.model).__name__} supports only its native 'first_frame' condition; "
+                f"got {request.condition!r}."
             )
         kwargs = {key: value for key, value in kwargs.items() if key in parameters}
 

@@ -24,7 +24,7 @@ FastWAM's vendored model implementation is under `src/models/fastwam/model_code/
 Install this repository and the selected model backend's dependencies. For FastWAM:
 
 ```bash
-python -m pip install -e ".[fastwam]"
+python -m pip install -e ".[all]"
 ```
 
 Install and configure the upstream [LIBERO benchmark](https://github.com/Lifelong-Robot-Learning/LIBERO) in the same Python environment according to its installation instructions. That installation provides the `libero` package, BDDL task files, initial simulator states, and simulator dependencies. This project does not download those assets for you. For optional MP4 recording, install `python -m pip install -e ".[libero-video]"`.

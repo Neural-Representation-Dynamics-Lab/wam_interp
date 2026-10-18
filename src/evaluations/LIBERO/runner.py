@@ -1,18 +1,13 @@
 """Closed-loop LIBERO evaluation around an already-loaded model adapter."""
 
-from __future__ import annotations
-
 from dataclasses import asdict, is_dataclass
 from datetime import datetime, timezone
 from pathlib import Path
 from time import perf_counter
 import json
-from typing import TYPE_CHECKING, Any, Callable, Mapping
+from typing import Any, Callable, Mapping
 
-if TYPE_CHECKING:
-    from wam_interp.models.base import EvaluationModelAdapter
-else:
-    EvaluationModelAdapter = Any
+from wam_interp.models.base import EvaluationModelAdapter
 
 from wam_interp.types import InferenceRequest, InferenceResult
 

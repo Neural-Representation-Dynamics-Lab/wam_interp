@@ -1,56 +1,47 @@
 # Experiment protocol
 
-These rules are for comparing model inference paths and, later, evaluating those paths in an environment. The current runner only accepts one prepared observation and returns one normalized action chunk. It does not run LIBERO or RoboTwin episodes. Keep model inference, environment control, and the research claim clear in both code and result files.
+These rules apply to inference-path comparisons and closed-loop benchmark runs. Keep the model call, environment control, and scientific claim distinguishable in code and in saved records.
 
 ## Before a run
 
-Save enough information to reproduce the exact call:
+Record enough provenance to reconstruct the run:
 
-- repository revision and model backend/variant;
-- checkpoint identity or hash and any pretrained assets it depends on;
-- resolved model config and the selected task/model groups;
-- dataset and normalization-stat locations;
-- benchmark, task split, trial, and observation identity when using an environment;
-- prompt, inference condition, action horizon, video frame count, and inference steps;
-- random seed, device, dtype, and compile setting;
-- preprocessing and post-processing versions, including camera order and action/gripper transforms;
-- the normalized model action, the action after post-processing, and the action prefix actually executed.
+- repository revision, model/backend/variant, checkpoint identity or hash, and external pretrained assets;
+- resolved model config and dataset-statistics path/hash;
+- benchmark, suite, task IDs, trial IDs, and initial-state indices;
+- prompts, inference condition, action horizon, video frame count, inference steps, and replan interval;
+- environment and inference seeds, device, dtype, and compilation setting;
+- preprocessing and action-decoding version, including camera order and gripper mapping;
+- the normalized model action, decoded command, and prefix actually executed when retaining action traces.
 
-Do not assume that a seed controls every random draw. Check the selected model path and simulator path, and record any source of randomness that remains uncontrolled.
+`LiberoEvalConfig.run_metadata` is caller-supplied provenance. The evaluator does not infer checkpoint hashes, statistics identity, or simulator versions. Do not assume a seed controls every source of randomness; record what the selected model and simulator seed.
 
 ## Paired inference
 
-For a paired comparison, hold the observation, prompt, checkpoint, normalization statistics, action noise seed, action horizon, and scheduler fixed unless one of those is the intervention. Record exactly which settings changed between calls.
+For a paired comparison, hold the observation, prompt, checkpoint, normalization statistics, action noise seed, horizon, and scheduler fixed unless one is the intervention. Record exactly which settings changed.
 
-Use explicit condition names:
+Use explicit conditions such as `first_frame`, `idm`, a named intervention, or a compute-matched control. FastWAM Optional IDM's `first_frame` and `idm` modes differ in inference path, so a mode comparison alone does not isolate the causal effect of future content. Fixed IDM and Joint checkpoints have their own native paths.
 
-- `first_frame`: action inference conditioned on the initial observation;
-- `idm`: FastWAM's future-conditioned IDM path;
-- a named intervention, such as a future replacement at a specific boundary;
-- a compute-matched control that retains the same processing depth while removing the scene-specific information of interest.
+## Closed-loop evaluation
 
-The Optional IDM `first_frame` and `idm` calls use different inference paths. A difference between them is evidence about the paths as a whole; it does not isolate future content from additional computation or architectural changes. Fixed IDM and Joint checkpoints have their own native conditions and should not be treated as if they were Optional IDM.
+`evaluate_libero(model=adapter, config=...)` consumes an already-loaded evaluation adapter. The caller composes model configuration, loads weights and external assets, reads matching statistics, and constructs the adapter before calling the evaluator. The evaluator then owns LIBERO suite/task selection, simulator construction, fixed initial-state selection, no-op warm-up, replanning, stepping, termination, and success metrics.
 
-## Environment evaluation
+The adapter owns model-specific raw observation preparation, normalized model inference, and conversion of normalized actions to environment commands. Preserve the expected camera orientation/order, image size/montage, proprioception statistics, action statistics, gripper convention, and action horizon. A configuration file alone is not evidence that an episode ran.
 
-An evaluator should call the model through `load_model_adapter()` and `predict_action()`. It should own environment creation, task and trial selection, observation conversion, robot-specific action transforms, replanning, stepping, and success measurement. Keep the adapter output so action changes can be separated from effects introduced by post-processing or execution.
-
-For LIBERO and RoboTwin, preserve the exact image montage and camera order, proprioception normalization, action normalization, gripper convention, execution horizon, and reset/task protocol expected by the checkpoint. A benchmark config file is not an environment evaluator: report success only after episodes have actually been run with the intended setup.
-
-At minimum, retain per-trial success, the normalized action chunk, the post-processed command, the executed action prefix, and latency. Save task/trial identifiers and enough simulator and preprocessing information to repeat the run. Keep failed runs and null results.
+For LIBERO, results record each initial-state index, trial seed, success flag, termination reason, policy and warm-up steps, inference count, and total reward. `record_actions=True` also stores normalized chunks, decoded chunks, and executed prefixes. `save_rollout_videos=True` stores primary-camera MP4s. Keep the run's checkpoint/statistics/source identities in `run_metadata`.
 
 ## Interventions and traces
 
-For every intervention, record its definition, the tensor or frame boundary, layer and denoising step, token or frame range, and intervention magnitude. Include matched donor and recipient inputs for activation patches and state the patch direction. Validate image edits after decoding and, where possible, inspect their latent or feature-space effect.
+For each intervention, record its definition, tensor boundary, layer and denoising step, token/frame range, and magnitude. Include matched donor/recipient inputs for activation patches and state the patch direction. Validate image edits after decoding and, when possible, inspect the latent/feature-space effect.
 
-Generic module hooks only see values that pass through the selected modules. They do not automatically expose FastWAM's functional attention, post-RoPE caches, or all per-step states. Name a trace according to the value actually captured; add model-specific observers when a research question needs a deeper boundary.
+Generic module hooks only see values that pass through selected modules. They do not automatically expose functional attention, post-RoPE cache values, or all denoising states. Name a trace after the value actually captured, and add backend-specific observers when the research question needs a deeper boundary.
 
 ## Interpreting results
 
-Separate these claims:
+Keep these claims separate:
 
-1. the future representation contains scene-specific information;
+1. a future representation contains scene-specific information;
 2. the action computation causally uses that information;
 3. using it improves task performance or robustness.
 
-A changed action does not by itself mean the change is useful. Include negative controls and, when compute differs, a compute-matched control. Keep exploratory traces distinct from confirmatory runs, record alternative explanations, and do not discard null interventions. The [research questions](research_questions.md) describe the claims and candidate experiments in more detail.
+A changed action does not by itself establish usefulness. Include negative controls and, when compute differs, a compute-matched control. Keep exploratory traces distinct from confirmatory runs, retain null interventions, and state alternative explanations. See [the research questions](research_questions.md) and [the LIBERO evaluator guide](libero_evaluation.md).

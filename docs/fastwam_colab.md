@@ -37,7 +37,7 @@ for filename in (
     )
 ```
 
-The `.pt` file is the model checkpoint used below. The dataset-statistics file is useful for the future LIBERO evaluator to convert normalized predictions to environment actions; the current adapter does not read it. The Hugging Face repository also contains a README, but it is not needed to load the checkpoint.
+The `.pt` file is the model checkpoint used below. The dataset-statistics file is required by `FastWAMLiberoAdapter` to normalize state input and denormalize predicted actions during live LIBERO evaluation. The Hugging Face repository also contains a README, but it is not needed to load the checkpoint.
 
 ## 3. Load FastWAM through the adapter
 
@@ -59,6 +59,6 @@ adapter = load_model_adapter(
 
 The loader finds this checkout's `configs/fastwam/` directory automatically, so the call does not need a `repository_root` argument. It composes `sim_libero.yaml`, which sets `skip_dit_load_from_pretrain=true` and clears `action_dit_pretrained_path`. The model is therefore constructed without the separate ActionDiT initialization file; the released checkpoint is loaded into it before inference. The Wan 2.2 and text tokenizer/encoder assets are still needed, and the model code downloads any missing assets. By default, those files are cached under `./checkpoints/` relative to the process working directory. The optional environment setting in the example puts them under `/content/checkpoints` instead.
 
-The released FastWAM checkpoint is separate from these base assets: the code first constructs the configured model, then loads the `.pt` checkpoint into it. Loading the adapter alone is not a LIBERO evaluation. An evaluator still needs to create and preprocess observations, convert model-normalized actions to the environment's action convention, step the environment, and record success.
+The released FastWAM checkpoint is separate from these base assets: the code first constructs the configured model, then loads the `.pt` checkpoint into it. This section demonstrates a single model load, not an evaluation episode. For live LIBERO evaluation, construct `FastWAMLiberoAdapter` with the raw loaded model, resolved data config, and statistics file, then pass it to `evaluate_libero()`. See [`the LIBERO evaluation guide`](libero_evaluation.md).
 
 For the meaning of `libero_uncond_2cam224_1e-4`, the model variants, and the local implementation layout, see [the FastWAM backend README](../src/models/fastwam/README.md). The upstream [FastWAM repository](https://github.com/yuantianyuan01/FastWAM) and its [released checkpoints](https://huggingface.co/yuanty/fastwam) are useful references for the original project and model assets.

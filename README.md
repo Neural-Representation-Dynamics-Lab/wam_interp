@@ -1,51 +1,37 @@
 # WAM Interpretability
 
-This repository is for studying how world-action models use predicted futures when they choose actions. We want to understand three things separately: what a predicted future represents, whether the action computation uses that information, and whether using it helps on a task. A generated video may be useful to the model without being a faithful explanation of its decision, so the infrastructure is designed to test those claims rather than assume them.
+This repository is research infrastructure for studying how world-action models use their internal representations to choose actions. FastWAM is the first model backend; the shared interfaces are intended to support other models and benchmarks without moving their implementation details into common code.
 
-FastWAM is the first model backend. Its Optional IDM variant can run either the `first_frame` action path or the future-conditioned `idm` path. Comparing those modes is a useful starting point, but the paths differ in more than future content; a mode comparison alone does not prove that the imagined content caused an action change or improved behavior.
+The main design rule is: **a benchmark evaluator controls the benchmark; a model adapter controls the model-facing transforms.** The evaluator does not load a model, checkpoint, tokenizer, or normalization file. It receives a ready-to-use adapter and calls its public methods.
 
-## How the repository is organized
-
-The main boundary is the model adapter. Shared experiment and evaluation code should describe an observation and an inference request, then call an adapter. It should not need to know a model's internal class names, checkpoint format, prompt template, or attention implementation. Each model backend owns those details and translates the shared request into its model's API.
-
-That separation lets us add evaluation environments and interpretability tools without making them FastWAM-specific. It also makes it possible to compare models through the same outer workflow while keeping model-specific limits explicit.
+## Repository map
 
 ```text
-configs/fastwam/       FastWAM Hydra configs and task/model choices
-docs/                  Architecture, research questions, and experiment protocol
-src/types.py           Shared observation, request, and result types
-src/models/            Adapter contract, registry, and model backends
-src/data/              Loading and validating prepared observations
-src/experiments/       Small helpers for paired model inference
-src/tracing/           Passive module-output capture
-src/interventions/     Scoped edits at named module outputs
+configs/fastwam/                 FastWAM Hydra model/task configuration
+src/types.py                     Shared raw/prepared observation and inference types
+src/models/                      Model adapters, loaders, and model-specific preprocessing
+src/evaluations/LIBERO/          LIBERO suite, simulator, rollout, and result handling
+src/data/                        Offline prepared-observation helpers (for example NPZ)
+src/tracing/                     Passive module-output capture
+src/interventions/               Scoped changes to named module outputs
+docs/                            Architecture, experiment, and evaluation guidance
 ```
 
-FastWAM's model implementation is included under `src/models/fastwam/model_code/`, with its license alongside it. The Hydra configs are in the repository under `configs/fastwam/`. Model checkpoints and pretrained assets are still external inputs; they are not included here.
+FastWAM's vendored model implementation is under `src/models/fastwam/model_code/`. Model checkpoints and pretrained video/text assets are external. LIBERO's simulator, task definitions, and MuJoCo assets are also external; the evaluator imports the upstream LIBERO package only when `evaluate_libero()` starts.
 
-## Set up
+## Installation
 
-From the repository root:
+Install this repository and the selected model backend's dependencies. For FastWAM:
 
 ```bash
-python -m pip install -e ".[all]"
+python -m pip install -e ".[fastwam]"
 ```
 
-This installs the repository and the dependencies currently declared for FastWAM. It does not download a checkpoint or pretrained model assets, install LIBERO or RoboTwin, or set up their simulators. The current development workflow uses an editable install from a checkout, so the repository's Hydra config files remain available to the loader.
-
-In notebooks, restart the runtime after installing or changing packages. The running Python process can keep older modules loaded even after their files have been replaced.
-
-For a complete Colab example that clones the repository, downloads the released FastWAM checkpoint, and loads it through the adapter, see [the FastWAM Colab guide](docs/fastwam_colab.md). The model-specific README at [src/models/fastwam/README.md](src/models/fastwam/README.md) explains the model variants and config naming.
-
-The package import name is `wam_interp`:
-
-```python
-import wam_interp.models
-```
+Install and configure the upstream [LIBERO benchmark](https://github.com/Lifelong-Robot-Learning/LIBERO) in the same Python environment according to its installation instructions. That installation provides the `libero` package, BDDL task files, initial simulator states, and simulator dependencies. This project does not download those assets for you. For optional MP4 recording, install `python -m pip install -e ".[libero-video]"`.
 
 ## Run one prepared observation
 
-The current runner makes one offline model call. It does not start an environment or run a benchmark episode. A checkpoint and its required pretrained assets must be available in your environment.
+The existing command-line runner is an offline, one-observation model call. It does not start a simulator or run benchmark episodes:
 
 ```bash
 python -m wam_interp.main \
@@ -58,62 +44,79 @@ python -m wam_interp.main \
   --output results/first_frame.json
 ```
 
-An observation NPZ contains two arrays:
+The NPZ file contains `image` and optional `proprio` arrays already arranged for the selected model. Its actions are returned in the model's normalized space. It is separate from live LIBERO evaluation, which gets observations from the simulator and asks the model adapter to prepare them.
 
-- `image`: an RGB image in CHW or HWC layout. `uint8` pixels are converted to `[-1, 1]`; floating-point pixels must already be in that range. Height and width must be divisible by 16.
-- `proprio`: a one-dimensional state vector already normalized for the selected checkpoint.
+## Run live LIBERO evaluation
 
-The camera order, image montage, resizing, and state normalization must match the checkpoint. The runner does not apply dataset statistics, convert normalized actions to robot commands, or step an environment. Its output actions are model-normalized.
-
-The Hydra `--task` choice selects a task configuration, including its model configuration. It does not just name a benchmark task. For Optional IDM, `--condition` selects the inference path: use `first_frame` for action-only inference and `idm` for future-conditioned inference. Other FastWAM variants may only support their configured path; the adapter raises an error for unsupported combinations.
-
-The same adapter API is available to Python evaluation code:
+`evaluate_libero()` accepts an adapter object. It manages suite/task selection, fixed initial states, reset and warm-up, closed-loop action replanning, environment stepping, success accounting, and result files. The adapter manages image/state preprocessing, model inference, and conversion from normalized model actions to LIBERO commands.
 
 ```python
-from wam_interp.data.npz import load_observation_npz
-from wam_interp.models import load_model_adapter
-from wam_interp.types import InferenceRequest
+from omegaconf import OmegaConf
 
-adapter = load_model_adapter(
-    "fastwam",
-    task="libero_optional_idm_2cam224_1e-4",
-    checkpoint="/path/to/checkpoint.pt",
+from wam_interp.evaluations.LIBERO import LiberoEvalConfig, evaluate_libero
+from wam_interp.models.fastwam.loader import compose_fastwam_config, load_fastwam
+from wam_interp.models.fastwam.libero_adapter import FastWAMLiberoAdapter
+
+# Model construction and checkpoint loading happen here, outside the evaluator.
+fastwam_cfg = compose_fastwam_config("libero_optional_idm_2cam224_1e-4")
+raw_model = load_fastwam(fastwam_cfg, "/path/to/checkpoint.pt", device="cuda")
+fastwam_data = OmegaConf.to_container(fastwam_cfg.data.train, resolve=True)
+
+adapter = FastWAMLiberoAdapter(
+    raw_model,
+    data_config=fastwam_data,
+    dataset_stats="/path/to/dataset_stats.json",
 )
-observation = load_observation_npz("/path/to/observation.npz", "pick up the object")
-result = adapter.predict_action(
-    InferenceRequest(observation=observation, condition="first_frame")
+result = evaluate_libero(
+    model=adapter,
+    config=LiberoEvalConfig(
+        task_suite_name="libero_spatial",
+        task_ids=(0,),
+        num_trials=2,
+        replan_steps=10,
+        action_horizon=32,
+        seed=0,
+        output_dir="results/libero",
+        inference_options={"condition": "first_frame", "num_inference_steps": 10},
+        run_metadata={"checkpoint": "/path/to/checkpoint.pt"},
+    ),
 )
+print(result.success_rate, result.output_path)
 ```
 
-An evaluation loop should call this interface, then handle its own environment setup, action post-processing, execution, and success measurement. That code does not exist yet.
+`FastWAMLiberoAdapter` is the FastWAM-side bridge. It rotates and resizes LIBERO camera images, concatenates the configured views, builds and normalizes proprioception from end-effector pose and gripper state, calls the existing FastWAM inference adapter, denormalizes the action chunk, and maps the gripper convention. These are checkpoint-specific operations, so they live under `src/models/fastwam/`, not in the evaluator.
 
-## Add a model backend
+See [the LIBERO evaluation guide](docs/libero_evaluation.md) for the full call flow, config fields, output format, dependencies, and adaptation notes. The `LiberoEvalConfig` defaults to task 0 in `libero_spatial`; set `task_ids=None` to evaluate every task in the selected suite. Defaults are deliberately explicit and can be changed per run.
 
-Keep a new model's implementation and assumptions inside `src/models/<model_name>/`.
+## Adding another model
 
-1. Add a loader that constructs the model from its config/checkpoint and register it with `@register_model_loader("<model_name>")`.
-2. Add an adapter that registers with `@register_model_adapter("<model_name>")` and implements `predict_action(request, recorder=None)`.
-3. Translate `InferenceRequest` into the model's inputs inside that adapter. Return an `InferenceResult` with the action chunk, useful provenance in `metadata`, and trace events when requested. Keep actions in the shared normalized representation; robot-specific transforms belong in the evaluation layer.
-4. Import the backend from `src/models/__init__.py` so the registration decorators run when `wam_interp.models` is imported. Keep heavy model dependencies inside the loader or inference call where possible.
-5. Add a model-specific config under `configs/<model_name>/` only if the backend needs configuration files. Keep shared evaluation code free of model-specific keys and classes.
-6. Document the observation format, supported inference conditions, checkpoint/assets needed, and any unsupported features. Add a small load-and-predict check before wiring the adapter into an environment evaluator.
+Put its loader, adapter, preprocessing, normalization, and action decoding in `src/models/<model_name>/`. Its evaluation adapter must implement:
 
-The common types and registry live in `src/types.py`, `src/models/base.py`, and `src/models/registry.py`. FastWAM is the example backend to follow, but its prompt formatting, Hydra choices, checkpoint loading, and IDM rules should not be copied into shared code.
+- `inference_defaults() -> Mapping[str, Any]` for model-configured request values (caller overrides still win)
+- `prepare_observation(EnvironmentObservation) -> PreparedObservation`
+- `predict_action(InferenceRequest) -> InferenceResult`
+- `postprocess_actions(actions, environment="libero") -> environment commands`
 
-## What to build next
+The evaluator passes raw cameras, named raw state values, and the task instruction to `prepare_observation`. `predict_action` should return model-normalized action chunks. `postprocess_actions` converts those actions into the target environment's command convention. Do not add model class names, checkpoint formats, image normalization, robot-state normalization, or action denormalization to `src/evaluations/LIBERO/`.
 
-The next infrastructure work is to connect the adapter to real evaluation loops:
+## Adding another evaluation
 
-1. **LIBERO evaluation.** Add task and trial management, observation preprocessing that matches the checkpoint, action denormalization and gripper mapping, replanning, success measurement, and saved run metadata. The existing LIBERO Hydra configs select model settings; they are not an evaluator.
-2. **RoboTwin evaluation.** Add the corresponding camera/state preprocessing and action/environment interface for RoboTwin. Reuse the adapter contract, but keep environment-specific transformations in the evaluator.
-3. **Mechanistic interpretability tools.** The generic hooks only see named PyTorch module boundaries. FastWAM also uses direct projections and functional attention, so exact attention/cache values, per-step denoising states, and meaningful MoT boundaries need explicit observation points in the model runtime. Add those where they answer a concrete research question.
-4. **More model backends.** Add another WAM behind the same request/result contract before treating a FastWAM result as a general claim about WAMs.
+Use `src/evaluations/LIBERO/` as the example, but keep the new benchmark in its own folder, for example `src/evaluations/ROBOTWIN/`:
 
-When reporting results, keep representation content, causal influence on actions, and task benefit separate. The [research questions](docs/research_questions.md) explain the distinctions; the [experiment protocol](docs/experiment_protocol.md) describes what to record; and the [architecture notes](docs/architecture.md) describe where new code belongs.
+1. Put task selection, environment creation, reset/step calls, termination rules, metric calculation, and result serialization in that evaluation folder.
+2. Convert environment observations into the shared `EnvironmentObservation` structure without resizing, normalizing, or reordering for a particular model.
+3. Call the model adapter's `prepare_observation`, `predict_action`, and `postprocess_actions` methods. The model backend owns model-specific transforms.
+4. Keep benchmark-specific command validation and episode semantics in the evaluator. Never load model weights from `evaluate_<benchmark>()`.
+5. Make optional benchmark imports lazy, so importing shared interfaces does not require every simulator to be installed.
+6. Add a guide under `docs/` and a clear dependency/setup note. Record suite/task IDs, initial-state choice, seeds, action horizon, replan interval, inference condition, checkpoint/statistics identity, and the final success metric.
+7. Add the new package to `pyproject.toml`'s explicit package list and `package-dir` map.
+
+## Research and tracing
+
+Keep evidence about representation content, causal influence on actions, and task benefit separate. Generic PyTorch hooks only observe named module boundaries; they do not automatically expose functional attention values or post-RoPE caches. See [the architecture guide](docs/architecture.md) and [experiment protocol](docs/experiment_protocol.md) for limits and recording practices.
 
 ## References
 
 - [From World Models to World Action Models: A Concise Tutorial for Robotics](https://arxiv.org/abs/2607.00836)
 - [Fast-WAM: Do World Action Models Need Test-time Future Imagination?](https://arxiv.org/abs/2603.16666)
 - [Faster-WAM: Efficient Inference-Time Future Conditioning for Robust World Action Models](https://arxiv.org/abs/2608.04404)
-- [NVIDIA: Pretrained to Imagine, Fine-Tuned to Act](https://developer.nvidia.com/blog/pretrained-to-imagine-fine-tuned-to-act-the-rise-of-world-action-models/)

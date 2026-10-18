@@ -56,4 +56,3 @@ def registered_model_adapters() -> tuple[str, ...]:
 
 def registered_model_loaders() -> tuple[str, ...]:
     return tuple(sorted(_LOADERS))
-

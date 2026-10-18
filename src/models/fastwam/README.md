@@ -47,6 +47,7 @@ So “one pass” refers to the video-context preparation, not the entire predic
 ## Where things live
 
 - `adapter.py` translates the shared `InferenceRequest` into FastWAM's `infer_action` arguments and packages the result. It does not implement denoising.
+- `libero_adapter.py` adds FastWAM's LIBERO camera/state preprocessing, config-derived request defaults, dataset-stat normalization, and LIBERO action/gripper decoding around an already-loaded model.
 - `loader.py` composes `configs/fastwam/sim_libero.yaml` with the requested task, instantiates its configured model through Hydra, loads the provided checkpoint, and returns the model to the adapter.
 - `runtime.py` contains the Hydra `_target_` factories for the four model variants.
 - `model_code/fastwam.py`, `fastwam_idm.py`, `fastwam_joint.py`, and `fastwam_optional_idm.py` contain model construction and inference implementations. Supporting Wan layers, schedulers, dataset code, and model-download helpers are also under `model_code/`.
@@ -58,6 +59,6 @@ The individual configs under `configs/fastwam/model/` are also used in training-
 
 ## Current boundary
 
-The adapter can load a supported FastWAM variant and predict one normalized action chunk from an already prepared observation. This repository does not yet create a LIBERO or RoboTwin environment, run episodes, denormalize actions using dataset statistics, map gripper outputs, or calculate benchmark success rates. The task names describe configs; their presence is not evidence that the corresponding evaluation pipeline exists.
+The ordinary adapter predicts one normalized action chunk from a prepared observation. The live LIBERO evaluator is in `src/evaluations/LIBERO/`; pass it a `FastWAMLiberoAdapter` built around an already-loaded model, its resolved `cfg.data.train`, and the matching dataset-statistics JSON. The evaluator owns simulator episodes and scoring; `libero_adapter.py` owns FastWAM-specific transforms. See [`docs/libero_evaluation.md`](../../../docs/libero_evaluation.md) for setup and the full call flow. RoboTwin evaluation is not implemented here.
 
 For upstream details and the paper's reported experiments, see the [FastWAM repository](https://github.com/yuantianyuan01/FastWAM). This README describes the implementation and configuration currently included in this checkout; where local behavior matters, the code and configs here are authoritative.

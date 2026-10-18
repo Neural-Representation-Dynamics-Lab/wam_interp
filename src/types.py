@@ -1,7 +1,18 @@
-"""Shared model-neutral request/result types; framework objects stay behind Any."""
+"""Shared model-neutral request, observation, and result types."""
 
+from collections.abc import Mapping
 from dataclasses import dataclass, field
 from typing import Any
+
+
+@dataclass(frozen=True)
+class EnvironmentObservation:
+    """Raw observation from a benchmark frontend, before model-specific transforms."""
+
+    cameras: Mapping[str, Any]
+    state: Mapping[str, Any]
+    instruction: str
+    metadata: dict[str, Any] = field(default_factory=dict)
 
 
 @dataclass(frozen=True)
@@ -33,9 +44,8 @@ class InferenceRequest:
 
 @dataclass
 class InferenceResult:
-    """Normalized model output plus provenance; robot transforms are separate."""
+    """Normalized model output plus provenance; environment transforms are separate."""
 
     actions: Any
     metadata: dict[str, Any] = field(default_factory=dict)
     trace: list[Any] = field(default_factory=list)
-

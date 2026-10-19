@@ -99,13 +99,15 @@ Put its loader, adapter, preprocessing, normalization, and action decoding in `s
 
 The evaluator passes raw cameras, named raw state values, and the task instruction to `prepare_observation`. `predict_action` should return model-normalized action chunks. `postprocess_actions` converts those actions into the target environment's command convention. Do not add model class names, checkpoint formats, image normalization, robot-state normalization, or action denormalization to `src/evaluations/LIBERO/`.
 
+This adapter work is evaluation-specific and must be included whenever a model is added or connected to another evaluation. For each supported model/environment pairing, implement the required observation preparation and action conversion in that model's adapter. The evaluator should handle benchmark mechanics and pass observations through the adapter; it should not contain model-specific preprocessing or branching.
+
 ## Adding another evaluation
 
 Use `src/evaluations/LIBERO/` as the example, but keep the new benchmark in its own folder, for example `src/evaluations/ROBOTWIN/`:
 
 1. Put task selection, environment creation, reset/step calls, termination rules, metric calculation, and result serialization in that evaluation folder.
 2. Convert environment observations into the shared `EnvironmentObservation` structure without resizing, normalizing, or reordering for a particular model.
-3. Call the model adapter's `prepare_observation`, `predict_action`, and `postprocess_actions` methods. The model backend owns model-specific transforms.
+  3. Call the model adapter's `prepare_observation`, `predict_action`, and `postprocess_actions` methods. Add the matching environment-specific preparation and action conversion to each model adapter intended to work with this evaluation; the model backend owns those transforms.
 4. Keep benchmark-specific command validation and episode semantics in the evaluator. Never load model weights from `evaluate_<benchmark>()`.
 5. Make optional benchmark imports lazy, so importing shared interfaces does not require every simulator to be installed.
 6. Add a guide under `docs/` and a clear dependency/setup note. Record suite/task IDs, initial-state choice, seeds, action horizon, replan interval, inference condition, checkpoint/statistics identity, and the final success metric.

@@ -17,8 +17,6 @@ class EpisodeResult:
     inference_calls: int
     total_reward: float
     inference_metadata: list[dict[str, Any]] = field(default_factory=list)
-    action_trace: list[dict[str, Any]] = field(default_factory=list)
-    rollout_video: str | None = None
 
 
 @dataclass
@@ -94,8 +92,6 @@ class LiberoEvaluationResult:
                             "inference_calls": trial.inference_calls,
                             "total_reward": trial.total_reward,
                             "inference_metadata": trial.inference_metadata,
-                            "action_trace": trial.action_trace,
-                            "rollout_video": trial.rollout_video,
                         }
                         for trial in task.episodes
                     ],

@@ -5,7 +5,7 @@ from datetime import datetime, timezone
 from pathlib import Path
 from time import perf_counter
 import json
-from typing import Any, Callable, Mapping
+from typing import Any, Mapping
 
 from wam_interp.models.base import EvaluationModelAdapter
 
@@ -23,7 +23,7 @@ from .environment import (
 from .results import EpisodeResult, LiberoEvaluationResult, TaskResult
 
 
-def _default_suite_factory(name: str) -> Any:
+def _get_suite(name: str) -> Any:
     benchmark, _, _ = get_benchmark_module()
     suites = benchmark.get_benchmark_dict()
     try:
@@ -72,6 +72,8 @@ def _all_finite(value: Any) -> bool:
     import numpy as np
 
     return bool(np.isfinite(value).all())
+
+
 def _json_safe(value: Any) -> Any:
     if is_dataclass(value):
         return _json_safe(asdict(value))
@@ -113,24 +115,6 @@ def _request_for_call(
     )
 
 
-def _save_video(path: Path, frames: list[Any]) -> None:
-    if not frames:
-        return
-    try:
-        import imageio.v2 as imageio
-    except ImportError as exc:
-        raise RuntimeError(
-            "save_rollout_videos=True requires imageio and an MP4 writer such as imageio-ffmpeg"
-        ) from exc
-    path.parent.mkdir(parents=True, exist_ok=True)
-    imageio.mimsave(path, frames, fps=24)
-
-
-def _primary_frame(observation: Any) -> Any:
-    camera = observation.cameras.get("agentview")
-    return None if camera is None else _to_numpy(camera)
-
-
 def _run_episode(
     *,
     model: EvaluationModelAdapter,
@@ -143,8 +127,6 @@ def _run_episode(
     config: LiberoEvalConfig,
     seed: int | None,
     max_steps: int,
-    output_dir: Path | None,
-    run_id: str,
 ) -> EpisodeResult:
     instruction = str(task.language)
     provenance = {"task_id": task_id, "trial_index": trial_index}
@@ -156,11 +138,6 @@ def _run_episode(
         metadata=provenance,
     )
 
-    frames: list[Any] = []
-    if config.save_rollout_videos:
-        first_frame = _primary_frame(observation)
-        if first_frame is not None:
-            frames.append(first_frame)
     warmup_steps = 0
     total_reward = 0.0
     success = False
@@ -178,11 +155,6 @@ def _run_episode(
         total_reward += warmup.reward
         warmup_steps += 1
         success, done = warmup.success, warmup.done
-        if config.save_rollout_videos:
-            if config.save_rollout_videos:
-                frame = _primary_frame(observation)
-                if frame is not None:
-                    frames.append(frame)
         if success or done:
             termination_reason = "success_during_warmup" if success else "environment_done_during_warmup"
             break
@@ -190,7 +162,6 @@ def _run_episode(
     policy_steps = 0
     inference_calls = 0
     inference_metadata: list[dict[str, Any]] = []
-    action_trace: list[dict[str, Any]] = []
 
     while not success and not done and policy_steps < max_steps:
         prepared = model.prepare_observation(observation)
@@ -229,7 +200,6 @@ def _run_episode(
             decoded.shape[0],
             max_steps - policy_steps,
         )
-        executed: list[list[float]] = []
         for action in decoded[:execute_count]:
             step = step_libero(
                 env,
@@ -241,33 +211,12 @@ def _run_episode(
             total_reward += step.reward
             policy_steps += 1
             success, done = step.success, step.done
-            executed.append([float(x) for x in action.tolist()])
-            if config.save_rollout_videos:
-                frame = _primary_frame(observation)
-                if frame is not None:
-                    frames.append(frame)
             if success or done:
                 termination_reason = "success" if success else "environment_done"
                 break
 
-        if config.record_actions:
-            action_trace.append(
-                {
-                    "inference_call": inference_calls - 1,
-                    "normalized_model_actions": _json_safe(prediction.actions),
-                    "decoded_action_chunk": _json_safe(decoded),
-                    "executed_prefix": executed,
-                }
-            )
-
     if success and termination_reason == "max_steps":
         termination_reason = "success"
-
-    rollout_path = None
-    if config.save_rollout_videos and output_dir is not None:
-        relative = Path(run_id) / Path(config.task_suite_name.strip().lower()) / f"task_{task_id:02d}" / f"trial_{trial_index:03d}.mp4"
-        _save_video(output_dir / "videos" / relative, frames)
-        rollout_path = str(Path("videos") / relative)
 
     return EpisodeResult(
         task_id=task_id,
@@ -281,24 +230,17 @@ def _run_episode(
         inference_calls=inference_calls,
         total_reward=total_reward,
         inference_metadata=inference_metadata,
-        action_trace=action_trace,
-        rollout_video=rollout_path,
     )
 
 
 def evaluate_libero(
     model: EvaluationModelAdapter,
     config: LiberoEvalConfig | None = None,
-    *,
-    suite_factory: Callable[[str], Any] | None = None,
-    environment_factory: Callable[[Any, int, int | None], Any] | None = None,
 ) -> LiberoEvaluationResult:
     """Run LIBERO episodes using an already-created model adapter.
 
     This function never loads a model or checkpoint. ``model`` supplies the
     backend-specific observation preparation, inference, and action decoding.
-    ``suite_factory`` and ``environment_factory`` can be injected by other
-    frontends or small integration checks without changing the rollout loop.
     """
     config = config or LiberoEvalConfig()
     config.validate()
@@ -317,13 +259,11 @@ def evaluate_libero(
             f"{missing_methods}"
         )
 
-    suite_factory = suite_factory or _default_suite_factory
-    environment_factory = environment_factory or create_libero_environment
     started_clock = perf_counter()
     started_at = datetime.now(timezone.utc).isoformat()
     run_id = datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%S%fZ")
     suite_name = config.task_suite_name.strip().lower()
-    suite = suite_factory(suite_name)
+    suite = _get_suite(suite_name)
     suite_size = getattr(suite, "n_tasks", None)
     if callable(suite_size):
         suite_size = suite_size()
@@ -348,7 +288,7 @@ def evaluate_libero(
         if len(initial_states) == 0:
             raise ValueError(f"LIBERO returned no initial states for task {task_id}")
         env_seed = _episode_seed(config.seed, int(task_id), 0)
-        env = environment_factory(task, config.camera_resolution, env_seed)
+        env = create_libero_environment(task, config.camera_resolution, env_seed)
         episodes: list[EpisodeResult] = []
         try:
             for trial_index in range(config.num_trials):
@@ -365,8 +305,6 @@ def evaluate_libero(
                     config=config,
                     seed=seed,
                     max_steps=max_steps,
-                    output_dir=output_dir,
-                    run_id=run_id,
                 )
                 episodes.append(episode)
         finally:

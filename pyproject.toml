@@ -57,11 +57,6 @@ all = [
   "termcolor>=1.1",
   "opencv-python>=4.6",
 ]
-libero-video = [
-  "imageio>=2.31",
-  "imageio-ffmpeg>=0.4",
-]
-
 [project.scripts]
 wam_interp = "wam_interp.main:main"
 

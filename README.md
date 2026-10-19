@@ -31,14 +31,15 @@ The `all` extra includes FastWAM's Python dependencies and the LIBERO simulator 
 
 ```bash
 mkdir -p third_party
-git clone --depth 1 --branch master https://github.com/Lifelong-Robot-Learning/LIBERO.git third_party/LIBERO
+git clone --depth 1 --no-checkout --branch master https://github.com/Lifelong-Robot-Learning/LIBERO.git third_party/LIBERO
+git -C third_party/LIBERO fetch --depth 1 origin 8f1084e3132a39270c3a13ebe37270a43ece2a01
 git -C third_party/LIBERO checkout --detach 8f1084e3132a39270c3a13ebe37270a43ece2a01
 python -m pip install -e "./third_party/LIBERO" --no-deps
 ```
 
 The source checkout is pinned to LIBERO commit `8f1084e3132a39270c3a13ebe37270a43ece2a01` in the notebook and the manual setup above so collaborators use the same task definitions and initial states. The notebook downloads the released FastWAM checkpoint and statistics from Hugging Face. FastWAM then downloads any missing Wan VAE, text-encoder, and tokenizer assets from their public Hugging Face repositories into its configured cache; the base video DiT download is skipped for this checkpoint. Network access is required, but no separate manual model-asset setup is needed.
 
-The evaluator needs no LIBERO demonstration trajectories. Before evaluation, LIBERO also needs a `config.yaml` with paths to its benchmark root, BDDL files, initial states, datasets, and assets. The notebook creates this config automatically and tests a real environment reset and camera render before loading FastWAM. See [the LIBERO evaluation guide](docs/libero_evaluation.md) for manual setup details. For optional MP4 recording, install `python -m pip install -e ".[libero-video]"`.
+The evaluator needs no LIBERO demonstration trajectories. Before evaluation, LIBERO needs a `config.yaml` with paths to its benchmark root, BDDL files, initial states, datasets, and assets. The notebook creates this config and checks a real environment reset and camera render before loading FastWAM. Its default run evaluates task 0 of `libero_spatial` for 50 full-length episodes and reports that task's success rate; it is not the full-suite average. See [the LIBERO evaluation guide](docs/libero_evaluation.md) for setup and comparison details.
 
 ## Run one prepared observation
 
@@ -118,7 +119,7 @@ Use `src/evaluations/LIBERO/` as the example, but keep the new benchmark in its 
 
 1. Put task selection, environment creation, reset/step calls, termination rules, metric calculation, and result serialization in that evaluation folder.
 2. Convert environment observations into the shared `EnvironmentObservation` structure without resizing, normalizing, or reordering for a particular model.
-  3. Call the model adapter's `prepare_observation`, `predict_action`, and `postprocess_actions` methods. Add the matching environment-specific preparation and action conversion to each model adapter intended to work with this evaluation; the model backend owns those transforms.
+3. Call the model adapter's `prepare_observation`, `predict_action`, and `postprocess_actions` methods. Add the matching environment-specific preparation and action conversion to each model adapter intended to work with this evaluation; the model backend owns those transforms.
 4. Keep benchmark-specific command validation and episode semantics in the evaluator. Never load model weights from `evaluate_<benchmark>()`.
 5. Make optional benchmark imports lazy, so importing shared interfaces does not require every simulator to be installed.
 6. Add a guide under `docs/` and a clear dependency/setup note. Record suite/task IDs, initial-state choice, seeds, action horizon, replan interval, inference condition, checkpoint/statistics identity, and the final success metric.

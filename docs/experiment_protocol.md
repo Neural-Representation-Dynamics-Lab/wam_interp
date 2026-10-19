@@ -28,7 +28,7 @@ Use explicit conditions such as `first_frame`, `idm`, a named intervention, or a
 
 The adapter owns model-specific raw observation preparation, normalized model inference, and conversion of normalized actions to environment commands. Preserve the expected camera orientation/order, image size/montage, proprioception statistics, action statistics, gripper convention, and action horizon. A configuration file alone is not evidence that an episode ran.
 
-For LIBERO, results record each initial-state index, trial seed, success flag, termination reason, policy and warm-up steps, inference count, and total reward. `record_actions=True` also stores normalized chunks, decoded chunks, and executed prefixes. `save_rollout_videos=True` stores primary-camera MP4s. Keep the run's checkpoint/statistics/source identities in `run_metadata`.
+For LIBERO, results record each initial-state index, trial seed, success flag, termination reason, policy and warm-up steps, inference count, total reward, and inference metadata. Keep the run's checkpoint/statistics/source identities in `run_metadata`.
 
 ## Interventions and traces
 

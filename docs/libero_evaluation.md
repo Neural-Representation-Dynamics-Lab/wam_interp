@@ -16,12 +16,15 @@ Clone LIBERO's official source checkout and install its package without allowing
 
 ```bash
 mkdir -p third_party
-git clone --depth 1 --branch master https://github.com/Lifelong-Robot-Learning/LIBERO.git third_party/LIBERO
+git clone --depth 1 --no-checkout --branch master https://github.com/Lifelong-Robot-Learning/LIBERO.git third_party/LIBERO
+git -C third_party/LIBERO fetch --depth 1 origin 8f1084e3132a39270c3a13ebe37270a43ece2a01
 git -C third_party/LIBERO checkout --detach 8f1084e3132a39270c3a13ebe37270a43ece2a01
 python -m pip install -e "./third_party/LIBERO" --no-deps
 ```
 
 The notebook and this guide use the official LIBERO commit `8f1084e3132a39270c3a13ebe37270a43ece2a01` for repeatable task definitions and initial states.
+
+The notebook runs task 0 of libero_spatial for 50 full-length episodes, matching FastWAM's single-task evaluation budget. Its reported success rate is task-specific, not the full-suite average. Compare against the same suite, task, checkpoint, and inference settings; exact reproduction also depends on matching seed and initial-state handling.
 
 LIBERO needs a path config before `get_libero_path()` can be used. The notebook writes this automatically. For a manual setup, make a directory (for example, `./libero_config`) and put a `config.yaml` there with absolute paths like the following; set `LIBERO_CONFIG_PATH` to that directory before importing `libero.libero`:
 
@@ -74,7 +77,7 @@ The first and third steps depend on the model and checkpoint, so they belong in 
 8. **Decode the chunk.** The runner passes `InferenceResult.actions` to `model.postprocess_actions(..., environment="libero")`. The FastWAM adapter denormalizes with action statistics and maps the gripper to LIBERO's `-1=open`, `+1=close` convention (optionally binarizing it).
 9. **Execute only a prefix.** The evaluator sends up to `replan_steps` actions from the predicted chunk to `env.step()`. It then discards the unexecuted remainder, observes again, and asks for another chunk. The final chunk is shortened when it would exceed the episode step limit.
 10. **Stop and score.** Success comes from the environment's `check_success()` when available; the upstream reward/info success signal is the fallback. An environment termination without a success signal is recorded as termination, not automatically counted as success. The default maximum policy steps follow FastWAM's suite limits: 400 for spatial/object/goal, 700 for LIBERO-10/90. `max_steps` overrides them.
-11. **Save results.** The function returns `LiberoEvaluationResult` with task and episode outcomes, success rates, seeds, initial-state indices, warm-up/policy step counts, inference metadata and captured traces, plus optional action traces/video paths. If `output_dir` is set, it writes a timestamped JSON result. Requested module traces are included with that inference call; use `trace_modules` sparingly because activation tensors can make result files large. Set `record_actions=True` to retain the normalized model chunk, decoded chunk, and executed prefix for every inference call. Set `save_rollout_videos=True` to save primary-camera MP4 rollouts; that option requires an output directory and the `libero-video` extra.
+11. **Save results.** The function returns `LiberoEvaluationResult` with task and episode outcomes, success rates, seeds, initial-state indices, warm-up/policy step counts, and inference metadata. If `output_dir` is set, it writes a timestamped JSON result. Requested module traces are included with that inference call; use `trace_modules` sparingly because activation tensors can make result files large.
 
 ## Calling it with FastWAM
 
@@ -126,7 +129,7 @@ The FastWAM adapter reads only the configuration and stats required for model-si
 - `camera_resolution`: width and height passed to the LIBERO offscreen renderer.
 - `inference_options`: fields of shared `InferenceRequest` except `observation` and `action_horizon`. Examples include `condition`, `num_video_frames`, `num_inference_steps`, `sigma_shift`, `text_cfg_scale`, and `compile_action_infer`.
 - `run_metadata`: caller-provided provenance, such as checkpoint path/hash, dataset-statistics path/hash, source revision, and external asset versions. The evaluator does not guess these values.
-- `output_dir`, `record_actions`, `save_rollout_videos`: result and optional artifact controls.
+- `output_dir`: where the evaluator writes its JSON result.
 
 ## Adding another benchmark evaluator
 

@@ -41,8 +41,6 @@ class LiberoEvalConfig:
     inference_options: Mapping[str, Any] = field(default_factory=dict)
     run_metadata: Mapping[str, Any] = field(default_factory=dict)
     output_dir: Path | None = None
-    record_actions: bool = False
-    save_rollout_videos: bool = False
 
     def validate(self) -> None:
         suite = self.task_suite_name.strip().lower()
@@ -61,8 +59,6 @@ class LiberoEvalConfig:
             raise ValueError("replan_steps and action_horizon must be positive")
         if self.camera_resolution < 1:
             raise ValueError("camera_resolution must be positive")
-        if self.save_rollout_videos and self.output_dir is None:
-            raise ValueError("output_dir is required when save_rollout_videos=True")
         if self.task_ids is not None:
             if not self.task_ids:
                 raise ValueError("task_ids cannot be empty; use None for the full suite")

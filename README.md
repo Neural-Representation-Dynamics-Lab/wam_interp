@@ -21,13 +21,24 @@ FastWAM's vendored model implementation is under `src/models/fastwam/model_code/
 
 ## Installation
 
-Install this repository and the selected model backend's dependencies. For FastWAM:
+Install this repository, the FastWAM backend, and the LIBERO simulator runtime:
 
 ```bash
 python -m pip install -e ".[all]"
 ```
 
-Install and configure the upstream [LIBERO benchmark](https://github.com/Lifelong-Robot-Learning/LIBERO) in the same Python environment according to its installation instructions. That installation provides the `libero` package, BDDL task files, initial simulator states, and simulator dependencies. This project does not download those assets for you. For optional MP4 recording, install `python -m pip install -e ".[libero-video]"`.
+The `all` extra includes FastWAM's Python dependencies and the LIBERO simulator runtime (`robosuite>=1.4.0,<1.5`, `mujoco>=3.3,<3.10`, and the task/parser packages). The bounds keep LIBERO on robosuite's required 1.4 API and avoid the MuJoCo 3.10 API change that breaks robosuite 1.4. LIBERO's legacy requirements file pins Python 3.8 and PyTorch 1.11; do not install it into this environment because that would replace the model stack. The upstream LIBERO source checkout is still needed for task definitions, fixed initial states, and simulator assets. Clone and install that source without re-resolving its old dependencies:
+
+```bash
+mkdir -p third_party
+git clone --depth 1 --branch master https://github.com/Lifelong-Robot-Learning/LIBERO.git third_party/LIBERO
+git -C third_party/LIBERO checkout --detach 8f1084e3132a39270c3a13ebe37270a43ece2a01
+python -m pip install -e "./third_party/LIBERO" --no-deps
+```
+
+The source checkout is pinned to LIBERO commit `8f1084e3132a39270c3a13ebe37270a43ece2a01` in the notebook and the manual setup above so collaborators use the same task definitions and initial states. The notebook downloads the released FastWAM checkpoint and statistics from Hugging Face. FastWAM then downloads any missing Wan VAE, text-encoder, and tokenizer assets from their public Hugging Face repositories into its configured cache; the base video DiT download is skipped for this checkpoint. Network access is required, but no separate manual model-asset setup is needed.
+
+The evaluator needs no LIBERO demonstration trajectories. Before evaluation, LIBERO also needs a `config.yaml` with paths to its benchmark root, BDDL files, initial states, datasets, and assets. The notebook creates this config automatically and tests a real environment reset and camera render before loading FastWAM. See [the LIBERO evaluation guide](docs/libero_evaluation.md) for manual setup details. For optional MP4 recording, install `python -m pip install -e ".[libero-video]"`.
 
 ## Run one prepared observation
 

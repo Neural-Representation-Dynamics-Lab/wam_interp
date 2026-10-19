@@ -2,9 +2,51 @@
 
 This is the closed-loop simulator evaluator. It is separate from training and from the one-observation NPZ inference command.
 
+## Install the evaluation environment
+
+Use Python 3.10 or newer in a clean environment. From the repository root, install the project's dependencies:
+
+```bash
+python -m pip install -e ".[all]"
+```
+
+This installs the FastWAM runtime plus the LIBERO simulation dependencies used here: `robosuite>=1.4.0,<1.5`, `mujoco>=3.3,<3.10`, and the BDDL/task support packages. LIBERO's upstream `requirements.txt` is for an older Python 3.8/PyTorch 1.11 stack; do not install it into this environment. The robosuite bound retains LIBERO's 1.4 environment API, and the MuJoCo upper bound avoids the 3.10 `mj_fullM` signature change. The evaluator does not need LIBERO's demonstration dataset.
+
+Clone LIBERO's official source checkout and install its package without allowing its legacy setup to resolve dependencies again:
+
+```bash
+mkdir -p third_party
+git clone --depth 1 --branch master https://github.com/Lifelong-Robot-Learning/LIBERO.git third_party/LIBERO
+git -C third_party/LIBERO checkout --detach 8f1084e3132a39270c3a13ebe37270a43ece2a01
+python -m pip install -e "./third_party/LIBERO" --no-deps
+```
+
+The notebook and this guide use the official LIBERO commit `8f1084e3132a39270c3a13ebe37270a43ece2a01` for repeatable task definitions and initial states.
+
+LIBERO needs a path config before `get_libero_path()` can be used. The notebook writes this automatically. For a manual setup, make a directory (for example, `./libero_config`) and put a `config.yaml` there with absolute paths like the following; set `LIBERO_CONFIG_PATH` to that directory before importing `libero.libero`:
+
+```yaml
+benchmark_root: /absolute/path/to/third_party/LIBERO/libero/libero
+bddl_files: /absolute/path/to/third_party/LIBERO/libero/libero/bddl_files
+init_states: /absolute/path/to/third_party/LIBERO/libero/libero/init_files
+datasets: /absolute/path/to/empty-or-existing/libero_datasets
+assets: /absolute/path/to/third_party/LIBERO/libero/libero/assets
+```
+
+Then export the config and renderer paths in that shell before starting Python:
+
+```bash
+export LIBERO_CONFIG_PATH="$(pwd)/libero_config"
+export MUJOCO_GL=egl
+```
+
+The `datasets` directory may be empty for evaluation; it is included because upstream LIBERO expects the key in its config. The notebook runs a simulator construction, fixed-state reset, and camera-observation check before downloading/loading the model checkpoint, so renderer or path errors are caught early.
+
+The model-loading cell downloads the released FastWAM checkpoint and normalization statistics. It directs the vendored loader to Hugging Face and caches missing Wan VAE, text-encoder, and tokenizer files under `checkpoints/wan_assets`. The base Wan video DiT is not separately downloaded for this released FastWAM checkpoint (`skip_dit_load_from_pretrain=true`). This setup requires outbound network access; it does not require a separate Wan install or a LIBERO demonstration-data download.
+
 ## What lives where
 
-LIBERO is installed as an upstream benchmark package. Its Python code provides suite/task objects, BDDL task definitions, simulator wrappers, and fixed initial simulator states. MuJoCo/robosuite and LIBERO's configured asset directories are external dependencies. `evaluate_libero()` does not download them or load a policy checkpoint.
+LIBERO's Python package, BDDL task definitions, fixed initial simulator states, and simulator assets come from its upstream source checkout. The `.[all]` extra installs the compatible MuJoCo/robosuite runtime, while the notebook clones and configures the upstream checkout. `evaluate_libero()` itself does not download any of these or load a policy checkpoint.
 
 At run time, the evaluator asks LIBERO for a suite and a task. The task object provides its natural-language instruction and the names of its BDDL file and problem folder. The environment frontend resolves that task's BDDL file through `get_libero_path("bddl_files")` and creates `OffScreenRenderEnv`. The suite object returns initial states for a task through `get_task_init_states(task_id)`. These simulator states are not the demo-training dataset and are not loaded from an evaluation NPZ.
 

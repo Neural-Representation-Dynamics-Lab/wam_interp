@@ -1,0 +1,24 @@
+# @package _global_
+# Shape/processor metadata from upstream configs/data/libero_2cam.yaml.
+data:
+  train:
+    num_frames: 33
+    action_video_freq_ratio: 4
+    video_size: [224, 448]
+    concat_multi_camera: horizontal
+    shape_meta:
+      images:
+        - {key: image, shape: [3, 224, 224], raw_shape: [3, 512, 512]}
+        - {key: wrist_image, shape: [3, 224, 224], raw_shape: [3, 512, 512]}
+      action:
+        - {key: default, shape: 7, raw_shape: 7}
+      state:
+        - {key: default, shape: 8, raw_shape: 8}
+    processor:
+      num_output_cameras: 2
+      action_output_dim: 7
+      proprio_output_dim: 8
+      action_state_transforms: null
+      use_stepwise_action_norm: false
+      norm_default_mode: min/max
+      norm_exception_mode: null

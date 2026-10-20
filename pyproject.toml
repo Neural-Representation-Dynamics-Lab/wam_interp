@@ -10,6 +10,19 @@ requires-python = ">=3.10"
 dependencies = []
 
 [project.optional-dependencies]
+fasterwam = [
+  "torch>=2.7",
+  "hydra-core>=1.3",
+  "omegaconf>=2.3",
+  "numpy>=1.26,<2",
+  "einops>=0.8",
+  "Pillow>=10",
+  "safetensors>=0.5",
+  "transformers>=4.49,<5",
+  "huggingface-hub==0.36.2",
+  "modelscope>=1.34",
+  "tqdm>=4.66",
+]
 fastwam = [
   "torch>=2.7",
   "hydra-core>=1.3",
@@ -92,6 +105,10 @@ packages = [
   "wam_interp.models.fastwam.model_code.schedulers",
   "wam_interp.models.lingbot_va",
   "wam_interp.models.lingbot_va.model_code",
+  "wam_interp.models.fasterwam",
+  "wam_interp.models.fasterwam.model_code",
+  "wam_interp.models.fasterwam.model_code.helpers",
+  "wam_interp.models.fasterwam.model_code.schedulers",
   "wam_interp.tracing",
 ]
 
@@ -109,4 +126,11 @@ wam_interp = "src"
 "wam_interp.models.fastwam.model_code.schedulers" = "src/models/fastwam/model_code/schedulers"
 "wam_interp.models.lingbot_va" = "src/models/lingbot_va"
 "wam_interp.models.lingbot_va.model_code" = "src/models/lingbot_va/model_code"
+"wam_interp.models.fasterwam" = "src/models/fasterwam"
+"wam_interp.models.fasterwam.model_code" = "src/models/fasterwam/model_code"
+"wam_interp.models.fasterwam.model_code.helpers" = "src/models/fasterwam/model_code/helpers"
+"wam_interp.models.fasterwam.model_code.schedulers" = "src/models/fasterwam/model_code/schedulers"
 "wam_interp.tracing" = "src/tracing"
+
+[tool.setuptools.package-data]
+"wam_interp.models.fasterwam.model_code" = ["LICENSE"]

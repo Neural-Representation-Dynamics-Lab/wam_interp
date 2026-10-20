@@ -1,0 +1,19 @@
+# Inference-only composition. No training datasets or simulator are instantiated.
+defaults:
+  - model: fasterwam
+  - task: libero_fasterwam_2cam224_1e-4
+  - _self_
+
+model:
+  load_text_encoder: true
+  skip_dit_load_from_pretrain: true
+  action_dit_pretrained_path: null
+  mot_checkpoint_mixed_attn: false
+
+EVALUATION:
+  action_horizon: 32
+  num_video_frames: 9
+  num_inference_steps: 10
+  action_infer_mode: one_pass_future_cache
+  sigma_shift: null
+  binarize_gripper: true

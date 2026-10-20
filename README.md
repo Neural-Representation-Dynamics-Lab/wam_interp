@@ -1,5 +1,10 @@
 # WAM Interpretability
 
+Faster-WAM is also available through the registered `"fasterwam"` backend,
+including native checkpoint loading and a LIBERO adapter. See the
+[backend guide](src/models/fasterwam/README.md) and
+[H100 validation instructions](docs/fasterwam_validation.md).
+
 This repository is research infrastructure for studying how world-action models use their internal representations to choose actions. FastWAM is the first model backend; the shared interfaces are intended to support other models and benchmarks without moving their implementation details into common code.
 
 The main design rule is: **a benchmark evaluator controls the benchmark; a model adapter controls the model-facing transforms.** The evaluator does not load a model, checkpoint, tokenizer, or normalization file. It receives a ready-to-use adapter and calls its public methods.

@@ -12,9 +12,12 @@ from .registry import (
 # Import backend modules for registration. Their heavy dependencies are lazy.
 from .fastwam.adapter import FastWAMAdapter
 from .fastwam.loader import load_fastwam_backend
+from .fasterwam.adapter import FasterWAMAdapter
+from .fasterwam.loader import load_fasterwam_backend
 
 __all__ = [
     "FastWAMAdapter",
+    "FasterWAMAdapter",
     "get_model_adapter",
     "load_model",
     "load_model_adapter",

@@ -34,10 +34,10 @@ mkdir -p third_party
 git clone --depth 1 --no-checkout --branch master https://github.com/Lifelong-Robot-Learning/LIBERO.git third_party/LIBERO
 git -C third_party/LIBERO fetch --depth 1 origin 8f1084e3132a39270c3a13ebe37270a43ece2a01
 git -C third_party/LIBERO checkout --detach 8f1084e3132a39270c3a13ebe37270a43ece2a01
-python -m pip install -e "./third_party/LIBERO" --no-deps
+python -m pip install -e "./third_party/LIBERO" --no-deps --config-settings editable_mode=compat
 ```
 
-The source checkout is pinned to LIBERO commit `8f1084e3132a39270c3a13ebe37270a43ece2a01` in the notebook and the manual setup above so collaborators use the same task definitions and initial states. The notebook downloads the released FastWAM checkpoint and statistics from Hugging Face. FastWAM then downloads any missing Wan VAE, text-encoder, and tokenizer assets from their public Hugging Face repositories into its configured cache; the base video DiT download is skipped for this checkpoint. Network access is required, but no separate manual model-asset setup is needed.
+The source checkout is pinned to LIBERO commit `8f1084e3132a39270c3a13ebe37270a43ece2a01` in the notebook and the manual setup above so collaborators use the same task definitions and initial states. The notebook downloads the released FastWAM checkpoint and statistics from Hugging Face. FastWAM then downloads any missing Wan VAE, text-encoder, and tokenizer assets from ModelScope, its default source, into its configured cache; the base video DiT download is skipped for this checkpoint. Network access is required, but no separate manual model-asset setup is needed.
 
 The evaluator needs no LIBERO demonstration trajectories. Before evaluation, LIBERO needs a `config.yaml` with paths to its benchmark root, BDDL files, initial states, datasets, and assets. The notebook creates this config and checks a real environment reset and camera render before loading FastWAM. Its default run evaluates task 0 of `libero_spatial` for 50 full-length episodes and reports that task's success rate; it is not the full-suite average. See [the LIBERO evaluation guide](docs/libero_evaluation.md) for setup and comparison details.
 

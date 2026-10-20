@@ -35,6 +35,7 @@ libero = [
   "future>=0.18.2",
   "termcolor>=1.1",
   "opencv-python>=4.6",
+  "matplotlib>=3.5",
 ]
 all = [
   "torch>=2.7",
@@ -56,6 +57,7 @@ all = [
   "future>=0.18.2",
   "termcolor>=1.1",
   "opencv-python>=4.6",
+  "matplotlib>=3.5",
 ]
 [project.scripts]
 wam_interp = "wam_interp.main:main"

@@ -141,5 +141,11 @@ def step_libero(
 
 
 def initial_states_for_task(task_suite: Any, task_id: int):
-    """Ask LIBERO's suite object for its fixed simulator states for this task."""
-    return task_suite.get_task_init_states(int(task_id))
+    """Load LIBERO's fixed simulator states for this task."""
+    import torch
+
+    _, get_libero_path, _ = get_benchmark_module()
+    task = task_suite.get_task(int(task_id))
+    path = Path(get_libero_path("init_states")) / task.problem_folder / task.init_states_file
+    # torch>=2.6 rejects these pickled numpy arrays unless weights_only=False
+    return torch.load(path, weights_only=False)

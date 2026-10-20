@@ -162,6 +162,10 @@ def _run_episode(
     policy_steps = 0
     inference_calls = 0
     inference_metadata: list[dict[str, Any]] = []
+    begin_episode = getattr(model, "begin_episode", None)
+    observe_step = getattr(model, "observe_step", None)
+    if callable(begin_episode) and not (success or done):
+        begin_episode(observation)
 
     while not success and not done and policy_steps < max_steps:
         prepared = model.prepare_observation(observation)
@@ -210,6 +214,8 @@ def _run_episode(
             observation = step.observation
             total_reward += step.reward
             policy_steps += 1
+            if callable(observe_step):
+                observe_step(observation, action)
             success, done = step.success, step.done
             if success or done:
                 termination_reason = "success" if success else "environment_done"

@@ -22,6 +22,18 @@ fastwam = [
   "modelscope>=1.34",
   "huggingface-hub==0.36.2",
 ]
+lingbot_va = [
+  "torch>=2.7",
+  "diffusers==0.36.0",
+  "accelerate>=1.0",
+  "ftfy>=6",
+  "transformers>=4.49,<5",
+  "einops>=0.8",
+  "easydict>=1.9",
+  "numpy>=1.26,<2",
+  "safetensors>=0.5",
+  "huggingface-hub==0.36.2",
+]
 libero = [
   "numpy>=1.26,<2",
   # LIBERO's BDDL environments depend on the robosuite 1.4 API.
@@ -48,6 +60,9 @@ all = [
   "transformers>=4.49,<5",
   "modelscope>=1.34",
   "huggingface-hub==0.36.2",
+  "diffusers==0.36.0",
+  "accelerate>=1.0",
+  "ftfy>=6",
   "robosuite>=1.4.0,<1.5",
   "mujoco>=3.3,<3.10",
   "bddl==1.0.1",
@@ -75,6 +90,8 @@ packages = [
   "wam_interp.models.fastwam.model_code",
   "wam_interp.models.fastwam.model_code.helpers",
   "wam_interp.models.fastwam.model_code.schedulers",
+  "wam_interp.models.lingbot_va",
+  "wam_interp.models.lingbot_va.model_code",
   "wam_interp.tracing",
 ]
 
@@ -90,4 +107,6 @@ wam_interp = "src"
 "wam_interp.models.fastwam.model_code" = "src/models/fastwam/model_code"
 "wam_interp.models.fastwam.model_code.helpers" = "src/models/fastwam/model_code/helpers"
 "wam_interp.models.fastwam.model_code.schedulers" = "src/models/fastwam/model_code/schedulers"
+"wam_interp.models.lingbot_va" = "src/models/lingbot_va"
+"wam_interp.models.lingbot_va.model_code" = "src/models/lingbot_va/model_code"
 "wam_interp.tracing" = "src/tracing"

@@ -109,6 +109,8 @@ Put its loader, adapter, preprocessing, normalization, and action decoding in `s
 - `predict_action(InferenceRequest) -> InferenceResult`
 - `postprocess_actions(actions, environment="libero") -> environment commands`
 
+Stateful models can also define `begin_episode(observation)`, called after warm-up, and `observe_step(observation, action)`, called after every executed step. The evaluator calls them only when present; see `src/models/lingbot_va/` for an example.
+
 The evaluator passes raw cameras, named raw state values, and the task instruction to `prepare_observation`. `predict_action` should return model-normalized action chunks. `postprocess_actions` converts those actions into the target environment's command convention. Do not add model class names, checkpoint formats, image normalization, robot-state normalization, or action denormalization to `src/evaluations/LIBERO/`.
 
 This adapter work is evaluation-specific and must be included whenever a model is added or connected to another evaluation. For each supported model/environment pairing, implement the required observation preparation and action conversion in that model's adapter. The evaluator should handle benchmark mechanics and pass observations through the adapter; it should not contain model-specific preprocessing or branching.

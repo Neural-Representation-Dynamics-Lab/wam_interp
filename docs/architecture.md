@@ -15,7 +15,7 @@
 
 - `src/evaluations/<benchmark>/`: benchmark tasks, simulator setup, reset/step loop, replanning, metrics, and benchmark results. No model loading or model-specific transforms.
 - `src/models/<backend>/`: checkpoint/model loader, inference adapter, model-specific input transforms, normalization, and environment action decoding.
-- `src/models/registry.py`: model loader and inference-adapter registries. Importing `wam_interp.models` imports built-in FastWAM modules so their registration decorators execute.
+- `src/models/registry.py`: model loader and inference-adapter registries. Importing `wam_interp.models` imports the built-in FastWAM and LingBot-VA modules so their registration decorators execute.
 - `configs/<backend>/`: backend configuration files when needed. FastWAM uses Hydra; other backends need not.
 - `src/data/`: helpers for stored/prepared observations such as NPZ inputs; not a live simulator loader.
 - `src/tracing/`: passive named-module output capture.

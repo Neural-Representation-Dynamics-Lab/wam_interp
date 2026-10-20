@@ -26,6 +26,10 @@ class EvaluationModelAdapter(ModelAdapter, Protocol):
 
     Preprocessing, model-configured request defaults, and action decoding are
     implemented by the backend. The evaluator only orchestrates the benchmark.
+
+    Stateful backends may also define begin_episode(observation), called once
+    after warm-up, and observe_step(observation, action), called after every
+    executed policy step. Evaluators call them only when present.
     """
 
     def inference_defaults(self) -> Mapping[str, Any]:

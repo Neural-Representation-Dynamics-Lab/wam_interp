@@ -8,13 +8,6 @@ import torch
 import torch.nn.functional as F
 from einops import rearrange
 
-from .model_code.loading import (
-    WanVAEStreamingWrapper,
-    load_text_encoder,
-    load_tokenizer,
-    load_transformer,
-    load_vae,
-)
 from .model_code.scheduler import FlowMatchScheduler
 from .model_code.utils import data_seq_to_patch, get_mesh_id
 
@@ -24,6 +17,10 @@ class LingBotVARuntime:
 
     def __init__(self, config: Any, checkpoint_dir: str | Path, *, device: str = "cuda",
                  dtype: torch.dtype = torch.bfloat16):
+        from .model_code.loading import (
+            WanVAEStreamingWrapper, load_text_encoder, load_tokenizer,
+            load_transformer, load_vae,
+        )
         self.config = config
         self.device = torch.device(device)
         self.dtype = dtype
@@ -38,6 +35,10 @@ class LingBotVARuntime:
 
         self.vae = load_vae(root / "vae", torch_dtype=dtype, torch_device=self.device)
         self.streaming_vae = WanVAEStreamingWrapper(self.vae)
+        # The two resolutions need independent temporal caches. The frozen VAE
+        # weights can be shared; WanVAEStreamingWrapper owns its feature cache.
+        self.streaming_vae_half = (WanVAEStreamingWrapper(self.vae)
+                                   if config.env_type == "robotwin_tshape" else None)
         self.tokenizer = load_tokenizer(root / "tokenizer")
         self.text_encoder = load_text_encoder(root / "text_encoder", torch_dtype=dtype,
                                               torch_device=self.device)
@@ -88,11 +89,16 @@ class LingBotVARuntime:
         self.init_latent = None
         self.transformer.clear_cache(self.cache_name)
         self.streaming_vae.clear_cache()
+        if self.streaming_vae_half is not None:
+            self.streaming_vae_half.clear_cache()
 
         self.action_per_frame = cfg.action_per_frame
         self.height, self.width = cfg.height, cfg.width
         self.latent_height = self.height // 16
         self.latent_width = self.width // 16 * len(cfg.obs_cam_keys)
+        if cfg.env_type == "robotwin_tshape":
+            self.latent_height = (self.height // 16) * 3 // 2
+            self.latent_width = self.width // 16
 
         p = cfg.patch_size
         latent_token_per_chunk = (cfg.frame_chunk_size * self.latent_height * self.latent_width) // (p[0] * p[1] * p[2])
@@ -116,8 +122,20 @@ class LingBotVARuntime:
         """frames: list over time of [num_cams, 3, H, W] floats in [-1, 1], camera order fixed."""
         if not frames:
             return None
-        videos = torch.stack(frames, dim=0).permute(1, 2, 0, 3, 4)  # cams, C, T, H, W
-        enc_out = self.streaming_vae.encode_chunk(videos.to(self.device, self.dtype))
+        if self.config.env_type == "robotwin_tshape":
+            # Frames contain (head[3,256,320], left/right[3,128,160]).
+            videos_high = torch.stack([frame[0] for frame in frames], dim=1)[None]
+            videos_half = torch.stack([
+                torch.stack([frame[camera] for frame in frames], dim=1)
+                for camera in (1, 2)
+            ])
+            high = self.streaming_vae.encode_chunk(videos_high.to(self.device, self.dtype))
+            half = self.streaming_vae_half.encode_chunk(videos_half.to(self.device, self.dtype))
+            wrists = torch.cat(half.split(1, dim=0), dim=-1)
+            enc_out = torch.cat([wrists, high], dim=-2)
+        else:
+            videos = torch.stack(frames, dim=0).permute(1, 2, 0, 3, 4)  # cams, C, T, H, W
+            enc_out = self.streaming_vae.encode_chunk(videos.to(self.device, self.dtype))
         mu, _logvar = torch.chunk(enc_out, 2, dim=1)
         latents_mean = torch.tensor(self.vae.config.latents_mean).to(mu.device)
         latents_std = torch.tensor(self.vae.config.latents_std).to(mu.device)
@@ -269,7 +287,7 @@ class LingBotVARuntime:
     def compute_kv_cache(self, frames: list[torch.Tensor], executed_chunk: np.ndarray) -> None:
         """Replace the predicted K/V with real observed frames and the executed action chunk.
 
-        executed_chunk is the denormalized [7, F, A] chunk returned for the last call.
+        executed_chunk is the denormalized [channels, F, A] chunk returned for the last call.
         """
         self.transformer.clear_pred_cache(self.cache_name)
         latent_model_input = self.encode_frames(frames)

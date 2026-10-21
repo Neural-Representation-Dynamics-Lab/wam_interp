@@ -5,6 +5,10 @@ including native checkpoint loading and a LIBERO adapter. See the
 [backend guide](src/models/fasterwam/README.md) and
 [H100 validation instructions](docs/fasterwam_validation.md).
 
+LIBERO-Plus and pinned RoboTwin 2.0 evaluators now have adapters for FastWAM,
+Faster-WAM, and LingBot-VA. See the [isolated setup and six H100 smoke commands](docs/benchmark_handoff.md).
+CPU protocol checks are separate from real-checkpoint validation, which is pending.
+
 This repository is research infrastructure for studying how world-action models use their internal representations to choose actions. FastWAM is the first model backend; the shared interfaces are intended to support other models and benchmarks without moving their implementation details into common code.
 
 The main design rule is: **a benchmark evaluator controls the benchmark; a model adapter controls the model-facing transforms.** The evaluator does not load a model, checkpoint, tokenizer, or normalization file. It receives a ready-to-use adapter and calls its public methods.

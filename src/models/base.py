@@ -30,6 +30,9 @@ class EvaluationModelAdapter(ModelAdapter, Protocol):
     Stateful backends may also define begin_episode(observation), called once
     after warm-up, and observe_step(observation, action), called after every
     executed policy step. Evaluators call them only when present.
+
+    RoboTwin adapters additionally provide environment_action_type(environment),
+    returning 'qpos' or 'ee'. LIBERO-family evaluators do not require this hook.
     """
 
     def inference_defaults(self) -> Mapping[str, Any]:

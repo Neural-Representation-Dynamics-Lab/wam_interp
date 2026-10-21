@@ -10,6 +10,30 @@ requires-python = ">=3.10"
 dependencies = []
 
 [project.optional-dependencies]
+libero_plus = [
+  "wand>=0.6",
+  "scikit-image>=0.21",
+  "numpy>=1.26,<2",
+  "robosuite>=1.4.0,<1.5",
+  "mujoco==3.3.2",
+  "bddl==1.0.1",
+  "gym==0.25.2",
+  "easydict>=1.9",
+  "cloudpickle>=2.1",
+  "future>=0.18.2",
+  "termcolor>=1.1",
+  "opencv-python>=4.6",
+  "matplotlib>=3.5",
+]
+robotwin = [
+  "numpy>=1.26,<2",
+  "PyYAML>=6",
+  "Pillow>=10",
+  "transforms3d==0.4.2",
+  "trimesh==4.4.3",
+  "sapien==3.0.0b1; sys_platform == 'linux'",
+  "mplib==0.2.1; sys_platform == 'linux'",
+]
 fasterwam = [
   "torch>=2.7",
   "hydra-core>=1.3",
@@ -96,6 +120,8 @@ packages = [
   "wam_interp.data",
   "wam_interp.evaluations",
   "wam_interp.evaluations.LIBERO",
+  "wam_interp.evaluations.LIBERO_PLUS",
+  "wam_interp.evaluations.ROBOTWIN",
   "wam_interp.experiments",
   "wam_interp.interventions",
   "wam_interp.models",
@@ -117,6 +143,8 @@ wam_interp = "src"
 "wam_interp.data" = "src/data"
 "wam_interp.evaluations" = "src/evaluations"
 "wam_interp.evaluations.LIBERO" = "src/evaluations/LIBERO"
+"wam_interp.evaluations.LIBERO_PLUS" = "src/evaluations/LIBERO_PLUS"
+"wam_interp.evaluations.ROBOTWIN" = "src/evaluations/ROBOTWIN"
 "wam_interp.experiments" = "src/experiments"
 "wam_interp.interventions" = "src/interventions"
 "wam_interp.models" = "src/models"

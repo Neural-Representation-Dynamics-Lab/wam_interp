@@ -1,0 +1,24 @@
+# @package _global_
+data:
+  train:
+    num_frames: 33
+    action_video_freq_ratio: 4
+    video_size: [384, 320]
+    concat_multi_camera: robotwin
+    shape_meta:
+      images:
+        - {key: cam_high, shape: [3, 240, 320]}
+        - {key: cam_left_wrist, shape: [3, 240, 320]}
+        - {key: cam_right_wrist, shape: [3, 240, 320]}
+      state:
+        - {key: default, shape: 14}
+      action:
+        - {key: default, shape: 14}
+    processor:
+      num_output_cameras: 3
+      proprio_output_dim: 14
+      action_output_dim: 14
+      action_state_transforms: null
+      use_stepwise_action_norm: false
+      norm_default_mode: z-score
+      norm_exception_mode: null

@@ -7,10 +7,13 @@ from wam_interp.models.registry import register_model_loader
 
 
 def lingbot_va_config(name: str = "libero"):
-    if name != "libero":
-        raise ValueError(f"Only the LIBERO config is ported so far, got {name!r}")
-    from .model_code.va_libero_cfg import va_libero_cfg
-    return deepcopy(va_libero_cfg)
+    if name in {"libero", "libero_plus"}:
+        from .model_code.va_libero_cfg import va_libero_cfg
+        return deepcopy(va_libero_cfg)
+    if name == "robotwin":
+        from .model_code.va_robotwin_cfg import va_robotwin_cfg
+        return deepcopy(va_robotwin_cfg)
+    raise ValueError(f"Unsupported LingBot-VA config {name!r}")
 
 
 def _resolve_dtype(name: str):
@@ -30,4 +33,8 @@ def load_lingbot_va(*, checkpoint_dir: str | Path, config_name: str = "libero",
     from .runtime import LingBotVARuntime
 
     cfg = lingbot_va_config(config_name) if config is None else config
-    return LingBotVARuntime(cfg, checkpoint_dir, device=device, dtype=_resolve_dtype(dtype))
+    model = LingBotVARuntime(cfg, checkpoint_dir, device=device, dtype=_resolve_dtype(dtype))
+    model._wam_interp_metadata = {"checkpoint": str(Path(checkpoint_dir).expanduser().resolve()),
+        "resolved_model_config": dict(cfg),
+        "upstream_revision": "7c6ffa9bfc4b83582cafc860fab4c82cc7deeeeb"}
+    return model

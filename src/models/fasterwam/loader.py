@@ -8,15 +8,18 @@ UPSTREAM_REVISION = "83667817df0d4f823f39d90700e61ea2f432ac45"
 
 
 def compose_fasterwam_config(task="libero_fasterwam_2cam224_1e-4", repository_root=None,
-                           overrides=None):
+                           overrides=None, *, benchmark="libero"):
     from hydra import compose, initialize_config_dir
 
     root = Path(repository_root).expanduser().resolve() if repository_root else Path(__file__).resolve().parents[3]
     config_dir = root / "configs" / "fasterwam"
     if not config_dir.is_dir():
         raise FileNotFoundError(f"Faster-WAM config directory not found: {config_dir}")
+    if benchmark not in {"libero", "libero_plus", "robotwin"}:
+        raise ValueError(f"Unsupported benchmark {benchmark!r}")
     with initialize_config_dir(version_base=None, config_dir=str(config_dir)):
-        return compose(config_name="sim_libero", overrides=[f"task={task}", *(overrides or [])])
+        return compose(config_name="sim_robotwin" if benchmark == "robotwin" else "sim_libero",
+                       overrides=[f"task={task}", *(overrides or [])])
 
 
 def load_fasterwam(config, checkpoint, *, device="cuda", dtype="bfloat16"):
@@ -44,9 +47,9 @@ def load_fasterwam(config, checkpoint, *, device="cuda", dtype="bfloat16"):
 
 @register_model_loader("fasterwam")
 def load_fasterwam_backend(*, task="libero_fasterwam_2cam224_1e-4", repository_root=None,
-                          checkpoint, device="cuda", dtype="bfloat16", overrides=None):
+                          checkpoint, device="cuda", dtype="bfloat16", overrides=None, benchmark="libero"):
     # Reject missing weights before importing Hydra or allocating model assets.
     if not Path(checkpoint).expanduser().is_file():
         raise FileNotFoundError(f"Faster-WAM checkpoint not found: {checkpoint}")
-    config = compose_fasterwam_config(task, repository_root, overrides)
+    config = compose_fasterwam_config(task, repository_root, overrides, benchmark=benchmark)
     return load_fasterwam(config, checkpoint, device=device, dtype=dtype)

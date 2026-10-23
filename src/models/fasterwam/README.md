@@ -49,7 +49,8 @@ The inference config enables prompt encoding, skips training-only DiT
 initialization, and relies on the released checkpoint for the video/action
 weights. Wan VAE, T5, and tokenizer assets still download through the native
 helper. Set `DIFFSYNTH_MODEL_BASE_PATH` to choose their cache directory and
-`DIFFSYNTH_DOWNLOAD_SOURCE=huggingface` to select the download source.
+`DIFFSYNTH_DOWNLOAD_SOURCE=modelscope`; the converted Wan T5/VAE files are
+not public on the Hugging Face Hub.
 
 The NPZ input is the same prepared format as FastWAM: RGB CHW/HWC uint8 or
 float `[-1,1]` and a normalized one-dimensional proprio vector. The LIBERO

@@ -74,7 +74,7 @@ def load_fastwam(config: Any, checkpoint: str | Path, *, device: str = "cuda",
     model.eval()
     from omegaconf import OmegaConf
     model._wam_interp_metadata = {"checkpoint": str(checkpoint),
-        "resolved_model_config": OmegaConf.to_container(config, resolve=True)}
+        "resolved_model_config": OmegaConf.to_container(config.model, resolve=True)}
     return model
 
 

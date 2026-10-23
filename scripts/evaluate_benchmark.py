@@ -86,7 +86,7 @@ def main(argv=None):
                 from wam_interp.models.fasterwam.libero_plus_adapter import FasterWAMLiberoPlusAdapter as Adapter
             else:
                 from wam_interp.models.fasterwam.robotwin_adapter import FasterWAMRobotWinAdapter as Adapter
-        metadata["resolved_model_config"] = OmegaConf.to_container(cfg, resolve=True)
+        metadata["resolved_model_config"] = OmegaConf.to_container(cfg.model, resolve=True)
         adapter = Adapter(model, data_config=OmegaConf.to_container(cfg.data.train, resolve=True),
                           dataset_stats=args.dataset_stats)
     options = {} if args.condition is None else {"condition": args.condition}

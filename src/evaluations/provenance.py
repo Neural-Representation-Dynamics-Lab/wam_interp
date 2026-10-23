@@ -71,5 +71,5 @@ def save_report(report, output_dir, prefix):
     output_dir.mkdir(parents=True, exist_ok=True)
     path = output_dir / f"{prefix}_{datetime.now(timezone.utc).strftime('%Y%m%dT%H%M%S%fZ')}.json"
     report["output_path"] = str(path)
-    path.write_text(json.dumps(report, indent=2, sort_keys=True), encoding="utf-8")
+    path.write_text(json.dumps(report, indent=2, sort_keys=True, default=str), encoding="utf-8")
     return str(path)

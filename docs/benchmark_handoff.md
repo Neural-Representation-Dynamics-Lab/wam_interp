@@ -66,7 +66,10 @@ root = Path('third_party/LIBERO-plus/libero/libero').resolve()
 revision = HfApi().dataset_info('Sylvest/LIBERO-plus').sha
 archive = hf_hub_download('Sylvest/LIBERO-plus', 'assets.zip', repo_type='dataset', revision=revision)
 with zipfile.ZipFile(archive) as stream:
-    stream.extractall(root)
+    for member in stream.infolist():
+        # entries sit under the authors' own path (inspire/hdd/.../LIBERO-plus-0/assets/...)
+        member.filename = member.filename[member.filename.index('assets/'):]
+        stream.extract(member, root)
 Path('checkpoints').mkdir(exist_ok=True)
 Path('checkpoints/libero_plus_assets.json').write_text(json.dumps({'revision': revision, 'archive': archive}, indent=2))
 PY
@@ -99,13 +102,14 @@ inputs loaded with `weights_only=False`; do not use untrusted pickle files.
 Deactivate the Plus env first. Follow the official host/Vulkan/CUDA prerequisites
 from [RoboTwin setup](https://robotwin-platform.github.io/doc/usage/robotwin-install.html),
 but use the pinned checkout and commands below, not the latest install script.
+open3d also needs a system `libGL.so.1` (`libgl1` on Ubuntu).
 
 ```bash
 deactivate
 python3.10 -m venv .venv-robotwin
 source .venv-robotwin/bin/activate
 python -m pip install --upgrade pip setuptools wheel ninja cmake
-python -m pip install -e .
+python -m pip install -e . numpy==1.26.4
 git clone https://github.com/RoboTwin-Platform/RoboTwin.git third_party/RoboTwin
 git -C third_party/RoboTwin checkout --detach c3ddfa8b97d5519efa828b075999bd0006778e5e
 python scripts/prepare_robotwin.py --root third_party/RoboTwin
@@ -113,6 +117,9 @@ python scripts/prepare_robotwin.py --root third_party/RoboTwin --install
 python -m pip install -e '.[fastwam,fasterwam,lingbot_va,robotwin]' pytest
 (cd third_party/RoboTwin && bash script/_download_assets.sh)
 ```
+
+NumPy goes in with the base install because `prepare_robotwin.py` imports
+`wam_interp.evaluations.ROBOTWIN`, whose runner needs it.
 
 `prepare_robotwin.py` is read-only unless `--install` is provided. Installation
 uses PyTorch 2.7.1/cu128 instead of the simulator's 2.4.1 pin, Hub 0.36.2 instead
@@ -153,11 +160,14 @@ Run in either prepared environment; both use `checkpoints/` in this checkout.
 These commands pin model revisions, not floating branches. The FastWAM-family
 loader downloads missing Wan VAE/text/tokenizer base assets on first load;
 the training backbone initialization is skipped for released checkpoints.
+The Wan text encoder and VAE are fetched from
+`DiffSynth-Studio/Wan-Series-Converted-Safetensors`, which is published on
+ModelScope; the Hugging Face Hub has no public repo of that name.
 LingBot snapshots include their transformer/VAE/text encoder/tokenizer. Expect
 large downloads and long first loads. Preserve HF caches for reproducibility.
 
 ```bash
-export DIFFSYNTH_DOWNLOAD_SOURCE=huggingface
+export DIFFSYNTH_DOWNLOAD_SOURCE=modelscope
 export DIFFSYNTH_MODEL_BASE_PATH="$PWD/checkpoints/wan_assets"
 python - <<'PY'
 from huggingface_hub import snapshot_download

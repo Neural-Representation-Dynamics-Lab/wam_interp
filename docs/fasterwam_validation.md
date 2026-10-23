@@ -18,7 +18,7 @@ python -m pip install --upgrade pip setuptools wheel
 python -m pip install torch==2.7.1 torchvision==0.22.1 --index-url https://download.pytorch.org/whl/cu128
 python -m pip install -e ".[fasterwam,libero]" pytest rich
 python -m pytest tests/test_fasterwam.py -q
-export DIFFSYNTH_DOWNLOAD_SOURCE=huggingface
+export DIFFSYNTH_DOWNLOAD_SOURCE=modelscope
 export DIFFSYNTH_MODEL_BASE_PATH="$(pwd)/checkpoints/wan_assets"
 ```
 

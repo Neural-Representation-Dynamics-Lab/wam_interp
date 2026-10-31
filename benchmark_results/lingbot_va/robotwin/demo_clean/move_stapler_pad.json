@@ -1,0 +1,2199 @@
+{
+  "accepted_seeds": [
+    10000,
+    10001,
+    10002,
+    10003,
+    10004,
+    10005,
+    10006,
+    10007,
+    10008,
+    10009
+  ],
+  "action_type": "ee",
+  "attempts": 10,
+  "benchmark": "robotwin",
+  "benchmark_revision": "c3ddfa8b97d5519efa828b075999bd0006778e5e",
+  "completed": true,
+  "config": {
+    "action_horizon": 32,
+    "clear_cache_freq": 5,
+    "inference_options": {},
+    "instruction_pool_size": 100,
+    "instruction_type": "seen",
+    "max_repeated_screen_errors": 20,
+    "max_seed_attempts": 1000,
+    "max_steps": null,
+    "num_episodes": 10,
+    "output_dir": "/nethome/pi34/kv_results/rt10-lingbot_va-13068",
+    "replan_steps": 32,
+    "robotwin_root": "/dev/shm/pi34-rt-13068/RoboTwin",
+    "run_metadata": {
+      "checkpoint": "/dev/shm/pi34-rt-13068/checkpoints/lingbot",
+      "checkpoint_revision": "8c9dea8abbc5c91cc9e18bc3264b8915083bbe70",
+      "dtype": "bfloat16",
+      "repository_revision": "2a6a56a2a679da5b3d7b43ff92b0a6ad085c8d69",
+      "resolved_model_config": {
+        "__name__": "Config: VA robotwin",
+        "action_dim": 30,
+        "action_guidance_scale": 1,
+        "action_norm_method": "quantiles",
+        "action_num_inference_steps": 50,
+        "action_per_frame": 16,
+        "action_snr_shift": 1.0,
+        "attn_window": 72,
+        "enable_offload": false,
+        "env_type": "robotwin_tshape",
+        "frame_chunk_size": 2,
+        "guidance_scale": 5,
+        "height": 256,
+        "host": "0.0.0.0",
+        "inverse_used_action_channel_ids": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          16,
+          16,
+          16,
+          16,
+          16,
+          16,
+          16,
+          16,
+          16,
+          16,
+          16,
+          16,
+          16,
+          16,
+          7,
+          15
+        ],
+        "norm_stat": {
+          "q01": [
+            -0.06172713458538055,
+            -3.6716461181640625e-05,
+            -0.08783501386642456,
+            -1,
+            -1,
+            -1,
+            -1,
+            -0.3547105032205582,
+            -1.3113021850585938e-06,
+            -0.11975435614585876,
+            -1,
+            -1,
+            -1,
+            -1,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "q99": [
+            0.3462600058317184,
+            0.39966784834861746,
+            0.14745532035827624,
+            1,
+            1,
+            1,
+            1,
+            0.034201726913452024,
+            0.39142737388610793,
+            0.1792279863357542,
+            1,
+            1,
+            1,
+            1,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            1.0,
+            1.0
+          ]
+        },
+        "num_inference_steps": 25,
+        "obs_cam_keys": [
+          "observation.images.cam_high",
+          "observation.images.cam_left_wrist",
+          "observation.images.cam_right_wrist"
+        ],
+        "param_dtype": "torch.bfloat16",
+        "patch_size": [
+          1,
+          2,
+          2
+        ],
+        "port": 29536,
+        "save_root": "./train_out",
+        "snr_shift": 5.0,
+        "used_action_channel_ids": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          28,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          29
+        ],
+        "video_exec_step": -1,
+        "wan22_pretrained_model_name_or_path": "/path/to/pretrained/model",
+        "width": 320
+      }
+    },
+    "seed": 0,
+    "start_seed": 10000,
+    "task_config": "demo_clean",
+    "task_name": "move_stapler_pad"
+  },
+  "duration_seconds": 831.1731486439239,
+  "episodes": 10,
+  "model": {
+    "checkpoint": "/dev/shm/pi34-rt-13068/checkpoints/lingbot",
+    "model_device": "cuda",
+    "model_dtype": "torch.bfloat16",
+    "model_name": "lingbot_va",
+    "resolved_model_config": {
+      "__name__": "Config: VA robotwin",
+      "action_dim": 30,
+      "action_guidance_scale": 1,
+      "action_norm_method": "quantiles",
+      "action_num_inference_steps": 50,
+      "action_per_frame": 16,
+      "action_snr_shift": 1.0,
+      "attn_window": 72,
+      "enable_offload": false,
+      "env_type": "robotwin_tshape",
+      "frame_chunk_size": 2,
+      "guidance_scale": 5,
+      "height": 256,
+      "host": "0.0.0.0",
+      "inverse_used_action_channel_ids": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        16,
+        16,
+        16,
+        16,
+        16,
+        16,
+        16,
+        16,
+        16,
+        16,
+        16,
+        16,
+        16,
+        16,
+        7,
+        15
+      ],
+      "norm_stat": {
+        "q01": [
+          -0.06172713458538055,
+          -3.6716461181640625e-05,
+          -0.08783501386642456,
+          -1,
+          -1,
+          -1,
+          -1,
+          -0.3547105032205582,
+          -1.3113021850585938e-06,
+          -0.11975435614585876,
+          -1,
+          -1,
+          -1,
+          -1,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "q99": [
+          0.3462600058317184,
+          0.39966784834861746,
+          0.14745532035827624,
+          1,
+          1,
+          1,
+          1,
+          0.034201726913452024,
+          0.39142737388610793,
+          0.1792279863357542,
+          1,
+          1,
+          1,
+          1,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          1.0,
+          1.0
+        ]
+      },
+      "num_inference_steps": 25,
+      "obs_cam_keys": [
+        "observation.images.cam_high",
+        "observation.images.cam_left_wrist",
+        "observation.images.cam_right_wrist"
+      ],
+      "param_dtype": "torch.bfloat16",
+      "patch_size": [
+        1,
+        2,
+        2
+      ],
+      "port": 29536,
+      "save_root": "./train_out",
+      "snr_shift": 5.0,
+      "used_action_channel_ids": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        28,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        29
+      ],
+      "video_exec_step": -1,
+      "wan22_pretrained_model_name_or_path": "/path/to/pretrained/model",
+      "width": 320
+    },
+    "source_dirty": true,
+    "source_revision": "2a6a56a2a679da5b3d7b43ff92b0a6ad085c8d69",
+    "source_state": {
+      "dirty": true,
+      "dirty_paths": 37,
+      "revision": "2a6a56a2a679da5b3d7b43ff92b0a6ad085c8d69",
+      "status_and_diff_sha256": "92a158dc775f76904e5c5b14f59c22884aa46d4c893aecc7d689bfce39df3c26"
+    },
+    "statistics_content_sha256": null,
+    "upstream_revision": "7c6ffa9bfc4b83582cafc860fab4c82cc7deeeeb"
+  },
+  "output_path": "/nethome/pi34/kv_results/rt10-lingbot_va-13068/robotwin_20261030T235646802585Z.json",
+  "package_versions": {
+    "diffusers": "0.36.0",
+    "mplib": "0.2.1",
+    "mujoco": null,
+    "numpy": "1.26.4",
+    "robosuite": null,
+    "sapien": "3.0.0b1",
+    "torch": "2.7.1+cu128",
+    "transformers": "4.57.6"
+  },
+  "rejected_seeds": [],
+  "success_rate": 0.7,
+  "successes": 7,
+  "trials": [
+    {
+      "episode": 0,
+      "inference_calls": 5,
+      "inference_latency_ms": [
+        4532.425040146336,
+        4704.111031955108,
+        4789.462147979066,
+        4850.625494029373,
+        4922.891310183331
+      ],
+      "inference_metadata": [
+        {
+          "action_horizon": 32,
+          "action_inference_steps": 50,
+          "action_per_frame": 16,
+          "backend": "lingbot_va",
+          "condition": "video",
+          "frame_chunk_size": 2,
+          "frame_st_id": 0,
+          "guidance_scale": 5,
+          "observation": {
+            "camera_layout": "latent_wrists_above_head",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ],
+            "seed": 10000,
+            "task_name": "move_stapler_pad"
+          },
+          "seed": 10000,
+          "video_exec_step": -1,
+          "video_inference_steps": 25
+        },
+        {
+          "action_horizon": 32,
+          "action_inference_steps": 50,
+          "action_per_frame": 16,
+          "backend": "lingbot_va",
+          "condition": "video",
+          "frame_chunk_size": 2,
+          "frame_st_id": 2,
+          "guidance_scale": 5,
+          "observation": {
+            "camera_layout": "latent_wrists_above_head",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ]
+          },
+          "seed": 10001,
+          "video_exec_step": -1,
+          "video_inference_steps": 25
+        },
+        {
+          "action_horizon": 32,
+          "action_inference_steps": 50,
+          "action_per_frame": 16,
+          "backend": "lingbot_va",
+          "condition": "video",
+          "frame_chunk_size": 2,
+          "frame_st_id": 4,
+          "guidance_scale": 5,
+          "observation": {
+            "camera_layout": "latent_wrists_above_head",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ]
+          },
+          "seed": 10002,
+          "video_exec_step": -1,
+          "video_inference_steps": 25
+        },
+        {
+          "action_horizon": 32,
+          "action_inference_steps": 50,
+          "action_per_frame": 16,
+          "backend": "lingbot_va",
+          "condition": "video",
+          "frame_chunk_size": 2,
+          "frame_st_id": 6,
+          "guidance_scale": 5,
+          "observation": {
+            "camera_layout": "latent_wrists_above_head",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ]
+          },
+          "seed": 10003,
+          "video_exec_step": -1,
+          "video_inference_steps": 25
+        },
+        {
+          "action_horizon": 32,
+          "action_inference_steps": 50,
+          "action_per_frame": 16,
+          "backend": "lingbot_va",
+          "condition": "video",
+          "frame_chunk_size": 2,
+          "frame_st_id": 8,
+          "guidance_scale": 5,
+          "observation": {
+            "camera_layout": "latent_wrists_above_head",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ]
+          },
+          "seed": 10004,
+          "video_exec_step": -1,
+          "video_inference_steps": 25
+        }
+      ],
+      "instruction": "With the left arm, move the blue stapler with black handle area to the Black mat",
+      "policy_steps": 133,
+      "seed": 10000,
+      "success": true,
+      "termination_reason": "success"
+    },
+    {
+      "episode": 1,
+      "inference_calls": 13,
+      "inference_latency_ms": [
+        4488.973988918588,
+        4696.75094098784,
+        4805.556591134518,
+        4862.3464370612055,
+        4917.297368869185,
+        4959.886432159692,
+        5038.294743048027,
+        5125.73362281546,
+        5203.337739920244,
+        5283.833937952295,
+        5360.239742090926,
+        5455.925538903102,
+        5562.895918963477
+      ],
+      "inference_metadata": [
+        {
+          "action_horizon": 32,
+          "action_inference_steps": 50,
+          "action_per_frame": 16,
+          "backend": "lingbot_va",
+          "condition": "video",
+          "frame_chunk_size": 2,
+          "frame_st_id": 0,
+          "guidance_scale": 5,
+          "observation": {
+            "camera_layout": "latent_wrists_above_head",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ],
+            "seed": 10001,
+            "task_name": "move_stapler_pad"
+          },
+          "seed": 10001,
+          "video_exec_step": -1,
+          "video_inference_steps": 25
+        },
+        {
+          "action_horizon": 32,
+          "action_inference_steps": 50,
+          "action_per_frame": 16,
+          "backend": "lingbot_va",
+          "condition": "video",
+          "frame_chunk_size": 2,
+          "frame_st_id": 2,
+          "guidance_scale": 5,
+          "observation": {
+            "camera_layout": "latent_wrists_above_head",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ]
+          },
+          "seed": 10002,
+          "video_exec_step": -1,
+          "video_inference_steps": 25
+        },
+        {
+          "action_horizon": 32,
+          "action_inference_steps": 50,
+          "action_per_frame": 16,
+          "backend": "lingbot_va",
+          "condition": "video",
+          "frame_chunk_size": 2,
+          "frame_st_id": 4,
+          "guidance_scale": 5,
+          "observation": {
+            "camera_layout": "latent_wrists_above_head",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ]
+          },
+          "seed": 10003,
+          "video_exec_step": -1,
+          "video_inference_steps": 25
+        },
+        {
+          "action_horizon": 32,
+          "action_inference_steps": 50,
+          "action_per_frame": 16,
+          "backend": "lingbot_va",
+          "condition": "video",
+          "frame_chunk_size": 2,
+          "frame_st_id": 6,
+          "guidance_scale": 5,
+          "observation": {
+            "camera_layout": "latent_wrists_above_head",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ]
+          },
+          "seed": 10004,
+          "video_exec_step": -1,
+          "video_inference_steps": 25
+        },
+        {
+          "action_horizon": 32,
+          "action_inference_steps": 50,
+          "action_per_frame": 16,
+          "backend": "lingbot_va",
+          "condition": "video",
+          "frame_chunk_size": 2,
+          "frame_st_id": 8,
+          "guidance_scale": 5,
+          "observation": {
+            "camera_layout": "latent_wrists_above_head",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ]
+          },
+          "seed": 10005,
+          "video_exec_step": -1,
+          "video_inference_steps": 25
+        },
+        {
+          "action_horizon": 32,
+          "action_inference_steps": 50,
+          "action_per_frame": 16,
+          "backend": "lingbot_va",
+          "condition": "video",
+          "frame_chunk_size": 2,
+          "frame_st_id": 10,
+          "guidance_scale": 5,
+          "observation": {
+            "camera_layout": "latent_wrists_above_head",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ]
+          },
+          "seed": 10006,
+          "video_exec_step": -1,
+          "video_inference_steps": 25
+        },
+        {
+          "action_horizon": 32,
+          "action_inference_steps": 50,
+          "action_per_frame": 16,
+          "backend": "lingbot_va",
+          "condition": "video",
+          "frame_chunk_size": 2,
+          "frame_st_id": 12,
+          "guidance_scale": 5,
+          "observation": {
+            "camera_layout": "latent_wrists_above_head",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ]
+          },
+          "seed": 10007,
+          "video_exec_step": -1,
+          "video_inference_steps": 25
+        },
+        {
+          "action_horizon": 32,
+          "action_inference_steps": 50,
+          "action_per_frame": 16,
+          "backend": "lingbot_va",
+          "condition": "video",
+          "frame_chunk_size": 2,
+          "frame_st_id": 14,
+          "guidance_scale": 5,
+          "observation": {
+            "camera_layout": "latent_wrists_above_head",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ]
+          },
+          "seed": 10008,
+          "video_exec_step": -1,
+          "video_inference_steps": 25
+        },
+        {
+          "action_horizon": 32,
+          "action_inference_steps": 50,
+          "action_per_frame": 16,
+          "backend": "lingbot_va",
+          "condition": "video",
+          "frame_chunk_size": 2,
+          "frame_st_id": 16,
+          "guidance_scale": 5,
+          "observation": {
+            "camera_layout": "latent_wrists_above_head",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ]
+          },
+          "seed": 10009,
+          "video_exec_step": -1,
+          "video_inference_steps": 25
+        },
+        {
+          "action_horizon": 32,
+          "action_inference_steps": 50,
+          "action_per_frame": 16,
+          "backend": "lingbot_va",
+          "condition": "video",
+          "frame_chunk_size": 2,
+          "frame_st_id": 18,
+          "guidance_scale": 5,
+          "observation": {
+            "camera_layout": "latent_wrists_above_head",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ]
+          },
+          "seed": 10010,
+          "video_exec_step": -1,
+          "video_inference_steps": 25
+        },
+        {
+          "action_horizon": 32,
+          "action_inference_steps": 50,
+          "action_per_frame": 16,
+          "backend": "lingbot_va",
+          "condition": "video",
+          "frame_chunk_size": 2,
+          "frame_st_id": 20,
+          "guidance_scale": 5,
+          "observation": {
+            "camera_layout": "latent_wrists_above_head",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ]
+          },
+          "seed": 10011,
+          "video_exec_step": -1,
+          "video_inference_steps": 25
+        },
+        {
+          "action_horizon": 32,
+          "action_inference_steps": 50,
+          "action_per_frame": 16,
+          "backend": "lingbot_va",
+          "condition": "video",
+          "frame_chunk_size": 2,
+          "frame_st_id": 22,
+          "guidance_scale": 5,
+          "observation": {
+            "camera_layout": "latent_wrists_above_head",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ]
+          },
+          "seed": 10012,
+          "video_exec_step": -1,
+          "video_inference_steps": 25
+        },
+        {
+          "action_horizon": 32,
+          "action_inference_steps": 50,
+          "action_per_frame": 16,
+          "backend": "lingbot_va",
+          "condition": "video",
+          "frame_chunk_size": 2,
+          "frame_st_id": 24,
+          "guidance_scale": 5,
+          "observation": {
+            "camera_layout": "latent_wrists_above_head",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ]
+          },
+          "seed": 10013,
+          "video_exec_step": -1,
+          "video_inference_steps": 25
+        }
+      ],
+      "instruction": "Carry the smooth plastic stapler to the Red colored mat",
+      "policy_steps": 400,
+      "seed": 10001,
+      "success": false,
+      "termination_reason": "max_steps"
+    },
+    {
+      "episode": 2,
+      "inference_calls": 6,
+      "inference_latency_ms": [
+        4490.982288960367,
+        4690.781190991402,
+        4822.808695025742,
+        4858.346943045035,
+        4909.196749096736,
+        4997.252237983048
+      ],
+      "inference_metadata": [
+        {
+          "action_horizon": 32,
+          "action_inference_steps": 50,
+          "action_per_frame": 16,
+          "backend": "lingbot_va",
+          "condition": "video",
+          "frame_chunk_size": 2,
+          "frame_st_id": 0,
+          "guidance_scale": 5,
+          "observation": {
+            "camera_layout": "latent_wrists_above_head",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ],
+            "seed": 10002,
+            "task_name": "move_stapler_pad"
+          },
+          "seed": 10002,
+          "video_exec_step": -1,
+          "video_inference_steps": 25
+        },
+        {
+          "action_horizon": 32,
+          "action_inference_steps": 50,
+          "action_per_frame": 16,
+          "backend": "lingbot_va",
+          "condition": "video",
+          "frame_chunk_size": 2,
+          "frame_st_id": 2,
+          "guidance_scale": 5,
+          "observation": {
+            "camera_layout": "latent_wrists_above_head",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ]
+          },
+          "seed": 10003,
+          "video_exec_step": -1,
+          "video_inference_steps": 25
+        },
+        {
+          "action_horizon": 32,
+          "action_inference_steps": 50,
+          "action_per_frame": 16,
+          "backend": "lingbot_va",
+          "condition": "video",
+          "frame_chunk_size": 2,
+          "frame_st_id": 4,
+          "guidance_scale": 5,
+          "observation": {
+            "camera_layout": "latent_wrists_above_head",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ]
+          },
+          "seed": 10004,
+          "video_exec_step": -1,
+          "video_inference_steps": 25
+        },
+        {
+          "action_horizon": 32,
+          "action_inference_steps": 50,
+          "action_per_frame": 16,
+          "backend": "lingbot_va",
+          "condition": "video",
+          "frame_chunk_size": 2,
+          "frame_st_id": 6,
+          "guidance_scale": 5,
+          "observation": {
+            "camera_layout": "latent_wrists_above_head",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ]
+          },
+          "seed": 10005,
+          "video_exec_step": -1,
+          "video_inference_steps": 25
+        },
+        {
+          "action_horizon": 32,
+          "action_inference_steps": 50,
+          "action_per_frame": 16,
+          "backend": "lingbot_va",
+          "condition": "video",
+          "frame_chunk_size": 2,
+          "frame_st_id": 8,
+          "guidance_scale": 5,
+          "observation": {
+            "camera_layout": "latent_wrists_above_head",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ]
+          },
+          "seed": 10006,
+          "video_exec_step": -1,
+          "video_inference_steps": 25
+        },
+        {
+          "action_horizon": 32,
+          "action_inference_steps": 50,
+          "action_per_frame": 16,
+          "backend": "lingbot_va",
+          "condition": "video",
+          "frame_chunk_size": 2,
+          "frame_st_id": 10,
+          "guidance_scale": 5,
+          "observation": {
+            "camera_layout": "latent_wrists_above_head",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ]
+          },
+          "seed": 10007,
+          "video_exec_step": -1,
+          "video_inference_steps": 25
+        }
+      ],
+      "instruction": "With the left arm, move the plastic stapler with silver mechanism to the Magenta mat",
+      "policy_steps": 167,
+      "seed": 10002,
+      "success": true,
+      "termination_reason": "success"
+    },
+    {
+      "episode": 3,
+      "inference_calls": 5,
+      "inference_latency_ms": [
+        4491.508590988815,
+        4707.143822917715,
+        4781.2301819212735,
+        4879.68186289072,
+        4940.883812960237
+      ],
+      "inference_metadata": [
+        {
+          "action_horizon": 32,
+          "action_inference_steps": 50,
+          "action_per_frame": 16,
+          "backend": "lingbot_va",
+          "condition": "video",
+          "frame_chunk_size": 2,
+          "frame_st_id": 0,
+          "guidance_scale": 5,
+          "observation": {
+            "camera_layout": "latent_wrists_above_head",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ],
+            "seed": 10003,
+            "task_name": "move_stapler_pad"
+          },
+          "seed": 10003,
+          "video_exec_step": -1,
+          "video_inference_steps": 25
+        },
+        {
+          "action_horizon": 32,
+          "action_inference_steps": 50,
+          "action_per_frame": 16,
+          "backend": "lingbot_va",
+          "condition": "video",
+          "frame_chunk_size": 2,
+          "frame_st_id": 2,
+          "guidance_scale": 5,
+          "observation": {
+            "camera_layout": "latent_wrists_above_head",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ]
+          },
+          "seed": 10004,
+          "video_exec_step": -1,
+          "video_inference_steps": 25
+        },
+        {
+          "action_horizon": 32,
+          "action_inference_steps": 50,
+          "action_per_frame": 16,
+          "backend": "lingbot_va",
+          "condition": "video",
+          "frame_chunk_size": 2,
+          "frame_st_id": 4,
+          "guidance_scale": 5,
+          "observation": {
+            "camera_layout": "latent_wrists_above_head",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ]
+          },
+          "seed": 10005,
+          "video_exec_step": -1,
+          "video_inference_steps": 25
+        },
+        {
+          "action_horizon": 32,
+          "action_inference_steps": 50,
+          "action_per_frame": 16,
+          "backend": "lingbot_va",
+          "condition": "video",
+          "frame_chunk_size": 2,
+          "frame_st_id": 6,
+          "guidance_scale": 5,
+          "observation": {
+            "camera_layout": "latent_wrists_above_head",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ]
+          },
+          "seed": 10006,
+          "video_exec_step": -1,
+          "video_inference_steps": 25
+        },
+        {
+          "action_horizon": 32,
+          "action_inference_steps": 50,
+          "action_per_frame": 16,
+          "backend": "lingbot_va",
+          "condition": "video",
+          "frame_chunk_size": 2,
+          "frame_st_id": 8,
+          "guidance_scale": 5,
+          "observation": {
+            "camera_layout": "latent_wrists_above_head",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ]
+          },
+          "seed": 10007,
+          "video_exec_step": -1,
+          "video_inference_steps": 25
+        }
+      ],
+      "instruction": "Drop the compact office stapler onto the Blue mat.",
+      "policy_steps": 143,
+      "seed": 10003,
+      "success": true,
+      "termination_reason": "success"
+    },
+    {
+      "episode": 4,
+      "inference_calls": 13,
+      "inference_latency_ms": [
+        4502.991053974256,
+        4723.89062307775,
+        4825.969545869157,
+        4908.221258083358,
+        4965.524971019477,
+        4989.759471965954,
+        5020.635100081563,
+        5134.370377985761,
+        5203.179561998695,
+        5332.77601795271,
+        5404.937520856038,
+        5437.900599092245,
+        5580.52716194652
+      ],
+      "inference_metadata": [
+        {
+          "action_horizon": 32,
+          "action_inference_steps": 50,
+          "action_per_frame": 16,
+          "backend": "lingbot_va",
+          "condition": "video",
+          "frame_chunk_size": 2,
+          "frame_st_id": 0,
+          "guidance_scale": 5,
+          "observation": {
+            "camera_layout": "latent_wrists_above_head",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ],
+            "seed": 10004,
+            "task_name": "move_stapler_pad"
+          },
+          "seed": 10004,
+          "video_exec_step": -1,
+          "video_inference_steps": 25
+        },
+        {
+          "action_horizon": 32,
+          "action_inference_steps": 50,
+          "action_per_frame": 16,
+          "backend": "lingbot_va",
+          "condition": "video",
+          "frame_chunk_size": 2,
+          "frame_st_id": 2,
+          "guidance_scale": 5,
+          "observation": {
+            "camera_layout": "latent_wrists_above_head",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ]
+          },
+          "seed": 10005,
+          "video_exec_step": -1,
+          "video_inference_steps": 25
+        },
+        {
+          "action_horizon": 32,
+          "action_inference_steps": 50,
+          "action_per_frame": 16,
+          "backend": "lingbot_va",
+          "condition": "video",
+          "frame_chunk_size": 2,
+          "frame_st_id": 4,
+          "guidance_scale": 5,
+          "observation": {
+            "camera_layout": "latent_wrists_above_head",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ]
+          },
+          "seed": 10006,
+          "video_exec_step": -1,
+          "video_inference_steps": 25
+        },
+        {
+          "action_horizon": 32,
+          "action_inference_steps": 50,
+          "action_per_frame": 16,
+          "backend": "lingbot_va",
+          "condition": "video",
+          "frame_chunk_size": 2,
+          "frame_st_id": 6,
+          "guidance_scale": 5,
+          "observation": {
+            "camera_layout": "latent_wrists_above_head",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ]
+          },
+          "seed": 10007,
+          "video_exec_step": -1,
+          "video_inference_steps": 25
+        },
+        {
+          "action_horizon": 32,
+          "action_inference_steps": 50,
+          "action_per_frame": 16,
+          "backend": "lingbot_va",
+          "condition": "video",
+          "frame_chunk_size": 2,
+          "frame_st_id": 8,
+          "guidance_scale": 5,
+          "observation": {
+            "camera_layout": "latent_wrists_above_head",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ]
+          },
+          "seed": 10008,
+          "video_exec_step": -1,
+          "video_inference_steps": 25
+        },
+        {
+          "action_horizon": 32,
+          "action_inference_steps": 50,
+          "action_per_frame": 16,
+          "backend": "lingbot_va",
+          "condition": "video",
+          "frame_chunk_size": 2,
+          "frame_st_id": 10,
+          "guidance_scale": 5,
+          "observation": {
+            "camera_layout": "latent_wrists_above_head",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ]
+          },
+          "seed": 10009,
+          "video_exec_step": -1,
+          "video_inference_steps": 25
+        },
+        {
+          "action_horizon": 32,
+          "action_inference_steps": 50,
+          "action_per_frame": 16,
+          "backend": "lingbot_va",
+          "condition": "video",
+          "frame_chunk_size": 2,
+          "frame_st_id": 12,
+          "guidance_scale": 5,
+          "observation": {
+            "camera_layout": "latent_wrists_above_head",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ]
+          },
+          "seed": 10010,
+          "video_exec_step": -1,
+          "video_inference_steps": 25
+        },
+        {
+          "action_horizon": 32,
+          "action_inference_steps": 50,
+          "action_per_frame": 16,
+          "backend": "lingbot_va",
+          "condition": "video",
+          "frame_chunk_size": 2,
+          "frame_st_id": 14,
+          "guidance_scale": 5,
+          "observation": {
+            "camera_layout": "latent_wrists_above_head",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ]
+          },
+          "seed": 10011,
+          "video_exec_step": -1,
+          "video_inference_steps": 25
+        },
+        {
+          "action_horizon": 32,
+          "action_inference_steps": 50,
+          "action_per_frame": 16,
+          "backend": "lingbot_va",
+          "condition": "video",
+          "frame_chunk_size": 2,
+          "frame_st_id": 16,
+          "guidance_scale": 5,
+          "observation": {
+            "camera_layout": "latent_wrists_above_head",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ]
+          },
+          "seed": 10012,
+          "video_exec_step": -1,
+          "video_inference_steps": 25
+        },
+        {
+          "action_horizon": 32,
+          "action_inference_steps": 50,
+          "action_per_frame": 16,
+          "backend": "lingbot_va",
+          "condition": "video",
+          "frame_chunk_size": 2,
+          "frame_st_id": 18,
+          "guidance_scale": 5,
+          "observation": {
+            "camera_layout": "latent_wrists_above_head",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ]
+          },
+          "seed": 10013,
+          "video_exec_step": -1,
+          "video_inference_steps": 25
+        },
+        {
+          "action_horizon": 32,
+          "action_inference_steps": 50,
+          "action_per_frame": 16,
+          "backend": "lingbot_va",
+          "condition": "video",
+          "frame_chunk_size": 2,
+          "frame_st_id": 20,
+          "guidance_scale": 5,
+          "observation": {
+            "camera_layout": "latent_wrists_above_head",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ]
+          },
+          "seed": 10014,
+          "video_exec_step": -1,
+          "video_inference_steps": 25
+        },
+        {
+          "action_horizon": 32,
+          "action_inference_steps": 50,
+          "action_per_frame": 16,
+          "backend": "lingbot_va",
+          "condition": "video",
+          "frame_chunk_size": 2,
+          "frame_st_id": 22,
+          "guidance_scale": 5,
+          "observation": {
+            "camera_layout": "latent_wrists_above_head",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ]
+          },
+          "seed": 10015,
+          "video_exec_step": -1,
+          "video_inference_steps": 25
+        },
+        {
+          "action_horizon": 32,
+          "action_inference_steps": 50,
+          "action_per_frame": 16,
+          "backend": "lingbot_va",
+          "condition": "video",
+          "frame_chunk_size": 2,
+          "frame_st_id": 24,
+          "guidance_scale": 5,
+          "observation": {
+            "camera_layout": "latent_wrists_above_head",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ]
+          },
+          "seed": 10016,
+          "video_exec_step": -1,
+          "video_inference_steps": 25
+        }
+      ],
+      "instruction": "Stick the office stapler with plastic and metal parts onto the Blue colored mat.",
+      "policy_steps": 400,
+      "seed": 10004,
+      "success": false,
+      "termination_reason": "max_steps"
+    },
+    {
+      "episode": 5,
+      "inference_calls": 5,
+      "inference_latency_ms": [
+        4488.615006906912,
+        4702.471329830587,
+        4810.980933951214,
+        4871.150461956859,
+        4916.646000929177
+      ],
+      "inference_metadata": [
+        {
+          "action_horizon": 32,
+          "action_inference_steps": 50,
+          "action_per_frame": 16,
+          "backend": "lingbot_va",
+          "condition": "video",
+          "frame_chunk_size": 2,
+          "frame_st_id": 0,
+          "guidance_scale": 5,
+          "observation": {
+            "camera_layout": "latent_wrists_above_head",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ],
+            "seed": 10005,
+            "task_name": "move_stapler_pad"
+          },
+          "seed": 10005,
+          "video_exec_step": -1,
+          "video_inference_steps": 25
+        },
+        {
+          "action_horizon": 32,
+          "action_inference_steps": 50,
+          "action_per_frame": 16,
+          "backend": "lingbot_va",
+          "condition": "video",
+          "frame_chunk_size": 2,
+          "frame_st_id": 2,
+          "guidance_scale": 5,
+          "observation": {
+            "camera_layout": "latent_wrists_above_head",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ]
+          },
+          "seed": 10006,
+          "video_exec_step": -1,
+          "video_inference_steps": 25
+        },
+        {
+          "action_horizon": 32,
+          "action_inference_steps": 50,
+          "action_per_frame": 16,
+          "backend": "lingbot_va",
+          "condition": "video",
+          "frame_chunk_size": 2,
+          "frame_st_id": 4,
+          "guidance_scale": 5,
+          "observation": {
+            "camera_layout": "latent_wrists_above_head",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ]
+          },
+          "seed": 10007,
+          "video_exec_step": -1,
+          "video_inference_steps": 25
+        },
+        {
+          "action_horizon": 32,
+          "action_inference_steps": 50,
+          "action_per_frame": 16,
+          "backend": "lingbot_va",
+          "condition": "video",
+          "frame_chunk_size": 2,
+          "frame_st_id": 6,
+          "guidance_scale": 5,
+          "observation": {
+            "camera_layout": "latent_wrists_above_head",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ]
+          },
+          "seed": 10008,
+          "video_exec_step": -1,
+          "video_inference_steps": 25
+        },
+        {
+          "action_horizon": 32,
+          "action_inference_steps": 50,
+          "action_per_frame": 16,
+          "backend": "lingbot_va",
+          "condition": "video",
+          "frame_chunk_size": 2,
+          "frame_st_id": 8,
+          "guidance_scale": 5,
+          "observation": {
+            "camera_layout": "latent_wrists_above_head",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ]
+          },
+          "seed": 10009,
+          "video_exec_step": -1,
+          "video_inference_steps": 25
+        }
+      ],
+      "instruction": "Set the stapler with red top onto the Blue colored mat.",
+      "policy_steps": 136,
+      "seed": 10005,
+      "success": true,
+      "termination_reason": "success"
+    },
+    {
+      "episode": 6,
+      "inference_calls": 6,
+      "inference_latency_ms": [
+        4493.677102960646,
+        4707.87183009088,
+        4792.459309799597,
+        4869.309223955497,
+        4927.776453085244,
+        4992.959744064137
+      ],
+      "inference_metadata": [
+        {
+          "action_horizon": 32,
+          "action_inference_steps": 50,
+          "action_per_frame": 16,
+          "backend": "lingbot_va",
+          "condition": "video",
+          "frame_chunk_size": 2,
+          "frame_st_id": 0,
+          "guidance_scale": 5,
+          "observation": {
+            "camera_layout": "latent_wrists_above_head",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ],
+            "seed": 10006,
+            "task_name": "move_stapler_pad"
+          },
+          "seed": 10006,
+          "video_exec_step": -1,
+          "video_inference_steps": 25
+        },
+        {
+          "action_horizon": 32,
+          "action_inference_steps": 50,
+          "action_per_frame": 16,
+          "backend": "lingbot_va",
+          "condition": "video",
+          "frame_chunk_size": 2,
+          "frame_st_id": 2,
+          "guidance_scale": 5,
+          "observation": {
+            "camera_layout": "latent_wrists_above_head",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ]
+          },
+          "seed": 10007,
+          "video_exec_step": -1,
+          "video_inference_steps": 25
+        },
+        {
+          "action_horizon": 32,
+          "action_inference_steps": 50,
+          "action_per_frame": 16,
+          "backend": "lingbot_va",
+          "condition": "video",
+          "frame_chunk_size": 2,
+          "frame_st_id": 4,
+          "guidance_scale": 5,
+          "observation": {
+            "camera_layout": "latent_wrists_above_head",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ]
+          },
+          "seed": 10008,
+          "video_exec_step": -1,
+          "video_inference_steps": 25
+        },
+        {
+          "action_horizon": 32,
+          "action_inference_steps": 50,
+          "action_per_frame": 16,
+          "backend": "lingbot_va",
+          "condition": "video",
+          "frame_chunk_size": 2,
+          "frame_st_id": 6,
+          "guidance_scale": 5,
+          "observation": {
+            "camera_layout": "latent_wrists_above_head",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ]
+          },
+          "seed": 10009,
+          "video_exec_step": -1,
+          "video_inference_steps": 25
+        },
+        {
+          "action_horizon": 32,
+          "action_inference_steps": 50,
+          "action_per_frame": 16,
+          "backend": "lingbot_va",
+          "condition": "video",
+          "frame_chunk_size": 2,
+          "frame_st_id": 8,
+          "guidance_scale": 5,
+          "observation": {
+            "camera_layout": "latent_wrists_above_head",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ]
+          },
+          "seed": 10010,
+          "video_exec_step": -1,
+          "video_inference_steps": 25
+        },
+        {
+          "action_horizon": 32,
+          "action_inference_steps": 50,
+          "action_per_frame": 16,
+          "backend": "lingbot_va",
+          "condition": "video",
+          "frame_chunk_size": 2,
+          "frame_st_id": 10,
+          "guidance_scale": 5,
+          "observation": {
+            "camera_layout": "latent_wrists_above_head",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ]
+          },
+          "seed": 10011,
+          "video_exec_step": -1,
+          "video_inference_steps": 25
+        }
+      ],
+      "instruction": "Place the blue stapler with curved design on the Gray mat using the left arm",
+      "policy_steps": 147,
+      "seed": 10006,
+      "success": true,
+      "termination_reason": "success"
+    },
+    {
+      "episode": 7,
+      "inference_calls": 5,
+      "inference_latency_ms": [
+        4493.581560906023,
+        4707.728998037055,
+        4816.878092940897,
+        4876.663681818172,
+        4917.239399859682
+      ],
+      "inference_metadata": [
+        {
+          "action_horizon": 32,
+          "action_inference_steps": 50,
+          "action_per_frame": 16,
+          "backend": "lingbot_va",
+          "condition": "video",
+          "frame_chunk_size": 2,
+          "frame_st_id": 0,
+          "guidance_scale": 5,
+          "observation": {
+            "camera_layout": "latent_wrists_above_head",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ],
+            "seed": 10007,
+            "task_name": "move_stapler_pad"
+          },
+          "seed": 10007,
+          "video_exec_step": -1,
+          "video_inference_steps": 25
+        },
+        {
+          "action_horizon": 32,
+          "action_inference_steps": 50,
+          "action_per_frame": 16,
+          "backend": "lingbot_va",
+          "condition": "video",
+          "frame_chunk_size": 2,
+          "frame_st_id": 2,
+          "guidance_scale": 5,
+          "observation": {
+            "camera_layout": "latent_wrists_above_head",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ]
+          },
+          "seed": 10008,
+          "video_exec_step": -1,
+          "video_inference_steps": 25
+        },
+        {
+          "action_horizon": 32,
+          "action_inference_steps": 50,
+          "action_per_frame": 16,
+          "backend": "lingbot_va",
+          "condition": "video",
+          "frame_chunk_size": 2,
+          "frame_st_id": 4,
+          "guidance_scale": 5,
+          "observation": {
+            "camera_layout": "latent_wrists_above_head",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ]
+          },
+          "seed": 10009,
+          "video_exec_step": -1,
+          "video_inference_steps": 25
+        },
+        {
+          "action_horizon": 32,
+          "action_inference_steps": 50,
+          "action_per_frame": 16,
+          "backend": "lingbot_va",
+          "condition": "video",
+          "frame_chunk_size": 2,
+          "frame_st_id": 6,
+          "guidance_scale": 5,
+          "observation": {
+            "camera_layout": "latent_wrists_above_head",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ]
+          },
+          "seed": 10010,
+          "video_exec_step": -1,
+          "video_inference_steps": 25
+        },
+        {
+          "action_horizon": 32,
+          "action_inference_steps": 50,
+          "action_per_frame": 16,
+          "backend": "lingbot_va",
+          "condition": "video",
+          "frame_chunk_size": 2,
+          "frame_st_id": 8,
+          "guidance_scale": 5,
+          "observation": {
+            "camera_layout": "latent_wrists_above_head",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ]
+          },
+          "seed": 10011,
+          "video_exec_step": -1,
+          "video_inference_steps": 25
+        }
+      ],
+      "instruction": "Stick the small lightweight blue stapler onto the Red colored mat.",
+      "policy_steps": 142,
+      "seed": 10007,
+      "success": true,
+      "termination_reason": "success"
+    },
+    {
+      "episode": 8,
+      "inference_calls": 5,
+      "inference_latency_ms": [
+        4505.032139131799,
+        4698.467514012009,
+        4789.262291975319,
+        4858.104926999658,
+        4918.870783178136
+      ],
+      "inference_metadata": [
+        {
+          "action_horizon": 32,
+          "action_inference_steps": 50,
+          "action_per_frame": 16,
+          "backend": "lingbot_va",
+          "condition": "video",
+          "frame_chunk_size": 2,
+          "frame_st_id": 0,
+          "guidance_scale": 5,
+          "observation": {
+            "camera_layout": "latent_wrists_above_head",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ],
+            "seed": 10008,
+            "task_name": "move_stapler_pad"
+          },
+          "seed": 10008,
+          "video_exec_step": -1,
+          "video_inference_steps": 25
+        },
+        {
+          "action_horizon": 32,
+          "action_inference_steps": 50,
+          "action_per_frame": 16,
+          "backend": "lingbot_va",
+          "condition": "video",
+          "frame_chunk_size": 2,
+          "frame_st_id": 2,
+          "guidance_scale": 5,
+          "observation": {
+            "camera_layout": "latent_wrists_above_head",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ]
+          },
+          "seed": 10009,
+          "video_exec_step": -1,
+          "video_inference_steps": 25
+        },
+        {
+          "action_horizon": 32,
+          "action_inference_steps": 50,
+          "action_per_frame": 16,
+          "backend": "lingbot_va",
+          "condition": "video",
+          "frame_chunk_size": 2,
+          "frame_st_id": 4,
+          "guidance_scale": 5,
+          "observation": {
+            "camera_layout": "latent_wrists_above_head",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ]
+          },
+          "seed": 10010,
+          "video_exec_step": -1,
+          "video_inference_steps": 25
+        },
+        {
+          "action_horizon": 32,
+          "action_inference_steps": 50,
+          "action_per_frame": 16,
+          "backend": "lingbot_va",
+          "condition": "video",
+          "frame_chunk_size": 2,
+          "frame_st_id": 6,
+          "guidance_scale": 5,
+          "observation": {
+            "camera_layout": "latent_wrists_above_head",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ]
+          },
+          "seed": 10011,
+          "video_exec_step": -1,
+          "video_inference_steps": 25
+        },
+        {
+          "action_horizon": 32,
+          "action_inference_steps": 50,
+          "action_per_frame": 16,
+          "backend": "lingbot_va",
+          "condition": "video",
+          "frame_chunk_size": 2,
+          "frame_st_id": 8,
+          "guidance_scale": 5,
+          "observation": {
+            "camera_layout": "latent_wrists_above_head",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ]
+          },
+          "seed": 10012,
+          "video_exec_step": -1,
+          "video_inference_steps": 25
+        }
+      ],
+      "instruction": "Shift the stapler for fastening papers manually to the Green mat",
+      "policy_steps": 136,
+      "seed": 10008,
+      "success": true,
+      "termination_reason": "success"
+    },
+    {
+      "episode": 9,
+      "inference_calls": 13,
+      "inference_latency_ms": [
+        4511.369798099622,
+        4716.386602027342,
+        4796.066881157458,
+        4862.157309893519,
+        4940.307343145832,
+        4993.067892035469,
+        5047.961944947019,
+        5116.806362988427,
+        5245.5231989733875,
+        5300.881787203252,
+        5375.629589892924,
+        5465.469747083262,
+        5552.081060828641
+      ],
+      "inference_metadata": [
+        {
+          "action_horizon": 32,
+          "action_inference_steps": 50,
+          "action_per_frame": 16,
+          "backend": "lingbot_va",
+          "condition": "video",
+          "frame_chunk_size": 2,
+          "frame_st_id": 0,
+          "guidance_scale": 5,
+          "observation": {
+            "camera_layout": "latent_wrists_above_head",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ],
+            "seed": 10009,
+            "task_name": "move_stapler_pad"
+          },
+          "seed": 10009,
+          "video_exec_step": -1,
+          "video_inference_steps": 25
+        },
+        {
+          "action_horizon": 32,
+          "action_inference_steps": 50,
+          "action_per_frame": 16,
+          "backend": "lingbot_va",
+          "condition": "video",
+          "frame_chunk_size": 2,
+          "frame_st_id": 2,
+          "guidance_scale": 5,
+          "observation": {
+            "camera_layout": "latent_wrists_above_head",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ]
+          },
+          "seed": 10010,
+          "video_exec_step": -1,
+          "video_inference_steps": 25
+        },
+        {
+          "action_horizon": 32,
+          "action_inference_steps": 50,
+          "action_per_frame": 16,
+          "backend": "lingbot_va",
+          "condition": "video",
+          "frame_chunk_size": 2,
+          "frame_st_id": 4,
+          "guidance_scale": 5,
+          "observation": {
+            "camera_layout": "latent_wrists_above_head",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ]
+          },
+          "seed": 10011,
+          "video_exec_step": -1,
+          "video_inference_steps": 25
+        },
+        {
+          "action_horizon": 32,
+          "action_inference_steps": 50,
+          "action_per_frame": 16,
+          "backend": "lingbot_va",
+          "condition": "video",
+          "frame_chunk_size": 2,
+          "frame_st_id": 6,
+          "guidance_scale": 5,
+          "observation": {
+            "camera_layout": "latent_wrists_above_head",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ]
+          },
+          "seed": 10012,
+          "video_exec_step": -1,
+          "video_inference_steps": 25
+        },
+        {
+          "action_horizon": 32,
+          "action_inference_steps": 50,
+          "action_per_frame": 16,
+          "backend": "lingbot_va",
+          "condition": "video",
+          "frame_chunk_size": 2,
+          "frame_st_id": 8,
+          "guidance_scale": 5,
+          "observation": {
+            "camera_layout": "latent_wrists_above_head",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ]
+          },
+          "seed": 10013,
+          "video_exec_step": -1,
+          "video_inference_steps": 25
+        },
+        {
+          "action_horizon": 32,
+          "action_inference_steps": 50,
+          "action_per_frame": 16,
+          "backend": "lingbot_va",
+          "condition": "video",
+          "frame_chunk_size": 2,
+          "frame_st_id": 10,
+          "guidance_scale": 5,
+          "observation": {
+            "camera_layout": "latent_wrists_above_head",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ]
+          },
+          "seed": 10014,
+          "video_exec_step": -1,
+          "video_inference_steps": 25
+        },
+        {
+          "action_horizon": 32,
+          "action_inference_steps": 50,
+          "action_per_frame": 16,
+          "backend": "lingbot_va",
+          "condition": "video",
+          "frame_chunk_size": 2,
+          "frame_st_id": 12,
+          "guidance_scale": 5,
+          "observation": {
+            "camera_layout": "latent_wrists_above_head",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ]
+          },
+          "seed": 10015,
+          "video_exec_step": -1,
+          "video_inference_steps": 25
+        },
+        {
+          "action_horizon": 32,
+          "action_inference_steps": 50,
+          "action_per_frame": 16,
+          "backend": "lingbot_va",
+          "condition": "video",
+          "frame_chunk_size": 2,
+          "frame_st_id": 14,
+          "guidance_scale": 5,
+          "observation": {
+            "camera_layout": "latent_wrists_above_head",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ]
+          },
+          "seed": 10016,
+          "video_exec_step": -1,
+          "video_inference_steps": 25
+        },
+        {
+          "action_horizon": 32,
+          "action_inference_steps": 50,
+          "action_per_frame": 16,
+          "backend": "lingbot_va",
+          "condition": "video",
+          "frame_chunk_size": 2,
+          "frame_st_id": 16,
+          "guidance_scale": 5,
+          "observation": {
+            "camera_layout": "latent_wrists_above_head",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ]
+          },
+          "seed": 10017,
+          "video_exec_step": -1,
+          "video_inference_steps": 25
+        },
+        {
+          "action_horizon": 32,
+          "action_inference_steps": 50,
+          "action_per_frame": 16,
+          "backend": "lingbot_va",
+          "condition": "video",
+          "frame_chunk_size": 2,
+          "frame_st_id": 18,
+          "guidance_scale": 5,
+          "observation": {
+            "camera_layout": "latent_wrists_above_head",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ]
+          },
+          "seed": 10018,
+          "video_exec_step": -1,
+          "video_inference_steps": 25
+        },
+        {
+          "action_horizon": 32,
+          "action_inference_steps": 50,
+          "action_per_frame": 16,
+          "backend": "lingbot_va",
+          "condition": "video",
+          "frame_chunk_size": 2,
+          "frame_st_id": 20,
+          "guidance_scale": 5,
+          "observation": {
+            "camera_layout": "latent_wrists_above_head",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ]
+          },
+          "seed": 10019,
+          "video_exec_step": -1,
+          "video_inference_steps": 25
+        },
+        {
+          "action_horizon": 32,
+          "action_inference_steps": 50,
+          "action_per_frame": 16,
+          "backend": "lingbot_va",
+          "condition": "video",
+          "frame_chunk_size": 2,
+          "frame_st_id": 22,
+          "guidance_scale": 5,
+          "observation": {
+            "camera_layout": "latent_wrists_above_head",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ]
+          },
+          "seed": 10020,
+          "video_exec_step": -1,
+          "video_inference_steps": 25
+        },
+        {
+          "action_horizon": 32,
+          "action_inference_steps": 50,
+          "action_per_frame": 16,
+          "backend": "lingbot_va",
+          "condition": "video",
+          "frame_chunk_size": 2,
+          "frame_st_id": 24,
+          "guidance_scale": 5,
+          "observation": {
+            "camera_layout": "latent_wrists_above_head",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ]
+          },
+          "seed": 10021,
+          "video_exec_step": -1,
+          "video_inference_steps": 25
+        }
+      ],
+      "instruction": "Grab the black stapler for joining pages using the right arm and shift it to Yellow",
+      "policy_steps": 400,
+      "seed": 10009,
+      "success": false,
+      "termination_reason": "max_steps"
+    }
+  ]
+}

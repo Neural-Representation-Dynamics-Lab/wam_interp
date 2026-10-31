@@ -21,3 +21,25 @@ Per task (0 to 9):
 Paired by trial, Optional IDM first_frame succeeds alone on 8 trials and idm alone on 20 (exact McNemar p = 0.036); no single task differs significantly. On LIBERO-Long the Fast-WAM paper reports 95.2% for Fast-WAM (uncond) and 97.6% for Fast-WAM-IDM, a separate checkpoint from Optional IDM.
 
 Earlier runs in fp16 or with MuJoCo 3.9.0 are not included. With MuJoCo 3.3.2, uncond on task 4 was 20/50 in fp16 and 43/50 in bf16.
+
+## RoboTwin 2.0
+
+Released RoboTwin checkpoints for all five backends (revision and SHA-256 in each JSON), RoboTwin `c3ddfa8`, `demo_clean`, bf16, one L40 or L40S per job. One JSON per task: 10 tasks, 10 expert-valid seeds each. Replan interval and instruction set follow each backend's own RoboTwin eval.
+
+| Folder | Replan | Instructions | Success | Published, same 10 tasks | Published, 50 tasks |
+|---|---|---|---|---|---|
+| `fastwam/robotwin/demo_clean` | 24 | unseen | 89/100 | 88.7% | 91.9% |
+| `fasterwam/robotwin/demo_clean` | 28 | unseen | 87/100 | 90.7% | 92.8% |
+| `lingbot_va/robotwin/demo_clean` | 32 | seen | 84/100 | 89.1% | 92.9% |
+| `longwam/robotwin/demo_clean` | 24 | unseen | 90/100 | not reported | 94.7% |
+| `openwam/robotwin/demo_clean` | 32 | unseen | 94/100 | not reported | 93.7% |
+
+Per task (adjust_bottle, click_bell, hanging_mug, move_stapler_pad, place_a2b_left, place_can_basket, place_fan, place_phone_stand, rotate_qrcode, stack_blocks_two):
+
+- FastWAM: 10, 10, 6, 9, 10, 7, 10, 9, 8, 10
+- Faster-WAM: 10, 10, 6, 8, 10, 7, 10, 9, 7, 10
+- LingBot-VA: 10, 10, 2, 7, 9, 8, 9, 10, 9, 10
+- Long-WAM: 10, 10, 8, 7, 10, 9, 9, 9, 8, 10
+- OpenWAM: 10, 10, 5, 10, 10, 9, 10, 10, 10, 10
+
+Published numbers are the clean setting with 100 trials per task, from the Fast-WAM (arXiv 2603.16666, Table 3), Faster-WAM (2608.04404, Table A5) and LingBot-VA (2601.21998, Table S1, Easy) papers. Each falls inside the 95% Wilson interval of our 100 episodes. Long-WAM and OpenWAM report only the 50-task average, which is not directly comparable. Seed screening plans with CuRobo, which is not deterministic, so a re-run can accept different seeds. These runs used the evaluation fixes from [#13](https://github.com/Neural-Representation-Dynamics-Lab/wam_interp/pull/13) before they were committed, so `repository_revision` records only their base, `2a6a56a`.

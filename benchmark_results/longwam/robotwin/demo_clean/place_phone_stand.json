@@ -1,0 +1,5804 @@
+{
+  "accepted_seeds": [
+    100000,
+    100001,
+    100002,
+    100005,
+    100006,
+    100008,
+    100010,
+    100012,
+    100014,
+    100015
+  ],
+  "action_type": "qpos",
+  "attempts": 16,
+  "benchmark": "robotwin",
+  "benchmark_revision": "c3ddfa8b97d5519efa828b075999bd0006778e5e",
+  "completed": true,
+  "config": {
+    "action_horizon": 32,
+    "clear_cache_freq": 5,
+    "inference_options": {},
+    "instruction_pool_size": 100,
+    "instruction_type": "unseen",
+    "max_repeated_screen_errors": 20,
+    "max_seed_attempts": 1000,
+    "max_steps": null,
+    "num_episodes": 10,
+    "output_dir": "/nethome/pi34/kv_results/rt10-longwam-13072",
+    "replan_steps": 24,
+    "robotwin_root": "/dev/shm/pi34-rt-13072/RoboTwin",
+    "run_metadata": {
+      "checkpoint": "/dev/shm/pi34-rt-13072/checkpoints/longwam/model.pt",
+      "checkpoint_revision": "f456378dec6c4d38ee74717f5d71c0e7490bcc78",
+      "checkpoint_sha256": "8013982c70d7dbd6cb8cd17b71a251409c69eb58e39f1e26005515262d11d711",
+      "dataset_stats": "/dev/shm/pi34-rt-13072/checkpoints/longwam/dataset_stats.json",
+      "dataset_stats_sha256": "639e69c81e35568e9a49a60b4ede4f28735594c9ab325ee73931d6360bfd5834",
+      "dtype": "bfloat16",
+      "model_config": "/dev/shm/pi34-rt-13072/checkpoints/longwam/config.yaml",
+      "model_config_sha256": "e4d9f600a46c078f461de083092aef2f454937b53c538f5977e5265bad720707",
+      "repository_revision": "2a6a56a2a679da5b3d7b43ff92b0a6ad085c8d69",
+      "resolved_model_config": {
+        "_target_": "wam_interp.models.longwam.runtime.create_longwam",
+        "action_dit_config": {
+          "action_dim": 14,
+          "attn_head_dim": 128,
+          "eps": 1e-06,
+          "ffn_dim": 4096,
+          "freq_dim": 256,
+          "hidden_dim": 1024,
+          "num_heads": 24,
+          "num_layers": 30,
+          "text_dim": 4096,
+          "use_gradient_checkpointing": true
+        },
+        "action_dit_pretrained_path": null,
+        "action_scheduler": {
+          "infer_shift": 5.0,
+          "num_train_timesteps": 1000,
+          "train_shift": 5.0
+        },
+        "load_text_encoder": true,
+        "longlive_video_weights": null,
+        "longwam_imagine_infer_steps": 4,
+        "longwam_imagine_sigma": 0.9,
+        "longwam_local_attn_size": -1,
+        "longwam_num_frame_per_block": 1,
+        "longwam_num_imagine_frames": 2,
+        "longwam_past_obs_size": 48,
+        "longwam_sink_size": 0,
+        "model_id": "Wan-AI/Wan2.2-TI2V-5B",
+        "mot_checkpoint_mixed_attn": true,
+        "proprio_dim": 14,
+        "redirect_common_files": false,
+        "skip_action_dit_load_from_pretrain": true,
+        "skip_dit_load_from_pretrain": true,
+        "skip_video_dit_load_from_pretrain": true,
+        "tokenizer_max_len": 128,
+        "tokenizer_model_id": "Wan-AI/Wan2.1-T2V-1.3B",
+        "video_dit_config": {
+          "action_conditioned": false,
+          "action_dim": 14,
+          "action_group_causal_mask_mode": "group_diagonal",
+          "attn_head_dim": 128,
+          "eps": 1e-06,
+          "ffn_dim": 14336,
+          "freq_dim": 256,
+          "fuse_vae_embedding_in_latents": true,
+          "has_image_input": false,
+          "hidden_dim": 3072,
+          "in_dim": 48,
+          "num_heads": 24,
+          "num_layers": 30,
+          "out_dim": 48,
+          "patch_size": [
+            1,
+            2,
+            2
+          ],
+          "require_clip_embedding": false,
+          "require_vae_embedding": false,
+          "seperated_timestep": true,
+          "text_dim": 4096,
+          "use_gradient_checkpointing": true,
+          "video_attention_mask_mode": "per_frame_causal"
+        },
+        "video_scheduler": {
+          "infer_shift": 5.0,
+          "num_train_timesteps": 1000,
+          "train_shift": 5.0
+        }
+      }
+    },
+    "seed": 0,
+    "start_seed": null,
+    "task_config": "demo_clean",
+    "task_name": "place_phone_stand"
+  },
+  "duration_seconds": 232.42387824691832,
+  "episodes": 10,
+  "model": {
+    "asset_environment": {
+      "DIFFSYNTH_DOWNLOAD_SOURCE": "huggingface",
+      "DIFFSYNTH_MODEL_BASE_PATH": "/dev/shm/pi34-rt-13072/wan_assets"
+    },
+    "asset_paths": {
+      "action_dit_backbone": "SKIPPED_PRETRAIN",
+      "text_encoder": "/dev/shm/pi34-rt-13072/wan_assets/Wan-AI/Wan2.2-TI2V-5B/models_t5_umt5-xxl-enc-bf16.pth",
+      "tokenizer": "/dev/shm/pi34-rt-13072/wan_assets/Wan-AI/Wan2.1-T2V-1.3B/google/umt5-xxl/",
+      "vae": "/dev/shm/pi34-rt-13072/wan_assets/Wan-AI/Wan2.2-TI2V-5B/Wan2.2_VAE.pth",
+      "video_dit": "SKIPPED_PRETRAIN"
+    },
+    "backend": "longwam",
+    "checkpoint": "/dev/shm/pi34-rt-13072/checkpoints/longwam/model.pt",
+    "checkpoint_load": {
+      "allow_partial": false,
+      "missing_keys": 0,
+      "modules_loaded": [
+        "mot",
+        "proprio_encoder"
+      ],
+      "problems": [],
+      "unexpected_key_examples": [],
+      "unexpected_keys": 0
+    },
+    "checkpoint_size_bytes": 12041813497,
+    "checkpoint_step": 29355,
+    "checkpoint_strict": true,
+    "checkpoint_torch_dtype": "torch.bfloat16",
+    "data_config": {
+      "action_chunk": 32,
+      "action_video_freq_ratio": 4,
+      "concat_multi_camera": "robotwin",
+      "context_len": 128,
+      "num_frames": 81,
+      "past_obs_size": 48,
+      "pretrained_norm_stats": "./dataset_stats.json",
+      "processor": {
+        "_target_": "longwam.datasets.lerobot.processors.longwam_processor.LongWAMProcessor",
+        "action_output_dim": 14,
+        "action_state_merger": {
+          "_target_": "longwam.datasets.lerobot.transforms.action_state_merger.ConcatLeftAlign"
+        },
+        "action_state_transforms": null,
+        "norm_default_mode": "z-score",
+        "norm_exception_mode": null,
+        "num_obs_steps": 81,
+        "num_output_cameras": 3,
+        "proprio_output_dim": 14,
+        "shape_meta": {
+          "action": [
+            {
+              "key": "default",
+              "raw_shape": 14,
+              "shape": 14
+            }
+          ],
+          "images": [
+            {
+              "key": "cam_high",
+              "raw_shape": [
+                3,
+                480,
+                640
+              ],
+              "shape": [
+                3,
+                240,
+                320
+              ]
+            },
+            {
+              "key": "cam_left_wrist",
+              "raw_shape": [
+                3,
+                480,
+                640
+              ],
+              "shape": [
+                3,
+                240,
+                320
+              ]
+            },
+            {
+              "key": "cam_right_wrist",
+              "raw_shape": [
+                3,
+                480,
+                640
+              ],
+              "shape": [
+                3,
+                240,
+                320
+              ]
+            }
+          ],
+          "state": [
+            {
+              "key": "default",
+              "raw_shape": 14,
+              "shape": 14
+            }
+          ]
+        },
+        "use_stepwise_action_norm": false,
+        "val_transforms": [
+          {
+            "_target_": "longwam.datasets.lerobot.transforms.image.ToTensor"
+          },
+          {
+            "_target_": "torchvision.transforms.Resize",
+            "size": [
+              240,
+              320
+            ]
+          }
+        ]
+      },
+      "shape_meta": {
+        "action": [
+          {
+            "key": "default",
+            "raw_shape": 14,
+            "shape": 14
+          }
+        ],
+        "images": [
+          {
+            "key": "cam_high",
+            "raw_shape": [
+              3,
+              480,
+              640
+            ],
+            "shape": [
+              3,
+              240,
+              320
+            ]
+          },
+          {
+            "key": "cam_left_wrist",
+            "raw_shape": [
+              3,
+              480,
+              640
+            ],
+            "shape": [
+              3,
+              240,
+              320
+            ]
+          },
+          {
+            "key": "cam_right_wrist",
+            "raw_shape": [
+              3,
+              480,
+              640
+            ],
+            "shape": [
+              3,
+              240,
+              320
+            ]
+          }
+        ],
+        "state": [
+          {
+            "key": "default",
+            "raw_shape": 14,
+            "shape": 14
+          }
+        ]
+      },
+      "video_size": [
+        384,
+        320
+      ]
+    },
+    "evaluation": {
+      "mixed_precision": "bf16",
+      "num_inference_steps": 10
+    },
+    "inference_mode": "idm",
+    "model_device": "cuda",
+    "model_dtype": "torch.bfloat16",
+    "model_name": "longwam",
+    "released_bundle": "robotwin2_idm",
+    "resolved_model_config": {
+      "_target_": "wam_interp.models.longwam.runtime.create_longwam",
+      "action_dit_config": {
+        "action_dim": 14,
+        "attn_head_dim": 128,
+        "eps": 1e-06,
+        "ffn_dim": 4096,
+        "freq_dim": 256,
+        "hidden_dim": 1024,
+        "num_heads": 24,
+        "num_layers": 30,
+        "text_dim": 4096,
+        "use_gradient_checkpointing": true
+      },
+      "action_dit_pretrained_path": null,
+      "action_scheduler": {
+        "infer_shift": 5.0,
+        "num_train_timesteps": 1000,
+        "train_shift": 5.0
+      },
+      "load_text_encoder": true,
+      "longlive_video_weights": null,
+      "longwam_imagine_infer_steps": 4,
+      "longwam_imagine_sigma": 0.9,
+      "longwam_local_attn_size": -1,
+      "longwam_num_frame_per_block": 1,
+      "longwam_num_imagine_frames": 2,
+      "longwam_past_obs_size": 48,
+      "longwam_sink_size": 0,
+      "model_id": "Wan-AI/Wan2.2-TI2V-5B",
+      "mot_checkpoint_mixed_attn": true,
+      "proprio_dim": 14,
+      "redirect_common_files": false,
+      "skip_action_dit_load_from_pretrain": true,
+      "skip_dit_load_from_pretrain": true,
+      "skip_video_dit_load_from_pretrain": true,
+      "tokenizer_max_len": 128,
+      "tokenizer_model_id": "Wan-AI/Wan2.1-T2V-1.3B",
+      "video_dit_config": {
+        "action_conditioned": false,
+        "action_dim": 14,
+        "action_group_causal_mask_mode": "group_diagonal",
+        "attn_head_dim": 128,
+        "eps": 1e-06,
+        "ffn_dim": 14336,
+        "freq_dim": 256,
+        "fuse_vae_embedding_in_latents": true,
+        "has_image_input": false,
+        "hidden_dim": 3072,
+        "in_dim": 48,
+        "num_heads": 24,
+        "num_layers": 30,
+        "out_dim": 48,
+        "patch_size": [
+          1,
+          2,
+          2
+        ],
+        "require_clip_embedding": false,
+        "require_vae_embedding": false,
+        "seperated_timestep": true,
+        "text_dim": 4096,
+        "use_gradient_checkpointing": true,
+        "video_attention_mask_mode": "per_frame_causal"
+      },
+      "video_scheduler": {
+        "infer_shift": 5.0,
+        "num_train_timesteps": 1000,
+        "train_shift": 5.0
+      }
+    },
+    "run_config": "/dev/shm/pi34-rt-13072/checkpoints/longwam/config.yaml",
+    "run_config_sha256": "e4d9f600a46c078f461de083092aef2f454937b53c538f5977e5265bad720707",
+    "source_dirty": true,
+    "source_revision": "2a6a56a2a679da5b3d7b43ff92b0a6ad085c8d69",
+    "source_state": {
+      "dirty": true,
+      "dirty_paths": 37,
+      "revision": "2a6a56a2a679da5b3d7b43ff92b0a6ad085c8d69",
+      "status_and_diff_sha256": "92a158dc775f76904e5c5b14f59c22884aa46d4c893aecc7d689bfce39df3c26"
+    },
+    "statistics_content_sha256": "38ed9c8d466356fb8f4688da470b14a036dbc51e0fc5484cc5959b507adbcd48",
+    "text_encoder_loaded": true,
+    "upstream_repository": "https://github.com/NVlabs/LongLive",
+    "upstream_revision": "242635807b4ebb89fa2609a84df7eacde6aed92f",
+    "upstream_subdirectory": "Long-WAM"
+  },
+  "output_path": "/nethome/pi34/kv_results/rt10-longwam-13072/robotwin_20261031T000320109832Z.json",
+  "package_versions": {
+    "diffusers": null,
+    "mplib": "0.2.1",
+    "mujoco": null,
+    "numpy": "1.26.4",
+    "robosuite": null,
+    "sapien": "3.0.0b1",
+    "torch": "2.7.1+cu128",
+    "transformers": "4.57.6"
+  },
+  "rejected_seeds": [
+    {
+      "reason": "expert_failed",
+      "seed": 100003,
+      "stage": "expert"
+    },
+    {
+      "reason": "expert_failed",
+      "seed": 100004,
+      "stage": "expert"
+    },
+    {
+      "reason": "expert_failed",
+      "seed": 100007,
+      "stage": "expert"
+    },
+    {
+      "reason": "expert_failed",
+      "seed": 100009,
+      "stage": "expert"
+    },
+    {
+      "reason": "expert_failed",
+      "seed": 100011,
+      "stage": "expert"
+    },
+    {
+      "reason": "expert_failed",
+      "seed": 100013,
+      "stage": "expert"
+    }
+  ],
+  "success_rate": 0.9,
+  "successes": 9,
+  "trials": [
+    {
+      "episode": 0,
+      "inference_calls": 5,
+      "inference_latency_ms": [
+        880.650098901242,
+        850.0005619134754,
+        865.8742930274457,
+        853.2964608166367,
+        857.6612831093371
+      ],
+      "inference_metadata": [
+        {
+          "action_dtype": "torch.float32",
+          "action_horizon": 32,
+          "action_inference_steps": 10,
+          "action_shape": [
+            32,
+            14
+          ],
+          "backend": "longwam",
+          "condition": "idm",
+          "history": {
+            "buffered_frames": 1,
+            "current_step": 0,
+            "observed_frames": 1,
+            "padded_frames": 48,
+            "past_obs_size": 48,
+            "sample_stride": 4,
+            "window_observation_indices": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          "imagine_sigma": 0.9,
+          "inference_method": "infer_joint_ar",
+          "input_image_shape": [
+            1,
+            3,
+            384,
+            320
+          ],
+          "model_class": "LongWAM",
+          "model_device": "cuda",
+          "model_dtype": "torch.bfloat16",
+          "num_clean_frames": 4,
+          "num_imagine_frames": 2,
+          "observation": {
+            "camera_layout": "head_above_left_right_wrists",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ],
+            "dataset_stats": "/dev/shm/pi34-rt-13072/checkpoints/longwam/dataset_stats.json",
+            "longwam_image_shape": [
+              1,
+              3,
+              384,
+              320
+            ],
+            "resize": "two_stage_antialiased_bilinear",
+            "seed": 100000,
+            "state_key": "default",
+            "task_name": "place_phone_stand"
+          },
+          "observation_window_shape": [
+            1,
+            3,
+            13,
+            384,
+            320
+          ],
+          "prompt": "A video recorded from a robot's point of view executing the following instruction: Set the modern phone on the silver arm phonestand.",
+          "rand_device": "cpu",
+          "seed": 100000,
+          "sigma_shift": null,
+          "text_context_shape": [
+            1,
+            128,
+            4096
+          ],
+          "tiled": false,
+          "trained_action_chunk": 32,
+          "video_inference_steps": 4
+        },
+        {
+          "action_dtype": "torch.float32",
+          "action_horizon": 32,
+          "action_inference_steps": 10,
+          "action_shape": [
+            32,
+            14
+          ],
+          "backend": "longwam",
+          "condition": "idm",
+          "history": {
+            "buffered_frames": 25,
+            "current_step": 24,
+            "observed_frames": 25,
+            "padded_frames": 24,
+            "past_obs_size": 48,
+            "sample_stride": 4,
+            "window_observation_indices": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              4,
+              8,
+              12,
+              16,
+              20,
+              24
+            ]
+          },
+          "imagine_sigma": 0.9,
+          "inference_method": "infer_joint_ar",
+          "input_image_shape": [
+            1,
+            3,
+            384,
+            320
+          ],
+          "model_class": "LongWAM",
+          "model_device": "cuda",
+          "model_dtype": "torch.bfloat16",
+          "num_clean_frames": 4,
+          "num_imagine_frames": 2,
+          "observation": {
+            "camera_layout": "head_above_left_right_wrists",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ],
+            "dataset_stats": "/dev/shm/pi34-rt-13072/checkpoints/longwam/dataset_stats.json",
+            "longwam_image_shape": [
+              1,
+              3,
+              384,
+              320
+            ],
+            "resize": "two_stage_antialiased_bilinear",
+            "state_key": "default"
+          },
+          "observation_window_shape": [
+            1,
+            3,
+            13,
+            384,
+            320
+          ],
+          "prompt": "A video recorded from a robot's point of view executing the following instruction: Set the modern phone on the silver arm phonestand.",
+          "rand_device": "cpu",
+          "seed": 100001,
+          "sigma_shift": null,
+          "text_context_shape": [
+            1,
+            128,
+            4096
+          ],
+          "tiled": false,
+          "trained_action_chunk": 32,
+          "video_inference_steps": 4
+        },
+        {
+          "action_dtype": "torch.float32",
+          "action_horizon": 32,
+          "action_inference_steps": 10,
+          "action_shape": [
+            32,
+            14
+          ],
+          "backend": "longwam",
+          "condition": "idm",
+          "history": {
+            "buffered_frames": 49,
+            "current_step": 48,
+            "observed_frames": 49,
+            "padded_frames": 0,
+            "past_obs_size": 48,
+            "sample_stride": 4,
+            "window_observation_indices": [
+              0,
+              4,
+              8,
+              12,
+              16,
+              20,
+              24,
+              28,
+              32,
+              36,
+              40,
+              44,
+              48
+            ]
+          },
+          "imagine_sigma": 0.9,
+          "inference_method": "infer_joint_ar",
+          "input_image_shape": [
+            1,
+            3,
+            384,
+            320
+          ],
+          "model_class": "LongWAM",
+          "model_device": "cuda",
+          "model_dtype": "torch.bfloat16",
+          "num_clean_frames": 4,
+          "num_imagine_frames": 2,
+          "observation": {
+            "camera_layout": "head_above_left_right_wrists",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ],
+            "dataset_stats": "/dev/shm/pi34-rt-13072/checkpoints/longwam/dataset_stats.json",
+            "longwam_image_shape": [
+              1,
+              3,
+              384,
+              320
+            ],
+            "resize": "two_stage_antialiased_bilinear",
+            "state_key": "default"
+          },
+          "observation_window_shape": [
+            1,
+            3,
+            13,
+            384,
+            320
+          ],
+          "prompt": "A video recorded from a robot's point of view executing the following instruction: Set the modern phone on the silver arm phonestand.",
+          "rand_device": "cpu",
+          "seed": 100002,
+          "sigma_shift": null,
+          "text_context_shape": [
+            1,
+            128,
+            4096
+          ],
+          "tiled": false,
+          "trained_action_chunk": 32,
+          "video_inference_steps": 4
+        },
+        {
+          "action_dtype": "torch.float32",
+          "action_horizon": 32,
+          "action_inference_steps": 10,
+          "action_shape": [
+            32,
+            14
+          ],
+          "backend": "longwam",
+          "condition": "idm",
+          "history": {
+            "buffered_frames": 49,
+            "current_step": 72,
+            "observed_frames": 73,
+            "padded_frames": 0,
+            "past_obs_size": 48,
+            "sample_stride": 4,
+            "window_observation_indices": [
+              24,
+              28,
+              32,
+              36,
+              40,
+              44,
+              48,
+              52,
+              56,
+              60,
+              64,
+              68,
+              72
+            ]
+          },
+          "imagine_sigma": 0.9,
+          "inference_method": "infer_joint_ar",
+          "input_image_shape": [
+            1,
+            3,
+            384,
+            320
+          ],
+          "model_class": "LongWAM",
+          "model_device": "cuda",
+          "model_dtype": "torch.bfloat16",
+          "num_clean_frames": 4,
+          "num_imagine_frames": 2,
+          "observation": {
+            "camera_layout": "head_above_left_right_wrists",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ],
+            "dataset_stats": "/dev/shm/pi34-rt-13072/checkpoints/longwam/dataset_stats.json",
+            "longwam_image_shape": [
+              1,
+              3,
+              384,
+              320
+            ],
+            "resize": "two_stage_antialiased_bilinear",
+            "state_key": "default"
+          },
+          "observation_window_shape": [
+            1,
+            3,
+            13,
+            384,
+            320
+          ],
+          "prompt": "A video recorded from a robot's point of view executing the following instruction: Set the modern phone on the silver arm phonestand.",
+          "rand_device": "cpu",
+          "seed": 100003,
+          "sigma_shift": null,
+          "text_context_shape": [
+            1,
+            128,
+            4096
+          ],
+          "tiled": false,
+          "trained_action_chunk": 32,
+          "video_inference_steps": 4
+        },
+        {
+          "action_dtype": "torch.float32",
+          "action_horizon": 32,
+          "action_inference_steps": 10,
+          "action_shape": [
+            32,
+            14
+          ],
+          "backend": "longwam",
+          "condition": "idm",
+          "history": {
+            "buffered_frames": 49,
+            "current_step": 96,
+            "observed_frames": 97,
+            "padded_frames": 0,
+            "past_obs_size": 48,
+            "sample_stride": 4,
+            "window_observation_indices": [
+              48,
+              52,
+              56,
+              60,
+              64,
+              68,
+              72,
+              76,
+              80,
+              84,
+              88,
+              92,
+              96
+            ]
+          },
+          "imagine_sigma": 0.9,
+          "inference_method": "infer_joint_ar",
+          "input_image_shape": [
+            1,
+            3,
+            384,
+            320
+          ],
+          "model_class": "LongWAM",
+          "model_device": "cuda",
+          "model_dtype": "torch.bfloat16",
+          "num_clean_frames": 4,
+          "num_imagine_frames": 2,
+          "observation": {
+            "camera_layout": "head_above_left_right_wrists",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ],
+            "dataset_stats": "/dev/shm/pi34-rt-13072/checkpoints/longwam/dataset_stats.json",
+            "longwam_image_shape": [
+              1,
+              3,
+              384,
+              320
+            ],
+            "resize": "two_stage_antialiased_bilinear",
+            "state_key": "default"
+          },
+          "observation_window_shape": [
+            1,
+            3,
+            13,
+            384,
+            320
+          ],
+          "prompt": "A video recorded from a robot's point of view executing the following instruction: Set the modern phone on the silver arm phonestand.",
+          "rand_device": "cpu",
+          "seed": 100004,
+          "sigma_shift": null,
+          "text_context_shape": [
+            1,
+            128,
+            4096
+          ],
+          "tiled": false,
+          "trained_action_chunk": 32,
+          "video_inference_steps": 4
+        }
+      ],
+      "instruction": "Set the modern phone on the silver arm phonestand.",
+      "policy_steps": 120,
+      "seed": 100000,
+      "success": true,
+      "termination_reason": "success"
+    },
+    {
+      "episode": 1,
+      "inference_calls": 5,
+      "inference_latency_ms": [
+        892.8286419250071,
+        862.7321911044419,
+        862.3676740098745,
+        859.4791409559548,
+        873.5347860492766
+      ],
+      "inference_metadata": [
+        {
+          "action_dtype": "torch.float32",
+          "action_horizon": 32,
+          "action_inference_steps": 10,
+          "action_shape": [
+            32,
+            14
+          ],
+          "backend": "longwam",
+          "condition": "idm",
+          "history": {
+            "buffered_frames": 1,
+            "current_step": 0,
+            "observed_frames": 1,
+            "padded_frames": 48,
+            "past_obs_size": 48,
+            "sample_stride": 4,
+            "window_observation_indices": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          "imagine_sigma": 0.9,
+          "inference_method": "infer_joint_ar",
+          "input_image_shape": [
+            1,
+            3,
+            384,
+            320
+          ],
+          "model_class": "LongWAM",
+          "model_device": "cuda",
+          "model_dtype": "torch.bfloat16",
+          "num_clean_frames": 4,
+          "num_imagine_frames": 2,
+          "observation": {
+            "camera_layout": "head_above_left_right_wrists",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ],
+            "dataset_stats": "/dev/shm/pi34-rt-13072/checkpoints/longwam/dataset_stats.json",
+            "longwam_image_shape": [
+              1,
+              3,
+              384,
+              320
+            ],
+            "resize": "two_stage_antialiased_bilinear",
+            "seed": 100001,
+            "state_key": "default",
+            "task_name": "place_phone_stand"
+          },
+          "observation_window_shape": [
+            1,
+            3,
+            13,
+            384,
+            320
+          ],
+          "prompt": "A video recorded from a robot's point of view executing the following instruction: Set the phone with rounded edges on the silver arm phonestand.",
+          "rand_device": "cpu",
+          "seed": 100001,
+          "sigma_shift": null,
+          "text_context_shape": [
+            1,
+            128,
+            4096
+          ],
+          "tiled": false,
+          "trained_action_chunk": 32,
+          "video_inference_steps": 4
+        },
+        {
+          "action_dtype": "torch.float32",
+          "action_horizon": 32,
+          "action_inference_steps": 10,
+          "action_shape": [
+            32,
+            14
+          ],
+          "backend": "longwam",
+          "condition": "idm",
+          "history": {
+            "buffered_frames": 25,
+            "current_step": 24,
+            "observed_frames": 25,
+            "padded_frames": 24,
+            "past_obs_size": 48,
+            "sample_stride": 4,
+            "window_observation_indices": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              4,
+              8,
+              12,
+              16,
+              20,
+              24
+            ]
+          },
+          "imagine_sigma": 0.9,
+          "inference_method": "infer_joint_ar",
+          "input_image_shape": [
+            1,
+            3,
+            384,
+            320
+          ],
+          "model_class": "LongWAM",
+          "model_device": "cuda",
+          "model_dtype": "torch.bfloat16",
+          "num_clean_frames": 4,
+          "num_imagine_frames": 2,
+          "observation": {
+            "camera_layout": "head_above_left_right_wrists",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ],
+            "dataset_stats": "/dev/shm/pi34-rt-13072/checkpoints/longwam/dataset_stats.json",
+            "longwam_image_shape": [
+              1,
+              3,
+              384,
+              320
+            ],
+            "resize": "two_stage_antialiased_bilinear",
+            "state_key": "default"
+          },
+          "observation_window_shape": [
+            1,
+            3,
+            13,
+            384,
+            320
+          ],
+          "prompt": "A video recorded from a robot's point of view executing the following instruction: Set the phone with rounded edges on the silver arm phonestand.",
+          "rand_device": "cpu",
+          "seed": 100002,
+          "sigma_shift": null,
+          "text_context_shape": [
+            1,
+            128,
+            4096
+          ],
+          "tiled": false,
+          "trained_action_chunk": 32,
+          "video_inference_steps": 4
+        },
+        {
+          "action_dtype": "torch.float32",
+          "action_horizon": 32,
+          "action_inference_steps": 10,
+          "action_shape": [
+            32,
+            14
+          ],
+          "backend": "longwam",
+          "condition": "idm",
+          "history": {
+            "buffered_frames": 49,
+            "current_step": 48,
+            "observed_frames": 49,
+            "padded_frames": 0,
+            "past_obs_size": 48,
+            "sample_stride": 4,
+            "window_observation_indices": [
+              0,
+              4,
+              8,
+              12,
+              16,
+              20,
+              24,
+              28,
+              32,
+              36,
+              40,
+              44,
+              48
+            ]
+          },
+          "imagine_sigma": 0.9,
+          "inference_method": "infer_joint_ar",
+          "input_image_shape": [
+            1,
+            3,
+            384,
+            320
+          ],
+          "model_class": "LongWAM",
+          "model_device": "cuda",
+          "model_dtype": "torch.bfloat16",
+          "num_clean_frames": 4,
+          "num_imagine_frames": 2,
+          "observation": {
+            "camera_layout": "head_above_left_right_wrists",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ],
+            "dataset_stats": "/dev/shm/pi34-rt-13072/checkpoints/longwam/dataset_stats.json",
+            "longwam_image_shape": [
+              1,
+              3,
+              384,
+              320
+            ],
+            "resize": "two_stage_antialiased_bilinear",
+            "state_key": "default"
+          },
+          "observation_window_shape": [
+            1,
+            3,
+            13,
+            384,
+            320
+          ],
+          "prompt": "A video recorded from a robot's point of view executing the following instruction: Set the phone with rounded edges on the silver arm phonestand.",
+          "rand_device": "cpu",
+          "seed": 100003,
+          "sigma_shift": null,
+          "text_context_shape": [
+            1,
+            128,
+            4096
+          ],
+          "tiled": false,
+          "trained_action_chunk": 32,
+          "video_inference_steps": 4
+        },
+        {
+          "action_dtype": "torch.float32",
+          "action_horizon": 32,
+          "action_inference_steps": 10,
+          "action_shape": [
+            32,
+            14
+          ],
+          "backend": "longwam",
+          "condition": "idm",
+          "history": {
+            "buffered_frames": 49,
+            "current_step": 72,
+            "observed_frames": 73,
+            "padded_frames": 0,
+            "past_obs_size": 48,
+            "sample_stride": 4,
+            "window_observation_indices": [
+              24,
+              28,
+              32,
+              36,
+              40,
+              44,
+              48,
+              52,
+              56,
+              60,
+              64,
+              68,
+              72
+            ]
+          },
+          "imagine_sigma": 0.9,
+          "inference_method": "infer_joint_ar",
+          "input_image_shape": [
+            1,
+            3,
+            384,
+            320
+          ],
+          "model_class": "LongWAM",
+          "model_device": "cuda",
+          "model_dtype": "torch.bfloat16",
+          "num_clean_frames": 4,
+          "num_imagine_frames": 2,
+          "observation": {
+            "camera_layout": "head_above_left_right_wrists",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ],
+            "dataset_stats": "/dev/shm/pi34-rt-13072/checkpoints/longwam/dataset_stats.json",
+            "longwam_image_shape": [
+              1,
+              3,
+              384,
+              320
+            ],
+            "resize": "two_stage_antialiased_bilinear",
+            "state_key": "default"
+          },
+          "observation_window_shape": [
+            1,
+            3,
+            13,
+            384,
+            320
+          ],
+          "prompt": "A video recorded from a robot's point of view executing the following instruction: Set the phone with rounded edges on the silver arm phonestand.",
+          "rand_device": "cpu",
+          "seed": 100004,
+          "sigma_shift": null,
+          "text_context_shape": [
+            1,
+            128,
+            4096
+          ],
+          "tiled": false,
+          "trained_action_chunk": 32,
+          "video_inference_steps": 4
+        },
+        {
+          "action_dtype": "torch.float32",
+          "action_horizon": 32,
+          "action_inference_steps": 10,
+          "action_shape": [
+            32,
+            14
+          ],
+          "backend": "longwam",
+          "condition": "idm",
+          "history": {
+            "buffered_frames": 49,
+            "current_step": 96,
+            "observed_frames": 97,
+            "padded_frames": 0,
+            "past_obs_size": 48,
+            "sample_stride": 4,
+            "window_observation_indices": [
+              48,
+              52,
+              56,
+              60,
+              64,
+              68,
+              72,
+              76,
+              80,
+              84,
+              88,
+              92,
+              96
+            ]
+          },
+          "imagine_sigma": 0.9,
+          "inference_method": "infer_joint_ar",
+          "input_image_shape": [
+            1,
+            3,
+            384,
+            320
+          ],
+          "model_class": "LongWAM",
+          "model_device": "cuda",
+          "model_dtype": "torch.bfloat16",
+          "num_clean_frames": 4,
+          "num_imagine_frames": 2,
+          "observation": {
+            "camera_layout": "head_above_left_right_wrists",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ],
+            "dataset_stats": "/dev/shm/pi34-rt-13072/checkpoints/longwam/dataset_stats.json",
+            "longwam_image_shape": [
+              1,
+              3,
+              384,
+              320
+            ],
+            "resize": "two_stage_antialiased_bilinear",
+            "state_key": "default"
+          },
+          "observation_window_shape": [
+            1,
+            3,
+            13,
+            384,
+            320
+          ],
+          "prompt": "A video recorded from a robot's point of view executing the following instruction: Set the phone with rounded edges on the silver arm phonestand.",
+          "rand_device": "cpu",
+          "seed": 100005,
+          "sigma_shift": null,
+          "text_context_shape": [
+            1,
+            128,
+            4096
+          ],
+          "tiled": false,
+          "trained_action_chunk": 32,
+          "video_inference_steps": 4
+        }
+      ],
+      "instruction": "Set the phone with rounded edges on the silver arm phonestand.",
+      "policy_steps": 119,
+      "seed": 100001,
+      "success": true,
+      "termination_reason": "success"
+    },
+    {
+      "episode": 2,
+      "inference_calls": 5,
+      "inference_latency_ms": [
+        891.0184889100492,
+        868.757938966155,
+        870.7341409754008,
+        876.584640936926,
+        868.5935949906707
+      ],
+      "inference_metadata": [
+        {
+          "action_dtype": "torch.float32",
+          "action_horizon": 32,
+          "action_inference_steps": 10,
+          "action_shape": [
+            32,
+            14
+          ],
+          "backend": "longwam",
+          "condition": "idm",
+          "history": {
+            "buffered_frames": 1,
+            "current_step": 0,
+            "observed_frames": 1,
+            "padded_frames": 48,
+            "past_obs_size": 48,
+            "sample_stride": 4,
+            "window_observation_indices": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          "imagine_sigma": 0.9,
+          "inference_method": "infer_joint_ar",
+          "input_image_shape": [
+            1,
+            3,
+            384,
+            320
+          ],
+          "model_class": "LongWAM",
+          "model_device": "cuda",
+          "model_dtype": "torch.bfloat16",
+          "num_clean_frames": 4,
+          "num_imagine_frames": 2,
+          "observation": {
+            "camera_layout": "head_above_left_right_wrists",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ],
+            "dataset_stats": "/dev/shm/pi34-rt-13072/checkpoints/longwam/dataset_stats.json",
+            "longwam_image_shape": [
+              1,
+              3,
+              384,
+              320
+            ],
+            "resize": "two_stage_antialiased_bilinear",
+            "seed": 100002,
+            "state_key": "default",
+            "task_name": "place_phone_stand"
+          },
+          "observation_window_shape": [
+            1,
+            3,
+            13,
+            384,
+            320
+          ],
+          "prompt": "A video recorded from a robot's point of view executing the following instruction: Set the palm-sized phone with glossy finish on the angled brown phonestand.",
+          "rand_device": "cpu",
+          "seed": 100002,
+          "sigma_shift": null,
+          "text_context_shape": [
+            1,
+            128,
+            4096
+          ],
+          "tiled": false,
+          "trained_action_chunk": 32,
+          "video_inference_steps": 4
+        },
+        {
+          "action_dtype": "torch.float32",
+          "action_horizon": 32,
+          "action_inference_steps": 10,
+          "action_shape": [
+            32,
+            14
+          ],
+          "backend": "longwam",
+          "condition": "idm",
+          "history": {
+            "buffered_frames": 25,
+            "current_step": 24,
+            "observed_frames": 25,
+            "padded_frames": 24,
+            "past_obs_size": 48,
+            "sample_stride": 4,
+            "window_observation_indices": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              4,
+              8,
+              12,
+              16,
+              20,
+              24
+            ]
+          },
+          "imagine_sigma": 0.9,
+          "inference_method": "infer_joint_ar",
+          "input_image_shape": [
+            1,
+            3,
+            384,
+            320
+          ],
+          "model_class": "LongWAM",
+          "model_device": "cuda",
+          "model_dtype": "torch.bfloat16",
+          "num_clean_frames": 4,
+          "num_imagine_frames": 2,
+          "observation": {
+            "camera_layout": "head_above_left_right_wrists",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ],
+            "dataset_stats": "/dev/shm/pi34-rt-13072/checkpoints/longwam/dataset_stats.json",
+            "longwam_image_shape": [
+              1,
+              3,
+              384,
+              320
+            ],
+            "resize": "two_stage_antialiased_bilinear",
+            "state_key": "default"
+          },
+          "observation_window_shape": [
+            1,
+            3,
+            13,
+            384,
+            320
+          ],
+          "prompt": "A video recorded from a robot's point of view executing the following instruction: Set the palm-sized phone with glossy finish on the angled brown phonestand.",
+          "rand_device": "cpu",
+          "seed": 100003,
+          "sigma_shift": null,
+          "text_context_shape": [
+            1,
+            128,
+            4096
+          ],
+          "tiled": false,
+          "trained_action_chunk": 32,
+          "video_inference_steps": 4
+        },
+        {
+          "action_dtype": "torch.float32",
+          "action_horizon": 32,
+          "action_inference_steps": 10,
+          "action_shape": [
+            32,
+            14
+          ],
+          "backend": "longwam",
+          "condition": "idm",
+          "history": {
+            "buffered_frames": 49,
+            "current_step": 48,
+            "observed_frames": 49,
+            "padded_frames": 0,
+            "past_obs_size": 48,
+            "sample_stride": 4,
+            "window_observation_indices": [
+              0,
+              4,
+              8,
+              12,
+              16,
+              20,
+              24,
+              28,
+              32,
+              36,
+              40,
+              44,
+              48
+            ]
+          },
+          "imagine_sigma": 0.9,
+          "inference_method": "infer_joint_ar",
+          "input_image_shape": [
+            1,
+            3,
+            384,
+            320
+          ],
+          "model_class": "LongWAM",
+          "model_device": "cuda",
+          "model_dtype": "torch.bfloat16",
+          "num_clean_frames": 4,
+          "num_imagine_frames": 2,
+          "observation": {
+            "camera_layout": "head_above_left_right_wrists",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ],
+            "dataset_stats": "/dev/shm/pi34-rt-13072/checkpoints/longwam/dataset_stats.json",
+            "longwam_image_shape": [
+              1,
+              3,
+              384,
+              320
+            ],
+            "resize": "two_stage_antialiased_bilinear",
+            "state_key": "default"
+          },
+          "observation_window_shape": [
+            1,
+            3,
+            13,
+            384,
+            320
+          ],
+          "prompt": "A video recorded from a robot's point of view executing the following instruction: Set the palm-sized phone with glossy finish on the angled brown phonestand.",
+          "rand_device": "cpu",
+          "seed": 100004,
+          "sigma_shift": null,
+          "text_context_shape": [
+            1,
+            128,
+            4096
+          ],
+          "tiled": false,
+          "trained_action_chunk": 32,
+          "video_inference_steps": 4
+        },
+        {
+          "action_dtype": "torch.float32",
+          "action_horizon": 32,
+          "action_inference_steps": 10,
+          "action_shape": [
+            32,
+            14
+          ],
+          "backend": "longwam",
+          "condition": "idm",
+          "history": {
+            "buffered_frames": 49,
+            "current_step": 72,
+            "observed_frames": 73,
+            "padded_frames": 0,
+            "past_obs_size": 48,
+            "sample_stride": 4,
+            "window_observation_indices": [
+              24,
+              28,
+              32,
+              36,
+              40,
+              44,
+              48,
+              52,
+              56,
+              60,
+              64,
+              68,
+              72
+            ]
+          },
+          "imagine_sigma": 0.9,
+          "inference_method": "infer_joint_ar",
+          "input_image_shape": [
+            1,
+            3,
+            384,
+            320
+          ],
+          "model_class": "LongWAM",
+          "model_device": "cuda",
+          "model_dtype": "torch.bfloat16",
+          "num_clean_frames": 4,
+          "num_imagine_frames": 2,
+          "observation": {
+            "camera_layout": "head_above_left_right_wrists",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ],
+            "dataset_stats": "/dev/shm/pi34-rt-13072/checkpoints/longwam/dataset_stats.json",
+            "longwam_image_shape": [
+              1,
+              3,
+              384,
+              320
+            ],
+            "resize": "two_stage_antialiased_bilinear",
+            "state_key": "default"
+          },
+          "observation_window_shape": [
+            1,
+            3,
+            13,
+            384,
+            320
+          ],
+          "prompt": "A video recorded from a robot's point of view executing the following instruction: Set the palm-sized phone with glossy finish on the angled brown phonestand.",
+          "rand_device": "cpu",
+          "seed": 100005,
+          "sigma_shift": null,
+          "text_context_shape": [
+            1,
+            128,
+            4096
+          ],
+          "tiled": false,
+          "trained_action_chunk": 32,
+          "video_inference_steps": 4
+        },
+        {
+          "action_dtype": "torch.float32",
+          "action_horizon": 32,
+          "action_inference_steps": 10,
+          "action_shape": [
+            32,
+            14
+          ],
+          "backend": "longwam",
+          "condition": "idm",
+          "history": {
+            "buffered_frames": 49,
+            "current_step": 96,
+            "observed_frames": 97,
+            "padded_frames": 0,
+            "past_obs_size": 48,
+            "sample_stride": 4,
+            "window_observation_indices": [
+              48,
+              52,
+              56,
+              60,
+              64,
+              68,
+              72,
+              76,
+              80,
+              84,
+              88,
+              92,
+              96
+            ]
+          },
+          "imagine_sigma": 0.9,
+          "inference_method": "infer_joint_ar",
+          "input_image_shape": [
+            1,
+            3,
+            384,
+            320
+          ],
+          "model_class": "LongWAM",
+          "model_device": "cuda",
+          "model_dtype": "torch.bfloat16",
+          "num_clean_frames": 4,
+          "num_imagine_frames": 2,
+          "observation": {
+            "camera_layout": "head_above_left_right_wrists",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ],
+            "dataset_stats": "/dev/shm/pi34-rt-13072/checkpoints/longwam/dataset_stats.json",
+            "longwam_image_shape": [
+              1,
+              3,
+              384,
+              320
+            ],
+            "resize": "two_stage_antialiased_bilinear",
+            "state_key": "default"
+          },
+          "observation_window_shape": [
+            1,
+            3,
+            13,
+            384,
+            320
+          ],
+          "prompt": "A video recorded from a robot's point of view executing the following instruction: Set the palm-sized phone with glossy finish on the angled brown phonestand.",
+          "rand_device": "cpu",
+          "seed": 100006,
+          "sigma_shift": null,
+          "text_context_shape": [
+            1,
+            128,
+            4096
+          ],
+          "tiled": false,
+          "trained_action_chunk": 32,
+          "video_inference_steps": 4
+        }
+      ],
+      "instruction": "Set the palm-sized phone with glossy finish on the angled brown phonestand.",
+      "policy_steps": 117,
+      "seed": 100002,
+      "success": true,
+      "termination_reason": "success"
+    },
+    {
+      "episode": 3,
+      "inference_calls": 5,
+      "inference_latency_ms": [
+        885.6707739178091,
+        865.7477281522006,
+        866.3111480418593,
+        859.5885939430445,
+        867.8559209220111
+      ],
+      "inference_metadata": [
+        {
+          "action_dtype": "torch.float32",
+          "action_horizon": 32,
+          "action_inference_steps": 10,
+          "action_shape": [
+            32,
+            14
+          ],
+          "backend": "longwam",
+          "condition": "idm",
+          "history": {
+            "buffered_frames": 1,
+            "current_step": 0,
+            "observed_frames": 1,
+            "padded_frames": 48,
+            "past_obs_size": 48,
+            "sample_stride": 4,
+            "window_observation_indices": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          "imagine_sigma": 0.9,
+          "inference_method": "infer_joint_ar",
+          "input_image_shape": [
+            1,
+            3,
+            384,
+            320
+          ],
+          "model_class": "LongWAM",
+          "model_device": "cuda",
+          "model_dtype": "torch.bfloat16",
+          "num_clean_frames": 4,
+          "num_imagine_frames": 2,
+          "observation": {
+            "camera_layout": "head_above_left_right_wrists",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ],
+            "dataset_stats": "/dev/shm/pi34-rt-13072/checkpoints/longwam/dataset_stats.json",
+            "longwam_image_shape": [
+              1,
+              3,
+              384,
+              320
+            ],
+            "resize": "two_stage_antialiased_bilinear",
+            "seed": 100005,
+            "state_key": "default",
+            "task_name": "place_phone_stand"
+          },
+          "observation_window_shape": [
+            1,
+            3,
+            13,
+            384,
+            320
+          ],
+          "prompt": "A video recorded from a robot's point of view executing the following instruction: Set the handheld phone with silver frame on the L-shaped smooth brown phonestand.",
+          "rand_device": "cpu",
+          "seed": 100005,
+          "sigma_shift": null,
+          "text_context_shape": [
+            1,
+            128,
+            4096
+          ],
+          "tiled": false,
+          "trained_action_chunk": 32,
+          "video_inference_steps": 4
+        },
+        {
+          "action_dtype": "torch.float32",
+          "action_horizon": 32,
+          "action_inference_steps": 10,
+          "action_shape": [
+            32,
+            14
+          ],
+          "backend": "longwam",
+          "condition": "idm",
+          "history": {
+            "buffered_frames": 25,
+            "current_step": 24,
+            "observed_frames": 25,
+            "padded_frames": 24,
+            "past_obs_size": 48,
+            "sample_stride": 4,
+            "window_observation_indices": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              4,
+              8,
+              12,
+              16,
+              20,
+              24
+            ]
+          },
+          "imagine_sigma": 0.9,
+          "inference_method": "infer_joint_ar",
+          "input_image_shape": [
+            1,
+            3,
+            384,
+            320
+          ],
+          "model_class": "LongWAM",
+          "model_device": "cuda",
+          "model_dtype": "torch.bfloat16",
+          "num_clean_frames": 4,
+          "num_imagine_frames": 2,
+          "observation": {
+            "camera_layout": "head_above_left_right_wrists",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ],
+            "dataset_stats": "/dev/shm/pi34-rt-13072/checkpoints/longwam/dataset_stats.json",
+            "longwam_image_shape": [
+              1,
+              3,
+              384,
+              320
+            ],
+            "resize": "two_stage_antialiased_bilinear",
+            "state_key": "default"
+          },
+          "observation_window_shape": [
+            1,
+            3,
+            13,
+            384,
+            320
+          ],
+          "prompt": "A video recorded from a robot's point of view executing the following instruction: Set the handheld phone with silver frame on the L-shaped smooth brown phonestand.",
+          "rand_device": "cpu",
+          "seed": 100006,
+          "sigma_shift": null,
+          "text_context_shape": [
+            1,
+            128,
+            4096
+          ],
+          "tiled": false,
+          "trained_action_chunk": 32,
+          "video_inference_steps": 4
+        },
+        {
+          "action_dtype": "torch.float32",
+          "action_horizon": 32,
+          "action_inference_steps": 10,
+          "action_shape": [
+            32,
+            14
+          ],
+          "backend": "longwam",
+          "condition": "idm",
+          "history": {
+            "buffered_frames": 49,
+            "current_step": 48,
+            "observed_frames": 49,
+            "padded_frames": 0,
+            "past_obs_size": 48,
+            "sample_stride": 4,
+            "window_observation_indices": [
+              0,
+              4,
+              8,
+              12,
+              16,
+              20,
+              24,
+              28,
+              32,
+              36,
+              40,
+              44,
+              48
+            ]
+          },
+          "imagine_sigma": 0.9,
+          "inference_method": "infer_joint_ar",
+          "input_image_shape": [
+            1,
+            3,
+            384,
+            320
+          ],
+          "model_class": "LongWAM",
+          "model_device": "cuda",
+          "model_dtype": "torch.bfloat16",
+          "num_clean_frames": 4,
+          "num_imagine_frames": 2,
+          "observation": {
+            "camera_layout": "head_above_left_right_wrists",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ],
+            "dataset_stats": "/dev/shm/pi34-rt-13072/checkpoints/longwam/dataset_stats.json",
+            "longwam_image_shape": [
+              1,
+              3,
+              384,
+              320
+            ],
+            "resize": "two_stage_antialiased_bilinear",
+            "state_key": "default"
+          },
+          "observation_window_shape": [
+            1,
+            3,
+            13,
+            384,
+            320
+          ],
+          "prompt": "A video recorded from a robot's point of view executing the following instruction: Set the handheld phone with silver frame on the L-shaped smooth brown phonestand.",
+          "rand_device": "cpu",
+          "seed": 100007,
+          "sigma_shift": null,
+          "text_context_shape": [
+            1,
+            128,
+            4096
+          ],
+          "tiled": false,
+          "trained_action_chunk": 32,
+          "video_inference_steps": 4
+        },
+        {
+          "action_dtype": "torch.float32",
+          "action_horizon": 32,
+          "action_inference_steps": 10,
+          "action_shape": [
+            32,
+            14
+          ],
+          "backend": "longwam",
+          "condition": "idm",
+          "history": {
+            "buffered_frames": 49,
+            "current_step": 72,
+            "observed_frames": 73,
+            "padded_frames": 0,
+            "past_obs_size": 48,
+            "sample_stride": 4,
+            "window_observation_indices": [
+              24,
+              28,
+              32,
+              36,
+              40,
+              44,
+              48,
+              52,
+              56,
+              60,
+              64,
+              68,
+              72
+            ]
+          },
+          "imagine_sigma": 0.9,
+          "inference_method": "infer_joint_ar",
+          "input_image_shape": [
+            1,
+            3,
+            384,
+            320
+          ],
+          "model_class": "LongWAM",
+          "model_device": "cuda",
+          "model_dtype": "torch.bfloat16",
+          "num_clean_frames": 4,
+          "num_imagine_frames": 2,
+          "observation": {
+            "camera_layout": "head_above_left_right_wrists",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ],
+            "dataset_stats": "/dev/shm/pi34-rt-13072/checkpoints/longwam/dataset_stats.json",
+            "longwam_image_shape": [
+              1,
+              3,
+              384,
+              320
+            ],
+            "resize": "two_stage_antialiased_bilinear",
+            "state_key": "default"
+          },
+          "observation_window_shape": [
+            1,
+            3,
+            13,
+            384,
+            320
+          ],
+          "prompt": "A video recorded from a robot's point of view executing the following instruction: Set the handheld phone with silver frame on the L-shaped smooth brown phonestand.",
+          "rand_device": "cpu",
+          "seed": 100008,
+          "sigma_shift": null,
+          "text_context_shape": [
+            1,
+            128,
+            4096
+          ],
+          "tiled": false,
+          "trained_action_chunk": 32,
+          "video_inference_steps": 4
+        },
+        {
+          "action_dtype": "torch.float32",
+          "action_horizon": 32,
+          "action_inference_steps": 10,
+          "action_shape": [
+            32,
+            14
+          ],
+          "backend": "longwam",
+          "condition": "idm",
+          "history": {
+            "buffered_frames": 49,
+            "current_step": 96,
+            "observed_frames": 97,
+            "padded_frames": 0,
+            "past_obs_size": 48,
+            "sample_stride": 4,
+            "window_observation_indices": [
+              48,
+              52,
+              56,
+              60,
+              64,
+              68,
+              72,
+              76,
+              80,
+              84,
+              88,
+              92,
+              96
+            ]
+          },
+          "imagine_sigma": 0.9,
+          "inference_method": "infer_joint_ar",
+          "input_image_shape": [
+            1,
+            3,
+            384,
+            320
+          ],
+          "model_class": "LongWAM",
+          "model_device": "cuda",
+          "model_dtype": "torch.bfloat16",
+          "num_clean_frames": 4,
+          "num_imagine_frames": 2,
+          "observation": {
+            "camera_layout": "head_above_left_right_wrists",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ],
+            "dataset_stats": "/dev/shm/pi34-rt-13072/checkpoints/longwam/dataset_stats.json",
+            "longwam_image_shape": [
+              1,
+              3,
+              384,
+              320
+            ],
+            "resize": "two_stage_antialiased_bilinear",
+            "state_key": "default"
+          },
+          "observation_window_shape": [
+            1,
+            3,
+            13,
+            384,
+            320
+          ],
+          "prompt": "A video recorded from a robot's point of view executing the following instruction: Set the handheld phone with silver frame on the L-shaped smooth brown phonestand.",
+          "rand_device": "cpu",
+          "seed": 100009,
+          "sigma_shift": null,
+          "text_context_shape": [
+            1,
+            128,
+            4096
+          ],
+          "tiled": false,
+          "trained_action_chunk": 32,
+          "video_inference_steps": 4
+        }
+      ],
+      "instruction": "Set the handheld phone with silver frame on the L-shaped smooth brown phonestand.",
+      "policy_steps": 119,
+      "seed": 100005,
+      "success": true,
+      "termination_reason": "success"
+    },
+    {
+      "episode": 4,
+      "inference_calls": 5,
+      "inference_latency_ms": [
+        894.9927801731974,
+        867.7550810389221,
+        874.1606750991195,
+        856.3396651297808,
+        863.138081971556
+      ],
+      "inference_metadata": [
+        {
+          "action_dtype": "torch.float32",
+          "action_horizon": 32,
+          "action_inference_steps": 10,
+          "action_shape": [
+            32,
+            14
+          ],
+          "backend": "longwam",
+          "condition": "idm",
+          "history": {
+            "buffered_frames": 1,
+            "current_step": 0,
+            "observed_frames": 1,
+            "padded_frames": 48,
+            "past_obs_size": 48,
+            "sample_stride": 4,
+            "window_observation_indices": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          "imagine_sigma": 0.9,
+          "inference_method": "infer_joint_ar",
+          "input_image_shape": [
+            1,
+            3,
+            384,
+            320
+          ],
+          "model_class": "LongWAM",
+          "model_device": "cuda",
+          "model_dtype": "torch.bfloat16",
+          "num_clean_frames": 4,
+          "num_imagine_frames": 2,
+          "observation": {
+            "camera_layout": "head_above_left_right_wrists",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ],
+            "dataset_stats": "/dev/shm/pi34-rt-13072/checkpoints/longwam/dataset_stats.json",
+            "longwam_image_shape": [
+              1,
+              3,
+              384,
+              320
+            ],
+            "resize": "two_stage_antialiased_bilinear",
+            "seed": 100006,
+            "state_key": "default",
+            "task_name": "place_phone_stand"
+          },
+          "observation_window_shape": [
+            1,
+            3,
+            13,
+            384,
+            320
+          ],
+          "prompt": "A video recorded from a robot's point of view executing the following instruction: Set the smartphone with black display on the adjustable phone holder.",
+          "rand_device": "cpu",
+          "seed": 100006,
+          "sigma_shift": null,
+          "text_context_shape": [
+            1,
+            128,
+            4096
+          ],
+          "tiled": false,
+          "trained_action_chunk": 32,
+          "video_inference_steps": 4
+        },
+        {
+          "action_dtype": "torch.float32",
+          "action_horizon": 32,
+          "action_inference_steps": 10,
+          "action_shape": [
+            32,
+            14
+          ],
+          "backend": "longwam",
+          "condition": "idm",
+          "history": {
+            "buffered_frames": 25,
+            "current_step": 24,
+            "observed_frames": 25,
+            "padded_frames": 24,
+            "past_obs_size": 48,
+            "sample_stride": 4,
+            "window_observation_indices": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              4,
+              8,
+              12,
+              16,
+              20,
+              24
+            ]
+          },
+          "imagine_sigma": 0.9,
+          "inference_method": "infer_joint_ar",
+          "input_image_shape": [
+            1,
+            3,
+            384,
+            320
+          ],
+          "model_class": "LongWAM",
+          "model_device": "cuda",
+          "model_dtype": "torch.bfloat16",
+          "num_clean_frames": 4,
+          "num_imagine_frames": 2,
+          "observation": {
+            "camera_layout": "head_above_left_right_wrists",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ],
+            "dataset_stats": "/dev/shm/pi34-rt-13072/checkpoints/longwam/dataset_stats.json",
+            "longwam_image_shape": [
+              1,
+              3,
+              384,
+              320
+            ],
+            "resize": "two_stage_antialiased_bilinear",
+            "state_key": "default"
+          },
+          "observation_window_shape": [
+            1,
+            3,
+            13,
+            384,
+            320
+          ],
+          "prompt": "A video recorded from a robot's point of view executing the following instruction: Set the smartphone with black display on the adjustable phone holder.",
+          "rand_device": "cpu",
+          "seed": 100007,
+          "sigma_shift": null,
+          "text_context_shape": [
+            1,
+            128,
+            4096
+          ],
+          "tiled": false,
+          "trained_action_chunk": 32,
+          "video_inference_steps": 4
+        },
+        {
+          "action_dtype": "torch.float32",
+          "action_horizon": 32,
+          "action_inference_steps": 10,
+          "action_shape": [
+            32,
+            14
+          ],
+          "backend": "longwam",
+          "condition": "idm",
+          "history": {
+            "buffered_frames": 49,
+            "current_step": 48,
+            "observed_frames": 49,
+            "padded_frames": 0,
+            "past_obs_size": 48,
+            "sample_stride": 4,
+            "window_observation_indices": [
+              0,
+              4,
+              8,
+              12,
+              16,
+              20,
+              24,
+              28,
+              32,
+              36,
+              40,
+              44,
+              48
+            ]
+          },
+          "imagine_sigma": 0.9,
+          "inference_method": "infer_joint_ar",
+          "input_image_shape": [
+            1,
+            3,
+            384,
+            320
+          ],
+          "model_class": "LongWAM",
+          "model_device": "cuda",
+          "model_dtype": "torch.bfloat16",
+          "num_clean_frames": 4,
+          "num_imagine_frames": 2,
+          "observation": {
+            "camera_layout": "head_above_left_right_wrists",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ],
+            "dataset_stats": "/dev/shm/pi34-rt-13072/checkpoints/longwam/dataset_stats.json",
+            "longwam_image_shape": [
+              1,
+              3,
+              384,
+              320
+            ],
+            "resize": "two_stage_antialiased_bilinear",
+            "state_key": "default"
+          },
+          "observation_window_shape": [
+            1,
+            3,
+            13,
+            384,
+            320
+          ],
+          "prompt": "A video recorded from a robot's point of view executing the following instruction: Set the smartphone with black display on the adjustable phone holder.",
+          "rand_device": "cpu",
+          "seed": 100008,
+          "sigma_shift": null,
+          "text_context_shape": [
+            1,
+            128,
+            4096
+          ],
+          "tiled": false,
+          "trained_action_chunk": 32,
+          "video_inference_steps": 4
+        },
+        {
+          "action_dtype": "torch.float32",
+          "action_horizon": 32,
+          "action_inference_steps": 10,
+          "action_shape": [
+            32,
+            14
+          ],
+          "backend": "longwam",
+          "condition": "idm",
+          "history": {
+            "buffered_frames": 49,
+            "current_step": 72,
+            "observed_frames": 73,
+            "padded_frames": 0,
+            "past_obs_size": 48,
+            "sample_stride": 4,
+            "window_observation_indices": [
+              24,
+              28,
+              32,
+              36,
+              40,
+              44,
+              48,
+              52,
+              56,
+              60,
+              64,
+              68,
+              72
+            ]
+          },
+          "imagine_sigma": 0.9,
+          "inference_method": "infer_joint_ar",
+          "input_image_shape": [
+            1,
+            3,
+            384,
+            320
+          ],
+          "model_class": "LongWAM",
+          "model_device": "cuda",
+          "model_dtype": "torch.bfloat16",
+          "num_clean_frames": 4,
+          "num_imagine_frames": 2,
+          "observation": {
+            "camera_layout": "head_above_left_right_wrists",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ],
+            "dataset_stats": "/dev/shm/pi34-rt-13072/checkpoints/longwam/dataset_stats.json",
+            "longwam_image_shape": [
+              1,
+              3,
+              384,
+              320
+            ],
+            "resize": "two_stage_antialiased_bilinear",
+            "state_key": "default"
+          },
+          "observation_window_shape": [
+            1,
+            3,
+            13,
+            384,
+            320
+          ],
+          "prompt": "A video recorded from a robot's point of view executing the following instruction: Set the smartphone with black display on the adjustable phone holder.",
+          "rand_device": "cpu",
+          "seed": 100009,
+          "sigma_shift": null,
+          "text_context_shape": [
+            1,
+            128,
+            4096
+          ],
+          "tiled": false,
+          "trained_action_chunk": 32,
+          "video_inference_steps": 4
+        },
+        {
+          "action_dtype": "torch.float32",
+          "action_horizon": 32,
+          "action_inference_steps": 10,
+          "action_shape": [
+            32,
+            14
+          ],
+          "backend": "longwam",
+          "condition": "idm",
+          "history": {
+            "buffered_frames": 49,
+            "current_step": 96,
+            "observed_frames": 97,
+            "padded_frames": 0,
+            "past_obs_size": 48,
+            "sample_stride": 4,
+            "window_observation_indices": [
+              48,
+              52,
+              56,
+              60,
+              64,
+              68,
+              72,
+              76,
+              80,
+              84,
+              88,
+              92,
+              96
+            ]
+          },
+          "imagine_sigma": 0.9,
+          "inference_method": "infer_joint_ar",
+          "input_image_shape": [
+            1,
+            3,
+            384,
+            320
+          ],
+          "model_class": "LongWAM",
+          "model_device": "cuda",
+          "model_dtype": "torch.bfloat16",
+          "num_clean_frames": 4,
+          "num_imagine_frames": 2,
+          "observation": {
+            "camera_layout": "head_above_left_right_wrists",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ],
+            "dataset_stats": "/dev/shm/pi34-rt-13072/checkpoints/longwam/dataset_stats.json",
+            "longwam_image_shape": [
+              1,
+              3,
+              384,
+              320
+            ],
+            "resize": "two_stage_antialiased_bilinear",
+            "state_key": "default"
+          },
+          "observation_window_shape": [
+            1,
+            3,
+            13,
+            384,
+            320
+          ],
+          "prompt": "A video recorded from a robot's point of view executing the following instruction: Set the smartphone with black display on the adjustable phone holder.",
+          "rand_device": "cpu",
+          "seed": 100010,
+          "sigma_shift": null,
+          "text_context_shape": [
+            1,
+            128,
+            4096
+          ],
+          "tiled": false,
+          "trained_action_chunk": 32,
+          "video_inference_steps": 4
+        }
+      ],
+      "instruction": "Set the smartphone with black display on the adjustable phone holder.",
+      "policy_steps": 115,
+      "seed": 100006,
+      "success": true,
+      "termination_reason": "success"
+    },
+    {
+      "episode": 5,
+      "inference_calls": 17,
+      "inference_latency_ms": [
+        867.5918190274388,
+        869.0103532280773,
+        868.6164999380708,
+        878.3489980269223,
+        874.5452910661697,
+        868.166393134743,
+        865.3188780881464,
+        871.6698861680925,
+        868.6790729407221,
+        871.6995019931346,
+        851.2051950674504,
+        870.4367950558662,
+        874.1281169932336,
+        870.6534849479795,
+        872.6754209492356,
+        874.565850943327,
+        870.6333099398762
+      ],
+      "inference_metadata": [
+        {
+          "action_dtype": "torch.float32",
+          "action_horizon": 32,
+          "action_inference_steps": 10,
+          "action_shape": [
+            32,
+            14
+          ],
+          "backend": "longwam",
+          "condition": "idm",
+          "history": {
+            "buffered_frames": 1,
+            "current_step": 0,
+            "observed_frames": 1,
+            "padded_frames": 48,
+            "past_obs_size": 48,
+            "sample_stride": 4,
+            "window_observation_indices": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          "imagine_sigma": 0.9,
+          "inference_method": "infer_joint_ar",
+          "input_image_shape": [
+            1,
+            3,
+            384,
+            320
+          ],
+          "model_class": "LongWAM",
+          "model_device": "cuda",
+          "model_dtype": "torch.bfloat16",
+          "num_clean_frames": 4,
+          "num_imagine_frames": 2,
+          "observation": {
+            "camera_layout": "head_above_left_right_wrists",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ],
+            "dataset_stats": "/dev/shm/pi34-rt-13072/checkpoints/longwam/dataset_stats.json",
+            "longwam_image_shape": [
+              1,
+              3,
+              384,
+              320
+            ],
+            "resize": "two_stage_antialiased_bilinear",
+            "seed": 100008,
+            "state_key": "default",
+            "task_name": "place_phone_stand"
+          },
+          "observation_window_shape": [
+            1,
+            3,
+            13,
+            384,
+            320
+          ],
+          "prompt": "A video recorded from a robot's point of view executing the following instruction: Set the phone with rounded edges on the silver arm phonestand.",
+          "rand_device": "cpu",
+          "seed": 100008,
+          "sigma_shift": null,
+          "text_context_shape": [
+            1,
+            128,
+            4096
+          ],
+          "tiled": false,
+          "trained_action_chunk": 32,
+          "video_inference_steps": 4
+        },
+        {
+          "action_dtype": "torch.float32",
+          "action_horizon": 32,
+          "action_inference_steps": 10,
+          "action_shape": [
+            32,
+            14
+          ],
+          "backend": "longwam",
+          "condition": "idm",
+          "history": {
+            "buffered_frames": 25,
+            "current_step": 24,
+            "observed_frames": 25,
+            "padded_frames": 24,
+            "past_obs_size": 48,
+            "sample_stride": 4,
+            "window_observation_indices": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              4,
+              8,
+              12,
+              16,
+              20,
+              24
+            ]
+          },
+          "imagine_sigma": 0.9,
+          "inference_method": "infer_joint_ar",
+          "input_image_shape": [
+            1,
+            3,
+            384,
+            320
+          ],
+          "model_class": "LongWAM",
+          "model_device": "cuda",
+          "model_dtype": "torch.bfloat16",
+          "num_clean_frames": 4,
+          "num_imagine_frames": 2,
+          "observation": {
+            "camera_layout": "head_above_left_right_wrists",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ],
+            "dataset_stats": "/dev/shm/pi34-rt-13072/checkpoints/longwam/dataset_stats.json",
+            "longwam_image_shape": [
+              1,
+              3,
+              384,
+              320
+            ],
+            "resize": "two_stage_antialiased_bilinear",
+            "state_key": "default"
+          },
+          "observation_window_shape": [
+            1,
+            3,
+            13,
+            384,
+            320
+          ],
+          "prompt": "A video recorded from a robot's point of view executing the following instruction: Set the phone with rounded edges on the silver arm phonestand.",
+          "rand_device": "cpu",
+          "seed": 100009,
+          "sigma_shift": null,
+          "text_context_shape": [
+            1,
+            128,
+            4096
+          ],
+          "tiled": false,
+          "trained_action_chunk": 32,
+          "video_inference_steps": 4
+        },
+        {
+          "action_dtype": "torch.float32",
+          "action_horizon": 32,
+          "action_inference_steps": 10,
+          "action_shape": [
+            32,
+            14
+          ],
+          "backend": "longwam",
+          "condition": "idm",
+          "history": {
+            "buffered_frames": 49,
+            "current_step": 48,
+            "observed_frames": 49,
+            "padded_frames": 0,
+            "past_obs_size": 48,
+            "sample_stride": 4,
+            "window_observation_indices": [
+              0,
+              4,
+              8,
+              12,
+              16,
+              20,
+              24,
+              28,
+              32,
+              36,
+              40,
+              44,
+              48
+            ]
+          },
+          "imagine_sigma": 0.9,
+          "inference_method": "infer_joint_ar",
+          "input_image_shape": [
+            1,
+            3,
+            384,
+            320
+          ],
+          "model_class": "LongWAM",
+          "model_device": "cuda",
+          "model_dtype": "torch.bfloat16",
+          "num_clean_frames": 4,
+          "num_imagine_frames": 2,
+          "observation": {
+            "camera_layout": "head_above_left_right_wrists",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ],
+            "dataset_stats": "/dev/shm/pi34-rt-13072/checkpoints/longwam/dataset_stats.json",
+            "longwam_image_shape": [
+              1,
+              3,
+              384,
+              320
+            ],
+            "resize": "two_stage_antialiased_bilinear",
+            "state_key": "default"
+          },
+          "observation_window_shape": [
+            1,
+            3,
+            13,
+            384,
+            320
+          ],
+          "prompt": "A video recorded from a robot's point of view executing the following instruction: Set the phone with rounded edges on the silver arm phonestand.",
+          "rand_device": "cpu",
+          "seed": 100010,
+          "sigma_shift": null,
+          "text_context_shape": [
+            1,
+            128,
+            4096
+          ],
+          "tiled": false,
+          "trained_action_chunk": 32,
+          "video_inference_steps": 4
+        },
+        {
+          "action_dtype": "torch.float32",
+          "action_horizon": 32,
+          "action_inference_steps": 10,
+          "action_shape": [
+            32,
+            14
+          ],
+          "backend": "longwam",
+          "condition": "idm",
+          "history": {
+            "buffered_frames": 49,
+            "current_step": 72,
+            "observed_frames": 73,
+            "padded_frames": 0,
+            "past_obs_size": 48,
+            "sample_stride": 4,
+            "window_observation_indices": [
+              24,
+              28,
+              32,
+              36,
+              40,
+              44,
+              48,
+              52,
+              56,
+              60,
+              64,
+              68,
+              72
+            ]
+          },
+          "imagine_sigma": 0.9,
+          "inference_method": "infer_joint_ar",
+          "input_image_shape": [
+            1,
+            3,
+            384,
+            320
+          ],
+          "model_class": "LongWAM",
+          "model_device": "cuda",
+          "model_dtype": "torch.bfloat16",
+          "num_clean_frames": 4,
+          "num_imagine_frames": 2,
+          "observation": {
+            "camera_layout": "head_above_left_right_wrists",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ],
+            "dataset_stats": "/dev/shm/pi34-rt-13072/checkpoints/longwam/dataset_stats.json",
+            "longwam_image_shape": [
+              1,
+              3,
+              384,
+              320
+            ],
+            "resize": "two_stage_antialiased_bilinear",
+            "state_key": "default"
+          },
+          "observation_window_shape": [
+            1,
+            3,
+            13,
+            384,
+            320
+          ],
+          "prompt": "A video recorded from a robot's point of view executing the following instruction: Set the phone with rounded edges on the silver arm phonestand.",
+          "rand_device": "cpu",
+          "seed": 100011,
+          "sigma_shift": null,
+          "text_context_shape": [
+            1,
+            128,
+            4096
+          ],
+          "tiled": false,
+          "trained_action_chunk": 32,
+          "video_inference_steps": 4
+        },
+        {
+          "action_dtype": "torch.float32",
+          "action_horizon": 32,
+          "action_inference_steps": 10,
+          "action_shape": [
+            32,
+            14
+          ],
+          "backend": "longwam",
+          "condition": "idm",
+          "history": {
+            "buffered_frames": 49,
+            "current_step": 96,
+            "observed_frames": 97,
+            "padded_frames": 0,
+            "past_obs_size": 48,
+            "sample_stride": 4,
+            "window_observation_indices": [
+              48,
+              52,
+              56,
+              60,
+              64,
+              68,
+              72,
+              76,
+              80,
+              84,
+              88,
+              92,
+              96
+            ]
+          },
+          "imagine_sigma": 0.9,
+          "inference_method": "infer_joint_ar",
+          "input_image_shape": [
+            1,
+            3,
+            384,
+            320
+          ],
+          "model_class": "LongWAM",
+          "model_device": "cuda",
+          "model_dtype": "torch.bfloat16",
+          "num_clean_frames": 4,
+          "num_imagine_frames": 2,
+          "observation": {
+            "camera_layout": "head_above_left_right_wrists",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ],
+            "dataset_stats": "/dev/shm/pi34-rt-13072/checkpoints/longwam/dataset_stats.json",
+            "longwam_image_shape": [
+              1,
+              3,
+              384,
+              320
+            ],
+            "resize": "two_stage_antialiased_bilinear",
+            "state_key": "default"
+          },
+          "observation_window_shape": [
+            1,
+            3,
+            13,
+            384,
+            320
+          ],
+          "prompt": "A video recorded from a robot's point of view executing the following instruction: Set the phone with rounded edges on the silver arm phonestand.",
+          "rand_device": "cpu",
+          "seed": 100012,
+          "sigma_shift": null,
+          "text_context_shape": [
+            1,
+            128,
+            4096
+          ],
+          "tiled": false,
+          "trained_action_chunk": 32,
+          "video_inference_steps": 4
+        },
+        {
+          "action_dtype": "torch.float32",
+          "action_horizon": 32,
+          "action_inference_steps": 10,
+          "action_shape": [
+            32,
+            14
+          ],
+          "backend": "longwam",
+          "condition": "idm",
+          "history": {
+            "buffered_frames": 49,
+            "current_step": 120,
+            "observed_frames": 121,
+            "padded_frames": 0,
+            "past_obs_size": 48,
+            "sample_stride": 4,
+            "window_observation_indices": [
+              72,
+              76,
+              80,
+              84,
+              88,
+              92,
+              96,
+              100,
+              104,
+              108,
+              112,
+              116,
+              120
+            ]
+          },
+          "imagine_sigma": 0.9,
+          "inference_method": "infer_joint_ar",
+          "input_image_shape": [
+            1,
+            3,
+            384,
+            320
+          ],
+          "model_class": "LongWAM",
+          "model_device": "cuda",
+          "model_dtype": "torch.bfloat16",
+          "num_clean_frames": 4,
+          "num_imagine_frames": 2,
+          "observation": {
+            "camera_layout": "head_above_left_right_wrists",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ],
+            "dataset_stats": "/dev/shm/pi34-rt-13072/checkpoints/longwam/dataset_stats.json",
+            "longwam_image_shape": [
+              1,
+              3,
+              384,
+              320
+            ],
+            "resize": "two_stage_antialiased_bilinear",
+            "state_key": "default"
+          },
+          "observation_window_shape": [
+            1,
+            3,
+            13,
+            384,
+            320
+          ],
+          "prompt": "A video recorded from a robot's point of view executing the following instruction: Set the phone with rounded edges on the silver arm phonestand.",
+          "rand_device": "cpu",
+          "seed": 100013,
+          "sigma_shift": null,
+          "text_context_shape": [
+            1,
+            128,
+            4096
+          ],
+          "tiled": false,
+          "trained_action_chunk": 32,
+          "video_inference_steps": 4
+        },
+        {
+          "action_dtype": "torch.float32",
+          "action_horizon": 32,
+          "action_inference_steps": 10,
+          "action_shape": [
+            32,
+            14
+          ],
+          "backend": "longwam",
+          "condition": "idm",
+          "history": {
+            "buffered_frames": 49,
+            "current_step": 144,
+            "observed_frames": 145,
+            "padded_frames": 0,
+            "past_obs_size": 48,
+            "sample_stride": 4,
+            "window_observation_indices": [
+              96,
+              100,
+              104,
+              108,
+              112,
+              116,
+              120,
+              124,
+              128,
+              132,
+              136,
+              140,
+              144
+            ]
+          },
+          "imagine_sigma": 0.9,
+          "inference_method": "infer_joint_ar",
+          "input_image_shape": [
+            1,
+            3,
+            384,
+            320
+          ],
+          "model_class": "LongWAM",
+          "model_device": "cuda",
+          "model_dtype": "torch.bfloat16",
+          "num_clean_frames": 4,
+          "num_imagine_frames": 2,
+          "observation": {
+            "camera_layout": "head_above_left_right_wrists",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ],
+            "dataset_stats": "/dev/shm/pi34-rt-13072/checkpoints/longwam/dataset_stats.json",
+            "longwam_image_shape": [
+              1,
+              3,
+              384,
+              320
+            ],
+            "resize": "two_stage_antialiased_bilinear",
+            "state_key": "default"
+          },
+          "observation_window_shape": [
+            1,
+            3,
+            13,
+            384,
+            320
+          ],
+          "prompt": "A video recorded from a robot's point of view executing the following instruction: Set the phone with rounded edges on the silver arm phonestand.",
+          "rand_device": "cpu",
+          "seed": 100014,
+          "sigma_shift": null,
+          "text_context_shape": [
+            1,
+            128,
+            4096
+          ],
+          "tiled": false,
+          "trained_action_chunk": 32,
+          "video_inference_steps": 4
+        },
+        {
+          "action_dtype": "torch.float32",
+          "action_horizon": 32,
+          "action_inference_steps": 10,
+          "action_shape": [
+            32,
+            14
+          ],
+          "backend": "longwam",
+          "condition": "idm",
+          "history": {
+            "buffered_frames": 49,
+            "current_step": 168,
+            "observed_frames": 169,
+            "padded_frames": 0,
+            "past_obs_size": 48,
+            "sample_stride": 4,
+            "window_observation_indices": [
+              120,
+              124,
+              128,
+              132,
+              136,
+              140,
+              144,
+              148,
+              152,
+              156,
+              160,
+              164,
+              168
+            ]
+          },
+          "imagine_sigma": 0.9,
+          "inference_method": "infer_joint_ar",
+          "input_image_shape": [
+            1,
+            3,
+            384,
+            320
+          ],
+          "model_class": "LongWAM",
+          "model_device": "cuda",
+          "model_dtype": "torch.bfloat16",
+          "num_clean_frames": 4,
+          "num_imagine_frames": 2,
+          "observation": {
+            "camera_layout": "head_above_left_right_wrists",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ],
+            "dataset_stats": "/dev/shm/pi34-rt-13072/checkpoints/longwam/dataset_stats.json",
+            "longwam_image_shape": [
+              1,
+              3,
+              384,
+              320
+            ],
+            "resize": "two_stage_antialiased_bilinear",
+            "state_key": "default"
+          },
+          "observation_window_shape": [
+            1,
+            3,
+            13,
+            384,
+            320
+          ],
+          "prompt": "A video recorded from a robot's point of view executing the following instruction: Set the phone with rounded edges on the silver arm phonestand.",
+          "rand_device": "cpu",
+          "seed": 100015,
+          "sigma_shift": null,
+          "text_context_shape": [
+            1,
+            128,
+            4096
+          ],
+          "tiled": false,
+          "trained_action_chunk": 32,
+          "video_inference_steps": 4
+        },
+        {
+          "action_dtype": "torch.float32",
+          "action_horizon": 32,
+          "action_inference_steps": 10,
+          "action_shape": [
+            32,
+            14
+          ],
+          "backend": "longwam",
+          "condition": "idm",
+          "history": {
+            "buffered_frames": 49,
+            "current_step": 192,
+            "observed_frames": 193,
+            "padded_frames": 0,
+            "past_obs_size": 48,
+            "sample_stride": 4,
+            "window_observation_indices": [
+              144,
+              148,
+              152,
+              156,
+              160,
+              164,
+              168,
+              172,
+              176,
+              180,
+              184,
+              188,
+              192
+            ]
+          },
+          "imagine_sigma": 0.9,
+          "inference_method": "infer_joint_ar",
+          "input_image_shape": [
+            1,
+            3,
+            384,
+            320
+          ],
+          "model_class": "LongWAM",
+          "model_device": "cuda",
+          "model_dtype": "torch.bfloat16",
+          "num_clean_frames": 4,
+          "num_imagine_frames": 2,
+          "observation": {
+            "camera_layout": "head_above_left_right_wrists",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ],
+            "dataset_stats": "/dev/shm/pi34-rt-13072/checkpoints/longwam/dataset_stats.json",
+            "longwam_image_shape": [
+              1,
+              3,
+              384,
+              320
+            ],
+            "resize": "two_stage_antialiased_bilinear",
+            "state_key": "default"
+          },
+          "observation_window_shape": [
+            1,
+            3,
+            13,
+            384,
+            320
+          ],
+          "prompt": "A video recorded from a robot's point of view executing the following instruction: Set the phone with rounded edges on the silver arm phonestand.",
+          "rand_device": "cpu",
+          "seed": 100016,
+          "sigma_shift": null,
+          "text_context_shape": [
+            1,
+            128,
+            4096
+          ],
+          "tiled": false,
+          "trained_action_chunk": 32,
+          "video_inference_steps": 4
+        },
+        {
+          "action_dtype": "torch.float32",
+          "action_horizon": 32,
+          "action_inference_steps": 10,
+          "action_shape": [
+            32,
+            14
+          ],
+          "backend": "longwam",
+          "condition": "idm",
+          "history": {
+            "buffered_frames": 49,
+            "current_step": 216,
+            "observed_frames": 217,
+            "padded_frames": 0,
+            "past_obs_size": 48,
+            "sample_stride": 4,
+            "window_observation_indices": [
+              168,
+              172,
+              176,
+              180,
+              184,
+              188,
+              192,
+              196,
+              200,
+              204,
+              208,
+              212,
+              216
+            ]
+          },
+          "imagine_sigma": 0.9,
+          "inference_method": "infer_joint_ar",
+          "input_image_shape": [
+            1,
+            3,
+            384,
+            320
+          ],
+          "model_class": "LongWAM",
+          "model_device": "cuda",
+          "model_dtype": "torch.bfloat16",
+          "num_clean_frames": 4,
+          "num_imagine_frames": 2,
+          "observation": {
+            "camera_layout": "head_above_left_right_wrists",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ],
+            "dataset_stats": "/dev/shm/pi34-rt-13072/checkpoints/longwam/dataset_stats.json",
+            "longwam_image_shape": [
+              1,
+              3,
+              384,
+              320
+            ],
+            "resize": "two_stage_antialiased_bilinear",
+            "state_key": "default"
+          },
+          "observation_window_shape": [
+            1,
+            3,
+            13,
+            384,
+            320
+          ],
+          "prompt": "A video recorded from a robot's point of view executing the following instruction: Set the phone with rounded edges on the silver arm phonestand.",
+          "rand_device": "cpu",
+          "seed": 100017,
+          "sigma_shift": null,
+          "text_context_shape": [
+            1,
+            128,
+            4096
+          ],
+          "tiled": false,
+          "trained_action_chunk": 32,
+          "video_inference_steps": 4
+        },
+        {
+          "action_dtype": "torch.float32",
+          "action_horizon": 32,
+          "action_inference_steps": 10,
+          "action_shape": [
+            32,
+            14
+          ],
+          "backend": "longwam",
+          "condition": "idm",
+          "history": {
+            "buffered_frames": 49,
+            "current_step": 240,
+            "observed_frames": 241,
+            "padded_frames": 0,
+            "past_obs_size": 48,
+            "sample_stride": 4,
+            "window_observation_indices": [
+              192,
+              196,
+              200,
+              204,
+              208,
+              212,
+              216,
+              220,
+              224,
+              228,
+              232,
+              236,
+              240
+            ]
+          },
+          "imagine_sigma": 0.9,
+          "inference_method": "infer_joint_ar",
+          "input_image_shape": [
+            1,
+            3,
+            384,
+            320
+          ],
+          "model_class": "LongWAM",
+          "model_device": "cuda",
+          "model_dtype": "torch.bfloat16",
+          "num_clean_frames": 4,
+          "num_imagine_frames": 2,
+          "observation": {
+            "camera_layout": "head_above_left_right_wrists",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ],
+            "dataset_stats": "/dev/shm/pi34-rt-13072/checkpoints/longwam/dataset_stats.json",
+            "longwam_image_shape": [
+              1,
+              3,
+              384,
+              320
+            ],
+            "resize": "two_stage_antialiased_bilinear",
+            "state_key": "default"
+          },
+          "observation_window_shape": [
+            1,
+            3,
+            13,
+            384,
+            320
+          ],
+          "prompt": "A video recorded from a robot's point of view executing the following instruction: Set the phone with rounded edges on the silver arm phonestand.",
+          "rand_device": "cpu",
+          "seed": 100018,
+          "sigma_shift": null,
+          "text_context_shape": [
+            1,
+            128,
+            4096
+          ],
+          "tiled": false,
+          "trained_action_chunk": 32,
+          "video_inference_steps": 4
+        },
+        {
+          "action_dtype": "torch.float32",
+          "action_horizon": 32,
+          "action_inference_steps": 10,
+          "action_shape": [
+            32,
+            14
+          ],
+          "backend": "longwam",
+          "condition": "idm",
+          "history": {
+            "buffered_frames": 49,
+            "current_step": 264,
+            "observed_frames": 265,
+            "padded_frames": 0,
+            "past_obs_size": 48,
+            "sample_stride": 4,
+            "window_observation_indices": [
+              216,
+              220,
+              224,
+              228,
+              232,
+              236,
+              240,
+              244,
+              248,
+              252,
+              256,
+              260,
+              264
+            ]
+          },
+          "imagine_sigma": 0.9,
+          "inference_method": "infer_joint_ar",
+          "input_image_shape": [
+            1,
+            3,
+            384,
+            320
+          ],
+          "model_class": "LongWAM",
+          "model_device": "cuda",
+          "model_dtype": "torch.bfloat16",
+          "num_clean_frames": 4,
+          "num_imagine_frames": 2,
+          "observation": {
+            "camera_layout": "head_above_left_right_wrists",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ],
+            "dataset_stats": "/dev/shm/pi34-rt-13072/checkpoints/longwam/dataset_stats.json",
+            "longwam_image_shape": [
+              1,
+              3,
+              384,
+              320
+            ],
+            "resize": "two_stage_antialiased_bilinear",
+            "state_key": "default"
+          },
+          "observation_window_shape": [
+            1,
+            3,
+            13,
+            384,
+            320
+          ],
+          "prompt": "A video recorded from a robot's point of view executing the following instruction: Set the phone with rounded edges on the silver arm phonestand.",
+          "rand_device": "cpu",
+          "seed": 100019,
+          "sigma_shift": null,
+          "text_context_shape": [
+            1,
+            128,
+            4096
+          ],
+          "tiled": false,
+          "trained_action_chunk": 32,
+          "video_inference_steps": 4
+        },
+        {
+          "action_dtype": "torch.float32",
+          "action_horizon": 32,
+          "action_inference_steps": 10,
+          "action_shape": [
+            32,
+            14
+          ],
+          "backend": "longwam",
+          "condition": "idm",
+          "history": {
+            "buffered_frames": 49,
+            "current_step": 288,
+            "observed_frames": 289,
+            "padded_frames": 0,
+            "past_obs_size": 48,
+            "sample_stride": 4,
+            "window_observation_indices": [
+              240,
+              244,
+              248,
+              252,
+              256,
+              260,
+              264,
+              268,
+              272,
+              276,
+              280,
+              284,
+              288
+            ]
+          },
+          "imagine_sigma": 0.9,
+          "inference_method": "infer_joint_ar",
+          "input_image_shape": [
+            1,
+            3,
+            384,
+            320
+          ],
+          "model_class": "LongWAM",
+          "model_device": "cuda",
+          "model_dtype": "torch.bfloat16",
+          "num_clean_frames": 4,
+          "num_imagine_frames": 2,
+          "observation": {
+            "camera_layout": "head_above_left_right_wrists",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ],
+            "dataset_stats": "/dev/shm/pi34-rt-13072/checkpoints/longwam/dataset_stats.json",
+            "longwam_image_shape": [
+              1,
+              3,
+              384,
+              320
+            ],
+            "resize": "two_stage_antialiased_bilinear",
+            "state_key": "default"
+          },
+          "observation_window_shape": [
+            1,
+            3,
+            13,
+            384,
+            320
+          ],
+          "prompt": "A video recorded from a robot's point of view executing the following instruction: Set the phone with rounded edges on the silver arm phonestand.",
+          "rand_device": "cpu",
+          "seed": 100020,
+          "sigma_shift": null,
+          "text_context_shape": [
+            1,
+            128,
+            4096
+          ],
+          "tiled": false,
+          "trained_action_chunk": 32,
+          "video_inference_steps": 4
+        },
+        {
+          "action_dtype": "torch.float32",
+          "action_horizon": 32,
+          "action_inference_steps": 10,
+          "action_shape": [
+            32,
+            14
+          ],
+          "backend": "longwam",
+          "condition": "idm",
+          "history": {
+            "buffered_frames": 49,
+            "current_step": 312,
+            "observed_frames": 313,
+            "padded_frames": 0,
+            "past_obs_size": 48,
+            "sample_stride": 4,
+            "window_observation_indices": [
+              264,
+              268,
+              272,
+              276,
+              280,
+              284,
+              288,
+              292,
+              296,
+              300,
+              304,
+              308,
+              312
+            ]
+          },
+          "imagine_sigma": 0.9,
+          "inference_method": "infer_joint_ar",
+          "input_image_shape": [
+            1,
+            3,
+            384,
+            320
+          ],
+          "model_class": "LongWAM",
+          "model_device": "cuda",
+          "model_dtype": "torch.bfloat16",
+          "num_clean_frames": 4,
+          "num_imagine_frames": 2,
+          "observation": {
+            "camera_layout": "head_above_left_right_wrists",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ],
+            "dataset_stats": "/dev/shm/pi34-rt-13072/checkpoints/longwam/dataset_stats.json",
+            "longwam_image_shape": [
+              1,
+              3,
+              384,
+              320
+            ],
+            "resize": "two_stage_antialiased_bilinear",
+            "state_key": "default"
+          },
+          "observation_window_shape": [
+            1,
+            3,
+            13,
+            384,
+            320
+          ],
+          "prompt": "A video recorded from a robot's point of view executing the following instruction: Set the phone with rounded edges on the silver arm phonestand.",
+          "rand_device": "cpu",
+          "seed": 100021,
+          "sigma_shift": null,
+          "text_context_shape": [
+            1,
+            128,
+            4096
+          ],
+          "tiled": false,
+          "trained_action_chunk": 32,
+          "video_inference_steps": 4
+        },
+        {
+          "action_dtype": "torch.float32",
+          "action_horizon": 32,
+          "action_inference_steps": 10,
+          "action_shape": [
+            32,
+            14
+          ],
+          "backend": "longwam",
+          "condition": "idm",
+          "history": {
+            "buffered_frames": 49,
+            "current_step": 336,
+            "observed_frames": 337,
+            "padded_frames": 0,
+            "past_obs_size": 48,
+            "sample_stride": 4,
+            "window_observation_indices": [
+              288,
+              292,
+              296,
+              300,
+              304,
+              308,
+              312,
+              316,
+              320,
+              324,
+              328,
+              332,
+              336
+            ]
+          },
+          "imagine_sigma": 0.9,
+          "inference_method": "infer_joint_ar",
+          "input_image_shape": [
+            1,
+            3,
+            384,
+            320
+          ],
+          "model_class": "LongWAM",
+          "model_device": "cuda",
+          "model_dtype": "torch.bfloat16",
+          "num_clean_frames": 4,
+          "num_imagine_frames": 2,
+          "observation": {
+            "camera_layout": "head_above_left_right_wrists",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ],
+            "dataset_stats": "/dev/shm/pi34-rt-13072/checkpoints/longwam/dataset_stats.json",
+            "longwam_image_shape": [
+              1,
+              3,
+              384,
+              320
+            ],
+            "resize": "two_stage_antialiased_bilinear",
+            "state_key": "default"
+          },
+          "observation_window_shape": [
+            1,
+            3,
+            13,
+            384,
+            320
+          ],
+          "prompt": "A video recorded from a robot's point of view executing the following instruction: Set the phone with rounded edges on the silver arm phonestand.",
+          "rand_device": "cpu",
+          "seed": 100022,
+          "sigma_shift": null,
+          "text_context_shape": [
+            1,
+            128,
+            4096
+          ],
+          "tiled": false,
+          "trained_action_chunk": 32,
+          "video_inference_steps": 4
+        },
+        {
+          "action_dtype": "torch.float32",
+          "action_horizon": 32,
+          "action_inference_steps": 10,
+          "action_shape": [
+            32,
+            14
+          ],
+          "backend": "longwam",
+          "condition": "idm",
+          "history": {
+            "buffered_frames": 49,
+            "current_step": 360,
+            "observed_frames": 361,
+            "padded_frames": 0,
+            "past_obs_size": 48,
+            "sample_stride": 4,
+            "window_observation_indices": [
+              312,
+              316,
+              320,
+              324,
+              328,
+              332,
+              336,
+              340,
+              344,
+              348,
+              352,
+              356,
+              360
+            ]
+          },
+          "imagine_sigma": 0.9,
+          "inference_method": "infer_joint_ar",
+          "input_image_shape": [
+            1,
+            3,
+            384,
+            320
+          ],
+          "model_class": "LongWAM",
+          "model_device": "cuda",
+          "model_dtype": "torch.bfloat16",
+          "num_clean_frames": 4,
+          "num_imagine_frames": 2,
+          "observation": {
+            "camera_layout": "head_above_left_right_wrists",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ],
+            "dataset_stats": "/dev/shm/pi34-rt-13072/checkpoints/longwam/dataset_stats.json",
+            "longwam_image_shape": [
+              1,
+              3,
+              384,
+              320
+            ],
+            "resize": "two_stage_antialiased_bilinear",
+            "state_key": "default"
+          },
+          "observation_window_shape": [
+            1,
+            3,
+            13,
+            384,
+            320
+          ],
+          "prompt": "A video recorded from a robot's point of view executing the following instruction: Set the phone with rounded edges on the silver arm phonestand.",
+          "rand_device": "cpu",
+          "seed": 100023,
+          "sigma_shift": null,
+          "text_context_shape": [
+            1,
+            128,
+            4096
+          ],
+          "tiled": false,
+          "trained_action_chunk": 32,
+          "video_inference_steps": 4
+        },
+        {
+          "action_dtype": "torch.float32",
+          "action_horizon": 32,
+          "action_inference_steps": 10,
+          "action_shape": [
+            32,
+            14
+          ],
+          "backend": "longwam",
+          "condition": "idm",
+          "history": {
+            "buffered_frames": 49,
+            "current_step": 384,
+            "observed_frames": 385,
+            "padded_frames": 0,
+            "past_obs_size": 48,
+            "sample_stride": 4,
+            "window_observation_indices": [
+              336,
+              340,
+              344,
+              348,
+              352,
+              356,
+              360,
+              364,
+              368,
+              372,
+              376,
+              380,
+              384
+            ]
+          },
+          "imagine_sigma": 0.9,
+          "inference_method": "infer_joint_ar",
+          "input_image_shape": [
+            1,
+            3,
+            384,
+            320
+          ],
+          "model_class": "LongWAM",
+          "model_device": "cuda",
+          "model_dtype": "torch.bfloat16",
+          "num_clean_frames": 4,
+          "num_imagine_frames": 2,
+          "observation": {
+            "camera_layout": "head_above_left_right_wrists",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ],
+            "dataset_stats": "/dev/shm/pi34-rt-13072/checkpoints/longwam/dataset_stats.json",
+            "longwam_image_shape": [
+              1,
+              3,
+              384,
+              320
+            ],
+            "resize": "two_stage_antialiased_bilinear",
+            "state_key": "default"
+          },
+          "observation_window_shape": [
+            1,
+            3,
+            13,
+            384,
+            320
+          ],
+          "prompt": "A video recorded from a robot's point of view executing the following instruction: Set the phone with rounded edges on the silver arm phonestand.",
+          "rand_device": "cpu",
+          "seed": 100024,
+          "sigma_shift": null,
+          "text_context_shape": [
+            1,
+            128,
+            4096
+          ],
+          "tiled": false,
+          "trained_action_chunk": 32,
+          "video_inference_steps": 4
+        }
+      ],
+      "instruction": "Set the phone with rounded edges on the silver arm phonestand.",
+      "policy_steps": 400,
+      "seed": 100008,
+      "success": false,
+      "termination_reason": "max_steps"
+    },
+    {
+      "episode": 6,
+      "inference_calls": 5,
+      "inference_latency_ms": [
+        893.5215519741178,
+        869.4276979658753,
+        874.9856129288673,
+        861.501423176378,
+        877.5944339577109
+      ],
+      "inference_metadata": [
+        {
+          "action_dtype": "torch.float32",
+          "action_horizon": 32,
+          "action_inference_steps": 10,
+          "action_shape": [
+            32,
+            14
+          ],
+          "backend": "longwam",
+          "condition": "idm",
+          "history": {
+            "buffered_frames": 1,
+            "current_step": 0,
+            "observed_frames": 1,
+            "padded_frames": 48,
+            "past_obs_size": 48,
+            "sample_stride": 4,
+            "window_observation_indices": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          "imagine_sigma": 0.9,
+          "inference_method": "infer_joint_ar",
+          "input_image_shape": [
+            1,
+            3,
+            384,
+            320
+          ],
+          "model_class": "LongWAM",
+          "model_device": "cuda",
+          "model_dtype": "torch.bfloat16",
+          "num_clean_frames": 4,
+          "num_imagine_frames": 2,
+          "observation": {
+            "camera_layout": "head_above_left_right_wrists",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ],
+            "dataset_stats": "/dev/shm/pi34-rt-13072/checkpoints/longwam/dataset_stats.json",
+            "longwam_image_shape": [
+              1,
+              3,
+              384,
+              320
+            ],
+            "resize": "two_stage_antialiased_bilinear",
+            "seed": 100010,
+            "state_key": "default",
+            "task_name": "place_phone_stand"
+          },
+          "observation_window_shape": [
+            1,
+            3,
+            13,
+            384,
+            320
+          ],
+          "prompt": "A video recorded from a robot's point of view executing the following instruction: Set the palm-sized phone with glossy finish on the brown angled plastic phonestand.",
+          "rand_device": "cpu",
+          "seed": 100010,
+          "sigma_shift": null,
+          "text_context_shape": [
+            1,
+            128,
+            4096
+          ],
+          "tiled": false,
+          "trained_action_chunk": 32,
+          "video_inference_steps": 4
+        },
+        {
+          "action_dtype": "torch.float32",
+          "action_horizon": 32,
+          "action_inference_steps": 10,
+          "action_shape": [
+            32,
+            14
+          ],
+          "backend": "longwam",
+          "condition": "idm",
+          "history": {
+            "buffered_frames": 25,
+            "current_step": 24,
+            "observed_frames": 25,
+            "padded_frames": 24,
+            "past_obs_size": 48,
+            "sample_stride": 4,
+            "window_observation_indices": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              4,
+              8,
+              12,
+              16,
+              20,
+              24
+            ]
+          },
+          "imagine_sigma": 0.9,
+          "inference_method": "infer_joint_ar",
+          "input_image_shape": [
+            1,
+            3,
+            384,
+            320
+          ],
+          "model_class": "LongWAM",
+          "model_device": "cuda",
+          "model_dtype": "torch.bfloat16",
+          "num_clean_frames": 4,
+          "num_imagine_frames": 2,
+          "observation": {
+            "camera_layout": "head_above_left_right_wrists",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ],
+            "dataset_stats": "/dev/shm/pi34-rt-13072/checkpoints/longwam/dataset_stats.json",
+            "longwam_image_shape": [
+              1,
+              3,
+              384,
+              320
+            ],
+            "resize": "two_stage_antialiased_bilinear",
+            "state_key": "default"
+          },
+          "observation_window_shape": [
+            1,
+            3,
+            13,
+            384,
+            320
+          ],
+          "prompt": "A video recorded from a robot's point of view executing the following instruction: Set the palm-sized phone with glossy finish on the brown angled plastic phonestand.",
+          "rand_device": "cpu",
+          "seed": 100011,
+          "sigma_shift": null,
+          "text_context_shape": [
+            1,
+            128,
+            4096
+          ],
+          "tiled": false,
+          "trained_action_chunk": 32,
+          "video_inference_steps": 4
+        },
+        {
+          "action_dtype": "torch.float32",
+          "action_horizon": 32,
+          "action_inference_steps": 10,
+          "action_shape": [
+            32,
+            14
+          ],
+          "backend": "longwam",
+          "condition": "idm",
+          "history": {
+            "buffered_frames": 49,
+            "current_step": 48,
+            "observed_frames": 49,
+            "padded_frames": 0,
+            "past_obs_size": 48,
+            "sample_stride": 4,
+            "window_observation_indices": [
+              0,
+              4,
+              8,
+              12,
+              16,
+              20,
+              24,
+              28,
+              32,
+              36,
+              40,
+              44,
+              48
+            ]
+          },
+          "imagine_sigma": 0.9,
+          "inference_method": "infer_joint_ar",
+          "input_image_shape": [
+            1,
+            3,
+            384,
+            320
+          ],
+          "model_class": "LongWAM",
+          "model_device": "cuda",
+          "model_dtype": "torch.bfloat16",
+          "num_clean_frames": 4,
+          "num_imagine_frames": 2,
+          "observation": {
+            "camera_layout": "head_above_left_right_wrists",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ],
+            "dataset_stats": "/dev/shm/pi34-rt-13072/checkpoints/longwam/dataset_stats.json",
+            "longwam_image_shape": [
+              1,
+              3,
+              384,
+              320
+            ],
+            "resize": "two_stage_antialiased_bilinear",
+            "state_key": "default"
+          },
+          "observation_window_shape": [
+            1,
+            3,
+            13,
+            384,
+            320
+          ],
+          "prompt": "A video recorded from a robot's point of view executing the following instruction: Set the palm-sized phone with glossy finish on the brown angled plastic phonestand.",
+          "rand_device": "cpu",
+          "seed": 100012,
+          "sigma_shift": null,
+          "text_context_shape": [
+            1,
+            128,
+            4096
+          ],
+          "tiled": false,
+          "trained_action_chunk": 32,
+          "video_inference_steps": 4
+        },
+        {
+          "action_dtype": "torch.float32",
+          "action_horizon": 32,
+          "action_inference_steps": 10,
+          "action_shape": [
+            32,
+            14
+          ],
+          "backend": "longwam",
+          "condition": "idm",
+          "history": {
+            "buffered_frames": 49,
+            "current_step": 72,
+            "observed_frames": 73,
+            "padded_frames": 0,
+            "past_obs_size": 48,
+            "sample_stride": 4,
+            "window_observation_indices": [
+              24,
+              28,
+              32,
+              36,
+              40,
+              44,
+              48,
+              52,
+              56,
+              60,
+              64,
+              68,
+              72
+            ]
+          },
+          "imagine_sigma": 0.9,
+          "inference_method": "infer_joint_ar",
+          "input_image_shape": [
+            1,
+            3,
+            384,
+            320
+          ],
+          "model_class": "LongWAM",
+          "model_device": "cuda",
+          "model_dtype": "torch.bfloat16",
+          "num_clean_frames": 4,
+          "num_imagine_frames": 2,
+          "observation": {
+            "camera_layout": "head_above_left_right_wrists",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ],
+            "dataset_stats": "/dev/shm/pi34-rt-13072/checkpoints/longwam/dataset_stats.json",
+            "longwam_image_shape": [
+              1,
+              3,
+              384,
+              320
+            ],
+            "resize": "two_stage_antialiased_bilinear",
+            "state_key": "default"
+          },
+          "observation_window_shape": [
+            1,
+            3,
+            13,
+            384,
+            320
+          ],
+          "prompt": "A video recorded from a robot's point of view executing the following instruction: Set the palm-sized phone with glossy finish on the brown angled plastic phonestand.",
+          "rand_device": "cpu",
+          "seed": 100013,
+          "sigma_shift": null,
+          "text_context_shape": [
+            1,
+            128,
+            4096
+          ],
+          "tiled": false,
+          "trained_action_chunk": 32,
+          "video_inference_steps": 4
+        },
+        {
+          "action_dtype": "torch.float32",
+          "action_horizon": 32,
+          "action_inference_steps": 10,
+          "action_shape": [
+            32,
+            14
+          ],
+          "backend": "longwam",
+          "condition": "idm",
+          "history": {
+            "buffered_frames": 49,
+            "current_step": 96,
+            "observed_frames": 97,
+            "padded_frames": 0,
+            "past_obs_size": 48,
+            "sample_stride": 4,
+            "window_observation_indices": [
+              48,
+              52,
+              56,
+              60,
+              64,
+              68,
+              72,
+              76,
+              80,
+              84,
+              88,
+              92,
+              96
+            ]
+          },
+          "imagine_sigma": 0.9,
+          "inference_method": "infer_joint_ar",
+          "input_image_shape": [
+            1,
+            3,
+            384,
+            320
+          ],
+          "model_class": "LongWAM",
+          "model_device": "cuda",
+          "model_dtype": "torch.bfloat16",
+          "num_clean_frames": 4,
+          "num_imagine_frames": 2,
+          "observation": {
+            "camera_layout": "head_above_left_right_wrists",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ],
+            "dataset_stats": "/dev/shm/pi34-rt-13072/checkpoints/longwam/dataset_stats.json",
+            "longwam_image_shape": [
+              1,
+              3,
+              384,
+              320
+            ],
+            "resize": "two_stage_antialiased_bilinear",
+            "state_key": "default"
+          },
+          "observation_window_shape": [
+            1,
+            3,
+            13,
+            384,
+            320
+          ],
+          "prompt": "A video recorded from a robot's point of view executing the following instruction: Set the palm-sized phone with glossy finish on the brown angled plastic phonestand.",
+          "rand_device": "cpu",
+          "seed": 100014,
+          "sigma_shift": null,
+          "text_context_shape": [
+            1,
+            128,
+            4096
+          ],
+          "tiled": false,
+          "trained_action_chunk": 32,
+          "video_inference_steps": 4
+        }
+      ],
+      "instruction": "Set the palm-sized phone with glossy finish on the brown angled plastic phonestand.",
+      "policy_steps": 115,
+      "seed": 100010,
+      "success": true,
+      "termination_reason": "success"
+    },
+    {
+      "episode": 7,
+      "inference_calls": 5,
+      "inference_latency_ms": [
+        897.1791882067919,
+        875.1737938728184,
+        872.6781280711293,
+        871.6290560550988,
+        866.4009110070765
+      ],
+      "inference_metadata": [
+        {
+          "action_dtype": "torch.float32",
+          "action_horizon": 32,
+          "action_inference_steps": 10,
+          "action_shape": [
+            32,
+            14
+          ],
+          "backend": "longwam",
+          "condition": "idm",
+          "history": {
+            "buffered_frames": 1,
+            "current_step": 0,
+            "observed_frames": 1,
+            "padded_frames": 48,
+            "past_obs_size": 48,
+            "sample_stride": 4,
+            "window_observation_indices": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          "imagine_sigma": 0.9,
+          "inference_method": "infer_joint_ar",
+          "input_image_shape": [
+            1,
+            3,
+            384,
+            320
+          ],
+          "model_class": "LongWAM",
+          "model_device": "cuda",
+          "model_dtype": "torch.bfloat16",
+          "num_clean_frames": 4,
+          "num_imagine_frames": 2,
+          "observation": {
+            "camera_layout": "head_above_left_right_wrists",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ],
+            "dataset_stats": "/dev/shm/pi34-rt-13072/checkpoints/longwam/dataset_stats.json",
+            "longwam_image_shape": [
+              1,
+              3,
+              384,
+              320
+            ],
+            "resize": "two_stage_antialiased_bilinear",
+            "seed": 100012,
+            "state_key": "default",
+            "task_name": "place_phone_stand"
+          },
+          "observation_window_shape": [
+            1,
+            3,
+            13,
+            384,
+            320
+          ],
+          "prompt": "A video recorded from a robot's point of view executing the following instruction: Set the phone with rounded edges on the brown angled plastic phonestand.",
+          "rand_device": "cpu",
+          "seed": 100012,
+          "sigma_shift": null,
+          "text_context_shape": [
+            1,
+            128,
+            4096
+          ],
+          "tiled": false,
+          "trained_action_chunk": 32,
+          "video_inference_steps": 4
+        },
+        {
+          "action_dtype": "torch.float32",
+          "action_horizon": 32,
+          "action_inference_steps": 10,
+          "action_shape": [
+            32,
+            14
+          ],
+          "backend": "longwam",
+          "condition": "idm",
+          "history": {
+            "buffered_frames": 25,
+            "current_step": 24,
+            "observed_frames": 25,
+            "padded_frames": 24,
+            "past_obs_size": 48,
+            "sample_stride": 4,
+            "window_observation_indices": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              4,
+              8,
+              12,
+              16,
+              20,
+              24
+            ]
+          },
+          "imagine_sigma": 0.9,
+          "inference_method": "infer_joint_ar",
+          "input_image_shape": [
+            1,
+            3,
+            384,
+            320
+          ],
+          "model_class": "LongWAM",
+          "model_device": "cuda",
+          "model_dtype": "torch.bfloat16",
+          "num_clean_frames": 4,
+          "num_imagine_frames": 2,
+          "observation": {
+            "camera_layout": "head_above_left_right_wrists",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ],
+            "dataset_stats": "/dev/shm/pi34-rt-13072/checkpoints/longwam/dataset_stats.json",
+            "longwam_image_shape": [
+              1,
+              3,
+              384,
+              320
+            ],
+            "resize": "two_stage_antialiased_bilinear",
+            "state_key": "default"
+          },
+          "observation_window_shape": [
+            1,
+            3,
+            13,
+            384,
+            320
+          ],
+          "prompt": "A video recorded from a robot's point of view executing the following instruction: Set the phone with rounded edges on the brown angled plastic phonestand.",
+          "rand_device": "cpu",
+          "seed": 100013,
+          "sigma_shift": null,
+          "text_context_shape": [
+            1,
+            128,
+            4096
+          ],
+          "tiled": false,
+          "trained_action_chunk": 32,
+          "video_inference_steps": 4
+        },
+        {
+          "action_dtype": "torch.float32",
+          "action_horizon": 32,
+          "action_inference_steps": 10,
+          "action_shape": [
+            32,
+            14
+          ],
+          "backend": "longwam",
+          "condition": "idm",
+          "history": {
+            "buffered_frames": 49,
+            "current_step": 48,
+            "observed_frames": 49,
+            "padded_frames": 0,
+            "past_obs_size": 48,
+            "sample_stride": 4,
+            "window_observation_indices": [
+              0,
+              4,
+              8,
+              12,
+              16,
+              20,
+              24,
+              28,
+              32,
+              36,
+              40,
+              44,
+              48
+            ]
+          },
+          "imagine_sigma": 0.9,
+          "inference_method": "infer_joint_ar",
+          "input_image_shape": [
+            1,
+            3,
+            384,
+            320
+          ],
+          "model_class": "LongWAM",
+          "model_device": "cuda",
+          "model_dtype": "torch.bfloat16",
+          "num_clean_frames": 4,
+          "num_imagine_frames": 2,
+          "observation": {
+            "camera_layout": "head_above_left_right_wrists",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ],
+            "dataset_stats": "/dev/shm/pi34-rt-13072/checkpoints/longwam/dataset_stats.json",
+            "longwam_image_shape": [
+              1,
+              3,
+              384,
+              320
+            ],
+            "resize": "two_stage_antialiased_bilinear",
+            "state_key": "default"
+          },
+          "observation_window_shape": [
+            1,
+            3,
+            13,
+            384,
+            320
+          ],
+          "prompt": "A video recorded from a robot's point of view executing the following instruction: Set the phone with rounded edges on the brown angled plastic phonestand.",
+          "rand_device": "cpu",
+          "seed": 100014,
+          "sigma_shift": null,
+          "text_context_shape": [
+            1,
+            128,
+            4096
+          ],
+          "tiled": false,
+          "trained_action_chunk": 32,
+          "video_inference_steps": 4
+        },
+        {
+          "action_dtype": "torch.float32",
+          "action_horizon": 32,
+          "action_inference_steps": 10,
+          "action_shape": [
+            32,
+            14
+          ],
+          "backend": "longwam",
+          "condition": "idm",
+          "history": {
+            "buffered_frames": 49,
+            "current_step": 72,
+            "observed_frames": 73,
+            "padded_frames": 0,
+            "past_obs_size": 48,
+            "sample_stride": 4,
+            "window_observation_indices": [
+              24,
+              28,
+              32,
+              36,
+              40,
+              44,
+              48,
+              52,
+              56,
+              60,
+              64,
+              68,
+              72
+            ]
+          },
+          "imagine_sigma": 0.9,
+          "inference_method": "infer_joint_ar",
+          "input_image_shape": [
+            1,
+            3,
+            384,
+            320
+          ],
+          "model_class": "LongWAM",
+          "model_device": "cuda",
+          "model_dtype": "torch.bfloat16",
+          "num_clean_frames": 4,
+          "num_imagine_frames": 2,
+          "observation": {
+            "camera_layout": "head_above_left_right_wrists",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ],
+            "dataset_stats": "/dev/shm/pi34-rt-13072/checkpoints/longwam/dataset_stats.json",
+            "longwam_image_shape": [
+              1,
+              3,
+              384,
+              320
+            ],
+            "resize": "two_stage_antialiased_bilinear",
+            "state_key": "default"
+          },
+          "observation_window_shape": [
+            1,
+            3,
+            13,
+            384,
+            320
+          ],
+          "prompt": "A video recorded from a robot's point of view executing the following instruction: Set the phone with rounded edges on the brown angled plastic phonestand.",
+          "rand_device": "cpu",
+          "seed": 100015,
+          "sigma_shift": null,
+          "text_context_shape": [
+            1,
+            128,
+            4096
+          ],
+          "tiled": false,
+          "trained_action_chunk": 32,
+          "video_inference_steps": 4
+        },
+        {
+          "action_dtype": "torch.float32",
+          "action_horizon": 32,
+          "action_inference_steps": 10,
+          "action_shape": [
+            32,
+            14
+          ],
+          "backend": "longwam",
+          "condition": "idm",
+          "history": {
+            "buffered_frames": 49,
+            "current_step": 96,
+            "observed_frames": 97,
+            "padded_frames": 0,
+            "past_obs_size": 48,
+            "sample_stride": 4,
+            "window_observation_indices": [
+              48,
+              52,
+              56,
+              60,
+              64,
+              68,
+              72,
+              76,
+              80,
+              84,
+              88,
+              92,
+              96
+            ]
+          },
+          "imagine_sigma": 0.9,
+          "inference_method": "infer_joint_ar",
+          "input_image_shape": [
+            1,
+            3,
+            384,
+            320
+          ],
+          "model_class": "LongWAM",
+          "model_device": "cuda",
+          "model_dtype": "torch.bfloat16",
+          "num_clean_frames": 4,
+          "num_imagine_frames": 2,
+          "observation": {
+            "camera_layout": "head_above_left_right_wrists",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ],
+            "dataset_stats": "/dev/shm/pi34-rt-13072/checkpoints/longwam/dataset_stats.json",
+            "longwam_image_shape": [
+              1,
+              3,
+              384,
+              320
+            ],
+            "resize": "two_stage_antialiased_bilinear",
+            "state_key": "default"
+          },
+          "observation_window_shape": [
+            1,
+            3,
+            13,
+            384,
+            320
+          ],
+          "prompt": "A video recorded from a robot's point of view executing the following instruction: Set the phone with rounded edges on the brown angled plastic phonestand.",
+          "rand_device": "cpu",
+          "seed": 100016,
+          "sigma_shift": null,
+          "text_context_shape": [
+            1,
+            128,
+            4096
+          ],
+          "tiled": false,
+          "trained_action_chunk": 32,
+          "video_inference_steps": 4
+        }
+      ],
+      "instruction": "Set the phone with rounded edges on the brown angled plastic phonestand.",
+      "policy_steps": 117,
+      "seed": 100012,
+      "success": true,
+      "termination_reason": "success"
+    },
+    {
+      "episode": 8,
+      "inference_calls": 5,
+      "inference_latency_ms": [
+        884.567738045007,
+        865.7527319155633,
+        874.4071261025965,
+        870.8945540711284,
+        874.2423730436713
+      ],
+      "inference_metadata": [
+        {
+          "action_dtype": "torch.float32",
+          "action_horizon": 32,
+          "action_inference_steps": 10,
+          "action_shape": [
+            32,
+            14
+          ],
+          "backend": "longwam",
+          "condition": "idm",
+          "history": {
+            "buffered_frames": 1,
+            "current_step": 0,
+            "observed_frames": 1,
+            "padded_frames": 48,
+            "past_obs_size": 48,
+            "sample_stride": 4,
+            "window_observation_indices": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          "imagine_sigma": 0.9,
+          "inference_method": "infer_joint_ar",
+          "input_image_shape": [
+            1,
+            3,
+            384,
+            320
+          ],
+          "model_class": "LongWAM",
+          "model_device": "cuda",
+          "model_dtype": "torch.bfloat16",
+          "num_clean_frames": 4,
+          "num_imagine_frames": 2,
+          "observation": {
+            "camera_layout": "head_above_left_right_wrists",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ],
+            "dataset_stats": "/dev/shm/pi34-rt-13072/checkpoints/longwam/dataset_stats.json",
+            "longwam_image_shape": [
+              1,
+              3,
+              384,
+              320
+            ],
+            "resize": "two_stage_antialiased_bilinear",
+            "seed": 100014,
+            "state_key": "default",
+            "task_name": "place_phone_stand"
+          },
+          "observation_window_shape": [
+            1,
+            3,
+            13,
+            384,
+            320
+          ],
+          "prompt": "A video recorded from a robot's point of view executing the following instruction: Set the handheld phone with silver frame on the angled brown phonestand.",
+          "rand_device": "cpu",
+          "seed": 100014,
+          "sigma_shift": null,
+          "text_context_shape": [
+            1,
+            128,
+            4096
+          ],
+          "tiled": false,
+          "trained_action_chunk": 32,
+          "video_inference_steps": 4
+        },
+        {
+          "action_dtype": "torch.float32",
+          "action_horizon": 32,
+          "action_inference_steps": 10,
+          "action_shape": [
+            32,
+            14
+          ],
+          "backend": "longwam",
+          "condition": "idm",
+          "history": {
+            "buffered_frames": 25,
+            "current_step": 24,
+            "observed_frames": 25,
+            "padded_frames": 24,
+            "past_obs_size": 48,
+            "sample_stride": 4,
+            "window_observation_indices": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              4,
+              8,
+              12,
+              16,
+              20,
+              24
+            ]
+          },
+          "imagine_sigma": 0.9,
+          "inference_method": "infer_joint_ar",
+          "input_image_shape": [
+            1,
+            3,
+            384,
+            320
+          ],
+          "model_class": "LongWAM",
+          "model_device": "cuda",
+          "model_dtype": "torch.bfloat16",
+          "num_clean_frames": 4,
+          "num_imagine_frames": 2,
+          "observation": {
+            "camera_layout": "head_above_left_right_wrists",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ],
+            "dataset_stats": "/dev/shm/pi34-rt-13072/checkpoints/longwam/dataset_stats.json",
+            "longwam_image_shape": [
+              1,
+              3,
+              384,
+              320
+            ],
+            "resize": "two_stage_antialiased_bilinear",
+            "state_key": "default"
+          },
+          "observation_window_shape": [
+            1,
+            3,
+            13,
+            384,
+            320
+          ],
+          "prompt": "A video recorded from a robot's point of view executing the following instruction: Set the handheld phone with silver frame on the angled brown phonestand.",
+          "rand_device": "cpu",
+          "seed": 100015,
+          "sigma_shift": null,
+          "text_context_shape": [
+            1,
+            128,
+            4096
+          ],
+          "tiled": false,
+          "trained_action_chunk": 32,
+          "video_inference_steps": 4
+        },
+        {
+          "action_dtype": "torch.float32",
+          "action_horizon": 32,
+          "action_inference_steps": 10,
+          "action_shape": [
+            32,
+            14
+          ],
+          "backend": "longwam",
+          "condition": "idm",
+          "history": {
+            "buffered_frames": 49,
+            "current_step": 48,
+            "observed_frames": 49,
+            "padded_frames": 0,
+            "past_obs_size": 48,
+            "sample_stride": 4,
+            "window_observation_indices": [
+              0,
+              4,
+              8,
+              12,
+              16,
+              20,
+              24,
+              28,
+              32,
+              36,
+              40,
+              44,
+              48
+            ]
+          },
+          "imagine_sigma": 0.9,
+          "inference_method": "infer_joint_ar",
+          "input_image_shape": [
+            1,
+            3,
+            384,
+            320
+          ],
+          "model_class": "LongWAM",
+          "model_device": "cuda",
+          "model_dtype": "torch.bfloat16",
+          "num_clean_frames": 4,
+          "num_imagine_frames": 2,
+          "observation": {
+            "camera_layout": "head_above_left_right_wrists",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ],
+            "dataset_stats": "/dev/shm/pi34-rt-13072/checkpoints/longwam/dataset_stats.json",
+            "longwam_image_shape": [
+              1,
+              3,
+              384,
+              320
+            ],
+            "resize": "two_stage_antialiased_bilinear",
+            "state_key": "default"
+          },
+          "observation_window_shape": [
+            1,
+            3,
+            13,
+            384,
+            320
+          ],
+          "prompt": "A video recorded from a robot's point of view executing the following instruction: Set the handheld phone with silver frame on the angled brown phonestand.",
+          "rand_device": "cpu",
+          "seed": 100016,
+          "sigma_shift": null,
+          "text_context_shape": [
+            1,
+            128,
+            4096
+          ],
+          "tiled": false,
+          "trained_action_chunk": 32,
+          "video_inference_steps": 4
+        },
+        {
+          "action_dtype": "torch.float32",
+          "action_horizon": 32,
+          "action_inference_steps": 10,
+          "action_shape": [
+            32,
+            14
+          ],
+          "backend": "longwam",
+          "condition": "idm",
+          "history": {
+            "buffered_frames": 49,
+            "current_step": 72,
+            "observed_frames": 73,
+            "padded_frames": 0,
+            "past_obs_size": 48,
+            "sample_stride": 4,
+            "window_observation_indices": [
+              24,
+              28,
+              32,
+              36,
+              40,
+              44,
+              48,
+              52,
+              56,
+              60,
+              64,
+              68,
+              72
+            ]
+          },
+          "imagine_sigma": 0.9,
+          "inference_method": "infer_joint_ar",
+          "input_image_shape": [
+            1,
+            3,
+            384,
+            320
+          ],
+          "model_class": "LongWAM",
+          "model_device": "cuda",
+          "model_dtype": "torch.bfloat16",
+          "num_clean_frames": 4,
+          "num_imagine_frames": 2,
+          "observation": {
+            "camera_layout": "head_above_left_right_wrists",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ],
+            "dataset_stats": "/dev/shm/pi34-rt-13072/checkpoints/longwam/dataset_stats.json",
+            "longwam_image_shape": [
+              1,
+              3,
+              384,
+              320
+            ],
+            "resize": "two_stage_antialiased_bilinear",
+            "state_key": "default"
+          },
+          "observation_window_shape": [
+            1,
+            3,
+            13,
+            384,
+            320
+          ],
+          "prompt": "A video recorded from a robot's point of view executing the following instruction: Set the handheld phone with silver frame on the angled brown phonestand.",
+          "rand_device": "cpu",
+          "seed": 100017,
+          "sigma_shift": null,
+          "text_context_shape": [
+            1,
+            128,
+            4096
+          ],
+          "tiled": false,
+          "trained_action_chunk": 32,
+          "video_inference_steps": 4
+        },
+        {
+          "action_dtype": "torch.float32",
+          "action_horizon": 32,
+          "action_inference_steps": 10,
+          "action_shape": [
+            32,
+            14
+          ],
+          "backend": "longwam",
+          "condition": "idm",
+          "history": {
+            "buffered_frames": 49,
+            "current_step": 96,
+            "observed_frames": 97,
+            "padded_frames": 0,
+            "past_obs_size": 48,
+            "sample_stride": 4,
+            "window_observation_indices": [
+              48,
+              52,
+              56,
+              60,
+              64,
+              68,
+              72,
+              76,
+              80,
+              84,
+              88,
+              92,
+              96
+            ]
+          },
+          "imagine_sigma": 0.9,
+          "inference_method": "infer_joint_ar",
+          "input_image_shape": [
+            1,
+            3,
+            384,
+            320
+          ],
+          "model_class": "LongWAM",
+          "model_device": "cuda",
+          "model_dtype": "torch.bfloat16",
+          "num_clean_frames": 4,
+          "num_imagine_frames": 2,
+          "observation": {
+            "camera_layout": "head_above_left_right_wrists",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ],
+            "dataset_stats": "/dev/shm/pi34-rt-13072/checkpoints/longwam/dataset_stats.json",
+            "longwam_image_shape": [
+              1,
+              3,
+              384,
+              320
+            ],
+            "resize": "two_stage_antialiased_bilinear",
+            "state_key": "default"
+          },
+          "observation_window_shape": [
+            1,
+            3,
+            13,
+            384,
+            320
+          ],
+          "prompt": "A video recorded from a robot's point of view executing the following instruction: Set the handheld phone with silver frame on the angled brown phonestand.",
+          "rand_device": "cpu",
+          "seed": 100018,
+          "sigma_shift": null,
+          "text_context_shape": [
+            1,
+            128,
+            4096
+          ],
+          "tiled": false,
+          "trained_action_chunk": 32,
+          "video_inference_steps": 4
+        }
+      ],
+      "instruction": "Set the handheld phone with silver frame on the angled brown phonestand.",
+      "policy_steps": 117,
+      "seed": 100014,
+      "success": true,
+      "termination_reason": "success"
+    },
+    {
+      "episode": 9,
+      "inference_calls": 5,
+      "inference_latency_ms": [
+        893.7820349819958,
+        872.6360711734742,
+        874.4406530167907,
+        877.7175578288734,
+        872.9539450723678
+      ],
+      "inference_metadata": [
+        {
+          "action_dtype": "torch.float32",
+          "action_horizon": 32,
+          "action_inference_steps": 10,
+          "action_shape": [
+            32,
+            14
+          ],
+          "backend": "longwam",
+          "condition": "idm",
+          "history": {
+            "buffered_frames": 1,
+            "current_step": 0,
+            "observed_frames": 1,
+            "padded_frames": 48,
+            "past_obs_size": 48,
+            "sample_stride": 4,
+            "window_observation_indices": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          "imagine_sigma": 0.9,
+          "inference_method": "infer_joint_ar",
+          "input_image_shape": [
+            1,
+            3,
+            384,
+            320
+          ],
+          "model_class": "LongWAM",
+          "model_device": "cuda",
+          "model_dtype": "torch.bfloat16",
+          "num_clean_frames": 4,
+          "num_imagine_frames": 2,
+          "observation": {
+            "camera_layout": "head_above_left_right_wrists",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ],
+            "dataset_stats": "/dev/shm/pi34-rt-13072/checkpoints/longwam/dataset_stats.json",
+            "longwam_image_shape": [
+              1,
+              3,
+              384,
+              320
+            ],
+            "resize": "two_stage_antialiased_bilinear",
+            "seed": 100015,
+            "state_key": "default",
+            "task_name": "place_phone_stand"
+          },
+          "observation_window_shape": [
+            1,
+            3,
+            13,
+            384,
+            320
+          ],
+          "prompt": "A video recorded from a robot's point of view executing the following instruction: Set the smartphone with black display on the dark green phonestand.",
+          "rand_device": "cpu",
+          "seed": 100015,
+          "sigma_shift": null,
+          "text_context_shape": [
+            1,
+            128,
+            4096
+          ],
+          "tiled": false,
+          "trained_action_chunk": 32,
+          "video_inference_steps": 4
+        },
+        {
+          "action_dtype": "torch.float32",
+          "action_horizon": 32,
+          "action_inference_steps": 10,
+          "action_shape": [
+            32,
+            14
+          ],
+          "backend": "longwam",
+          "condition": "idm",
+          "history": {
+            "buffered_frames": 25,
+            "current_step": 24,
+            "observed_frames": 25,
+            "padded_frames": 24,
+            "past_obs_size": 48,
+            "sample_stride": 4,
+            "window_observation_indices": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              4,
+              8,
+              12,
+              16,
+              20,
+              24
+            ]
+          },
+          "imagine_sigma": 0.9,
+          "inference_method": "infer_joint_ar",
+          "input_image_shape": [
+            1,
+            3,
+            384,
+            320
+          ],
+          "model_class": "LongWAM",
+          "model_device": "cuda",
+          "model_dtype": "torch.bfloat16",
+          "num_clean_frames": 4,
+          "num_imagine_frames": 2,
+          "observation": {
+            "camera_layout": "head_above_left_right_wrists",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ],
+            "dataset_stats": "/dev/shm/pi34-rt-13072/checkpoints/longwam/dataset_stats.json",
+            "longwam_image_shape": [
+              1,
+              3,
+              384,
+              320
+            ],
+            "resize": "two_stage_antialiased_bilinear",
+            "state_key": "default"
+          },
+          "observation_window_shape": [
+            1,
+            3,
+            13,
+            384,
+            320
+          ],
+          "prompt": "A video recorded from a robot's point of view executing the following instruction: Set the smartphone with black display on the dark green phonestand.",
+          "rand_device": "cpu",
+          "seed": 100016,
+          "sigma_shift": null,
+          "text_context_shape": [
+            1,
+            128,
+            4096
+          ],
+          "tiled": false,
+          "trained_action_chunk": 32,
+          "video_inference_steps": 4
+        },
+        {
+          "action_dtype": "torch.float32",
+          "action_horizon": 32,
+          "action_inference_steps": 10,
+          "action_shape": [
+            32,
+            14
+          ],
+          "backend": "longwam",
+          "condition": "idm",
+          "history": {
+            "buffered_frames": 49,
+            "current_step": 48,
+            "observed_frames": 49,
+            "padded_frames": 0,
+            "past_obs_size": 48,
+            "sample_stride": 4,
+            "window_observation_indices": [
+              0,
+              4,
+              8,
+              12,
+              16,
+              20,
+              24,
+              28,
+              32,
+              36,
+              40,
+              44,
+              48
+            ]
+          },
+          "imagine_sigma": 0.9,
+          "inference_method": "infer_joint_ar",
+          "input_image_shape": [
+            1,
+            3,
+            384,
+            320
+          ],
+          "model_class": "LongWAM",
+          "model_device": "cuda",
+          "model_dtype": "torch.bfloat16",
+          "num_clean_frames": 4,
+          "num_imagine_frames": 2,
+          "observation": {
+            "camera_layout": "head_above_left_right_wrists",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ],
+            "dataset_stats": "/dev/shm/pi34-rt-13072/checkpoints/longwam/dataset_stats.json",
+            "longwam_image_shape": [
+              1,
+              3,
+              384,
+              320
+            ],
+            "resize": "two_stage_antialiased_bilinear",
+            "state_key": "default"
+          },
+          "observation_window_shape": [
+            1,
+            3,
+            13,
+            384,
+            320
+          ],
+          "prompt": "A video recorded from a robot's point of view executing the following instruction: Set the smartphone with black display on the dark green phonestand.",
+          "rand_device": "cpu",
+          "seed": 100017,
+          "sigma_shift": null,
+          "text_context_shape": [
+            1,
+            128,
+            4096
+          ],
+          "tiled": false,
+          "trained_action_chunk": 32,
+          "video_inference_steps": 4
+        },
+        {
+          "action_dtype": "torch.float32",
+          "action_horizon": 32,
+          "action_inference_steps": 10,
+          "action_shape": [
+            32,
+            14
+          ],
+          "backend": "longwam",
+          "condition": "idm",
+          "history": {
+            "buffered_frames": 49,
+            "current_step": 72,
+            "observed_frames": 73,
+            "padded_frames": 0,
+            "past_obs_size": 48,
+            "sample_stride": 4,
+            "window_observation_indices": [
+              24,
+              28,
+              32,
+              36,
+              40,
+              44,
+              48,
+              52,
+              56,
+              60,
+              64,
+              68,
+              72
+            ]
+          },
+          "imagine_sigma": 0.9,
+          "inference_method": "infer_joint_ar",
+          "input_image_shape": [
+            1,
+            3,
+            384,
+            320
+          ],
+          "model_class": "LongWAM",
+          "model_device": "cuda",
+          "model_dtype": "torch.bfloat16",
+          "num_clean_frames": 4,
+          "num_imagine_frames": 2,
+          "observation": {
+            "camera_layout": "head_above_left_right_wrists",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ],
+            "dataset_stats": "/dev/shm/pi34-rt-13072/checkpoints/longwam/dataset_stats.json",
+            "longwam_image_shape": [
+              1,
+              3,
+              384,
+              320
+            ],
+            "resize": "two_stage_antialiased_bilinear",
+            "state_key": "default"
+          },
+          "observation_window_shape": [
+            1,
+            3,
+            13,
+            384,
+            320
+          ],
+          "prompt": "A video recorded from a robot's point of view executing the following instruction: Set the smartphone with black display on the dark green phonestand.",
+          "rand_device": "cpu",
+          "seed": 100018,
+          "sigma_shift": null,
+          "text_context_shape": [
+            1,
+            128,
+            4096
+          ],
+          "tiled": false,
+          "trained_action_chunk": 32,
+          "video_inference_steps": 4
+        },
+        {
+          "action_dtype": "torch.float32",
+          "action_horizon": 32,
+          "action_inference_steps": 10,
+          "action_shape": [
+            32,
+            14
+          ],
+          "backend": "longwam",
+          "condition": "idm",
+          "history": {
+            "buffered_frames": 49,
+            "current_step": 96,
+            "observed_frames": 97,
+            "padded_frames": 0,
+            "past_obs_size": 48,
+            "sample_stride": 4,
+            "window_observation_indices": [
+              48,
+              52,
+              56,
+              60,
+              64,
+              68,
+              72,
+              76,
+              80,
+              84,
+              88,
+              92,
+              96
+            ]
+          },
+          "imagine_sigma": 0.9,
+          "inference_method": "infer_joint_ar",
+          "input_image_shape": [
+            1,
+            3,
+            384,
+            320
+          ],
+          "model_class": "LongWAM",
+          "model_device": "cuda",
+          "model_dtype": "torch.bfloat16",
+          "num_clean_frames": 4,
+          "num_imagine_frames": 2,
+          "observation": {
+            "camera_layout": "head_above_left_right_wrists",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ],
+            "dataset_stats": "/dev/shm/pi34-rt-13072/checkpoints/longwam/dataset_stats.json",
+            "longwam_image_shape": [
+              1,
+              3,
+              384,
+              320
+            ],
+            "resize": "two_stage_antialiased_bilinear",
+            "state_key": "default"
+          },
+          "observation_window_shape": [
+            1,
+            3,
+            13,
+            384,
+            320
+          ],
+          "prompt": "A video recorded from a robot's point of view executing the following instruction: Set the smartphone with black display on the dark green phonestand.",
+          "rand_device": "cpu",
+          "seed": 100019,
+          "sigma_shift": null,
+          "text_context_shape": [
+            1,
+            128,
+            4096
+          ],
+          "tiled": false,
+          "trained_action_chunk": 32,
+          "video_inference_steps": 4
+        }
+      ],
+      "instruction": "Set the smartphone with black display on the dark green phonestand.",
+      "policy_steps": 120,
+      "seed": 100015,
+      "success": true,
+      "termination_reason": "success"
+    }
+  ]
+}

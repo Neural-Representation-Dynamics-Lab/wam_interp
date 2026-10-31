@@ -1,0 +1,6197 @@
+{
+  "accepted_seeds": [
+    10001,
+    10002,
+    10003,
+    10006,
+    10007,
+    10008,
+    10009,
+    10010,
+    10011,
+    10012
+  ],
+  "action_type": "ee",
+  "attempts": 13,
+  "benchmark": "robotwin",
+  "benchmark_revision": "c3ddfa8b97d5519efa828b075999bd0006778e5e",
+  "completed": true,
+  "config": {
+    "action_horizon": 32,
+    "clear_cache_freq": 5,
+    "inference_options": {},
+    "instruction_pool_size": 100,
+    "instruction_type": "seen",
+    "max_repeated_screen_errors": 20,
+    "max_seed_attempts": 1000,
+    "max_steps": null,
+    "num_episodes": 10,
+    "output_dir": "/nethome/pi34/kv_results/rt10-lingbot_va-13068",
+    "replan_steps": 32,
+    "robotwin_root": "/dev/shm/pi34-rt-13068/RoboTwin",
+    "run_metadata": {
+      "checkpoint": "/dev/shm/pi34-rt-13068/checkpoints/lingbot",
+      "checkpoint_revision": "8c9dea8abbc5c91cc9e18bc3264b8915083bbe70",
+      "dtype": "bfloat16",
+      "repository_revision": "2a6a56a2a679da5b3d7b43ff92b0a6ad085c8d69",
+      "resolved_model_config": {
+        "__name__": "Config: VA robotwin",
+        "action_dim": 30,
+        "action_guidance_scale": 1,
+        "action_norm_method": "quantiles",
+        "action_num_inference_steps": 50,
+        "action_per_frame": 16,
+        "action_snr_shift": 1.0,
+        "attn_window": 72,
+        "enable_offload": false,
+        "env_type": "robotwin_tshape",
+        "frame_chunk_size": 2,
+        "guidance_scale": 5,
+        "height": 256,
+        "host": "0.0.0.0",
+        "inverse_used_action_channel_ids": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          16,
+          16,
+          16,
+          16,
+          16,
+          16,
+          16,
+          16,
+          16,
+          16,
+          16,
+          16,
+          16,
+          16,
+          7,
+          15
+        ],
+        "norm_stat": {
+          "q01": [
+            -0.06172713458538055,
+            -3.6716461181640625e-05,
+            -0.08783501386642456,
+            -1,
+            -1,
+            -1,
+            -1,
+            -0.3547105032205582,
+            -1.3113021850585938e-06,
+            -0.11975435614585876,
+            -1,
+            -1,
+            -1,
+            -1,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "q99": [
+            0.3462600058317184,
+            0.39966784834861746,
+            0.14745532035827624,
+            1,
+            1,
+            1,
+            1,
+            0.034201726913452024,
+            0.39142737388610793,
+            0.1792279863357542,
+            1,
+            1,
+            1,
+            1,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            1.0,
+            1.0
+          ]
+        },
+        "num_inference_steps": 25,
+        "obs_cam_keys": [
+          "observation.images.cam_high",
+          "observation.images.cam_left_wrist",
+          "observation.images.cam_right_wrist"
+        ],
+        "param_dtype": "torch.bfloat16",
+        "patch_size": [
+          1,
+          2,
+          2
+        ],
+        "port": 29536,
+        "save_root": "./train_out",
+        "snr_shift": 5.0,
+        "used_action_channel_ids": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          28,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          29
+        ],
+        "video_exec_step": -1,
+        "wan22_pretrained_model_name_or_path": "/path/to/pretrained/model",
+        "width": 320
+      }
+    },
+    "seed": 0,
+    "start_seed": 10000,
+    "task_config": "demo_clean",
+    "task_name": "hanging_mug"
+  },
+  "duration_seconds": 3223.4481043249834,
+  "episodes": 10,
+  "model": {
+    "checkpoint": "/dev/shm/pi34-rt-13068/checkpoints/lingbot",
+    "model_device": "cuda",
+    "model_dtype": "torch.bfloat16",
+    "model_name": "lingbot_va",
+    "resolved_model_config": {
+      "__name__": "Config: VA robotwin",
+      "action_dim": 30,
+      "action_guidance_scale": 1,
+      "action_norm_method": "quantiles",
+      "action_num_inference_steps": 50,
+      "action_per_frame": 16,
+      "action_snr_shift": 1.0,
+      "attn_window": 72,
+      "enable_offload": false,
+      "env_type": "robotwin_tshape",
+      "frame_chunk_size": 2,
+      "guidance_scale": 5,
+      "height": 256,
+      "host": "0.0.0.0",
+      "inverse_used_action_channel_ids": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        16,
+        16,
+        16,
+        16,
+        16,
+        16,
+        16,
+        16,
+        16,
+        16,
+        16,
+        16,
+        16,
+        16,
+        7,
+        15
+      ],
+      "norm_stat": {
+        "q01": [
+          -0.06172713458538055,
+          -3.6716461181640625e-05,
+          -0.08783501386642456,
+          -1,
+          -1,
+          -1,
+          -1,
+          -0.3547105032205582,
+          -1.3113021850585938e-06,
+          -0.11975435614585876,
+          -1,
+          -1,
+          -1,
+          -1,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "q99": [
+          0.3462600058317184,
+          0.39966784834861746,
+          0.14745532035827624,
+          1,
+          1,
+          1,
+          1,
+          0.034201726913452024,
+          0.39142737388610793,
+          0.1792279863357542,
+          1,
+          1,
+          1,
+          1,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          1.0,
+          1.0
+        ]
+      },
+      "num_inference_steps": 25,
+      "obs_cam_keys": [
+        "observation.images.cam_high",
+        "observation.images.cam_left_wrist",
+        "observation.images.cam_right_wrist"
+      ],
+      "param_dtype": "torch.bfloat16",
+      "patch_size": [
+        1,
+        2,
+        2
+      ],
+      "port": 29536,
+      "save_root": "./train_out",
+      "snr_shift": 5.0,
+      "used_action_channel_ids": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        28,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        29
+      ],
+      "video_exec_step": -1,
+      "wan22_pretrained_model_name_or_path": "/path/to/pretrained/model",
+      "width": 320
+    },
+    "source_dirty": true,
+    "source_revision": "2a6a56a2a679da5b3d7b43ff92b0a6ad085c8d69",
+    "source_state": {
+      "dirty": true,
+      "dirty_paths": 37,
+      "revision": "2a6a56a2a679da5b3d7b43ff92b0a6ad085c8d69",
+      "status_and_diff_sha256": "92a158dc775f76904e5c5b14f59c22884aa46d4c893aecc7d689bfce39df3c26"
+    },
+    "statistics_content_sha256": null,
+    "upstream_revision": "7c6ffa9bfc4b83582cafc860fab4c82cc7deeeeb"
+  },
+  "output_path": "/nethome/pi34/kv_results/rt10-lingbot_va-13068/robotwin_20261030T230303167853Z.json",
+  "package_versions": {
+    "diffusers": "0.36.0",
+    "mplib": "0.2.1",
+    "mujoco": null,
+    "numpy": "1.26.4",
+    "robosuite": null,
+    "sapien": "3.0.0b1",
+    "torch": "2.7.1+cu128",
+    "transformers": "4.57.6"
+  },
+  "rejected_seeds": [
+    {
+      "reason": "expert_failed",
+      "seed": 10000,
+      "stage": "expert"
+    },
+    {
+      "reason": "expert_failed",
+      "seed": 10004,
+      "stage": "expert"
+    },
+    {
+      "reason": "expert_failed",
+      "seed": 10005,
+      "stage": "expert"
+    }
+  ],
+  "success_rate": 0.2,
+  "successes": 2,
+  "trials": [
+    {
+      "episode": 0,
+      "inference_calls": 29,
+      "inference_latency_ms": [
+        4477.879906073213,
+        4652.047076961026,
+        4772.343148011714,
+        4852.269988041371,
+        4912.639129906893,
+        4973.309183958918,
+        5006.6096999216825,
+        5097.17483795248,
+        5170.4995420295745,
+        5255.601062905043,
+        5343.8234981149435,
+        5422.0533890184015,
+        5524.905098136514,
+        5588.9783289749175,
+        5686.453277943656,
+        5776.810358045623,
+        5835.975199006498,
+        5950.137126957998,
+        6044.8864521458745,
+        6164.445455884561,
+        6281.390711199492,
+        6369.234308833256,
+        6463.319557951763,
+        6520.994921214879,
+        6620.365418959409,
+        6693.99347808212,
+        6824.514319887385,
+        6877.85480893217,
+        6925.360322929919
+      ],
+      "inference_metadata": [
+        {
+          "action_horizon": 32,
+          "action_inference_steps": 50,
+          "action_per_frame": 16,
+          "backend": "lingbot_va",
+          "condition": "video",
+          "frame_chunk_size": 2,
+          "frame_st_id": 0,
+          "guidance_scale": 5,
+          "observation": {
+            "camera_layout": "latent_wrists_above_head",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ],
+            "seed": 10001,
+            "task_name": "hanging_mug"
+          },
+          "seed": 10001,
+          "video_exec_step": -1,
+          "video_inference_steps": 25
+        },
+        {
+          "action_horizon": 32,
+          "action_inference_steps": 50,
+          "action_per_frame": 16,
+          "backend": "lingbot_va",
+          "condition": "video",
+          "frame_chunk_size": 2,
+          "frame_st_id": 2,
+          "guidance_scale": 5,
+          "observation": {
+            "camera_layout": "latent_wrists_above_head",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ]
+          },
+          "seed": 10002,
+          "video_exec_step": -1,
+          "video_inference_steps": 25
+        },
+        {
+          "action_horizon": 32,
+          "action_inference_steps": 50,
+          "action_per_frame": 16,
+          "backend": "lingbot_va",
+          "condition": "video",
+          "frame_chunk_size": 2,
+          "frame_st_id": 4,
+          "guidance_scale": 5,
+          "observation": {
+            "camera_layout": "latent_wrists_above_head",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ]
+          },
+          "seed": 10003,
+          "video_exec_step": -1,
+          "video_inference_steps": 25
+        },
+        {
+          "action_horizon": 32,
+          "action_inference_steps": 50,
+          "action_per_frame": 16,
+          "backend": "lingbot_va",
+          "condition": "video",
+          "frame_chunk_size": 2,
+          "frame_st_id": 6,
+          "guidance_scale": 5,
+          "observation": {
+            "camera_layout": "latent_wrists_above_head",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ]
+          },
+          "seed": 10004,
+          "video_exec_step": -1,
+          "video_inference_steps": 25
+        },
+        {
+          "action_horizon": 32,
+          "action_inference_steps": 50,
+          "action_per_frame": 16,
+          "backend": "lingbot_va",
+          "condition": "video",
+          "frame_chunk_size": 2,
+          "frame_st_id": 8,
+          "guidance_scale": 5,
+          "observation": {
+            "camera_layout": "latent_wrists_above_head",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ]
+          },
+          "seed": 10005,
+          "video_exec_step": -1,
+          "video_inference_steps": 25
+        },
+        {
+          "action_horizon": 32,
+          "action_inference_steps": 50,
+          "action_per_frame": 16,
+          "backend": "lingbot_va",
+          "condition": "video",
+          "frame_chunk_size": 2,
+          "frame_st_id": 10,
+          "guidance_scale": 5,
+          "observation": {
+            "camera_layout": "latent_wrists_above_head",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ]
+          },
+          "seed": 10006,
+          "video_exec_step": -1,
+          "video_inference_steps": 25
+        },
+        {
+          "action_horizon": 32,
+          "action_inference_steps": 50,
+          "action_per_frame": 16,
+          "backend": "lingbot_va",
+          "condition": "video",
+          "frame_chunk_size": 2,
+          "frame_st_id": 12,
+          "guidance_scale": 5,
+          "observation": {
+            "camera_layout": "latent_wrists_above_head",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ]
+          },
+          "seed": 10007,
+          "video_exec_step": -1,
+          "video_inference_steps": 25
+        },
+        {
+          "action_horizon": 32,
+          "action_inference_steps": 50,
+          "action_per_frame": 16,
+          "backend": "lingbot_va",
+          "condition": "video",
+          "frame_chunk_size": 2,
+          "frame_st_id": 14,
+          "guidance_scale": 5,
+          "observation": {
+            "camera_layout": "latent_wrists_above_head",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ]
+          },
+          "seed": 10008,
+          "video_exec_step": -1,
+          "video_inference_steps": 25
+        },
+        {
+          "action_horizon": 32,
+          "action_inference_steps": 50,
+          "action_per_frame": 16,
+          "backend": "lingbot_va",
+          "condition": "video",
+          "frame_chunk_size": 2,
+          "frame_st_id": 16,
+          "guidance_scale": 5,
+          "observation": {
+            "camera_layout": "latent_wrists_above_head",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ]
+          },
+          "seed": 10009,
+          "video_exec_step": -1,
+          "video_inference_steps": 25
+        },
+        {
+          "action_horizon": 32,
+          "action_inference_steps": 50,
+          "action_per_frame": 16,
+          "backend": "lingbot_va",
+          "condition": "video",
+          "frame_chunk_size": 2,
+          "frame_st_id": 18,
+          "guidance_scale": 5,
+          "observation": {
+            "camera_layout": "latent_wrists_above_head",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ]
+          },
+          "seed": 10010,
+          "video_exec_step": -1,
+          "video_inference_steps": 25
+        },
+        {
+          "action_horizon": 32,
+          "action_inference_steps": 50,
+          "action_per_frame": 16,
+          "backend": "lingbot_va",
+          "condition": "video",
+          "frame_chunk_size": 2,
+          "frame_st_id": 20,
+          "guidance_scale": 5,
+          "observation": {
+            "camera_layout": "latent_wrists_above_head",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ]
+          },
+          "seed": 10011,
+          "video_exec_step": -1,
+          "video_inference_steps": 25
+        },
+        {
+          "action_horizon": 32,
+          "action_inference_steps": 50,
+          "action_per_frame": 16,
+          "backend": "lingbot_va",
+          "condition": "video",
+          "frame_chunk_size": 2,
+          "frame_st_id": 22,
+          "guidance_scale": 5,
+          "observation": {
+            "camera_layout": "latent_wrists_above_head",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ]
+          },
+          "seed": 10012,
+          "video_exec_step": -1,
+          "video_inference_steps": 25
+        },
+        {
+          "action_horizon": 32,
+          "action_inference_steps": 50,
+          "action_per_frame": 16,
+          "backend": "lingbot_va",
+          "condition": "video",
+          "frame_chunk_size": 2,
+          "frame_st_id": 24,
+          "guidance_scale": 5,
+          "observation": {
+            "camera_layout": "latent_wrists_above_head",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ]
+          },
+          "seed": 10013,
+          "video_exec_step": -1,
+          "video_inference_steps": 25
+        },
+        {
+          "action_horizon": 32,
+          "action_inference_steps": 50,
+          "action_per_frame": 16,
+          "backend": "lingbot_va",
+          "condition": "video",
+          "frame_chunk_size": 2,
+          "frame_st_id": 26,
+          "guidance_scale": 5,
+          "observation": {
+            "camera_layout": "latent_wrists_above_head",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ]
+          },
+          "seed": 10014,
+          "video_exec_step": -1,
+          "video_inference_steps": 25
+        },
+        {
+          "action_horizon": 32,
+          "action_inference_steps": 50,
+          "action_per_frame": 16,
+          "backend": "lingbot_va",
+          "condition": "video",
+          "frame_chunk_size": 2,
+          "frame_st_id": 28,
+          "guidance_scale": 5,
+          "observation": {
+            "camera_layout": "latent_wrists_above_head",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ]
+          },
+          "seed": 10015,
+          "video_exec_step": -1,
+          "video_inference_steps": 25
+        },
+        {
+          "action_horizon": 32,
+          "action_inference_steps": 50,
+          "action_per_frame": 16,
+          "backend": "lingbot_va",
+          "condition": "video",
+          "frame_chunk_size": 2,
+          "frame_st_id": 30,
+          "guidance_scale": 5,
+          "observation": {
+            "camera_layout": "latent_wrists_above_head",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ]
+          },
+          "seed": 10016,
+          "video_exec_step": -1,
+          "video_inference_steps": 25
+        },
+        {
+          "action_horizon": 32,
+          "action_inference_steps": 50,
+          "action_per_frame": 16,
+          "backend": "lingbot_va",
+          "condition": "video",
+          "frame_chunk_size": 2,
+          "frame_st_id": 32,
+          "guidance_scale": 5,
+          "observation": {
+            "camera_layout": "latent_wrists_above_head",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ]
+          },
+          "seed": 10017,
+          "video_exec_step": -1,
+          "video_inference_steps": 25
+        },
+        {
+          "action_horizon": 32,
+          "action_inference_steps": 50,
+          "action_per_frame": 16,
+          "backend": "lingbot_va",
+          "condition": "video",
+          "frame_chunk_size": 2,
+          "frame_st_id": 34,
+          "guidance_scale": 5,
+          "observation": {
+            "camera_layout": "latent_wrists_above_head",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ]
+          },
+          "seed": 10018,
+          "video_exec_step": -1,
+          "video_inference_steps": 25
+        },
+        {
+          "action_horizon": 32,
+          "action_inference_steps": 50,
+          "action_per_frame": 16,
+          "backend": "lingbot_va",
+          "condition": "video",
+          "frame_chunk_size": 2,
+          "frame_st_id": 36,
+          "guidance_scale": 5,
+          "observation": {
+            "camera_layout": "latent_wrists_above_head",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ]
+          },
+          "seed": 10019,
+          "video_exec_step": -1,
+          "video_inference_steps": 25
+        },
+        {
+          "action_horizon": 32,
+          "action_inference_steps": 50,
+          "action_per_frame": 16,
+          "backend": "lingbot_va",
+          "condition": "video",
+          "frame_chunk_size": 2,
+          "frame_st_id": 38,
+          "guidance_scale": 5,
+          "observation": {
+            "camera_layout": "latent_wrists_above_head",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ]
+          },
+          "seed": 10020,
+          "video_exec_step": -1,
+          "video_inference_steps": 25
+        },
+        {
+          "action_horizon": 32,
+          "action_inference_steps": 50,
+          "action_per_frame": 16,
+          "backend": "lingbot_va",
+          "condition": "video",
+          "frame_chunk_size": 2,
+          "frame_st_id": 40,
+          "guidance_scale": 5,
+          "observation": {
+            "camera_layout": "latent_wrists_above_head",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ]
+          },
+          "seed": 10021,
+          "video_exec_step": -1,
+          "video_inference_steps": 25
+        },
+        {
+          "action_horizon": 32,
+          "action_inference_steps": 50,
+          "action_per_frame": 16,
+          "backend": "lingbot_va",
+          "condition": "video",
+          "frame_chunk_size": 2,
+          "frame_st_id": 42,
+          "guidance_scale": 5,
+          "observation": {
+            "camera_layout": "latent_wrists_above_head",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ]
+          },
+          "seed": 10022,
+          "video_exec_step": -1,
+          "video_inference_steps": 25
+        },
+        {
+          "action_horizon": 32,
+          "action_inference_steps": 50,
+          "action_per_frame": 16,
+          "backend": "lingbot_va",
+          "condition": "video",
+          "frame_chunk_size": 2,
+          "frame_st_id": 44,
+          "guidance_scale": 5,
+          "observation": {
+            "camera_layout": "latent_wrists_above_head",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ]
+          },
+          "seed": 10023,
+          "video_exec_step": -1,
+          "video_inference_steps": 25
+        },
+        {
+          "action_horizon": 32,
+          "action_inference_steps": 50,
+          "action_per_frame": 16,
+          "backend": "lingbot_va",
+          "condition": "video",
+          "frame_chunk_size": 2,
+          "frame_st_id": 46,
+          "guidance_scale": 5,
+          "observation": {
+            "camera_layout": "latent_wrists_above_head",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ]
+          },
+          "seed": 10024,
+          "video_exec_step": -1,
+          "video_inference_steps": 25
+        },
+        {
+          "action_horizon": 32,
+          "action_inference_steps": 50,
+          "action_per_frame": 16,
+          "backend": "lingbot_va",
+          "condition": "video",
+          "frame_chunk_size": 2,
+          "frame_st_id": 48,
+          "guidance_scale": 5,
+          "observation": {
+            "camera_layout": "latent_wrists_above_head",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ]
+          },
+          "seed": 10025,
+          "video_exec_step": -1,
+          "video_inference_steps": 25
+        },
+        {
+          "action_horizon": 32,
+          "action_inference_steps": 50,
+          "action_per_frame": 16,
+          "backend": "lingbot_va",
+          "condition": "video",
+          "frame_chunk_size": 2,
+          "frame_st_id": 50,
+          "guidance_scale": 5,
+          "observation": {
+            "camera_layout": "latent_wrists_above_head",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ]
+          },
+          "seed": 10026,
+          "video_exec_step": -1,
+          "video_inference_steps": 25
+        },
+        {
+          "action_horizon": 32,
+          "action_inference_steps": 50,
+          "action_per_frame": 16,
+          "backend": "lingbot_va",
+          "condition": "video",
+          "frame_chunk_size": 2,
+          "frame_st_id": 52,
+          "guidance_scale": 5,
+          "observation": {
+            "camera_layout": "latent_wrists_above_head",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ]
+          },
+          "seed": 10027,
+          "video_exec_step": -1,
+          "video_inference_steps": 25
+        },
+        {
+          "action_horizon": 32,
+          "action_inference_steps": 50,
+          "action_per_frame": 16,
+          "backend": "lingbot_va",
+          "condition": "video",
+          "frame_chunk_size": 2,
+          "frame_st_id": 54,
+          "guidance_scale": 5,
+          "observation": {
+            "camera_layout": "latent_wrists_above_head",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ]
+          },
+          "seed": 10028,
+          "video_exec_step": -1,
+          "video_inference_steps": 25
+        },
+        {
+          "action_horizon": 32,
+          "action_inference_steps": 50,
+          "action_per_frame": 16,
+          "backend": "lingbot_va",
+          "condition": "video",
+          "frame_chunk_size": 2,
+          "frame_st_id": 56,
+          "guidance_scale": 5,
+          "observation": {
+            "camera_layout": "latent_wrists_above_head",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ]
+          },
+          "seed": 10029,
+          "video_exec_step": -1,
+          "video_inference_steps": 25
+        }
+      ],
+      "instruction": "Use the left arm to pick the ceramic mug with cartoons, turn it, place it, then hang on the dark gray rack.",
+      "policy_steps": 900,
+      "seed": 10001,
+      "success": false,
+      "termination_reason": "max_steps"
+    },
+    {
+      "episode": 1,
+      "inference_calls": 11,
+      "inference_latency_ms": [
+        4464.329835027456,
+        4671.268421923742,
+        4778.483010828495,
+        4852.580215083435,
+        4898.278171895072,
+        4956.554651958868,
+        5002.032150048763,
+        5117.518624989316,
+        5208.696214016527,
+        5268.86620093137,
+        5320.297612110153
+      ],
+      "inference_metadata": [
+        {
+          "action_horizon": 32,
+          "action_inference_steps": 50,
+          "action_per_frame": 16,
+          "backend": "lingbot_va",
+          "condition": "video",
+          "frame_chunk_size": 2,
+          "frame_st_id": 0,
+          "guidance_scale": 5,
+          "observation": {
+            "camera_layout": "latent_wrists_above_head",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ],
+            "seed": 10002,
+            "task_name": "hanging_mug"
+          },
+          "seed": 10002,
+          "video_exec_step": -1,
+          "video_inference_steps": 25
+        },
+        {
+          "action_horizon": 32,
+          "action_inference_steps": 50,
+          "action_per_frame": 16,
+          "backend": "lingbot_va",
+          "condition": "video",
+          "frame_chunk_size": 2,
+          "frame_st_id": 2,
+          "guidance_scale": 5,
+          "observation": {
+            "camera_layout": "latent_wrists_above_head",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ]
+          },
+          "seed": 10003,
+          "video_exec_step": -1,
+          "video_inference_steps": 25
+        },
+        {
+          "action_horizon": 32,
+          "action_inference_steps": 50,
+          "action_per_frame": 16,
+          "backend": "lingbot_va",
+          "condition": "video",
+          "frame_chunk_size": 2,
+          "frame_st_id": 4,
+          "guidance_scale": 5,
+          "observation": {
+            "camera_layout": "latent_wrists_above_head",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ]
+          },
+          "seed": 10004,
+          "video_exec_step": -1,
+          "video_inference_steps": 25
+        },
+        {
+          "action_horizon": 32,
+          "action_inference_steps": 50,
+          "action_per_frame": 16,
+          "backend": "lingbot_va",
+          "condition": "video",
+          "frame_chunk_size": 2,
+          "frame_st_id": 6,
+          "guidance_scale": 5,
+          "observation": {
+            "camera_layout": "latent_wrists_above_head",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ]
+          },
+          "seed": 10005,
+          "video_exec_step": -1,
+          "video_inference_steps": 25
+        },
+        {
+          "action_horizon": 32,
+          "action_inference_steps": 50,
+          "action_per_frame": 16,
+          "backend": "lingbot_va",
+          "condition": "video",
+          "frame_chunk_size": 2,
+          "frame_st_id": 8,
+          "guidance_scale": 5,
+          "observation": {
+            "camera_layout": "latent_wrists_above_head",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ]
+          },
+          "seed": 10006,
+          "video_exec_step": -1,
+          "video_inference_steps": 25
+        },
+        {
+          "action_horizon": 32,
+          "action_inference_steps": 50,
+          "action_per_frame": 16,
+          "backend": "lingbot_va",
+          "condition": "video",
+          "frame_chunk_size": 2,
+          "frame_st_id": 10,
+          "guidance_scale": 5,
+          "observation": {
+            "camera_layout": "latent_wrists_above_head",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ]
+          },
+          "seed": 10007,
+          "video_exec_step": -1,
+          "video_inference_steps": 25
+        },
+        {
+          "action_horizon": 32,
+          "action_inference_steps": 50,
+          "action_per_frame": 16,
+          "backend": "lingbot_va",
+          "condition": "video",
+          "frame_chunk_size": 2,
+          "frame_st_id": 12,
+          "guidance_scale": 5,
+          "observation": {
+            "camera_layout": "latent_wrists_above_head",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ]
+          },
+          "seed": 10008,
+          "video_exec_step": -1,
+          "video_inference_steps": 25
+        },
+        {
+          "action_horizon": 32,
+          "action_inference_steps": 50,
+          "action_per_frame": 16,
+          "backend": "lingbot_va",
+          "condition": "video",
+          "frame_chunk_size": 2,
+          "frame_st_id": 14,
+          "guidance_scale": 5,
+          "observation": {
+            "camera_layout": "latent_wrists_above_head",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ]
+          },
+          "seed": 10009,
+          "video_exec_step": -1,
+          "video_inference_steps": 25
+        },
+        {
+          "action_horizon": 32,
+          "action_inference_steps": 50,
+          "action_per_frame": 16,
+          "backend": "lingbot_va",
+          "condition": "video",
+          "frame_chunk_size": 2,
+          "frame_st_id": 16,
+          "guidance_scale": 5,
+          "observation": {
+            "camera_layout": "latent_wrists_above_head",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ]
+          },
+          "seed": 10010,
+          "video_exec_step": -1,
+          "video_inference_steps": 25
+        },
+        {
+          "action_horizon": 32,
+          "action_inference_steps": 50,
+          "action_per_frame": 16,
+          "backend": "lingbot_va",
+          "condition": "video",
+          "frame_chunk_size": 2,
+          "frame_st_id": 18,
+          "guidance_scale": 5,
+          "observation": {
+            "camera_layout": "latent_wrists_above_head",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ]
+          },
+          "seed": 10011,
+          "video_exec_step": -1,
+          "video_inference_steps": 25
+        },
+        {
+          "action_horizon": 32,
+          "action_inference_steps": 50,
+          "action_per_frame": 16,
+          "backend": "lingbot_va",
+          "condition": "video",
+          "frame_chunk_size": 2,
+          "frame_st_id": 20,
+          "guidance_scale": 5,
+          "observation": {
+            "camera_layout": "latent_wrists_above_head",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ]
+          },
+          "seed": 10012,
+          "video_exec_step": -1,
+          "video_inference_steps": 25
+        }
+      ],
+      "instruction": "With the left arm, grab the mug with round handle from the table, rotate it, place it centrally, and with the right arm, hang it onto the smooth rack.",
+      "policy_steps": 305,
+      "seed": 10002,
+      "success": true,
+      "termination_reason": "success"
+    },
+    {
+      "episode": 2,
+      "inference_calls": 14,
+      "inference_latency_ms": [
+        4475.814241915941,
+        4674.390349071473,
+        4793.947488069534,
+        4831.5543830394745,
+        4920.473749982193,
+        4960.030799964443,
+        5037.824638886377,
+        5105.966106057167,
+        5191.836078185588,
+        5276.798611972481,
+        5340.084137860686,
+        5400.891277939081,
+        5529.50985589996,
+        5601.3709479011595
+      ],
+      "inference_metadata": [
+        {
+          "action_horizon": 32,
+          "action_inference_steps": 50,
+          "action_per_frame": 16,
+          "backend": "lingbot_va",
+          "condition": "video",
+          "frame_chunk_size": 2,
+          "frame_st_id": 0,
+          "guidance_scale": 5,
+          "observation": {
+            "camera_layout": "latent_wrists_above_head",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ],
+            "seed": 10003,
+            "task_name": "hanging_mug"
+          },
+          "seed": 10003,
+          "video_exec_step": -1,
+          "video_inference_steps": 25
+        },
+        {
+          "action_horizon": 32,
+          "action_inference_steps": 50,
+          "action_per_frame": 16,
+          "backend": "lingbot_va",
+          "condition": "video",
+          "frame_chunk_size": 2,
+          "frame_st_id": 2,
+          "guidance_scale": 5,
+          "observation": {
+            "camera_layout": "latent_wrists_above_head",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ]
+          },
+          "seed": 10004,
+          "video_exec_step": -1,
+          "video_inference_steps": 25
+        },
+        {
+          "action_horizon": 32,
+          "action_inference_steps": 50,
+          "action_per_frame": 16,
+          "backend": "lingbot_va",
+          "condition": "video",
+          "frame_chunk_size": 2,
+          "frame_st_id": 4,
+          "guidance_scale": 5,
+          "observation": {
+            "camera_layout": "latent_wrists_above_head",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ]
+          },
+          "seed": 10005,
+          "video_exec_step": -1,
+          "video_inference_steps": 25
+        },
+        {
+          "action_horizon": 32,
+          "action_inference_steps": 50,
+          "action_per_frame": 16,
+          "backend": "lingbot_va",
+          "condition": "video",
+          "frame_chunk_size": 2,
+          "frame_st_id": 6,
+          "guidance_scale": 5,
+          "observation": {
+            "camera_layout": "latent_wrists_above_head",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ]
+          },
+          "seed": 10006,
+          "video_exec_step": -1,
+          "video_inference_steps": 25
+        },
+        {
+          "action_horizon": 32,
+          "action_inference_steps": 50,
+          "action_per_frame": 16,
+          "backend": "lingbot_va",
+          "condition": "video",
+          "frame_chunk_size": 2,
+          "frame_st_id": 8,
+          "guidance_scale": 5,
+          "observation": {
+            "camera_layout": "latent_wrists_above_head",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ]
+          },
+          "seed": 10007,
+          "video_exec_step": -1,
+          "video_inference_steps": 25
+        },
+        {
+          "action_horizon": 32,
+          "action_inference_steps": 50,
+          "action_per_frame": 16,
+          "backend": "lingbot_va",
+          "condition": "video",
+          "frame_chunk_size": 2,
+          "frame_st_id": 10,
+          "guidance_scale": 5,
+          "observation": {
+            "camera_layout": "latent_wrists_above_head",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ]
+          },
+          "seed": 10008,
+          "video_exec_step": -1,
+          "video_inference_steps": 25
+        },
+        {
+          "action_horizon": 32,
+          "action_inference_steps": 50,
+          "action_per_frame": 16,
+          "backend": "lingbot_va",
+          "condition": "video",
+          "frame_chunk_size": 2,
+          "frame_st_id": 12,
+          "guidance_scale": 5,
+          "observation": {
+            "camera_layout": "latent_wrists_above_head",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ]
+          },
+          "seed": 10009,
+          "video_exec_step": -1,
+          "video_inference_steps": 25
+        },
+        {
+          "action_horizon": 32,
+          "action_inference_steps": 50,
+          "action_per_frame": 16,
+          "backend": "lingbot_va",
+          "condition": "video",
+          "frame_chunk_size": 2,
+          "frame_st_id": 14,
+          "guidance_scale": 5,
+          "observation": {
+            "camera_layout": "latent_wrists_above_head",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ]
+          },
+          "seed": 10010,
+          "video_exec_step": -1,
+          "video_inference_steps": 25
+        },
+        {
+          "action_horizon": 32,
+          "action_inference_steps": 50,
+          "action_per_frame": 16,
+          "backend": "lingbot_va",
+          "condition": "video",
+          "frame_chunk_size": 2,
+          "frame_st_id": 16,
+          "guidance_scale": 5,
+          "observation": {
+            "camera_layout": "latent_wrists_above_head",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ]
+          },
+          "seed": 10011,
+          "video_exec_step": -1,
+          "video_inference_steps": 25
+        },
+        {
+          "action_horizon": 32,
+          "action_inference_steps": 50,
+          "action_per_frame": 16,
+          "backend": "lingbot_va",
+          "condition": "video",
+          "frame_chunk_size": 2,
+          "frame_st_id": 18,
+          "guidance_scale": 5,
+          "observation": {
+            "camera_layout": "latent_wrists_above_head",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ]
+          },
+          "seed": 10012,
+          "video_exec_step": -1,
+          "video_inference_steps": 25
+        },
+        {
+          "action_horizon": 32,
+          "action_inference_steps": 50,
+          "action_per_frame": 16,
+          "backend": "lingbot_va",
+          "condition": "video",
+          "frame_chunk_size": 2,
+          "frame_st_id": 20,
+          "guidance_scale": 5,
+          "observation": {
+            "camera_layout": "latent_wrists_above_head",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ]
+          },
+          "seed": 10013,
+          "video_exec_step": -1,
+          "video_inference_steps": 25
+        },
+        {
+          "action_horizon": 32,
+          "action_inference_steps": 50,
+          "action_per_frame": 16,
+          "backend": "lingbot_va",
+          "condition": "video",
+          "frame_chunk_size": 2,
+          "frame_st_id": 22,
+          "guidance_scale": 5,
+          "observation": {
+            "camera_layout": "latent_wrists_above_head",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ]
+          },
+          "seed": 10014,
+          "video_exec_step": -1,
+          "video_inference_steps": 25
+        },
+        {
+          "action_horizon": 32,
+          "action_inference_steps": 50,
+          "action_per_frame": 16,
+          "backend": "lingbot_va",
+          "condition": "video",
+          "frame_chunk_size": 2,
+          "frame_st_id": 24,
+          "guidance_scale": 5,
+          "observation": {
+            "camera_layout": "latent_wrists_above_head",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ]
+          },
+          "seed": 10015,
+          "video_exec_step": -1,
+          "video_inference_steps": 25
+        },
+        {
+          "action_horizon": 32,
+          "action_inference_steps": 50,
+          "action_per_frame": 16,
+          "backend": "lingbot_va",
+          "condition": "video",
+          "frame_chunk_size": 2,
+          "frame_st_id": 26,
+          "guidance_scale": 5,
+          "observation": {
+            "camera_layout": "latent_wrists_above_head",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ]
+          },
+          "seed": 10016,
+          "video_exec_step": -1,
+          "video_inference_steps": 25
+        }
+      ],
+      "instruction": "Pick the green drinking mug from the table, rotate it, place it, and then hang it onto the smooth rack.",
+      "policy_steps": 409,
+      "seed": 10003,
+      "success": true,
+      "termination_reason": "success"
+    },
+    {
+      "episode": 3,
+      "inference_calls": 29,
+      "inference_latency_ms": [
+        4460.443759104237,
+        4641.149652888998,
+        4789.402444846928,
+        4868.127363966778,
+        4867.998952977359,
+        4955.4405270610005,
+        5010.682021966204,
+        5118.346069008112,
+        5193.467163015157,
+        5243.551203981042,
+        5345.054280944169,
+        5405.704651027918,
+        5510.08804095909,
+        5597.336537903175,
+        5686.700721038505,
+        5828.293275088072,
+        5895.620702998713,
+        5980.267501203343,
+        6078.109971946105,
+        6151.480355998501,
+        6269.072799012065,
+        6352.238634135574,
+        6451.482373988256,
+        6492.942101089284,
+        6655.63761908561,
+        6700.313705019653,
+        6833.0187648534775,
+        6897.497221827507,
+        6970.836036838591
+      ],
+      "inference_metadata": [
+        {
+          "action_horizon": 32,
+          "action_inference_steps": 50,
+          "action_per_frame": 16,
+          "backend": "lingbot_va",
+          "condition": "video",
+          "frame_chunk_size": 2,
+          "frame_st_id": 0,
+          "guidance_scale": 5,
+          "observation": {
+            "camera_layout": "latent_wrists_above_head",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ],
+            "seed": 10006,
+            "task_name": "hanging_mug"
+          },
+          "seed": 10006,
+          "video_exec_step": -1,
+          "video_inference_steps": 25
+        },
+        {
+          "action_horizon": 32,
+          "action_inference_steps": 50,
+          "action_per_frame": 16,
+          "backend": "lingbot_va",
+          "condition": "video",
+          "frame_chunk_size": 2,
+          "frame_st_id": 2,
+          "guidance_scale": 5,
+          "observation": {
+            "camera_layout": "latent_wrists_above_head",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ]
+          },
+          "seed": 10007,
+          "video_exec_step": -1,
+          "video_inference_steps": 25
+        },
+        {
+          "action_horizon": 32,
+          "action_inference_steps": 50,
+          "action_per_frame": 16,
+          "backend": "lingbot_va",
+          "condition": "video",
+          "frame_chunk_size": 2,
+          "frame_st_id": 4,
+          "guidance_scale": 5,
+          "observation": {
+            "camera_layout": "latent_wrists_above_head",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ]
+          },
+          "seed": 10008,
+          "video_exec_step": -1,
+          "video_inference_steps": 25
+        },
+        {
+          "action_horizon": 32,
+          "action_inference_steps": 50,
+          "action_per_frame": 16,
+          "backend": "lingbot_va",
+          "condition": "video",
+          "frame_chunk_size": 2,
+          "frame_st_id": 6,
+          "guidance_scale": 5,
+          "observation": {
+            "camera_layout": "latent_wrists_above_head",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ]
+          },
+          "seed": 10009,
+          "video_exec_step": -1,
+          "video_inference_steps": 25
+        },
+        {
+          "action_horizon": 32,
+          "action_inference_steps": 50,
+          "action_per_frame": 16,
+          "backend": "lingbot_va",
+          "condition": "video",
+          "frame_chunk_size": 2,
+          "frame_st_id": 8,
+          "guidance_scale": 5,
+          "observation": {
+            "camera_layout": "latent_wrists_above_head",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ]
+          },
+          "seed": 10010,
+          "video_exec_step": -1,
+          "video_inference_steps": 25
+        },
+        {
+          "action_horizon": 32,
+          "action_inference_steps": 50,
+          "action_per_frame": 16,
+          "backend": "lingbot_va",
+          "condition": "video",
+          "frame_chunk_size": 2,
+          "frame_st_id": 10,
+          "guidance_scale": 5,
+          "observation": {
+            "camera_layout": "latent_wrists_above_head",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ]
+          },
+          "seed": 10011,
+          "video_exec_step": -1,
+          "video_inference_steps": 25
+        },
+        {
+          "action_horizon": 32,
+          "action_inference_steps": 50,
+          "action_per_frame": 16,
+          "backend": "lingbot_va",
+          "condition": "video",
+          "frame_chunk_size": 2,
+          "frame_st_id": 12,
+          "guidance_scale": 5,
+          "observation": {
+            "camera_layout": "latent_wrists_above_head",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ]
+          },
+          "seed": 10012,
+          "video_exec_step": -1,
+          "video_inference_steps": 25
+        },
+        {
+          "action_horizon": 32,
+          "action_inference_steps": 50,
+          "action_per_frame": 16,
+          "backend": "lingbot_va",
+          "condition": "video",
+          "frame_chunk_size": 2,
+          "frame_st_id": 14,
+          "guidance_scale": 5,
+          "observation": {
+            "camera_layout": "latent_wrists_above_head",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ]
+          },
+          "seed": 10013,
+          "video_exec_step": -1,
+          "video_inference_steps": 25
+        },
+        {
+          "action_horizon": 32,
+          "action_inference_steps": 50,
+          "action_per_frame": 16,
+          "backend": "lingbot_va",
+          "condition": "video",
+          "frame_chunk_size": 2,
+          "frame_st_id": 16,
+          "guidance_scale": 5,
+          "observation": {
+            "camera_layout": "latent_wrists_above_head",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ]
+          },
+          "seed": 10014,
+          "video_exec_step": -1,
+          "video_inference_steps": 25
+        },
+        {
+          "action_horizon": 32,
+          "action_inference_steps": 50,
+          "action_per_frame": 16,
+          "backend": "lingbot_va",
+          "condition": "video",
+          "frame_chunk_size": 2,
+          "frame_st_id": 18,
+          "guidance_scale": 5,
+          "observation": {
+            "camera_layout": "latent_wrists_above_head",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ]
+          },
+          "seed": 10015,
+          "video_exec_step": -1,
+          "video_inference_steps": 25
+        },
+        {
+          "action_horizon": 32,
+          "action_inference_steps": 50,
+          "action_per_frame": 16,
+          "backend": "lingbot_va",
+          "condition": "video",
+          "frame_chunk_size": 2,
+          "frame_st_id": 20,
+          "guidance_scale": 5,
+          "observation": {
+            "camera_layout": "latent_wrists_above_head",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ]
+          },
+          "seed": 10016,
+          "video_exec_step": -1,
+          "video_inference_steps": 25
+        },
+        {
+          "action_horizon": 32,
+          "action_inference_steps": 50,
+          "action_per_frame": 16,
+          "backend": "lingbot_va",
+          "condition": "video",
+          "frame_chunk_size": 2,
+          "frame_st_id": 22,
+          "guidance_scale": 5,
+          "observation": {
+            "camera_layout": "latent_wrists_above_head",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ]
+          },
+          "seed": 10017,
+          "video_exec_step": -1,
+          "video_inference_steps": 25
+        },
+        {
+          "action_horizon": 32,
+          "action_inference_steps": 50,
+          "action_per_frame": 16,
+          "backend": "lingbot_va",
+          "condition": "video",
+          "frame_chunk_size": 2,
+          "frame_st_id": 24,
+          "guidance_scale": 5,
+          "observation": {
+            "camera_layout": "latent_wrists_above_head",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ]
+          },
+          "seed": 10018,
+          "video_exec_step": -1,
+          "video_inference_steps": 25
+        },
+        {
+          "action_horizon": 32,
+          "action_inference_steps": 50,
+          "action_per_frame": 16,
+          "backend": "lingbot_va",
+          "condition": "video",
+          "frame_chunk_size": 2,
+          "frame_st_id": 26,
+          "guidance_scale": 5,
+          "observation": {
+            "camera_layout": "latent_wrists_above_head",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ]
+          },
+          "seed": 10019,
+          "video_exec_step": -1,
+          "video_inference_steps": 25
+        },
+        {
+          "action_horizon": 32,
+          "action_inference_steps": 50,
+          "action_per_frame": 16,
+          "backend": "lingbot_va",
+          "condition": "video",
+          "frame_chunk_size": 2,
+          "frame_st_id": 28,
+          "guidance_scale": 5,
+          "observation": {
+            "camera_layout": "latent_wrists_above_head",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ]
+          },
+          "seed": 10020,
+          "video_exec_step": -1,
+          "video_inference_steps": 25
+        },
+        {
+          "action_horizon": 32,
+          "action_inference_steps": 50,
+          "action_per_frame": 16,
+          "backend": "lingbot_va",
+          "condition": "video",
+          "frame_chunk_size": 2,
+          "frame_st_id": 30,
+          "guidance_scale": 5,
+          "observation": {
+            "camera_layout": "latent_wrists_above_head",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ]
+          },
+          "seed": 10021,
+          "video_exec_step": -1,
+          "video_inference_steps": 25
+        },
+        {
+          "action_horizon": 32,
+          "action_inference_steps": 50,
+          "action_per_frame": 16,
+          "backend": "lingbot_va",
+          "condition": "video",
+          "frame_chunk_size": 2,
+          "frame_st_id": 32,
+          "guidance_scale": 5,
+          "observation": {
+            "camera_layout": "latent_wrists_above_head",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ]
+          },
+          "seed": 10022,
+          "video_exec_step": -1,
+          "video_inference_steps": 25
+        },
+        {
+          "action_horizon": 32,
+          "action_inference_steps": 50,
+          "action_per_frame": 16,
+          "backend": "lingbot_va",
+          "condition": "video",
+          "frame_chunk_size": 2,
+          "frame_st_id": 34,
+          "guidance_scale": 5,
+          "observation": {
+            "camera_layout": "latent_wrists_above_head",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ]
+          },
+          "seed": 10023,
+          "video_exec_step": -1,
+          "video_inference_steps": 25
+        },
+        {
+          "action_horizon": 32,
+          "action_inference_steps": 50,
+          "action_per_frame": 16,
+          "backend": "lingbot_va",
+          "condition": "video",
+          "frame_chunk_size": 2,
+          "frame_st_id": 36,
+          "guidance_scale": 5,
+          "observation": {
+            "camera_layout": "latent_wrists_above_head",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ]
+          },
+          "seed": 10024,
+          "video_exec_step": -1,
+          "video_inference_steps": 25
+        },
+        {
+          "action_horizon": 32,
+          "action_inference_steps": 50,
+          "action_per_frame": 16,
+          "backend": "lingbot_va",
+          "condition": "video",
+          "frame_chunk_size": 2,
+          "frame_st_id": 38,
+          "guidance_scale": 5,
+          "observation": {
+            "camera_layout": "latent_wrists_above_head",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ]
+          },
+          "seed": 10025,
+          "video_exec_step": -1,
+          "video_inference_steps": 25
+        },
+        {
+          "action_horizon": 32,
+          "action_inference_steps": 50,
+          "action_per_frame": 16,
+          "backend": "lingbot_va",
+          "condition": "video",
+          "frame_chunk_size": 2,
+          "frame_st_id": 40,
+          "guidance_scale": 5,
+          "observation": {
+            "camera_layout": "latent_wrists_above_head",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ]
+          },
+          "seed": 10026,
+          "video_exec_step": -1,
+          "video_inference_steps": 25
+        },
+        {
+          "action_horizon": 32,
+          "action_inference_steps": 50,
+          "action_per_frame": 16,
+          "backend": "lingbot_va",
+          "condition": "video",
+          "frame_chunk_size": 2,
+          "frame_st_id": 42,
+          "guidance_scale": 5,
+          "observation": {
+            "camera_layout": "latent_wrists_above_head",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ]
+          },
+          "seed": 10027,
+          "video_exec_step": -1,
+          "video_inference_steps": 25
+        },
+        {
+          "action_horizon": 32,
+          "action_inference_steps": 50,
+          "action_per_frame": 16,
+          "backend": "lingbot_va",
+          "condition": "video",
+          "frame_chunk_size": 2,
+          "frame_st_id": 44,
+          "guidance_scale": 5,
+          "observation": {
+            "camera_layout": "latent_wrists_above_head",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ]
+          },
+          "seed": 10028,
+          "video_exec_step": -1,
+          "video_inference_steps": 25
+        },
+        {
+          "action_horizon": 32,
+          "action_inference_steps": 50,
+          "action_per_frame": 16,
+          "backend": "lingbot_va",
+          "condition": "video",
+          "frame_chunk_size": 2,
+          "frame_st_id": 46,
+          "guidance_scale": 5,
+          "observation": {
+            "camera_layout": "latent_wrists_above_head",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ]
+          },
+          "seed": 10029,
+          "video_exec_step": -1,
+          "video_inference_steps": 25
+        },
+        {
+          "action_horizon": 32,
+          "action_inference_steps": 50,
+          "action_per_frame": 16,
+          "backend": "lingbot_va",
+          "condition": "video",
+          "frame_chunk_size": 2,
+          "frame_st_id": 48,
+          "guidance_scale": 5,
+          "observation": {
+            "camera_layout": "latent_wrists_above_head",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ]
+          },
+          "seed": 10030,
+          "video_exec_step": -1,
+          "video_inference_steps": 25
+        },
+        {
+          "action_horizon": 32,
+          "action_inference_steps": 50,
+          "action_per_frame": 16,
+          "backend": "lingbot_va",
+          "condition": "video",
+          "frame_chunk_size": 2,
+          "frame_st_id": 50,
+          "guidance_scale": 5,
+          "observation": {
+            "camera_layout": "latent_wrists_above_head",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ]
+          },
+          "seed": 10031,
+          "video_exec_step": -1,
+          "video_inference_steps": 25
+        },
+        {
+          "action_horizon": 32,
+          "action_inference_steps": 50,
+          "action_per_frame": 16,
+          "backend": "lingbot_va",
+          "condition": "video",
+          "frame_chunk_size": 2,
+          "frame_st_id": 52,
+          "guidance_scale": 5,
+          "observation": {
+            "camera_layout": "latent_wrists_above_head",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ]
+          },
+          "seed": 10032,
+          "video_exec_step": -1,
+          "video_inference_steps": 25
+        },
+        {
+          "action_horizon": 32,
+          "action_inference_steps": 50,
+          "action_per_frame": 16,
+          "backend": "lingbot_va",
+          "condition": "video",
+          "frame_chunk_size": 2,
+          "frame_st_id": 54,
+          "guidance_scale": 5,
+          "observation": {
+            "camera_layout": "latent_wrists_above_head",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ]
+          },
+          "seed": 10033,
+          "video_exec_step": -1,
+          "video_inference_steps": 25
+        },
+        {
+          "action_horizon": 32,
+          "action_inference_steps": 50,
+          "action_per_frame": 16,
+          "backend": "lingbot_va",
+          "condition": "video",
+          "frame_chunk_size": 2,
+          "frame_st_id": 56,
+          "guidance_scale": 5,
+          "observation": {
+            "camera_layout": "latent_wrists_above_head",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ]
+          },
+          "seed": 10034,
+          "video_exec_step": -1,
+          "video_inference_steps": 25
+        }
+      ],
+      "instruction": "Pick the light beige ceramic drinking mug from the table using one hand, rotate, and hang it on the smooth rack.",
+      "policy_steps": 900,
+      "seed": 10006,
+      "success": false,
+      "termination_reason": "max_steps"
+    },
+    {
+      "episode": 4,
+      "inference_calls": 29,
+      "inference_latency_ms": [
+        4480.191987939179,
+        4673.362882109359,
+        4803.0265180859715,
+        4855.728758964688,
+        4924.906569998711,
+        4975.00653215684,
+        5047.235745936632,
+        5124.847896164283,
+        5205.071683973074,
+        5280.219719046727,
+        5359.229257097468,
+        5460.934652015567,
+        5575.340887997299,
+        5649.616931099445,
+        5739.596257917583,
+        5855.976334074512,
+        5925.315193831921,
+        6030.196706997231,
+        6111.531650880352,
+        6229.494073893875,
+        6343.323612818494,
+        6417.299659922719,
+        6498.160862131044,
+        6594.895218964666,
+        6671.363380039111,
+        6780.407438054681,
+        6873.120330041274,
+        6941.433286992833,
+        7018.5072959866375
+      ],
+      "inference_metadata": [
+        {
+          "action_horizon": 32,
+          "action_inference_steps": 50,
+          "action_per_frame": 16,
+          "backend": "lingbot_va",
+          "condition": "video",
+          "frame_chunk_size": 2,
+          "frame_st_id": 0,
+          "guidance_scale": 5,
+          "observation": {
+            "camera_layout": "latent_wrists_above_head",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ],
+            "seed": 10007,
+            "task_name": "hanging_mug"
+          },
+          "seed": 10007,
+          "video_exec_step": -1,
+          "video_inference_steps": 25
+        },
+        {
+          "action_horizon": 32,
+          "action_inference_steps": 50,
+          "action_per_frame": 16,
+          "backend": "lingbot_va",
+          "condition": "video",
+          "frame_chunk_size": 2,
+          "frame_st_id": 2,
+          "guidance_scale": 5,
+          "observation": {
+            "camera_layout": "latent_wrists_above_head",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ]
+          },
+          "seed": 10008,
+          "video_exec_step": -1,
+          "video_inference_steps": 25
+        },
+        {
+          "action_horizon": 32,
+          "action_inference_steps": 50,
+          "action_per_frame": 16,
+          "backend": "lingbot_va",
+          "condition": "video",
+          "frame_chunk_size": 2,
+          "frame_st_id": 4,
+          "guidance_scale": 5,
+          "observation": {
+            "camera_layout": "latent_wrists_above_head",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ]
+          },
+          "seed": 10009,
+          "video_exec_step": -1,
+          "video_inference_steps": 25
+        },
+        {
+          "action_horizon": 32,
+          "action_inference_steps": 50,
+          "action_per_frame": 16,
+          "backend": "lingbot_va",
+          "condition": "video",
+          "frame_chunk_size": 2,
+          "frame_st_id": 6,
+          "guidance_scale": 5,
+          "observation": {
+            "camera_layout": "latent_wrists_above_head",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ]
+          },
+          "seed": 10010,
+          "video_exec_step": -1,
+          "video_inference_steps": 25
+        },
+        {
+          "action_horizon": 32,
+          "action_inference_steps": 50,
+          "action_per_frame": 16,
+          "backend": "lingbot_va",
+          "condition": "video",
+          "frame_chunk_size": 2,
+          "frame_st_id": 8,
+          "guidance_scale": 5,
+          "observation": {
+            "camera_layout": "latent_wrists_above_head",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ]
+          },
+          "seed": 10011,
+          "video_exec_step": -1,
+          "video_inference_steps": 25
+        },
+        {
+          "action_horizon": 32,
+          "action_inference_steps": 50,
+          "action_per_frame": 16,
+          "backend": "lingbot_va",
+          "condition": "video",
+          "frame_chunk_size": 2,
+          "frame_st_id": 10,
+          "guidance_scale": 5,
+          "observation": {
+            "camera_layout": "latent_wrists_above_head",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ]
+          },
+          "seed": 10012,
+          "video_exec_step": -1,
+          "video_inference_steps": 25
+        },
+        {
+          "action_horizon": 32,
+          "action_inference_steps": 50,
+          "action_per_frame": 16,
+          "backend": "lingbot_va",
+          "condition": "video",
+          "frame_chunk_size": 2,
+          "frame_st_id": 12,
+          "guidance_scale": 5,
+          "observation": {
+            "camera_layout": "latent_wrists_above_head",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ]
+          },
+          "seed": 10013,
+          "video_exec_step": -1,
+          "video_inference_steps": 25
+        },
+        {
+          "action_horizon": 32,
+          "action_inference_steps": 50,
+          "action_per_frame": 16,
+          "backend": "lingbot_va",
+          "condition": "video",
+          "frame_chunk_size": 2,
+          "frame_st_id": 14,
+          "guidance_scale": 5,
+          "observation": {
+            "camera_layout": "latent_wrists_above_head",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ]
+          },
+          "seed": 10014,
+          "video_exec_step": -1,
+          "video_inference_steps": 25
+        },
+        {
+          "action_horizon": 32,
+          "action_inference_steps": 50,
+          "action_per_frame": 16,
+          "backend": "lingbot_va",
+          "condition": "video",
+          "frame_chunk_size": 2,
+          "frame_st_id": 16,
+          "guidance_scale": 5,
+          "observation": {
+            "camera_layout": "latent_wrists_above_head",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ]
+          },
+          "seed": 10015,
+          "video_exec_step": -1,
+          "video_inference_steps": 25
+        },
+        {
+          "action_horizon": 32,
+          "action_inference_steps": 50,
+          "action_per_frame": 16,
+          "backend": "lingbot_va",
+          "condition": "video",
+          "frame_chunk_size": 2,
+          "frame_st_id": 18,
+          "guidance_scale": 5,
+          "observation": {
+            "camera_layout": "latent_wrists_above_head",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ]
+          },
+          "seed": 10016,
+          "video_exec_step": -1,
+          "video_inference_steps": 25
+        },
+        {
+          "action_horizon": 32,
+          "action_inference_steps": 50,
+          "action_per_frame": 16,
+          "backend": "lingbot_va",
+          "condition": "video",
+          "frame_chunk_size": 2,
+          "frame_st_id": 20,
+          "guidance_scale": 5,
+          "observation": {
+            "camera_layout": "latent_wrists_above_head",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ]
+          },
+          "seed": 10017,
+          "video_exec_step": -1,
+          "video_inference_steps": 25
+        },
+        {
+          "action_horizon": 32,
+          "action_inference_steps": 50,
+          "action_per_frame": 16,
+          "backend": "lingbot_va",
+          "condition": "video",
+          "frame_chunk_size": 2,
+          "frame_st_id": 22,
+          "guidance_scale": 5,
+          "observation": {
+            "camera_layout": "latent_wrists_above_head",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ]
+          },
+          "seed": 10018,
+          "video_exec_step": -1,
+          "video_inference_steps": 25
+        },
+        {
+          "action_horizon": 32,
+          "action_inference_steps": 50,
+          "action_per_frame": 16,
+          "backend": "lingbot_va",
+          "condition": "video",
+          "frame_chunk_size": 2,
+          "frame_st_id": 24,
+          "guidance_scale": 5,
+          "observation": {
+            "camera_layout": "latent_wrists_above_head",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ]
+          },
+          "seed": 10019,
+          "video_exec_step": -1,
+          "video_inference_steps": 25
+        },
+        {
+          "action_horizon": 32,
+          "action_inference_steps": 50,
+          "action_per_frame": 16,
+          "backend": "lingbot_va",
+          "condition": "video",
+          "frame_chunk_size": 2,
+          "frame_st_id": 26,
+          "guidance_scale": 5,
+          "observation": {
+            "camera_layout": "latent_wrists_above_head",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ]
+          },
+          "seed": 10020,
+          "video_exec_step": -1,
+          "video_inference_steps": 25
+        },
+        {
+          "action_horizon": 32,
+          "action_inference_steps": 50,
+          "action_per_frame": 16,
+          "backend": "lingbot_va",
+          "condition": "video",
+          "frame_chunk_size": 2,
+          "frame_st_id": 28,
+          "guidance_scale": 5,
+          "observation": {
+            "camera_layout": "latent_wrists_above_head",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ]
+          },
+          "seed": 10021,
+          "video_exec_step": -1,
+          "video_inference_steps": 25
+        },
+        {
+          "action_horizon": 32,
+          "action_inference_steps": 50,
+          "action_per_frame": 16,
+          "backend": "lingbot_va",
+          "condition": "video",
+          "frame_chunk_size": 2,
+          "frame_st_id": 30,
+          "guidance_scale": 5,
+          "observation": {
+            "camera_layout": "latent_wrists_above_head",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ]
+          },
+          "seed": 10022,
+          "video_exec_step": -1,
+          "video_inference_steps": 25
+        },
+        {
+          "action_horizon": 32,
+          "action_inference_steps": 50,
+          "action_per_frame": 16,
+          "backend": "lingbot_va",
+          "condition": "video",
+          "frame_chunk_size": 2,
+          "frame_st_id": 32,
+          "guidance_scale": 5,
+          "observation": {
+            "camera_layout": "latent_wrists_above_head",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ]
+          },
+          "seed": 10023,
+          "video_exec_step": -1,
+          "video_inference_steps": 25
+        },
+        {
+          "action_horizon": 32,
+          "action_inference_steps": 50,
+          "action_per_frame": 16,
+          "backend": "lingbot_va",
+          "condition": "video",
+          "frame_chunk_size": 2,
+          "frame_st_id": 34,
+          "guidance_scale": 5,
+          "observation": {
+            "camera_layout": "latent_wrists_above_head",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ]
+          },
+          "seed": 10024,
+          "video_exec_step": -1,
+          "video_inference_steps": 25
+        },
+        {
+          "action_horizon": 32,
+          "action_inference_steps": 50,
+          "action_per_frame": 16,
+          "backend": "lingbot_va",
+          "condition": "video",
+          "frame_chunk_size": 2,
+          "frame_st_id": 36,
+          "guidance_scale": 5,
+          "observation": {
+            "camera_layout": "latent_wrists_above_head",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ]
+          },
+          "seed": 10025,
+          "video_exec_step": -1,
+          "video_inference_steps": 25
+        },
+        {
+          "action_horizon": 32,
+          "action_inference_steps": 50,
+          "action_per_frame": 16,
+          "backend": "lingbot_va",
+          "condition": "video",
+          "frame_chunk_size": 2,
+          "frame_st_id": 38,
+          "guidance_scale": 5,
+          "observation": {
+            "camera_layout": "latent_wrists_above_head",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ]
+          },
+          "seed": 10026,
+          "video_exec_step": -1,
+          "video_inference_steps": 25
+        },
+        {
+          "action_horizon": 32,
+          "action_inference_steps": 50,
+          "action_per_frame": 16,
+          "backend": "lingbot_va",
+          "condition": "video",
+          "frame_chunk_size": 2,
+          "frame_st_id": 40,
+          "guidance_scale": 5,
+          "observation": {
+            "camera_layout": "latent_wrists_above_head",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ]
+          },
+          "seed": 10027,
+          "video_exec_step": -1,
+          "video_inference_steps": 25
+        },
+        {
+          "action_horizon": 32,
+          "action_inference_steps": 50,
+          "action_per_frame": 16,
+          "backend": "lingbot_va",
+          "condition": "video",
+          "frame_chunk_size": 2,
+          "frame_st_id": 42,
+          "guidance_scale": 5,
+          "observation": {
+            "camera_layout": "latent_wrists_above_head",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ]
+          },
+          "seed": 10028,
+          "video_exec_step": -1,
+          "video_inference_steps": 25
+        },
+        {
+          "action_horizon": 32,
+          "action_inference_steps": 50,
+          "action_per_frame": 16,
+          "backend": "lingbot_va",
+          "condition": "video",
+          "frame_chunk_size": 2,
+          "frame_st_id": 44,
+          "guidance_scale": 5,
+          "observation": {
+            "camera_layout": "latent_wrists_above_head",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ]
+          },
+          "seed": 10029,
+          "video_exec_step": -1,
+          "video_inference_steps": 25
+        },
+        {
+          "action_horizon": 32,
+          "action_inference_steps": 50,
+          "action_per_frame": 16,
+          "backend": "lingbot_va",
+          "condition": "video",
+          "frame_chunk_size": 2,
+          "frame_st_id": 46,
+          "guidance_scale": 5,
+          "observation": {
+            "camera_layout": "latent_wrists_above_head",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ]
+          },
+          "seed": 10030,
+          "video_exec_step": -1,
+          "video_inference_steps": 25
+        },
+        {
+          "action_horizon": 32,
+          "action_inference_steps": 50,
+          "action_per_frame": 16,
+          "backend": "lingbot_va",
+          "condition": "video",
+          "frame_chunk_size": 2,
+          "frame_st_id": 48,
+          "guidance_scale": 5,
+          "observation": {
+            "camera_layout": "latent_wrists_above_head",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ]
+          },
+          "seed": 10031,
+          "video_exec_step": -1,
+          "video_inference_steps": 25
+        },
+        {
+          "action_horizon": 32,
+          "action_inference_steps": 50,
+          "action_per_frame": 16,
+          "backend": "lingbot_va",
+          "condition": "video",
+          "frame_chunk_size": 2,
+          "frame_st_id": 50,
+          "guidance_scale": 5,
+          "observation": {
+            "camera_layout": "latent_wrists_above_head",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ]
+          },
+          "seed": 10032,
+          "video_exec_step": -1,
+          "video_inference_steps": 25
+        },
+        {
+          "action_horizon": 32,
+          "action_inference_steps": 50,
+          "action_per_frame": 16,
+          "backend": "lingbot_va",
+          "condition": "video",
+          "frame_chunk_size": 2,
+          "frame_st_id": 52,
+          "guidance_scale": 5,
+          "observation": {
+            "camera_layout": "latent_wrists_above_head",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ]
+          },
+          "seed": 10033,
+          "video_exec_step": -1,
+          "video_inference_steps": 25
+        },
+        {
+          "action_horizon": 32,
+          "action_inference_steps": 50,
+          "action_per_frame": 16,
+          "backend": "lingbot_va",
+          "condition": "video",
+          "frame_chunk_size": 2,
+          "frame_st_id": 54,
+          "guidance_scale": 5,
+          "observation": {
+            "camera_layout": "latent_wrists_above_head",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ]
+          },
+          "seed": 10034,
+          "video_exec_step": -1,
+          "video_inference_steps": 25
+        },
+        {
+          "action_horizon": 32,
+          "action_inference_steps": 50,
+          "action_per_frame": 16,
+          "backend": "lingbot_va",
+          "condition": "video",
+          "frame_chunk_size": 2,
+          "frame_st_id": 56,
+          "guidance_scale": 5,
+          "observation": {
+            "camera_layout": "latent_wrists_above_head",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ]
+          },
+          "seed": 10035,
+          "video_exec_step": -1,
+          "video_inference_steps": 25
+        }
+      ],
+      "instruction": "Take the mug with cartoon design with one arm, rotate it, and hang it onto the dark gray angled rack.",
+      "policy_steps": 900,
+      "seed": 10007,
+      "success": false,
+      "termination_reason": "max_steps"
+    },
+    {
+      "episode": 5,
+      "inference_calls": 29,
+      "inference_latency_ms": [
+        4481.559945968911,
+        4701.70065597631,
+        4802.481109974906,
+        4865.569203160703,
+        4938.611806835979,
+        4996.376809896901,
+        5052.944923052564,
+        5146.630395902321,
+        5226.873753126711,
+        5306.433987105265,
+        5366.375118959695,
+        5487.106557935476,
+        5526.54462098144,
+        5661.148795159534,
+        5737.878131913021,
+        5834.909858880565,
+        5895.380710018799,
+        6002.41847592406,
+        6111.510746181011,
+        6228.721765102819,
+        6335.420938907191,
+        6400.115181924775,
+        6484.48990797624,
+        6589.196159970015,
+        6661.93989594467,
+        6763.775984058157,
+        6830.632981844246,
+        6958.4073920268565,
+        7056.550899986178
+      ],
+      "inference_metadata": [
+        {
+          "action_horizon": 32,
+          "action_inference_steps": 50,
+          "action_per_frame": 16,
+          "backend": "lingbot_va",
+          "condition": "video",
+          "frame_chunk_size": 2,
+          "frame_st_id": 0,
+          "guidance_scale": 5,
+          "observation": {
+            "camera_layout": "latent_wrists_above_head",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ],
+            "seed": 10008,
+            "task_name": "hanging_mug"
+          },
+          "seed": 10008,
+          "video_exec_step": -1,
+          "video_inference_steps": 25
+        },
+        {
+          "action_horizon": 32,
+          "action_inference_steps": 50,
+          "action_per_frame": 16,
+          "backend": "lingbot_va",
+          "condition": "video",
+          "frame_chunk_size": 2,
+          "frame_st_id": 2,
+          "guidance_scale": 5,
+          "observation": {
+            "camera_layout": "latent_wrists_above_head",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ]
+          },
+          "seed": 10009,
+          "video_exec_step": -1,
+          "video_inference_steps": 25
+        },
+        {
+          "action_horizon": 32,
+          "action_inference_steps": 50,
+          "action_per_frame": 16,
+          "backend": "lingbot_va",
+          "condition": "video",
+          "frame_chunk_size": 2,
+          "frame_st_id": 4,
+          "guidance_scale": 5,
+          "observation": {
+            "camera_layout": "latent_wrists_above_head",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ]
+          },
+          "seed": 10010,
+          "video_exec_step": -1,
+          "video_inference_steps": 25
+        },
+        {
+          "action_horizon": 32,
+          "action_inference_steps": 50,
+          "action_per_frame": 16,
+          "backend": "lingbot_va",
+          "condition": "video",
+          "frame_chunk_size": 2,
+          "frame_st_id": 6,
+          "guidance_scale": 5,
+          "observation": {
+            "camera_layout": "latent_wrists_above_head",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ]
+          },
+          "seed": 10011,
+          "video_exec_step": -1,
+          "video_inference_steps": 25
+        },
+        {
+          "action_horizon": 32,
+          "action_inference_steps": 50,
+          "action_per_frame": 16,
+          "backend": "lingbot_va",
+          "condition": "video",
+          "frame_chunk_size": 2,
+          "frame_st_id": 8,
+          "guidance_scale": 5,
+          "observation": {
+            "camera_layout": "latent_wrists_above_head",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ]
+          },
+          "seed": 10012,
+          "video_exec_step": -1,
+          "video_inference_steps": 25
+        },
+        {
+          "action_horizon": 32,
+          "action_inference_steps": 50,
+          "action_per_frame": 16,
+          "backend": "lingbot_va",
+          "condition": "video",
+          "frame_chunk_size": 2,
+          "frame_st_id": 10,
+          "guidance_scale": 5,
+          "observation": {
+            "camera_layout": "latent_wrists_above_head",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ]
+          },
+          "seed": 10013,
+          "video_exec_step": -1,
+          "video_inference_steps": 25
+        },
+        {
+          "action_horizon": 32,
+          "action_inference_steps": 50,
+          "action_per_frame": 16,
+          "backend": "lingbot_va",
+          "condition": "video",
+          "frame_chunk_size": 2,
+          "frame_st_id": 12,
+          "guidance_scale": 5,
+          "observation": {
+            "camera_layout": "latent_wrists_above_head",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ]
+          },
+          "seed": 10014,
+          "video_exec_step": -1,
+          "video_inference_steps": 25
+        },
+        {
+          "action_horizon": 32,
+          "action_inference_steps": 50,
+          "action_per_frame": 16,
+          "backend": "lingbot_va",
+          "condition": "video",
+          "frame_chunk_size": 2,
+          "frame_st_id": 14,
+          "guidance_scale": 5,
+          "observation": {
+            "camera_layout": "latent_wrists_above_head",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ]
+          },
+          "seed": 10015,
+          "video_exec_step": -1,
+          "video_inference_steps": 25
+        },
+        {
+          "action_horizon": 32,
+          "action_inference_steps": 50,
+          "action_per_frame": 16,
+          "backend": "lingbot_va",
+          "condition": "video",
+          "frame_chunk_size": 2,
+          "frame_st_id": 16,
+          "guidance_scale": 5,
+          "observation": {
+            "camera_layout": "latent_wrists_above_head",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ]
+          },
+          "seed": 10016,
+          "video_exec_step": -1,
+          "video_inference_steps": 25
+        },
+        {
+          "action_horizon": 32,
+          "action_inference_steps": 50,
+          "action_per_frame": 16,
+          "backend": "lingbot_va",
+          "condition": "video",
+          "frame_chunk_size": 2,
+          "frame_st_id": 18,
+          "guidance_scale": 5,
+          "observation": {
+            "camera_layout": "latent_wrists_above_head",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ]
+          },
+          "seed": 10017,
+          "video_exec_step": -1,
+          "video_inference_steps": 25
+        },
+        {
+          "action_horizon": 32,
+          "action_inference_steps": 50,
+          "action_per_frame": 16,
+          "backend": "lingbot_va",
+          "condition": "video",
+          "frame_chunk_size": 2,
+          "frame_st_id": 20,
+          "guidance_scale": 5,
+          "observation": {
+            "camera_layout": "latent_wrists_above_head",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ]
+          },
+          "seed": 10018,
+          "video_exec_step": -1,
+          "video_inference_steps": 25
+        },
+        {
+          "action_horizon": 32,
+          "action_inference_steps": 50,
+          "action_per_frame": 16,
+          "backend": "lingbot_va",
+          "condition": "video",
+          "frame_chunk_size": 2,
+          "frame_st_id": 22,
+          "guidance_scale": 5,
+          "observation": {
+            "camera_layout": "latent_wrists_above_head",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ]
+          },
+          "seed": 10019,
+          "video_exec_step": -1,
+          "video_inference_steps": 25
+        },
+        {
+          "action_horizon": 32,
+          "action_inference_steps": 50,
+          "action_per_frame": 16,
+          "backend": "lingbot_va",
+          "condition": "video",
+          "frame_chunk_size": 2,
+          "frame_st_id": 24,
+          "guidance_scale": 5,
+          "observation": {
+            "camera_layout": "latent_wrists_above_head",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ]
+          },
+          "seed": 10020,
+          "video_exec_step": -1,
+          "video_inference_steps": 25
+        },
+        {
+          "action_horizon": 32,
+          "action_inference_steps": 50,
+          "action_per_frame": 16,
+          "backend": "lingbot_va",
+          "condition": "video",
+          "frame_chunk_size": 2,
+          "frame_st_id": 26,
+          "guidance_scale": 5,
+          "observation": {
+            "camera_layout": "latent_wrists_above_head",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ]
+          },
+          "seed": 10021,
+          "video_exec_step": -1,
+          "video_inference_steps": 25
+        },
+        {
+          "action_horizon": 32,
+          "action_inference_steps": 50,
+          "action_per_frame": 16,
+          "backend": "lingbot_va",
+          "condition": "video",
+          "frame_chunk_size": 2,
+          "frame_st_id": 28,
+          "guidance_scale": 5,
+          "observation": {
+            "camera_layout": "latent_wrists_above_head",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ]
+          },
+          "seed": 10022,
+          "video_exec_step": -1,
+          "video_inference_steps": 25
+        },
+        {
+          "action_horizon": 32,
+          "action_inference_steps": 50,
+          "action_per_frame": 16,
+          "backend": "lingbot_va",
+          "condition": "video",
+          "frame_chunk_size": 2,
+          "frame_st_id": 30,
+          "guidance_scale": 5,
+          "observation": {
+            "camera_layout": "latent_wrists_above_head",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ]
+          },
+          "seed": 10023,
+          "video_exec_step": -1,
+          "video_inference_steps": 25
+        },
+        {
+          "action_horizon": 32,
+          "action_inference_steps": 50,
+          "action_per_frame": 16,
+          "backend": "lingbot_va",
+          "condition": "video",
+          "frame_chunk_size": 2,
+          "frame_st_id": 32,
+          "guidance_scale": 5,
+          "observation": {
+            "camera_layout": "latent_wrists_above_head",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ]
+          },
+          "seed": 10024,
+          "video_exec_step": -1,
+          "video_inference_steps": 25
+        },
+        {
+          "action_horizon": 32,
+          "action_inference_steps": 50,
+          "action_per_frame": 16,
+          "backend": "lingbot_va",
+          "condition": "video",
+          "frame_chunk_size": 2,
+          "frame_st_id": 34,
+          "guidance_scale": 5,
+          "observation": {
+            "camera_layout": "latent_wrists_above_head",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ]
+          },
+          "seed": 10025,
+          "video_exec_step": -1,
+          "video_inference_steps": 25
+        },
+        {
+          "action_horizon": 32,
+          "action_inference_steps": 50,
+          "action_per_frame": 16,
+          "backend": "lingbot_va",
+          "condition": "video",
+          "frame_chunk_size": 2,
+          "frame_st_id": 36,
+          "guidance_scale": 5,
+          "observation": {
+            "camera_layout": "latent_wrists_above_head",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ]
+          },
+          "seed": 10026,
+          "video_exec_step": -1,
+          "video_inference_steps": 25
+        },
+        {
+          "action_horizon": 32,
+          "action_inference_steps": 50,
+          "action_per_frame": 16,
+          "backend": "lingbot_va",
+          "condition": "video",
+          "frame_chunk_size": 2,
+          "frame_st_id": 38,
+          "guidance_scale": 5,
+          "observation": {
+            "camera_layout": "latent_wrists_above_head",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ]
+          },
+          "seed": 10027,
+          "video_exec_step": -1,
+          "video_inference_steps": 25
+        },
+        {
+          "action_horizon": 32,
+          "action_inference_steps": 50,
+          "action_per_frame": 16,
+          "backend": "lingbot_va",
+          "condition": "video",
+          "frame_chunk_size": 2,
+          "frame_st_id": 40,
+          "guidance_scale": 5,
+          "observation": {
+            "camera_layout": "latent_wrists_above_head",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ]
+          },
+          "seed": 10028,
+          "video_exec_step": -1,
+          "video_inference_steps": 25
+        },
+        {
+          "action_horizon": 32,
+          "action_inference_steps": 50,
+          "action_per_frame": 16,
+          "backend": "lingbot_va",
+          "condition": "video",
+          "frame_chunk_size": 2,
+          "frame_st_id": 42,
+          "guidance_scale": 5,
+          "observation": {
+            "camera_layout": "latent_wrists_above_head",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ]
+          },
+          "seed": 10029,
+          "video_exec_step": -1,
+          "video_inference_steps": 25
+        },
+        {
+          "action_horizon": 32,
+          "action_inference_steps": 50,
+          "action_per_frame": 16,
+          "backend": "lingbot_va",
+          "condition": "video",
+          "frame_chunk_size": 2,
+          "frame_st_id": 44,
+          "guidance_scale": 5,
+          "observation": {
+            "camera_layout": "latent_wrists_above_head",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ]
+          },
+          "seed": 10030,
+          "video_exec_step": -1,
+          "video_inference_steps": 25
+        },
+        {
+          "action_horizon": 32,
+          "action_inference_steps": 50,
+          "action_per_frame": 16,
+          "backend": "lingbot_va",
+          "condition": "video",
+          "frame_chunk_size": 2,
+          "frame_st_id": 46,
+          "guidance_scale": 5,
+          "observation": {
+            "camera_layout": "latent_wrists_above_head",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ]
+          },
+          "seed": 10031,
+          "video_exec_step": -1,
+          "video_inference_steps": 25
+        },
+        {
+          "action_horizon": 32,
+          "action_inference_steps": 50,
+          "action_per_frame": 16,
+          "backend": "lingbot_va",
+          "condition": "video",
+          "frame_chunk_size": 2,
+          "frame_st_id": 48,
+          "guidance_scale": 5,
+          "observation": {
+            "camera_layout": "latent_wrists_above_head",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ]
+          },
+          "seed": 10032,
+          "video_exec_step": -1,
+          "video_inference_steps": 25
+        },
+        {
+          "action_horizon": 32,
+          "action_inference_steps": 50,
+          "action_per_frame": 16,
+          "backend": "lingbot_va",
+          "condition": "video",
+          "frame_chunk_size": 2,
+          "frame_st_id": 50,
+          "guidance_scale": 5,
+          "observation": {
+            "camera_layout": "latent_wrists_above_head",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ]
+          },
+          "seed": 10033,
+          "video_exec_step": -1,
+          "video_inference_steps": 25
+        },
+        {
+          "action_horizon": 32,
+          "action_inference_steps": 50,
+          "action_per_frame": 16,
+          "backend": "lingbot_va",
+          "condition": "video",
+          "frame_chunk_size": 2,
+          "frame_st_id": 52,
+          "guidance_scale": 5,
+          "observation": {
+            "camera_layout": "latent_wrists_above_head",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ]
+          },
+          "seed": 10034,
+          "video_exec_step": -1,
+          "video_inference_steps": 25
+        },
+        {
+          "action_horizon": 32,
+          "action_inference_steps": 50,
+          "action_per_frame": 16,
+          "backend": "lingbot_va",
+          "condition": "video",
+          "frame_chunk_size": 2,
+          "frame_st_id": 54,
+          "guidance_scale": 5,
+          "observation": {
+            "camera_layout": "latent_wrists_above_head",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ]
+          },
+          "seed": 10035,
+          "video_exec_step": -1,
+          "video_inference_steps": 25
+        },
+        {
+          "action_horizon": 32,
+          "action_inference_steps": 50,
+          "action_per_frame": 16,
+          "backend": "lingbot_va",
+          "condition": "video",
+          "frame_chunk_size": 2,
+          "frame_st_id": 56,
+          "guidance_scale": 5,
+          "observation": {
+            "camera_layout": "latent_wrists_above_head",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ]
+          },
+          "seed": 10036,
+          "video_exec_step": -1,
+          "video_inference_steps": 25
+        }
+      ],
+      "instruction": "Use the left arm to pick the ceramic mug, turn it, place it, then hang on the metal rack.",
+      "policy_steps": 900,
+      "seed": 10008,
+      "success": false,
+      "termination_reason": "max_steps"
+    },
+    {
+      "episode": 6,
+      "inference_calls": 29,
+      "inference_latency_ms": [
+        4488.713230937719,
+        4706.789908930659,
+        4810.395606094971,
+        4893.7471359968185,
+        4958.009746158496,
+        5010.818541049957,
+        5068.640162004158,
+        5117.9438850376755,
+        5202.653412939981,
+        5290.8649342134595,
+        5376.056309090927,
+        5490.6398670282215,
+        5575.914368033409,
+        5649.126807926223,
+        5747.2464558668435,
+        5856.766168028116,
+        5931.016720831394,
+        6033.978586085141,
+        6130.636401008815,
+        6203.926804941148,
+        6296.244540950283,
+        6415.598978986964,
+        6503.137079067528,
+        6561.813612934202,
+        6652.3451211396605,
+        6773.277322994545,
+        6837.753681000322,
+        6955.631242133677,
+        7031.286490848288
+      ],
+      "inference_metadata": [
+        {
+          "action_horizon": 32,
+          "action_inference_steps": 50,
+          "action_per_frame": 16,
+          "backend": "lingbot_va",
+          "condition": "video",
+          "frame_chunk_size": 2,
+          "frame_st_id": 0,
+          "guidance_scale": 5,
+          "observation": {
+            "camera_layout": "latent_wrists_above_head",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ],
+            "seed": 10009,
+            "task_name": "hanging_mug"
+          },
+          "seed": 10009,
+          "video_exec_step": -1,
+          "video_inference_steps": 25
+        },
+        {
+          "action_horizon": 32,
+          "action_inference_steps": 50,
+          "action_per_frame": 16,
+          "backend": "lingbot_va",
+          "condition": "video",
+          "frame_chunk_size": 2,
+          "frame_st_id": 2,
+          "guidance_scale": 5,
+          "observation": {
+            "camera_layout": "latent_wrists_above_head",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ]
+          },
+          "seed": 10010,
+          "video_exec_step": -1,
+          "video_inference_steps": 25
+        },
+        {
+          "action_horizon": 32,
+          "action_inference_steps": 50,
+          "action_per_frame": 16,
+          "backend": "lingbot_va",
+          "condition": "video",
+          "frame_chunk_size": 2,
+          "frame_st_id": 4,
+          "guidance_scale": 5,
+          "observation": {
+            "camera_layout": "latent_wrists_above_head",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ]
+          },
+          "seed": 10011,
+          "video_exec_step": -1,
+          "video_inference_steps": 25
+        },
+        {
+          "action_horizon": 32,
+          "action_inference_steps": 50,
+          "action_per_frame": 16,
+          "backend": "lingbot_va",
+          "condition": "video",
+          "frame_chunk_size": 2,
+          "frame_st_id": 6,
+          "guidance_scale": 5,
+          "observation": {
+            "camera_layout": "latent_wrists_above_head",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ]
+          },
+          "seed": 10012,
+          "video_exec_step": -1,
+          "video_inference_steps": 25
+        },
+        {
+          "action_horizon": 32,
+          "action_inference_steps": 50,
+          "action_per_frame": 16,
+          "backend": "lingbot_va",
+          "condition": "video",
+          "frame_chunk_size": 2,
+          "frame_st_id": 8,
+          "guidance_scale": 5,
+          "observation": {
+            "camera_layout": "latent_wrists_above_head",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ]
+          },
+          "seed": 10013,
+          "video_exec_step": -1,
+          "video_inference_steps": 25
+        },
+        {
+          "action_horizon": 32,
+          "action_inference_steps": 50,
+          "action_per_frame": 16,
+          "backend": "lingbot_va",
+          "condition": "video",
+          "frame_chunk_size": 2,
+          "frame_st_id": 10,
+          "guidance_scale": 5,
+          "observation": {
+            "camera_layout": "latent_wrists_above_head",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ]
+          },
+          "seed": 10014,
+          "video_exec_step": -1,
+          "video_inference_steps": 25
+        },
+        {
+          "action_horizon": 32,
+          "action_inference_steps": 50,
+          "action_per_frame": 16,
+          "backend": "lingbot_va",
+          "condition": "video",
+          "frame_chunk_size": 2,
+          "frame_st_id": 12,
+          "guidance_scale": 5,
+          "observation": {
+            "camera_layout": "latent_wrists_above_head",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ]
+          },
+          "seed": 10015,
+          "video_exec_step": -1,
+          "video_inference_steps": 25
+        },
+        {
+          "action_horizon": 32,
+          "action_inference_steps": 50,
+          "action_per_frame": 16,
+          "backend": "lingbot_va",
+          "condition": "video",
+          "frame_chunk_size": 2,
+          "frame_st_id": 14,
+          "guidance_scale": 5,
+          "observation": {
+            "camera_layout": "latent_wrists_above_head",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ]
+          },
+          "seed": 10016,
+          "video_exec_step": -1,
+          "video_inference_steps": 25
+        },
+        {
+          "action_horizon": 32,
+          "action_inference_steps": 50,
+          "action_per_frame": 16,
+          "backend": "lingbot_va",
+          "condition": "video",
+          "frame_chunk_size": 2,
+          "frame_st_id": 16,
+          "guidance_scale": 5,
+          "observation": {
+            "camera_layout": "latent_wrists_above_head",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ]
+          },
+          "seed": 10017,
+          "video_exec_step": -1,
+          "video_inference_steps": 25
+        },
+        {
+          "action_horizon": 32,
+          "action_inference_steps": 50,
+          "action_per_frame": 16,
+          "backend": "lingbot_va",
+          "condition": "video",
+          "frame_chunk_size": 2,
+          "frame_st_id": 18,
+          "guidance_scale": 5,
+          "observation": {
+            "camera_layout": "latent_wrists_above_head",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ]
+          },
+          "seed": 10018,
+          "video_exec_step": -1,
+          "video_inference_steps": 25
+        },
+        {
+          "action_horizon": 32,
+          "action_inference_steps": 50,
+          "action_per_frame": 16,
+          "backend": "lingbot_va",
+          "condition": "video",
+          "frame_chunk_size": 2,
+          "frame_st_id": 20,
+          "guidance_scale": 5,
+          "observation": {
+            "camera_layout": "latent_wrists_above_head",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ]
+          },
+          "seed": 10019,
+          "video_exec_step": -1,
+          "video_inference_steps": 25
+        },
+        {
+          "action_horizon": 32,
+          "action_inference_steps": 50,
+          "action_per_frame": 16,
+          "backend": "lingbot_va",
+          "condition": "video",
+          "frame_chunk_size": 2,
+          "frame_st_id": 22,
+          "guidance_scale": 5,
+          "observation": {
+            "camera_layout": "latent_wrists_above_head",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ]
+          },
+          "seed": 10020,
+          "video_exec_step": -1,
+          "video_inference_steps": 25
+        },
+        {
+          "action_horizon": 32,
+          "action_inference_steps": 50,
+          "action_per_frame": 16,
+          "backend": "lingbot_va",
+          "condition": "video",
+          "frame_chunk_size": 2,
+          "frame_st_id": 24,
+          "guidance_scale": 5,
+          "observation": {
+            "camera_layout": "latent_wrists_above_head",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ]
+          },
+          "seed": 10021,
+          "video_exec_step": -1,
+          "video_inference_steps": 25
+        },
+        {
+          "action_horizon": 32,
+          "action_inference_steps": 50,
+          "action_per_frame": 16,
+          "backend": "lingbot_va",
+          "condition": "video",
+          "frame_chunk_size": 2,
+          "frame_st_id": 26,
+          "guidance_scale": 5,
+          "observation": {
+            "camera_layout": "latent_wrists_above_head",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ]
+          },
+          "seed": 10022,
+          "video_exec_step": -1,
+          "video_inference_steps": 25
+        },
+        {
+          "action_horizon": 32,
+          "action_inference_steps": 50,
+          "action_per_frame": 16,
+          "backend": "lingbot_va",
+          "condition": "video",
+          "frame_chunk_size": 2,
+          "frame_st_id": 28,
+          "guidance_scale": 5,
+          "observation": {
+            "camera_layout": "latent_wrists_above_head",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ]
+          },
+          "seed": 10023,
+          "video_exec_step": -1,
+          "video_inference_steps": 25
+        },
+        {
+          "action_horizon": 32,
+          "action_inference_steps": 50,
+          "action_per_frame": 16,
+          "backend": "lingbot_va",
+          "condition": "video",
+          "frame_chunk_size": 2,
+          "frame_st_id": 30,
+          "guidance_scale": 5,
+          "observation": {
+            "camera_layout": "latent_wrists_above_head",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ]
+          },
+          "seed": 10024,
+          "video_exec_step": -1,
+          "video_inference_steps": 25
+        },
+        {
+          "action_horizon": 32,
+          "action_inference_steps": 50,
+          "action_per_frame": 16,
+          "backend": "lingbot_va",
+          "condition": "video",
+          "frame_chunk_size": 2,
+          "frame_st_id": 32,
+          "guidance_scale": 5,
+          "observation": {
+            "camera_layout": "latent_wrists_above_head",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ]
+          },
+          "seed": 10025,
+          "video_exec_step": -1,
+          "video_inference_steps": 25
+        },
+        {
+          "action_horizon": 32,
+          "action_inference_steps": 50,
+          "action_per_frame": 16,
+          "backend": "lingbot_va",
+          "condition": "video",
+          "frame_chunk_size": 2,
+          "frame_st_id": 34,
+          "guidance_scale": 5,
+          "observation": {
+            "camera_layout": "latent_wrists_above_head",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ]
+          },
+          "seed": 10026,
+          "video_exec_step": -1,
+          "video_inference_steps": 25
+        },
+        {
+          "action_horizon": 32,
+          "action_inference_steps": 50,
+          "action_per_frame": 16,
+          "backend": "lingbot_va",
+          "condition": "video",
+          "frame_chunk_size": 2,
+          "frame_st_id": 36,
+          "guidance_scale": 5,
+          "observation": {
+            "camera_layout": "latent_wrists_above_head",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ]
+          },
+          "seed": 10027,
+          "video_exec_step": -1,
+          "video_inference_steps": 25
+        },
+        {
+          "action_horizon": 32,
+          "action_inference_steps": 50,
+          "action_per_frame": 16,
+          "backend": "lingbot_va",
+          "condition": "video",
+          "frame_chunk_size": 2,
+          "frame_st_id": 38,
+          "guidance_scale": 5,
+          "observation": {
+            "camera_layout": "latent_wrists_above_head",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ]
+          },
+          "seed": 10028,
+          "video_exec_step": -1,
+          "video_inference_steps": 25
+        },
+        {
+          "action_horizon": 32,
+          "action_inference_steps": 50,
+          "action_per_frame": 16,
+          "backend": "lingbot_va",
+          "condition": "video",
+          "frame_chunk_size": 2,
+          "frame_st_id": 40,
+          "guidance_scale": 5,
+          "observation": {
+            "camera_layout": "latent_wrists_above_head",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ]
+          },
+          "seed": 10029,
+          "video_exec_step": -1,
+          "video_inference_steps": 25
+        },
+        {
+          "action_horizon": 32,
+          "action_inference_steps": 50,
+          "action_per_frame": 16,
+          "backend": "lingbot_va",
+          "condition": "video",
+          "frame_chunk_size": 2,
+          "frame_st_id": 42,
+          "guidance_scale": 5,
+          "observation": {
+            "camera_layout": "latent_wrists_above_head",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ]
+          },
+          "seed": 10030,
+          "video_exec_step": -1,
+          "video_inference_steps": 25
+        },
+        {
+          "action_horizon": 32,
+          "action_inference_steps": 50,
+          "action_per_frame": 16,
+          "backend": "lingbot_va",
+          "condition": "video",
+          "frame_chunk_size": 2,
+          "frame_st_id": 44,
+          "guidance_scale": 5,
+          "observation": {
+            "camera_layout": "latent_wrists_above_head",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ]
+          },
+          "seed": 10031,
+          "video_exec_step": -1,
+          "video_inference_steps": 25
+        },
+        {
+          "action_horizon": 32,
+          "action_inference_steps": 50,
+          "action_per_frame": 16,
+          "backend": "lingbot_va",
+          "condition": "video",
+          "frame_chunk_size": 2,
+          "frame_st_id": 46,
+          "guidance_scale": 5,
+          "observation": {
+            "camera_layout": "latent_wrists_above_head",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ]
+          },
+          "seed": 10032,
+          "video_exec_step": -1,
+          "video_inference_steps": 25
+        },
+        {
+          "action_horizon": 32,
+          "action_inference_steps": 50,
+          "action_per_frame": 16,
+          "backend": "lingbot_va",
+          "condition": "video",
+          "frame_chunk_size": 2,
+          "frame_st_id": 48,
+          "guidance_scale": 5,
+          "observation": {
+            "camera_layout": "latent_wrists_above_head",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ]
+          },
+          "seed": 10033,
+          "video_exec_step": -1,
+          "video_inference_steps": 25
+        },
+        {
+          "action_horizon": 32,
+          "action_inference_steps": 50,
+          "action_per_frame": 16,
+          "backend": "lingbot_va",
+          "condition": "video",
+          "frame_chunk_size": 2,
+          "frame_st_id": 50,
+          "guidance_scale": 5,
+          "observation": {
+            "camera_layout": "latent_wrists_above_head",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ]
+          },
+          "seed": 10034,
+          "video_exec_step": -1,
+          "video_inference_steps": 25
+        },
+        {
+          "action_horizon": 32,
+          "action_inference_steps": 50,
+          "action_per_frame": 16,
+          "backend": "lingbot_va",
+          "condition": "video",
+          "frame_chunk_size": 2,
+          "frame_st_id": 52,
+          "guidance_scale": 5,
+          "observation": {
+            "camera_layout": "latent_wrists_above_head",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ]
+          },
+          "seed": 10035,
+          "video_exec_step": -1,
+          "video_inference_steps": 25
+        },
+        {
+          "action_horizon": 32,
+          "action_inference_steps": 50,
+          "action_per_frame": 16,
+          "backend": "lingbot_va",
+          "condition": "video",
+          "frame_chunk_size": 2,
+          "frame_st_id": 54,
+          "guidance_scale": 5,
+          "observation": {
+            "camera_layout": "latent_wrists_above_head",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ]
+          },
+          "seed": 10036,
+          "video_exec_step": -1,
+          "video_inference_steps": 25
+        },
+        {
+          "action_horizon": 32,
+          "action_inference_steps": 50,
+          "action_per_frame": 16,
+          "backend": "lingbot_va",
+          "condition": "video",
+          "frame_chunk_size": 2,
+          "frame_st_id": 56,
+          "guidance_scale": 5,
+          "observation": {
+            "camera_layout": "latent_wrists_above_head",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ]
+          },
+          "seed": 10037,
+          "video_exec_step": -1,
+          "video_inference_steps": 25
+        }
+      ],
+      "instruction": "Pick up the cylindrical coffee mug with handle, turn it, place it centrally, then hang the cylindrical coffee mug with handle onto the metal rack.",
+      "policy_steps": 900,
+      "seed": 10009,
+      "success": false,
+      "termination_reason": "max_steps"
+    },
+    {
+      "episode": 7,
+      "inference_calls": 29,
+      "inference_latency_ms": [
+        4530.996897025034,
+        4744.814480887726,
+        4810.487840790302,
+        4886.883883038536,
+        4925.4956911318,
+        4983.946588821709,
+        5066.476654959843,
+        5118.258343078196,
+        5214.9345118086785,
+        5308.797041885555,
+        5396.584747824818,
+        5467.337667942047,
+        5569.547593826428,
+        5659.509001066908,
+        5754.233764950186,
+        5848.931721877307,
+        5915.385280968621,
+        6044.046845054254,
+        6107.855451991782,
+        6216.674582101405,
+        6315.816759131849,
+        6388.932675821707,
+        6496.950000990182,
+        6571.812480920926,
+        6687.616873998195,
+        6729.563927976415,
+        6865.032498957589,
+        6901.874684961513,
+        6986.976258922368
+      ],
+      "inference_metadata": [
+        {
+          "action_horizon": 32,
+          "action_inference_steps": 50,
+          "action_per_frame": 16,
+          "backend": "lingbot_va",
+          "condition": "video",
+          "frame_chunk_size": 2,
+          "frame_st_id": 0,
+          "guidance_scale": 5,
+          "observation": {
+            "camera_layout": "latent_wrists_above_head",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ],
+            "seed": 10010,
+            "task_name": "hanging_mug"
+          },
+          "seed": 10010,
+          "video_exec_step": -1,
+          "video_inference_steps": 25
+        },
+        {
+          "action_horizon": 32,
+          "action_inference_steps": 50,
+          "action_per_frame": 16,
+          "backend": "lingbot_va",
+          "condition": "video",
+          "frame_chunk_size": 2,
+          "frame_st_id": 2,
+          "guidance_scale": 5,
+          "observation": {
+            "camera_layout": "latent_wrists_above_head",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ]
+          },
+          "seed": 10011,
+          "video_exec_step": -1,
+          "video_inference_steps": 25
+        },
+        {
+          "action_horizon": 32,
+          "action_inference_steps": 50,
+          "action_per_frame": 16,
+          "backend": "lingbot_va",
+          "condition": "video",
+          "frame_chunk_size": 2,
+          "frame_st_id": 4,
+          "guidance_scale": 5,
+          "observation": {
+            "camera_layout": "latent_wrists_above_head",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ]
+          },
+          "seed": 10012,
+          "video_exec_step": -1,
+          "video_inference_steps": 25
+        },
+        {
+          "action_horizon": 32,
+          "action_inference_steps": 50,
+          "action_per_frame": 16,
+          "backend": "lingbot_va",
+          "condition": "video",
+          "frame_chunk_size": 2,
+          "frame_st_id": 6,
+          "guidance_scale": 5,
+          "observation": {
+            "camera_layout": "latent_wrists_above_head",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ]
+          },
+          "seed": 10013,
+          "video_exec_step": -1,
+          "video_inference_steps": 25
+        },
+        {
+          "action_horizon": 32,
+          "action_inference_steps": 50,
+          "action_per_frame": 16,
+          "backend": "lingbot_va",
+          "condition": "video",
+          "frame_chunk_size": 2,
+          "frame_st_id": 8,
+          "guidance_scale": 5,
+          "observation": {
+            "camera_layout": "latent_wrists_above_head",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ]
+          },
+          "seed": 10014,
+          "video_exec_step": -1,
+          "video_inference_steps": 25
+        },
+        {
+          "action_horizon": 32,
+          "action_inference_steps": 50,
+          "action_per_frame": 16,
+          "backend": "lingbot_va",
+          "condition": "video",
+          "frame_chunk_size": 2,
+          "frame_st_id": 10,
+          "guidance_scale": 5,
+          "observation": {
+            "camera_layout": "latent_wrists_above_head",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ]
+          },
+          "seed": 10015,
+          "video_exec_step": -1,
+          "video_inference_steps": 25
+        },
+        {
+          "action_horizon": 32,
+          "action_inference_steps": 50,
+          "action_per_frame": 16,
+          "backend": "lingbot_va",
+          "condition": "video",
+          "frame_chunk_size": 2,
+          "frame_st_id": 12,
+          "guidance_scale": 5,
+          "observation": {
+            "camera_layout": "latent_wrists_above_head",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ]
+          },
+          "seed": 10016,
+          "video_exec_step": -1,
+          "video_inference_steps": 25
+        },
+        {
+          "action_horizon": 32,
+          "action_inference_steps": 50,
+          "action_per_frame": 16,
+          "backend": "lingbot_va",
+          "condition": "video",
+          "frame_chunk_size": 2,
+          "frame_st_id": 14,
+          "guidance_scale": 5,
+          "observation": {
+            "camera_layout": "latent_wrists_above_head",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ]
+          },
+          "seed": 10017,
+          "video_exec_step": -1,
+          "video_inference_steps": 25
+        },
+        {
+          "action_horizon": 32,
+          "action_inference_steps": 50,
+          "action_per_frame": 16,
+          "backend": "lingbot_va",
+          "condition": "video",
+          "frame_chunk_size": 2,
+          "frame_st_id": 16,
+          "guidance_scale": 5,
+          "observation": {
+            "camera_layout": "latent_wrists_above_head",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ]
+          },
+          "seed": 10018,
+          "video_exec_step": -1,
+          "video_inference_steps": 25
+        },
+        {
+          "action_horizon": 32,
+          "action_inference_steps": 50,
+          "action_per_frame": 16,
+          "backend": "lingbot_va",
+          "condition": "video",
+          "frame_chunk_size": 2,
+          "frame_st_id": 18,
+          "guidance_scale": 5,
+          "observation": {
+            "camera_layout": "latent_wrists_above_head",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ]
+          },
+          "seed": 10019,
+          "video_exec_step": -1,
+          "video_inference_steps": 25
+        },
+        {
+          "action_horizon": 32,
+          "action_inference_steps": 50,
+          "action_per_frame": 16,
+          "backend": "lingbot_va",
+          "condition": "video",
+          "frame_chunk_size": 2,
+          "frame_st_id": 20,
+          "guidance_scale": 5,
+          "observation": {
+            "camera_layout": "latent_wrists_above_head",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ]
+          },
+          "seed": 10020,
+          "video_exec_step": -1,
+          "video_inference_steps": 25
+        },
+        {
+          "action_horizon": 32,
+          "action_inference_steps": 50,
+          "action_per_frame": 16,
+          "backend": "lingbot_va",
+          "condition": "video",
+          "frame_chunk_size": 2,
+          "frame_st_id": 22,
+          "guidance_scale": 5,
+          "observation": {
+            "camera_layout": "latent_wrists_above_head",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ]
+          },
+          "seed": 10021,
+          "video_exec_step": -1,
+          "video_inference_steps": 25
+        },
+        {
+          "action_horizon": 32,
+          "action_inference_steps": 50,
+          "action_per_frame": 16,
+          "backend": "lingbot_va",
+          "condition": "video",
+          "frame_chunk_size": 2,
+          "frame_st_id": 24,
+          "guidance_scale": 5,
+          "observation": {
+            "camera_layout": "latent_wrists_above_head",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ]
+          },
+          "seed": 10022,
+          "video_exec_step": -1,
+          "video_inference_steps": 25
+        },
+        {
+          "action_horizon": 32,
+          "action_inference_steps": 50,
+          "action_per_frame": 16,
+          "backend": "lingbot_va",
+          "condition": "video",
+          "frame_chunk_size": 2,
+          "frame_st_id": 26,
+          "guidance_scale": 5,
+          "observation": {
+            "camera_layout": "latent_wrists_above_head",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ]
+          },
+          "seed": 10023,
+          "video_exec_step": -1,
+          "video_inference_steps": 25
+        },
+        {
+          "action_horizon": 32,
+          "action_inference_steps": 50,
+          "action_per_frame": 16,
+          "backend": "lingbot_va",
+          "condition": "video",
+          "frame_chunk_size": 2,
+          "frame_st_id": 28,
+          "guidance_scale": 5,
+          "observation": {
+            "camera_layout": "latent_wrists_above_head",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ]
+          },
+          "seed": 10024,
+          "video_exec_step": -1,
+          "video_inference_steps": 25
+        },
+        {
+          "action_horizon": 32,
+          "action_inference_steps": 50,
+          "action_per_frame": 16,
+          "backend": "lingbot_va",
+          "condition": "video",
+          "frame_chunk_size": 2,
+          "frame_st_id": 30,
+          "guidance_scale": 5,
+          "observation": {
+            "camera_layout": "latent_wrists_above_head",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ]
+          },
+          "seed": 10025,
+          "video_exec_step": -1,
+          "video_inference_steps": 25
+        },
+        {
+          "action_horizon": 32,
+          "action_inference_steps": 50,
+          "action_per_frame": 16,
+          "backend": "lingbot_va",
+          "condition": "video",
+          "frame_chunk_size": 2,
+          "frame_st_id": 32,
+          "guidance_scale": 5,
+          "observation": {
+            "camera_layout": "latent_wrists_above_head",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ]
+          },
+          "seed": 10026,
+          "video_exec_step": -1,
+          "video_inference_steps": 25
+        },
+        {
+          "action_horizon": 32,
+          "action_inference_steps": 50,
+          "action_per_frame": 16,
+          "backend": "lingbot_va",
+          "condition": "video",
+          "frame_chunk_size": 2,
+          "frame_st_id": 34,
+          "guidance_scale": 5,
+          "observation": {
+            "camera_layout": "latent_wrists_above_head",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ]
+          },
+          "seed": 10027,
+          "video_exec_step": -1,
+          "video_inference_steps": 25
+        },
+        {
+          "action_horizon": 32,
+          "action_inference_steps": 50,
+          "action_per_frame": 16,
+          "backend": "lingbot_va",
+          "condition": "video",
+          "frame_chunk_size": 2,
+          "frame_st_id": 36,
+          "guidance_scale": 5,
+          "observation": {
+            "camera_layout": "latent_wrists_above_head",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ]
+          },
+          "seed": 10028,
+          "video_exec_step": -1,
+          "video_inference_steps": 25
+        },
+        {
+          "action_horizon": 32,
+          "action_inference_steps": 50,
+          "action_per_frame": 16,
+          "backend": "lingbot_va",
+          "condition": "video",
+          "frame_chunk_size": 2,
+          "frame_st_id": 38,
+          "guidance_scale": 5,
+          "observation": {
+            "camera_layout": "latent_wrists_above_head",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ]
+          },
+          "seed": 10029,
+          "video_exec_step": -1,
+          "video_inference_steps": 25
+        },
+        {
+          "action_horizon": 32,
+          "action_inference_steps": 50,
+          "action_per_frame": 16,
+          "backend": "lingbot_va",
+          "condition": "video",
+          "frame_chunk_size": 2,
+          "frame_st_id": 40,
+          "guidance_scale": 5,
+          "observation": {
+            "camera_layout": "latent_wrists_above_head",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ]
+          },
+          "seed": 10030,
+          "video_exec_step": -1,
+          "video_inference_steps": 25
+        },
+        {
+          "action_horizon": 32,
+          "action_inference_steps": 50,
+          "action_per_frame": 16,
+          "backend": "lingbot_va",
+          "condition": "video",
+          "frame_chunk_size": 2,
+          "frame_st_id": 42,
+          "guidance_scale": 5,
+          "observation": {
+            "camera_layout": "latent_wrists_above_head",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ]
+          },
+          "seed": 10031,
+          "video_exec_step": -1,
+          "video_inference_steps": 25
+        },
+        {
+          "action_horizon": 32,
+          "action_inference_steps": 50,
+          "action_per_frame": 16,
+          "backend": "lingbot_va",
+          "condition": "video",
+          "frame_chunk_size": 2,
+          "frame_st_id": 44,
+          "guidance_scale": 5,
+          "observation": {
+            "camera_layout": "latent_wrists_above_head",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ]
+          },
+          "seed": 10032,
+          "video_exec_step": -1,
+          "video_inference_steps": 25
+        },
+        {
+          "action_horizon": 32,
+          "action_inference_steps": 50,
+          "action_per_frame": 16,
+          "backend": "lingbot_va",
+          "condition": "video",
+          "frame_chunk_size": 2,
+          "frame_st_id": 46,
+          "guidance_scale": 5,
+          "observation": {
+            "camera_layout": "latent_wrists_above_head",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ]
+          },
+          "seed": 10033,
+          "video_exec_step": -1,
+          "video_inference_steps": 25
+        },
+        {
+          "action_horizon": 32,
+          "action_inference_steps": 50,
+          "action_per_frame": 16,
+          "backend": "lingbot_va",
+          "condition": "video",
+          "frame_chunk_size": 2,
+          "frame_st_id": 48,
+          "guidance_scale": 5,
+          "observation": {
+            "camera_layout": "latent_wrists_above_head",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ]
+          },
+          "seed": 10034,
+          "video_exec_step": -1,
+          "video_inference_steps": 25
+        },
+        {
+          "action_horizon": 32,
+          "action_inference_steps": 50,
+          "action_per_frame": 16,
+          "backend": "lingbot_va",
+          "condition": "video",
+          "frame_chunk_size": 2,
+          "frame_st_id": 50,
+          "guidance_scale": 5,
+          "observation": {
+            "camera_layout": "latent_wrists_above_head",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ]
+          },
+          "seed": 10035,
+          "video_exec_step": -1,
+          "video_inference_steps": 25
+        },
+        {
+          "action_horizon": 32,
+          "action_inference_steps": 50,
+          "action_per_frame": 16,
+          "backend": "lingbot_va",
+          "condition": "video",
+          "frame_chunk_size": 2,
+          "frame_st_id": 52,
+          "guidance_scale": 5,
+          "observation": {
+            "camera_layout": "latent_wrists_above_head",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ]
+          },
+          "seed": 10036,
+          "video_exec_step": -1,
+          "video_inference_steps": 25
+        },
+        {
+          "action_horizon": 32,
+          "action_inference_steps": 50,
+          "action_per_frame": 16,
+          "backend": "lingbot_va",
+          "condition": "video",
+          "frame_chunk_size": 2,
+          "frame_st_id": 54,
+          "guidance_scale": 5,
+          "observation": {
+            "camera_layout": "latent_wrists_above_head",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ]
+          },
+          "seed": 10037,
+          "video_exec_step": -1,
+          "video_inference_steps": 25
+        },
+        {
+          "action_horizon": 32,
+          "action_inference_steps": 50,
+          "action_per_frame": 16,
+          "backend": "lingbot_va",
+          "condition": "video",
+          "frame_chunk_size": 2,
+          "frame_st_id": 56,
+          "guidance_scale": 5,
+          "observation": {
+            "camera_layout": "latent_wrists_above_head",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ]
+          },
+          "seed": 10038,
+          "video_exec_step": -1,
+          "video_inference_steps": 25
+        }
+      ],
+      "instruction": "Pick the starbucks green mug up, twist it, place it back, then hang it onto the metallic angular rack with rod pair.",
+      "policy_steps": 900,
+      "seed": 10010,
+      "success": false,
+      "termination_reason": "max_steps"
+    },
+    {
+      "episode": 8,
+      "inference_calls": 29,
+      "inference_latency_ms": [
+        4495.864502154291,
+        4708.900083089247,
+        4819.382322952151,
+        4875.153653789312,
+        4945.941463112831,
+        4987.100078025833,
+        5058.539270190522,
+        5153.853612951934,
+        5226.106071844697,
+        5315.637785941362,
+        5386.43532898277,
+        5490.637534996495,
+        5570.962218102068,
+        5642.868852009997,
+        5769.324854016304,
+        5843.63095392473,
+        5931.889382889494,
+        6040.893501834944,
+        6116.4234729949385,
+        6202.444398077205,
+        6307.086472865194,
+        6391.963549889624,
+        6479.145634919405,
+        6612.498995149508,
+        6661.475847009569,
+        6738.426084863022,
+        6873.842627974227,
+        6960.738214896992,
+        7035.3655649814755
+      ],
+      "inference_metadata": [
+        {
+          "action_horizon": 32,
+          "action_inference_steps": 50,
+          "action_per_frame": 16,
+          "backend": "lingbot_va",
+          "condition": "video",
+          "frame_chunk_size": 2,
+          "frame_st_id": 0,
+          "guidance_scale": 5,
+          "observation": {
+            "camera_layout": "latent_wrists_above_head",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ],
+            "seed": 10011,
+            "task_name": "hanging_mug"
+          },
+          "seed": 10011,
+          "video_exec_step": -1,
+          "video_inference_steps": 25
+        },
+        {
+          "action_horizon": 32,
+          "action_inference_steps": 50,
+          "action_per_frame": 16,
+          "backend": "lingbot_va",
+          "condition": "video",
+          "frame_chunk_size": 2,
+          "frame_st_id": 2,
+          "guidance_scale": 5,
+          "observation": {
+            "camera_layout": "latent_wrists_above_head",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ]
+          },
+          "seed": 10012,
+          "video_exec_step": -1,
+          "video_inference_steps": 25
+        },
+        {
+          "action_horizon": 32,
+          "action_inference_steps": 50,
+          "action_per_frame": 16,
+          "backend": "lingbot_va",
+          "condition": "video",
+          "frame_chunk_size": 2,
+          "frame_st_id": 4,
+          "guidance_scale": 5,
+          "observation": {
+            "camera_layout": "latent_wrists_above_head",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ]
+          },
+          "seed": 10013,
+          "video_exec_step": -1,
+          "video_inference_steps": 25
+        },
+        {
+          "action_horizon": 32,
+          "action_inference_steps": 50,
+          "action_per_frame": 16,
+          "backend": "lingbot_va",
+          "condition": "video",
+          "frame_chunk_size": 2,
+          "frame_st_id": 6,
+          "guidance_scale": 5,
+          "observation": {
+            "camera_layout": "latent_wrists_above_head",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ]
+          },
+          "seed": 10014,
+          "video_exec_step": -1,
+          "video_inference_steps": 25
+        },
+        {
+          "action_horizon": 32,
+          "action_inference_steps": 50,
+          "action_per_frame": 16,
+          "backend": "lingbot_va",
+          "condition": "video",
+          "frame_chunk_size": 2,
+          "frame_st_id": 8,
+          "guidance_scale": 5,
+          "observation": {
+            "camera_layout": "latent_wrists_above_head",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ]
+          },
+          "seed": 10015,
+          "video_exec_step": -1,
+          "video_inference_steps": 25
+        },
+        {
+          "action_horizon": 32,
+          "action_inference_steps": 50,
+          "action_per_frame": 16,
+          "backend": "lingbot_va",
+          "condition": "video",
+          "frame_chunk_size": 2,
+          "frame_st_id": 10,
+          "guidance_scale": 5,
+          "observation": {
+            "camera_layout": "latent_wrists_above_head",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ]
+          },
+          "seed": 10016,
+          "video_exec_step": -1,
+          "video_inference_steps": 25
+        },
+        {
+          "action_horizon": 32,
+          "action_inference_steps": 50,
+          "action_per_frame": 16,
+          "backend": "lingbot_va",
+          "condition": "video",
+          "frame_chunk_size": 2,
+          "frame_st_id": 12,
+          "guidance_scale": 5,
+          "observation": {
+            "camera_layout": "latent_wrists_above_head",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ]
+          },
+          "seed": 10017,
+          "video_exec_step": -1,
+          "video_inference_steps": 25
+        },
+        {
+          "action_horizon": 32,
+          "action_inference_steps": 50,
+          "action_per_frame": 16,
+          "backend": "lingbot_va",
+          "condition": "video",
+          "frame_chunk_size": 2,
+          "frame_st_id": 14,
+          "guidance_scale": 5,
+          "observation": {
+            "camera_layout": "latent_wrists_above_head",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ]
+          },
+          "seed": 10018,
+          "video_exec_step": -1,
+          "video_inference_steps": 25
+        },
+        {
+          "action_horizon": 32,
+          "action_inference_steps": 50,
+          "action_per_frame": 16,
+          "backend": "lingbot_va",
+          "condition": "video",
+          "frame_chunk_size": 2,
+          "frame_st_id": 16,
+          "guidance_scale": 5,
+          "observation": {
+            "camera_layout": "latent_wrists_above_head",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ]
+          },
+          "seed": 10019,
+          "video_exec_step": -1,
+          "video_inference_steps": 25
+        },
+        {
+          "action_horizon": 32,
+          "action_inference_steps": 50,
+          "action_per_frame": 16,
+          "backend": "lingbot_va",
+          "condition": "video",
+          "frame_chunk_size": 2,
+          "frame_st_id": 18,
+          "guidance_scale": 5,
+          "observation": {
+            "camera_layout": "latent_wrists_above_head",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ]
+          },
+          "seed": 10020,
+          "video_exec_step": -1,
+          "video_inference_steps": 25
+        },
+        {
+          "action_horizon": 32,
+          "action_inference_steps": 50,
+          "action_per_frame": 16,
+          "backend": "lingbot_va",
+          "condition": "video",
+          "frame_chunk_size": 2,
+          "frame_st_id": 20,
+          "guidance_scale": 5,
+          "observation": {
+            "camera_layout": "latent_wrists_above_head",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ]
+          },
+          "seed": 10021,
+          "video_exec_step": -1,
+          "video_inference_steps": 25
+        },
+        {
+          "action_horizon": 32,
+          "action_inference_steps": 50,
+          "action_per_frame": 16,
+          "backend": "lingbot_va",
+          "condition": "video",
+          "frame_chunk_size": 2,
+          "frame_st_id": 22,
+          "guidance_scale": 5,
+          "observation": {
+            "camera_layout": "latent_wrists_above_head",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ]
+          },
+          "seed": 10022,
+          "video_exec_step": -1,
+          "video_inference_steps": 25
+        },
+        {
+          "action_horizon": 32,
+          "action_inference_steps": 50,
+          "action_per_frame": 16,
+          "backend": "lingbot_va",
+          "condition": "video",
+          "frame_chunk_size": 2,
+          "frame_st_id": 24,
+          "guidance_scale": 5,
+          "observation": {
+            "camera_layout": "latent_wrists_above_head",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ]
+          },
+          "seed": 10023,
+          "video_exec_step": -1,
+          "video_inference_steps": 25
+        },
+        {
+          "action_horizon": 32,
+          "action_inference_steps": 50,
+          "action_per_frame": 16,
+          "backend": "lingbot_va",
+          "condition": "video",
+          "frame_chunk_size": 2,
+          "frame_st_id": 26,
+          "guidance_scale": 5,
+          "observation": {
+            "camera_layout": "latent_wrists_above_head",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ]
+          },
+          "seed": 10024,
+          "video_exec_step": -1,
+          "video_inference_steps": 25
+        },
+        {
+          "action_horizon": 32,
+          "action_inference_steps": 50,
+          "action_per_frame": 16,
+          "backend": "lingbot_va",
+          "condition": "video",
+          "frame_chunk_size": 2,
+          "frame_st_id": 28,
+          "guidance_scale": 5,
+          "observation": {
+            "camera_layout": "latent_wrists_above_head",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ]
+          },
+          "seed": 10025,
+          "video_exec_step": -1,
+          "video_inference_steps": 25
+        },
+        {
+          "action_horizon": 32,
+          "action_inference_steps": 50,
+          "action_per_frame": 16,
+          "backend": "lingbot_va",
+          "condition": "video",
+          "frame_chunk_size": 2,
+          "frame_st_id": 30,
+          "guidance_scale": 5,
+          "observation": {
+            "camera_layout": "latent_wrists_above_head",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ]
+          },
+          "seed": 10026,
+          "video_exec_step": -1,
+          "video_inference_steps": 25
+        },
+        {
+          "action_horizon": 32,
+          "action_inference_steps": 50,
+          "action_per_frame": 16,
+          "backend": "lingbot_va",
+          "condition": "video",
+          "frame_chunk_size": 2,
+          "frame_st_id": 32,
+          "guidance_scale": 5,
+          "observation": {
+            "camera_layout": "latent_wrists_above_head",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ]
+          },
+          "seed": 10027,
+          "video_exec_step": -1,
+          "video_inference_steps": 25
+        },
+        {
+          "action_horizon": 32,
+          "action_inference_steps": 50,
+          "action_per_frame": 16,
+          "backend": "lingbot_va",
+          "condition": "video",
+          "frame_chunk_size": 2,
+          "frame_st_id": 34,
+          "guidance_scale": 5,
+          "observation": {
+            "camera_layout": "latent_wrists_above_head",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ]
+          },
+          "seed": 10028,
+          "video_exec_step": -1,
+          "video_inference_steps": 25
+        },
+        {
+          "action_horizon": 32,
+          "action_inference_steps": 50,
+          "action_per_frame": 16,
+          "backend": "lingbot_va",
+          "condition": "video",
+          "frame_chunk_size": 2,
+          "frame_st_id": 36,
+          "guidance_scale": 5,
+          "observation": {
+            "camera_layout": "latent_wrists_above_head",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ]
+          },
+          "seed": 10029,
+          "video_exec_step": -1,
+          "video_inference_steps": 25
+        },
+        {
+          "action_horizon": 32,
+          "action_inference_steps": 50,
+          "action_per_frame": 16,
+          "backend": "lingbot_va",
+          "condition": "video",
+          "frame_chunk_size": 2,
+          "frame_st_id": 38,
+          "guidance_scale": 5,
+          "observation": {
+            "camera_layout": "latent_wrists_above_head",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ]
+          },
+          "seed": 10030,
+          "video_exec_step": -1,
+          "video_inference_steps": 25
+        },
+        {
+          "action_horizon": 32,
+          "action_inference_steps": 50,
+          "action_per_frame": 16,
+          "backend": "lingbot_va",
+          "condition": "video",
+          "frame_chunk_size": 2,
+          "frame_st_id": 40,
+          "guidance_scale": 5,
+          "observation": {
+            "camera_layout": "latent_wrists_above_head",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ]
+          },
+          "seed": 10031,
+          "video_exec_step": -1,
+          "video_inference_steps": 25
+        },
+        {
+          "action_horizon": 32,
+          "action_inference_steps": 50,
+          "action_per_frame": 16,
+          "backend": "lingbot_va",
+          "condition": "video",
+          "frame_chunk_size": 2,
+          "frame_st_id": 42,
+          "guidance_scale": 5,
+          "observation": {
+            "camera_layout": "latent_wrists_above_head",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ]
+          },
+          "seed": 10032,
+          "video_exec_step": -1,
+          "video_inference_steps": 25
+        },
+        {
+          "action_horizon": 32,
+          "action_inference_steps": 50,
+          "action_per_frame": 16,
+          "backend": "lingbot_va",
+          "condition": "video",
+          "frame_chunk_size": 2,
+          "frame_st_id": 44,
+          "guidance_scale": 5,
+          "observation": {
+            "camera_layout": "latent_wrists_above_head",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ]
+          },
+          "seed": 10033,
+          "video_exec_step": -1,
+          "video_inference_steps": 25
+        },
+        {
+          "action_horizon": 32,
+          "action_inference_steps": 50,
+          "action_per_frame": 16,
+          "backend": "lingbot_va",
+          "condition": "video",
+          "frame_chunk_size": 2,
+          "frame_st_id": 46,
+          "guidance_scale": 5,
+          "observation": {
+            "camera_layout": "latent_wrists_above_head",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ]
+          },
+          "seed": 10034,
+          "video_exec_step": -1,
+          "video_inference_steps": 25
+        },
+        {
+          "action_horizon": 32,
+          "action_inference_steps": 50,
+          "action_per_frame": 16,
+          "backend": "lingbot_va",
+          "condition": "video",
+          "frame_chunk_size": 2,
+          "frame_st_id": 48,
+          "guidance_scale": 5,
+          "observation": {
+            "camera_layout": "latent_wrists_above_head",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ]
+          },
+          "seed": 10035,
+          "video_exec_step": -1,
+          "video_inference_steps": 25
+        },
+        {
+          "action_horizon": 32,
+          "action_inference_steps": 50,
+          "action_per_frame": 16,
+          "backend": "lingbot_va",
+          "condition": "video",
+          "frame_chunk_size": 2,
+          "frame_st_id": 50,
+          "guidance_scale": 5,
+          "observation": {
+            "camera_layout": "latent_wrists_above_head",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ]
+          },
+          "seed": 10036,
+          "video_exec_step": -1,
+          "video_inference_steps": 25
+        },
+        {
+          "action_horizon": 32,
+          "action_inference_steps": 50,
+          "action_per_frame": 16,
+          "backend": "lingbot_va",
+          "condition": "video",
+          "frame_chunk_size": 2,
+          "frame_st_id": 52,
+          "guidance_scale": 5,
+          "observation": {
+            "camera_layout": "latent_wrists_above_head",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ]
+          },
+          "seed": 10037,
+          "video_exec_step": -1,
+          "video_inference_steps": 25
+        },
+        {
+          "action_horizon": 32,
+          "action_inference_steps": 50,
+          "action_per_frame": 16,
+          "backend": "lingbot_va",
+          "condition": "video",
+          "frame_chunk_size": 2,
+          "frame_st_id": 54,
+          "guidance_scale": 5,
+          "observation": {
+            "camera_layout": "latent_wrists_above_head",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ]
+          },
+          "seed": 10038,
+          "video_exec_step": -1,
+          "video_inference_steps": 25
+        },
+        {
+          "action_horizon": 32,
+          "action_inference_steps": 50,
+          "action_per_frame": 16,
+          "backend": "lingbot_va",
+          "condition": "video",
+          "frame_chunk_size": 2,
+          "frame_st_id": 56,
+          "guidance_scale": 5,
+          "observation": {
+            "camera_layout": "latent_wrists_above_head",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ]
+          },
+          "seed": 10039,
+          "video_exec_step": -1,
+          "video_inference_steps": 25
+        }
+      ],
+      "instruction": "With the left arm, grab the black coffee mug from the table, rotate it, place it centrally, and with the right arm, hang it onto the metallic angular rack with rod pair.",
+      "policy_steps": 900,
+      "seed": 10011,
+      "success": false,
+      "termination_reason": "max_steps"
+    },
+    {
+      "episode": 9,
+      "inference_calls": 29,
+      "inference_latency_ms": [
+        4523.24026892893,
+        4710.138566093519,
+        4794.816859066486,
+        4860.934912925586,
+        4928.905644919723,
+        5003.353314939886,
+        5067.154922056943,
+        5128.983306000009,
+        5219.589587068185,
+        5294.690727023408,
+        5381.003828952089,
+        5460.0023268722,
+        5534.390009008348,
+        5653.85976806283,
+        5732.1458698716015,
+        5833.247917937115,
+        5936.15383701399,
+        5999.024752993137,
+        6116.8155409395695,
+        6224.62384798564,
+        6300.08719000034,
+        6413.194380002096,
+        6448.764881817624,
+        6560.482343193144,
+        6661.138180177659,
+        6778.665986843407,
+        6874.249680899084,
+        6949.927932815626,
+        7037.511917063966
+      ],
+      "inference_metadata": [
+        {
+          "action_horizon": 32,
+          "action_inference_steps": 50,
+          "action_per_frame": 16,
+          "backend": "lingbot_va",
+          "condition": "video",
+          "frame_chunk_size": 2,
+          "frame_st_id": 0,
+          "guidance_scale": 5,
+          "observation": {
+            "camera_layout": "latent_wrists_above_head",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ],
+            "seed": 10012,
+            "task_name": "hanging_mug"
+          },
+          "seed": 10012,
+          "video_exec_step": -1,
+          "video_inference_steps": 25
+        },
+        {
+          "action_horizon": 32,
+          "action_inference_steps": 50,
+          "action_per_frame": 16,
+          "backend": "lingbot_va",
+          "condition": "video",
+          "frame_chunk_size": 2,
+          "frame_st_id": 2,
+          "guidance_scale": 5,
+          "observation": {
+            "camera_layout": "latent_wrists_above_head",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ]
+          },
+          "seed": 10013,
+          "video_exec_step": -1,
+          "video_inference_steps": 25
+        },
+        {
+          "action_horizon": 32,
+          "action_inference_steps": 50,
+          "action_per_frame": 16,
+          "backend": "lingbot_va",
+          "condition": "video",
+          "frame_chunk_size": 2,
+          "frame_st_id": 4,
+          "guidance_scale": 5,
+          "observation": {
+            "camera_layout": "latent_wrists_above_head",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ]
+          },
+          "seed": 10014,
+          "video_exec_step": -1,
+          "video_inference_steps": 25
+        },
+        {
+          "action_horizon": 32,
+          "action_inference_steps": 50,
+          "action_per_frame": 16,
+          "backend": "lingbot_va",
+          "condition": "video",
+          "frame_chunk_size": 2,
+          "frame_st_id": 6,
+          "guidance_scale": 5,
+          "observation": {
+            "camera_layout": "latent_wrists_above_head",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ]
+          },
+          "seed": 10015,
+          "video_exec_step": -1,
+          "video_inference_steps": 25
+        },
+        {
+          "action_horizon": 32,
+          "action_inference_steps": 50,
+          "action_per_frame": 16,
+          "backend": "lingbot_va",
+          "condition": "video",
+          "frame_chunk_size": 2,
+          "frame_st_id": 8,
+          "guidance_scale": 5,
+          "observation": {
+            "camera_layout": "latent_wrists_above_head",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ]
+          },
+          "seed": 10016,
+          "video_exec_step": -1,
+          "video_inference_steps": 25
+        },
+        {
+          "action_horizon": 32,
+          "action_inference_steps": 50,
+          "action_per_frame": 16,
+          "backend": "lingbot_va",
+          "condition": "video",
+          "frame_chunk_size": 2,
+          "frame_st_id": 10,
+          "guidance_scale": 5,
+          "observation": {
+            "camera_layout": "latent_wrists_above_head",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ]
+          },
+          "seed": 10017,
+          "video_exec_step": -1,
+          "video_inference_steps": 25
+        },
+        {
+          "action_horizon": 32,
+          "action_inference_steps": 50,
+          "action_per_frame": 16,
+          "backend": "lingbot_va",
+          "condition": "video",
+          "frame_chunk_size": 2,
+          "frame_st_id": 12,
+          "guidance_scale": 5,
+          "observation": {
+            "camera_layout": "latent_wrists_above_head",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ]
+          },
+          "seed": 10018,
+          "video_exec_step": -1,
+          "video_inference_steps": 25
+        },
+        {
+          "action_horizon": 32,
+          "action_inference_steps": 50,
+          "action_per_frame": 16,
+          "backend": "lingbot_va",
+          "condition": "video",
+          "frame_chunk_size": 2,
+          "frame_st_id": 14,
+          "guidance_scale": 5,
+          "observation": {
+            "camera_layout": "latent_wrists_above_head",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ]
+          },
+          "seed": 10019,
+          "video_exec_step": -1,
+          "video_inference_steps": 25
+        },
+        {
+          "action_horizon": 32,
+          "action_inference_steps": 50,
+          "action_per_frame": 16,
+          "backend": "lingbot_va",
+          "condition": "video",
+          "frame_chunk_size": 2,
+          "frame_st_id": 16,
+          "guidance_scale": 5,
+          "observation": {
+            "camera_layout": "latent_wrists_above_head",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ]
+          },
+          "seed": 10020,
+          "video_exec_step": -1,
+          "video_inference_steps": 25
+        },
+        {
+          "action_horizon": 32,
+          "action_inference_steps": 50,
+          "action_per_frame": 16,
+          "backend": "lingbot_va",
+          "condition": "video",
+          "frame_chunk_size": 2,
+          "frame_st_id": 18,
+          "guidance_scale": 5,
+          "observation": {
+            "camera_layout": "latent_wrists_above_head",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ]
+          },
+          "seed": 10021,
+          "video_exec_step": -1,
+          "video_inference_steps": 25
+        },
+        {
+          "action_horizon": 32,
+          "action_inference_steps": 50,
+          "action_per_frame": 16,
+          "backend": "lingbot_va",
+          "condition": "video",
+          "frame_chunk_size": 2,
+          "frame_st_id": 20,
+          "guidance_scale": 5,
+          "observation": {
+            "camera_layout": "latent_wrists_above_head",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ]
+          },
+          "seed": 10022,
+          "video_exec_step": -1,
+          "video_inference_steps": 25
+        },
+        {
+          "action_horizon": 32,
+          "action_inference_steps": 50,
+          "action_per_frame": 16,
+          "backend": "lingbot_va",
+          "condition": "video",
+          "frame_chunk_size": 2,
+          "frame_st_id": 22,
+          "guidance_scale": 5,
+          "observation": {
+            "camera_layout": "latent_wrists_above_head",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ]
+          },
+          "seed": 10023,
+          "video_exec_step": -1,
+          "video_inference_steps": 25
+        },
+        {
+          "action_horizon": 32,
+          "action_inference_steps": 50,
+          "action_per_frame": 16,
+          "backend": "lingbot_va",
+          "condition": "video",
+          "frame_chunk_size": 2,
+          "frame_st_id": 24,
+          "guidance_scale": 5,
+          "observation": {
+            "camera_layout": "latent_wrists_above_head",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ]
+          },
+          "seed": 10024,
+          "video_exec_step": -1,
+          "video_inference_steps": 25
+        },
+        {
+          "action_horizon": 32,
+          "action_inference_steps": 50,
+          "action_per_frame": 16,
+          "backend": "lingbot_va",
+          "condition": "video",
+          "frame_chunk_size": 2,
+          "frame_st_id": 26,
+          "guidance_scale": 5,
+          "observation": {
+            "camera_layout": "latent_wrists_above_head",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ]
+          },
+          "seed": 10025,
+          "video_exec_step": -1,
+          "video_inference_steps": 25
+        },
+        {
+          "action_horizon": 32,
+          "action_inference_steps": 50,
+          "action_per_frame": 16,
+          "backend": "lingbot_va",
+          "condition": "video",
+          "frame_chunk_size": 2,
+          "frame_st_id": 28,
+          "guidance_scale": 5,
+          "observation": {
+            "camera_layout": "latent_wrists_above_head",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ]
+          },
+          "seed": 10026,
+          "video_exec_step": -1,
+          "video_inference_steps": 25
+        },
+        {
+          "action_horizon": 32,
+          "action_inference_steps": 50,
+          "action_per_frame": 16,
+          "backend": "lingbot_va",
+          "condition": "video",
+          "frame_chunk_size": 2,
+          "frame_st_id": 30,
+          "guidance_scale": 5,
+          "observation": {
+            "camera_layout": "latent_wrists_above_head",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ]
+          },
+          "seed": 10027,
+          "video_exec_step": -1,
+          "video_inference_steps": 25
+        },
+        {
+          "action_horizon": 32,
+          "action_inference_steps": 50,
+          "action_per_frame": 16,
+          "backend": "lingbot_va",
+          "condition": "video",
+          "frame_chunk_size": 2,
+          "frame_st_id": 32,
+          "guidance_scale": 5,
+          "observation": {
+            "camera_layout": "latent_wrists_above_head",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ]
+          },
+          "seed": 10028,
+          "video_exec_step": -1,
+          "video_inference_steps": 25
+        },
+        {
+          "action_horizon": 32,
+          "action_inference_steps": 50,
+          "action_per_frame": 16,
+          "backend": "lingbot_va",
+          "condition": "video",
+          "frame_chunk_size": 2,
+          "frame_st_id": 34,
+          "guidance_scale": 5,
+          "observation": {
+            "camera_layout": "latent_wrists_above_head",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ]
+          },
+          "seed": 10029,
+          "video_exec_step": -1,
+          "video_inference_steps": 25
+        },
+        {
+          "action_horizon": 32,
+          "action_inference_steps": 50,
+          "action_per_frame": 16,
+          "backend": "lingbot_va",
+          "condition": "video",
+          "frame_chunk_size": 2,
+          "frame_st_id": 36,
+          "guidance_scale": 5,
+          "observation": {
+            "camera_layout": "latent_wrists_above_head",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ]
+          },
+          "seed": 10030,
+          "video_exec_step": -1,
+          "video_inference_steps": 25
+        },
+        {
+          "action_horizon": 32,
+          "action_inference_steps": 50,
+          "action_per_frame": 16,
+          "backend": "lingbot_va",
+          "condition": "video",
+          "frame_chunk_size": 2,
+          "frame_st_id": 38,
+          "guidance_scale": 5,
+          "observation": {
+            "camera_layout": "latent_wrists_above_head",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ]
+          },
+          "seed": 10031,
+          "video_exec_step": -1,
+          "video_inference_steps": 25
+        },
+        {
+          "action_horizon": 32,
+          "action_inference_steps": 50,
+          "action_per_frame": 16,
+          "backend": "lingbot_va",
+          "condition": "video",
+          "frame_chunk_size": 2,
+          "frame_st_id": 40,
+          "guidance_scale": 5,
+          "observation": {
+            "camera_layout": "latent_wrists_above_head",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ]
+          },
+          "seed": 10032,
+          "video_exec_step": -1,
+          "video_inference_steps": 25
+        },
+        {
+          "action_horizon": 32,
+          "action_inference_steps": 50,
+          "action_per_frame": 16,
+          "backend": "lingbot_va",
+          "condition": "video",
+          "frame_chunk_size": 2,
+          "frame_st_id": 42,
+          "guidance_scale": 5,
+          "observation": {
+            "camera_layout": "latent_wrists_above_head",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ]
+          },
+          "seed": 10033,
+          "video_exec_step": -1,
+          "video_inference_steps": 25
+        },
+        {
+          "action_horizon": 32,
+          "action_inference_steps": 50,
+          "action_per_frame": 16,
+          "backend": "lingbot_va",
+          "condition": "video",
+          "frame_chunk_size": 2,
+          "frame_st_id": 44,
+          "guidance_scale": 5,
+          "observation": {
+            "camera_layout": "latent_wrists_above_head",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ]
+          },
+          "seed": 10034,
+          "video_exec_step": -1,
+          "video_inference_steps": 25
+        },
+        {
+          "action_horizon": 32,
+          "action_inference_steps": 50,
+          "action_per_frame": 16,
+          "backend": "lingbot_va",
+          "condition": "video",
+          "frame_chunk_size": 2,
+          "frame_st_id": 46,
+          "guidance_scale": 5,
+          "observation": {
+            "camera_layout": "latent_wrists_above_head",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ]
+          },
+          "seed": 10035,
+          "video_exec_step": -1,
+          "video_inference_steps": 25
+        },
+        {
+          "action_horizon": 32,
+          "action_inference_steps": 50,
+          "action_per_frame": 16,
+          "backend": "lingbot_va",
+          "condition": "video",
+          "frame_chunk_size": 2,
+          "frame_st_id": 48,
+          "guidance_scale": 5,
+          "observation": {
+            "camera_layout": "latent_wrists_above_head",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ]
+          },
+          "seed": 10036,
+          "video_exec_step": -1,
+          "video_inference_steps": 25
+        },
+        {
+          "action_horizon": 32,
+          "action_inference_steps": 50,
+          "action_per_frame": 16,
+          "backend": "lingbot_va",
+          "condition": "video",
+          "frame_chunk_size": 2,
+          "frame_st_id": 50,
+          "guidance_scale": 5,
+          "observation": {
+            "camera_layout": "latent_wrists_above_head",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ]
+          },
+          "seed": 10037,
+          "video_exec_step": -1,
+          "video_inference_steps": 25
+        },
+        {
+          "action_horizon": 32,
+          "action_inference_steps": 50,
+          "action_per_frame": 16,
+          "backend": "lingbot_va",
+          "condition": "video",
+          "frame_chunk_size": 2,
+          "frame_st_id": 52,
+          "guidance_scale": 5,
+          "observation": {
+            "camera_layout": "latent_wrists_above_head",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ]
+          },
+          "seed": 10038,
+          "video_exec_step": -1,
+          "video_inference_steps": 25
+        },
+        {
+          "action_horizon": 32,
+          "action_inference_steps": 50,
+          "action_per_frame": 16,
+          "backend": "lingbot_va",
+          "condition": "video",
+          "frame_chunk_size": 2,
+          "frame_st_id": 54,
+          "guidance_scale": 5,
+          "observation": {
+            "camera_layout": "latent_wrists_above_head",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ]
+          },
+          "seed": 10039,
+          "video_exec_step": -1,
+          "video_inference_steps": 25
+        },
+        {
+          "action_horizon": 32,
+          "action_inference_steps": 50,
+          "action_per_frame": 16,
+          "backend": "lingbot_va",
+          "condition": "video",
+          "frame_chunk_size": 2,
+          "frame_st_id": 56,
+          "guidance_scale": 5,
+          "observation": {
+            "camera_layout": "latent_wrists_above_head",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ]
+          },
+          "seed": 10040,
+          "video_exec_step": -1,
+          "video_inference_steps": 25
+        }
+      ],
+      "instruction": "Pick the ceramic mug, turn it, put it in the center, and transfer it to the rack with two rods sticking out.",
+      "policy_steps": 900,
+      "seed": 10012,
+      "success": false,
+      "termination_reason": "max_steps"
+    }
+  ]
+}

@@ -1,0 +1,3112 @@
+{
+  "accepted_seeds": [
+    100000,
+    100001,
+    100002,
+    100003,
+    100004,
+    100005,
+    100006,
+    100008,
+    100009,
+    100010
+  ],
+  "action_type": "qpos",
+  "attempts": 11,
+  "benchmark": "robotwin",
+  "benchmark_revision": "c3ddfa8b97d5519efa828b075999bd0006778e5e",
+  "completed": true,
+  "config": {
+    "action_horizon": 32,
+    "clear_cache_freq": 5,
+    "inference_options": {},
+    "instruction_pool_size": 100,
+    "instruction_type": "unseen",
+    "max_repeated_screen_errors": 20,
+    "max_seed_attempts": 1000,
+    "max_steps": null,
+    "num_episodes": 10,
+    "output_dir": "/nethome/pi34/kv_results/rt10-fastwam-13066",
+    "replan_steps": 24,
+    "robotwin_root": "/dev/shm/pi34-rt-13066/RoboTwin",
+    "run_metadata": {
+      "checkpoint": "/dev/shm/pi34-rt-13066/checkpoints/fastwam/robotwin_uncond_3cam_384.pt",
+      "checkpoint_revision": "8eaceeb24c3cc92ff2a9c9a9d266a4941b836705",
+      "checkpoint_sha256": "776475b22566a791854ecf31cf3b50f25e7d8d94c343132ec16eb94994aa9e63",
+      "dataset_stats": "/dev/shm/pi34-rt-13066/checkpoints/fastwam/robotwin_uncond_3cam_384_dataset_stats.json",
+      "dataset_stats_sha256": "7a02c46cfc8c5e746c0afbe41fca73f723eda34cbc083f8ca54f76d8f7468095",
+      "dtype": "bfloat16",
+      "fastwam_task": "robotwin_uncond_3cam_384_1e-4",
+      "repository_revision": "2a6a56a2a679da5b3d7b43ff92b0a6ad085c8d69",
+      "resolved_model_config": {
+        "_target_": "wam_interp.models.fastwam.runtime.create_fastwam",
+        "action_dit_config": {
+          "action_dim": 14,
+          "attn_head_dim": 128,
+          "eps": 1e-06,
+          "ffn_dim": 4096,
+          "freq_dim": 256,
+          "hidden_dim": 1024,
+          "num_heads": 24,
+          "num_layers": 30,
+          "text_dim": 4096,
+          "use_gradient_checkpointing": false
+        },
+        "action_dit_pretrained_path": null,
+        "action_scheduler": {
+          "infer_shift": 1.0,
+          "num_train_timesteps": 1000,
+          "train_shift": 1.0
+        },
+        "compile_training_denoise": false,
+        "load_text_encoder": true,
+        "loss": {
+          "lambda_action": 1.0
+        },
+        "model_id": "Wan-AI/Wan2.2-TI2V-5B",
+        "mot_checkpoint_mixed_attn": false,
+        "proprio_dim": 14,
+        "redirect_common_files": true,
+        "skip_dit_load_from_pretrain": true,
+        "tokenizer_max_len": 128,
+        "tokenizer_model_id": "Wan-AI/Wan2.1-T2V-1.3B",
+        "video_dit_config": {
+          "action_conditioned": false,
+          "action_dim": 14,
+          "action_group_causal_mask_mode": "group_diagonal",
+          "attn_head_dim": 128,
+          "eps": 1e-06,
+          "ffn_dim": 14336,
+          "freq_dim": 256,
+          "fuse_vae_embedding_in_latents": true,
+          "has_image_input": false,
+          "hidden_dim": 3072,
+          "in_dim": 48,
+          "num_heads": 24,
+          "num_layers": 30,
+          "out_dim": 48,
+          "patch_size": [
+            1,
+            2,
+            2
+          ],
+          "require_clip_embedding": false,
+          "require_vae_embedding": false,
+          "seperated_timestep": true,
+          "text_dim": 4096,
+          "use_gradient_checkpointing": false,
+          "video_attention_mask_mode": "first_frame_causal"
+        },
+        "video_scheduler": {
+          "infer_shift": 5.0,
+          "num_train_timesteps": 1000,
+          "train_shift": 5.0
+        }
+      }
+    },
+    "seed": 0,
+    "start_seed": null,
+    "task_config": "demo_clean",
+    "task_name": "rotate_qrcode"
+  },
+  "duration_seconds": 215.13345370895695,
+  "episodes": 10,
+  "model": {
+    "checkpoint": "/dev/shm/pi34-rt-13066/checkpoints/fastwam/robotwin_uncond_3cam_384.pt",
+    "checkpoint_load": {
+      "allow_partial": false,
+      "missing_keys": 0,
+      "modules_loaded": [
+        "mot",
+        "proprio_encoder"
+      ],
+      "problems": [],
+      "unexpected_key_examples": [],
+      "unexpected_keys": 0
+    },
+    "evaluation": {
+      "negative_prompt": "",
+      "num_inference_steps": 10,
+      "rand_device": "cpu",
+      "sigma_shift": 5.0,
+      "text_cfg_scale": 1.0
+    },
+    "model_device": "cuda",
+    "model_dtype": "torch.bfloat16",
+    "model_name": "fastwam",
+    "resolved_model_config": {
+      "_target_": "wam_interp.models.fastwam.runtime.create_fastwam",
+      "action_dit_config": {
+        "action_dim": 14,
+        "attn_head_dim": 128,
+        "eps": 1e-06,
+        "ffn_dim": 4096,
+        "freq_dim": 256,
+        "hidden_dim": 1024,
+        "num_heads": 24,
+        "num_layers": 30,
+        "text_dim": 4096,
+        "use_gradient_checkpointing": false
+      },
+      "action_dit_pretrained_path": null,
+      "action_scheduler": {
+        "infer_shift": 1.0,
+        "num_train_timesteps": 1000,
+        "train_shift": 1.0
+      },
+      "compile_training_denoise": false,
+      "load_text_encoder": true,
+      "loss": {
+        "lambda_action": 1.0
+      },
+      "model_id": "Wan-AI/Wan2.2-TI2V-5B",
+      "mot_checkpoint_mixed_attn": false,
+      "proprio_dim": 14,
+      "redirect_common_files": true,
+      "skip_dit_load_from_pretrain": true,
+      "tokenizer_max_len": 128,
+      "tokenizer_model_id": "Wan-AI/Wan2.1-T2V-1.3B",
+      "video_dit_config": {
+        "action_conditioned": false,
+        "action_dim": 14,
+        "action_group_causal_mask_mode": "group_diagonal",
+        "attn_head_dim": 128,
+        "eps": 1e-06,
+        "ffn_dim": 14336,
+        "freq_dim": 256,
+        "fuse_vae_embedding_in_latents": true,
+        "has_image_input": false,
+        "hidden_dim": 3072,
+        "in_dim": 48,
+        "num_heads": 24,
+        "num_layers": 30,
+        "out_dim": 48,
+        "patch_size": [
+          1,
+          2,
+          2
+        ],
+        "require_clip_embedding": false,
+        "require_vae_embedding": false,
+        "seperated_timestep": true,
+        "text_dim": 4096,
+        "use_gradient_checkpointing": false,
+        "video_attention_mask_mode": "first_frame_causal"
+      },
+      "video_scheduler": {
+        "infer_shift": 5.0,
+        "num_train_timesteps": 1000,
+        "train_shift": 5.0
+      }
+    },
+    "source_dirty": true,
+    "source_revision": "2a6a56a2a679da5b3d7b43ff92b0a6ad085c8d69",
+    "source_state": {
+      "dirty": true,
+      "dirty_paths": 43,
+      "revision": "2a6a56a2a679da5b3d7b43ff92b0a6ad085c8d69",
+      "status_and_diff_sha256": "514e00433dd644f53839dcba4e42ddec22095879d9d1e7c4bd2138f82c0fc79b"
+    },
+    "statistics_content_sha256": "38ed9c8d466356fb8f4688da470b14a036dbc51e0fc5484cc5959b507adbcd48"
+  },
+  "output_path": "/nethome/pi34/kv_results/rt10-fastwam-13066/robotwin_20261031T015250745212Z.json",
+  "package_versions": {
+    "diffusers": null,
+    "mplib": "0.2.1",
+    "mujoco": null,
+    "numpy": "1.26.4",
+    "robosuite": null,
+    "sapien": "3.0.0b1",
+    "torch": "2.7.1+cu128",
+    "transformers": "4.57.6"
+  },
+  "rejected_seeds": [
+    {
+      "reason": "expert_failed",
+      "seed": 100007,
+      "stage": "expert"
+    }
+  ],
+  "success_rate": 0.8,
+  "successes": 8,
+  "trials": [
+    {
+      "episode": 0,
+      "inference_calls": 17,
+      "inference_latency_ms": [
+        244.53139794059098,
+        234.14852598216385,
+        235.56618799921125,
+        235.2109510684386,
+        234.0312390588224,
+        235.3385080350563,
+        236.27392505295575,
+        232.42129106074572,
+        236.24169896356761,
+        236.10487999394536,
+        235.9683329705149,
+        236.16486601531506,
+        237.3761619674042,
+        235.75212294235826,
+        235.34250003285706,
+        236.94477404933423,
+        235.4758579749614
+      ],
+      "inference_metadata": [
+        {
+          "action_horizon": 32,
+          "backend": "fastwam",
+          "compiled": false,
+          "condition": "first_frame",
+          "model_class": "FastWAM",
+          "model_output_keys": [
+            "action"
+          ],
+          "num_inference_steps": 10,
+          "num_video_frames": 9,
+          "observation": {
+            "camera_layout": "head_above_wrists",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ],
+            "image_shape": [
+              1,
+              3,
+              384,
+              320
+            ],
+            "seed": 100000,
+            "task_name": "rotate_qrcode"
+          },
+          "rand_device": "cpu",
+          "seed": 100000,
+          "sigma_shift": 5.0,
+          "text_cfg_scale": 1.0
+        },
+        {
+          "action_horizon": 32,
+          "backend": "fastwam",
+          "compiled": false,
+          "condition": "first_frame",
+          "model_class": "FastWAM",
+          "model_output_keys": [
+            "action"
+          ],
+          "num_inference_steps": 10,
+          "num_video_frames": 9,
+          "observation": {
+            "camera_layout": "head_above_wrists",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ],
+            "image_shape": [
+              1,
+              3,
+              384,
+              320
+            ]
+          },
+          "rand_device": "cpu",
+          "seed": 100001,
+          "sigma_shift": 5.0,
+          "text_cfg_scale": 1.0
+        },
+        {
+          "action_horizon": 32,
+          "backend": "fastwam",
+          "compiled": false,
+          "condition": "first_frame",
+          "model_class": "FastWAM",
+          "model_output_keys": [
+            "action"
+          ],
+          "num_inference_steps": 10,
+          "num_video_frames": 9,
+          "observation": {
+            "camera_layout": "head_above_wrists",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ],
+            "image_shape": [
+              1,
+              3,
+              384,
+              320
+            ]
+          },
+          "rand_device": "cpu",
+          "seed": 100002,
+          "sigma_shift": 5.0,
+          "text_cfg_scale": 1.0
+        },
+        {
+          "action_horizon": 32,
+          "backend": "fastwam",
+          "compiled": false,
+          "condition": "first_frame",
+          "model_class": "FastWAM",
+          "model_output_keys": [
+            "action"
+          ],
+          "num_inference_steps": 10,
+          "num_video_frames": 9,
+          "observation": {
+            "camera_layout": "head_above_wrists",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ],
+            "image_shape": [
+              1,
+              3,
+              384,
+              320
+            ]
+          },
+          "rand_device": "cpu",
+          "seed": 100003,
+          "sigma_shift": 5.0,
+          "text_cfg_scale": 1.0
+        },
+        {
+          "action_horizon": 32,
+          "backend": "fastwam",
+          "compiled": false,
+          "condition": "first_frame",
+          "model_class": "FastWAM",
+          "model_output_keys": [
+            "action"
+          ],
+          "num_inference_steps": 10,
+          "num_video_frames": 9,
+          "observation": {
+            "camera_layout": "head_above_wrists",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ],
+            "image_shape": [
+              1,
+              3,
+              384,
+              320
+            ]
+          },
+          "rand_device": "cpu",
+          "seed": 100004,
+          "sigma_shift": 5.0,
+          "text_cfg_scale": 1.0
+        },
+        {
+          "action_horizon": 32,
+          "backend": "fastwam",
+          "compiled": false,
+          "condition": "first_frame",
+          "model_class": "FastWAM",
+          "model_output_keys": [
+            "action"
+          ],
+          "num_inference_steps": 10,
+          "num_video_frames": 9,
+          "observation": {
+            "camera_layout": "head_above_wrists",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ],
+            "image_shape": [
+              1,
+              3,
+              384,
+              320
+            ]
+          },
+          "rand_device": "cpu",
+          "seed": 100005,
+          "sigma_shift": 5.0,
+          "text_cfg_scale": 1.0
+        },
+        {
+          "action_horizon": 32,
+          "backend": "fastwam",
+          "compiled": false,
+          "condition": "first_frame",
+          "model_class": "FastWAM",
+          "model_output_keys": [
+            "action"
+          ],
+          "num_inference_steps": 10,
+          "num_video_frames": 9,
+          "observation": {
+            "camera_layout": "head_above_wrists",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ],
+            "image_shape": [
+              1,
+              3,
+              384,
+              320
+            ]
+          },
+          "rand_device": "cpu",
+          "seed": 100006,
+          "sigma_shift": 5.0,
+          "text_cfg_scale": 1.0
+        },
+        {
+          "action_horizon": 32,
+          "backend": "fastwam",
+          "compiled": false,
+          "condition": "first_frame",
+          "model_class": "FastWAM",
+          "model_output_keys": [
+            "action"
+          ],
+          "num_inference_steps": 10,
+          "num_video_frames": 9,
+          "observation": {
+            "camera_layout": "head_above_wrists",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ],
+            "image_shape": [
+              1,
+              3,
+              384,
+              320
+            ]
+          },
+          "rand_device": "cpu",
+          "seed": 100007,
+          "sigma_shift": 5.0,
+          "text_cfg_scale": 1.0
+        },
+        {
+          "action_horizon": 32,
+          "backend": "fastwam",
+          "compiled": false,
+          "condition": "first_frame",
+          "model_class": "FastWAM",
+          "model_output_keys": [
+            "action"
+          ],
+          "num_inference_steps": 10,
+          "num_video_frames": 9,
+          "observation": {
+            "camera_layout": "head_above_wrists",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ],
+            "image_shape": [
+              1,
+              3,
+              384,
+              320
+            ]
+          },
+          "rand_device": "cpu",
+          "seed": 100008,
+          "sigma_shift": 5.0,
+          "text_cfg_scale": 1.0
+        },
+        {
+          "action_horizon": 32,
+          "backend": "fastwam",
+          "compiled": false,
+          "condition": "first_frame",
+          "model_class": "FastWAM",
+          "model_output_keys": [
+            "action"
+          ],
+          "num_inference_steps": 10,
+          "num_video_frames": 9,
+          "observation": {
+            "camera_layout": "head_above_wrists",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ],
+            "image_shape": [
+              1,
+              3,
+              384,
+              320
+            ]
+          },
+          "rand_device": "cpu",
+          "seed": 100009,
+          "sigma_shift": 5.0,
+          "text_cfg_scale": 1.0
+        },
+        {
+          "action_horizon": 32,
+          "backend": "fastwam",
+          "compiled": false,
+          "condition": "first_frame",
+          "model_class": "FastWAM",
+          "model_output_keys": [
+            "action"
+          ],
+          "num_inference_steps": 10,
+          "num_video_frames": 9,
+          "observation": {
+            "camera_layout": "head_above_wrists",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ],
+            "image_shape": [
+              1,
+              3,
+              384,
+              320
+            ]
+          },
+          "rand_device": "cpu",
+          "seed": 100010,
+          "sigma_shift": 5.0,
+          "text_cfg_scale": 1.0
+        },
+        {
+          "action_horizon": 32,
+          "backend": "fastwam",
+          "compiled": false,
+          "condition": "first_frame",
+          "model_class": "FastWAM",
+          "model_output_keys": [
+            "action"
+          ],
+          "num_inference_steps": 10,
+          "num_video_frames": 9,
+          "observation": {
+            "camera_layout": "head_above_wrists",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ],
+            "image_shape": [
+              1,
+              3,
+              384,
+              320
+            ]
+          },
+          "rand_device": "cpu",
+          "seed": 100011,
+          "sigma_shift": 5.0,
+          "text_cfg_scale": 1.0
+        },
+        {
+          "action_horizon": 32,
+          "backend": "fastwam",
+          "compiled": false,
+          "condition": "first_frame",
+          "model_class": "FastWAM",
+          "model_output_keys": [
+            "action"
+          ],
+          "num_inference_steps": 10,
+          "num_video_frames": 9,
+          "observation": {
+            "camera_layout": "head_above_wrists",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ],
+            "image_shape": [
+              1,
+              3,
+              384,
+              320
+            ]
+          },
+          "rand_device": "cpu",
+          "seed": 100012,
+          "sigma_shift": 5.0,
+          "text_cfg_scale": 1.0
+        },
+        {
+          "action_horizon": 32,
+          "backend": "fastwam",
+          "compiled": false,
+          "condition": "first_frame",
+          "model_class": "FastWAM",
+          "model_output_keys": [
+            "action"
+          ],
+          "num_inference_steps": 10,
+          "num_video_frames": 9,
+          "observation": {
+            "camera_layout": "head_above_wrists",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ],
+            "image_shape": [
+              1,
+              3,
+              384,
+              320
+            ]
+          },
+          "rand_device": "cpu",
+          "seed": 100013,
+          "sigma_shift": 5.0,
+          "text_cfg_scale": 1.0
+        },
+        {
+          "action_horizon": 32,
+          "backend": "fastwam",
+          "compiled": false,
+          "condition": "first_frame",
+          "model_class": "FastWAM",
+          "model_output_keys": [
+            "action"
+          ],
+          "num_inference_steps": 10,
+          "num_video_frames": 9,
+          "observation": {
+            "camera_layout": "head_above_wrists",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ],
+            "image_shape": [
+              1,
+              3,
+              384,
+              320
+            ]
+          },
+          "rand_device": "cpu",
+          "seed": 100014,
+          "sigma_shift": 5.0,
+          "text_cfg_scale": 1.0
+        },
+        {
+          "action_horizon": 32,
+          "backend": "fastwam",
+          "compiled": false,
+          "condition": "first_frame",
+          "model_class": "FastWAM",
+          "model_output_keys": [
+            "action"
+          ],
+          "num_inference_steps": 10,
+          "num_video_frames": 9,
+          "observation": {
+            "camera_layout": "head_above_wrists",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ],
+            "image_shape": [
+              1,
+              3,
+              384,
+              320
+            ]
+          },
+          "rand_device": "cpu",
+          "seed": 100015,
+          "sigma_shift": 5.0,
+          "text_cfg_scale": 1.0
+        },
+        {
+          "action_horizon": 32,
+          "backend": "fastwam",
+          "compiled": false,
+          "condition": "first_frame",
+          "model_class": "FastWAM",
+          "model_output_keys": [
+            "action"
+          ],
+          "num_inference_steps": 10,
+          "num_video_frames": 9,
+          "observation": {
+            "camera_layout": "head_above_wrists",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ],
+            "image_shape": [
+              1,
+              3,
+              384,
+              320
+            ]
+          },
+          "rand_device": "cpu",
+          "seed": 100016,
+          "sigma_shift": 5.0,
+          "text_cfg_scale": 1.0
+        }
+      ],
+      "instruction": "Catch the black stand with angled display on the table and pick it up.",
+      "policy_steps": 400,
+      "seed": 100000,
+      "success": false,
+      "termination_reason": "max_steps"
+    },
+    {
+      "episode": 1,
+      "inference_calls": 7,
+      "inference_latency_ms": [
+        237.4434599187225,
+        236.98839207645506,
+        237.54827899392694,
+        235.94953399151564,
+        236.01226299069822,
+        236.76326591521502,
+        235.39421695750207
+      ],
+      "inference_metadata": [
+        {
+          "action_horizon": 32,
+          "backend": "fastwam",
+          "compiled": false,
+          "condition": "first_frame",
+          "model_class": "FastWAM",
+          "model_output_keys": [
+            "action"
+          ],
+          "num_inference_steps": 10,
+          "num_video_frames": 9,
+          "observation": {
+            "camera_layout": "head_above_wrists",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ],
+            "image_shape": [
+              1,
+              3,
+              384,
+              320
+            ],
+            "seed": 100001,
+            "task_name": "rotate_qrcode"
+          },
+          "rand_device": "cpu",
+          "seed": 100001,
+          "sigma_shift": 5.0,
+          "text_cfg_scale": 1.0
+        },
+        {
+          "action_horizon": 32,
+          "backend": "fastwam",
+          "compiled": false,
+          "condition": "first_frame",
+          "model_class": "FastWAM",
+          "model_output_keys": [
+            "action"
+          ],
+          "num_inference_steps": 10,
+          "num_video_frames": 9,
+          "observation": {
+            "camera_layout": "head_above_wrists",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ],
+            "image_shape": [
+              1,
+              3,
+              384,
+              320
+            ]
+          },
+          "rand_device": "cpu",
+          "seed": 100002,
+          "sigma_shift": 5.0,
+          "text_cfg_scale": 1.0
+        },
+        {
+          "action_horizon": 32,
+          "backend": "fastwam",
+          "compiled": false,
+          "condition": "first_frame",
+          "model_class": "FastWAM",
+          "model_output_keys": [
+            "action"
+          ],
+          "num_inference_steps": 10,
+          "num_video_frames": 9,
+          "observation": {
+            "camera_layout": "head_above_wrists",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ],
+            "image_shape": [
+              1,
+              3,
+              384,
+              320
+            ]
+          },
+          "rand_device": "cpu",
+          "seed": 100003,
+          "sigma_shift": 5.0,
+          "text_cfg_scale": 1.0
+        },
+        {
+          "action_horizon": 32,
+          "backend": "fastwam",
+          "compiled": false,
+          "condition": "first_frame",
+          "model_class": "FastWAM",
+          "model_output_keys": [
+            "action"
+          ],
+          "num_inference_steps": 10,
+          "num_video_frames": 9,
+          "observation": {
+            "camera_layout": "head_above_wrists",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ],
+            "image_shape": [
+              1,
+              3,
+              384,
+              320
+            ]
+          },
+          "rand_device": "cpu",
+          "seed": 100004,
+          "sigma_shift": 5.0,
+          "text_cfg_scale": 1.0
+        },
+        {
+          "action_horizon": 32,
+          "backend": "fastwam",
+          "compiled": false,
+          "condition": "first_frame",
+          "model_class": "FastWAM",
+          "model_output_keys": [
+            "action"
+          ],
+          "num_inference_steps": 10,
+          "num_video_frames": 9,
+          "observation": {
+            "camera_layout": "head_above_wrists",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ],
+            "image_shape": [
+              1,
+              3,
+              384,
+              320
+            ]
+          },
+          "rand_device": "cpu",
+          "seed": 100005,
+          "sigma_shift": 5.0,
+          "text_cfg_scale": 1.0
+        },
+        {
+          "action_horizon": 32,
+          "backend": "fastwam",
+          "compiled": false,
+          "condition": "first_frame",
+          "model_class": "FastWAM",
+          "model_output_keys": [
+            "action"
+          ],
+          "num_inference_steps": 10,
+          "num_video_frames": 9,
+          "observation": {
+            "camera_layout": "head_above_wrists",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ],
+            "image_shape": [
+              1,
+              3,
+              384,
+              320
+            ]
+          },
+          "rand_device": "cpu",
+          "seed": 100006,
+          "sigma_shift": 5.0,
+          "text_cfg_scale": 1.0
+        },
+        {
+          "action_horizon": 32,
+          "backend": "fastwam",
+          "compiled": false,
+          "condition": "first_frame",
+          "model_class": "FastWAM",
+          "model_output_keys": [
+            "action"
+          ],
+          "num_inference_steps": 10,
+          "num_video_frames": 9,
+          "observation": {
+            "camera_layout": "head_above_wrists",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ],
+            "image_shape": [
+              1,
+              3,
+              384,
+              320
+            ]
+          },
+          "rand_device": "cpu",
+          "seed": 100007,
+          "sigma_shift": 5.0,
+          "text_cfg_scale": 1.0
+        }
+      ],
+      "instruction": "Catch the medium paymentsign with QR section from the table and rotate it",
+      "policy_steps": 167,
+      "seed": 100001,
+      "success": true,
+      "termination_reason": "success"
+    },
+    {
+      "episode": 2,
+      "inference_calls": 6,
+      "inference_latency_ms": [
+        237.52642096951604,
+        236.20223707985133,
+        236.92982795182616,
+        233.92912198323756,
+        234.19045598711818,
+        235.9431890072301
+      ],
+      "inference_metadata": [
+        {
+          "action_horizon": 32,
+          "backend": "fastwam",
+          "compiled": false,
+          "condition": "first_frame",
+          "model_class": "FastWAM",
+          "model_output_keys": [
+            "action"
+          ],
+          "num_inference_steps": 10,
+          "num_video_frames": 9,
+          "observation": {
+            "camera_layout": "head_above_wrists",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ],
+            "image_shape": [
+              1,
+              3,
+              384,
+              320
+            ],
+            "seed": 100002,
+            "task_name": "rotate_qrcode"
+          },
+          "rand_device": "cpu",
+          "seed": 100002,
+          "sigma_shift": 5.0,
+          "text_cfg_scale": 1.0
+        },
+        {
+          "action_horizon": 32,
+          "backend": "fastwam",
+          "compiled": false,
+          "condition": "first_frame",
+          "model_class": "FastWAM",
+          "model_output_keys": [
+            "action"
+          ],
+          "num_inference_steps": 10,
+          "num_video_frames": 9,
+          "observation": {
+            "camera_layout": "head_above_wrists",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ],
+            "image_shape": [
+              1,
+              3,
+              384,
+              320
+            ]
+          },
+          "rand_device": "cpu",
+          "seed": 100003,
+          "sigma_shift": 5.0,
+          "text_cfg_scale": 1.0
+        },
+        {
+          "action_horizon": 32,
+          "backend": "fastwam",
+          "compiled": false,
+          "condition": "first_frame",
+          "model_class": "FastWAM",
+          "model_output_keys": [
+            "action"
+          ],
+          "num_inference_steps": 10,
+          "num_video_frames": 9,
+          "observation": {
+            "camera_layout": "head_above_wrists",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ],
+            "image_shape": [
+              1,
+              3,
+              384,
+              320
+            ]
+          },
+          "rand_device": "cpu",
+          "seed": 100004,
+          "sigma_shift": 5.0,
+          "text_cfg_scale": 1.0
+        },
+        {
+          "action_horizon": 32,
+          "backend": "fastwam",
+          "compiled": false,
+          "condition": "first_frame",
+          "model_class": "FastWAM",
+          "model_output_keys": [
+            "action"
+          ],
+          "num_inference_steps": 10,
+          "num_video_frames": 9,
+          "observation": {
+            "camera_layout": "head_above_wrists",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ],
+            "image_shape": [
+              1,
+              3,
+              384,
+              320
+            ]
+          },
+          "rand_device": "cpu",
+          "seed": 100005,
+          "sigma_shift": 5.0,
+          "text_cfg_scale": 1.0
+        },
+        {
+          "action_horizon": 32,
+          "backend": "fastwam",
+          "compiled": false,
+          "condition": "first_frame",
+          "model_class": "FastWAM",
+          "model_output_keys": [
+            "action"
+          ],
+          "num_inference_steps": 10,
+          "num_video_frames": 9,
+          "observation": {
+            "camera_layout": "head_above_wrists",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ],
+            "image_shape": [
+              1,
+              3,
+              384,
+              320
+            ]
+          },
+          "rand_device": "cpu",
+          "seed": 100006,
+          "sigma_shift": 5.0,
+          "text_cfg_scale": 1.0
+        },
+        {
+          "action_horizon": 32,
+          "backend": "fastwam",
+          "compiled": false,
+          "condition": "first_frame",
+          "model_class": "FastWAM",
+          "model_output_keys": [
+            "action"
+          ],
+          "num_inference_steps": 10,
+          "num_video_frames": 9,
+          "observation": {
+            "camera_layout": "head_above_wrists",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ],
+            "image_shape": [
+              1,
+              3,
+              384,
+              320
+            ]
+          },
+          "rand_device": "cpu",
+          "seed": 100007,
+          "sigma_shift": 5.0,
+          "text_cfg_scale": 1.0
+        }
+      ],
+      "instruction": "Pick up the tabletop paymentsign and rotate it to face its QR code toward you.",
+      "policy_steps": 137,
+      "seed": 100002,
+      "success": true,
+      "termination_reason": "success"
+    },
+    {
+      "episode": 3,
+      "inference_calls": 7,
+      "inference_latency_ms": [
+        235.32982601318508,
+        235.97182496450841,
+        236.4373520249501,
+        235.7671649660915,
+        235.65290996339172,
+        234.9946399917826,
+        237.8409190569073
+      ],
+      "inference_metadata": [
+        {
+          "action_horizon": 32,
+          "backend": "fastwam",
+          "compiled": false,
+          "condition": "first_frame",
+          "model_class": "FastWAM",
+          "model_output_keys": [
+            "action"
+          ],
+          "num_inference_steps": 10,
+          "num_video_frames": 9,
+          "observation": {
+            "camera_layout": "head_above_wrists",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ],
+            "image_shape": [
+              1,
+              3,
+              384,
+              320
+            ],
+            "seed": 100003,
+            "task_name": "rotate_qrcode"
+          },
+          "rand_device": "cpu",
+          "seed": 100003,
+          "sigma_shift": 5.0,
+          "text_cfg_scale": 1.0
+        },
+        {
+          "action_horizon": 32,
+          "backend": "fastwam",
+          "compiled": false,
+          "condition": "first_frame",
+          "model_class": "FastWAM",
+          "model_output_keys": [
+            "action"
+          ],
+          "num_inference_steps": 10,
+          "num_video_frames": 9,
+          "observation": {
+            "camera_layout": "head_above_wrists",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ],
+            "image_shape": [
+              1,
+              3,
+              384,
+              320
+            ]
+          },
+          "rand_device": "cpu",
+          "seed": 100004,
+          "sigma_shift": 5.0,
+          "text_cfg_scale": 1.0
+        },
+        {
+          "action_horizon": 32,
+          "backend": "fastwam",
+          "compiled": false,
+          "condition": "first_frame",
+          "model_class": "FastWAM",
+          "model_output_keys": [
+            "action"
+          ],
+          "num_inference_steps": 10,
+          "num_video_frames": 9,
+          "observation": {
+            "camera_layout": "head_above_wrists",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ],
+            "image_shape": [
+              1,
+              3,
+              384,
+              320
+            ]
+          },
+          "rand_device": "cpu",
+          "seed": 100005,
+          "sigma_shift": 5.0,
+          "text_cfg_scale": 1.0
+        },
+        {
+          "action_horizon": 32,
+          "backend": "fastwam",
+          "compiled": false,
+          "condition": "first_frame",
+          "model_class": "FastWAM",
+          "model_output_keys": [
+            "action"
+          ],
+          "num_inference_steps": 10,
+          "num_video_frames": 9,
+          "observation": {
+            "camera_layout": "head_above_wrists",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ],
+            "image_shape": [
+              1,
+              3,
+              384,
+              320
+            ]
+          },
+          "rand_device": "cpu",
+          "seed": 100006,
+          "sigma_shift": 5.0,
+          "text_cfg_scale": 1.0
+        },
+        {
+          "action_horizon": 32,
+          "backend": "fastwam",
+          "compiled": false,
+          "condition": "first_frame",
+          "model_class": "FastWAM",
+          "model_output_keys": [
+            "action"
+          ],
+          "num_inference_steps": 10,
+          "num_video_frames": 9,
+          "observation": {
+            "camera_layout": "head_above_wrists",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ],
+            "image_shape": [
+              1,
+              3,
+              384,
+              320
+            ]
+          },
+          "rand_device": "cpu",
+          "seed": 100007,
+          "sigma_shift": 5.0,
+          "text_cfg_scale": 1.0
+        },
+        {
+          "action_horizon": 32,
+          "backend": "fastwam",
+          "compiled": false,
+          "condition": "first_frame",
+          "model_class": "FastWAM",
+          "model_output_keys": [
+            "action"
+          ],
+          "num_inference_steps": 10,
+          "num_video_frames": 9,
+          "observation": {
+            "camera_layout": "head_above_wrists",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ],
+            "image_shape": [
+              1,
+              3,
+              384,
+              320
+            ]
+          },
+          "rand_device": "cpu",
+          "seed": 100008,
+          "sigma_shift": 5.0,
+          "text_cfg_scale": 1.0
+        },
+        {
+          "action_horizon": 32,
+          "backend": "fastwam",
+          "compiled": false,
+          "condition": "first_frame",
+          "model_class": "FastWAM",
+          "model_output_keys": [
+            "action"
+          ],
+          "num_inference_steps": 10,
+          "num_video_frames": 9,
+          "observation": {
+            "camera_layout": "head_above_wrists",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ],
+            "image_shape": [
+              1,
+              3,
+              384,
+              320
+            ]
+          },
+          "rand_device": "cpu",
+          "seed": 100009,
+          "sigma_shift": 5.0,
+          "text_cfg_scale": 1.0
+        }
+      ],
+      "instruction": "Grab the QR code payment sign, lift it, and rotate until the QR code faces you.",
+      "policy_steps": 146,
+      "seed": 100003,
+      "success": true,
+      "termination_reason": "success"
+    },
+    {
+      "episode": 4,
+      "inference_calls": 7,
+      "inference_latency_ms": [
+        236.51662201154977,
+        235.73786299675703,
+        234.67089503537863,
+        236.4826799603179,
+        235.64680793788284,
+        235.09907198604196,
+        235.86815898306668
+      ],
+      "inference_metadata": [
+        {
+          "action_horizon": 32,
+          "backend": "fastwam",
+          "compiled": false,
+          "condition": "first_frame",
+          "model_class": "FastWAM",
+          "model_output_keys": [
+            "action"
+          ],
+          "num_inference_steps": 10,
+          "num_video_frames": 9,
+          "observation": {
+            "camera_layout": "head_above_wrists",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ],
+            "image_shape": [
+              1,
+              3,
+              384,
+              320
+            ],
+            "seed": 100004,
+            "task_name": "rotate_qrcode"
+          },
+          "rand_device": "cpu",
+          "seed": 100004,
+          "sigma_shift": 5.0,
+          "text_cfg_scale": 1.0
+        },
+        {
+          "action_horizon": 32,
+          "backend": "fastwam",
+          "compiled": false,
+          "condition": "first_frame",
+          "model_class": "FastWAM",
+          "model_output_keys": [
+            "action"
+          ],
+          "num_inference_steps": 10,
+          "num_video_frames": 9,
+          "observation": {
+            "camera_layout": "head_above_wrists",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ],
+            "image_shape": [
+              1,
+              3,
+              384,
+              320
+            ]
+          },
+          "rand_device": "cpu",
+          "seed": 100005,
+          "sigma_shift": 5.0,
+          "text_cfg_scale": 1.0
+        },
+        {
+          "action_horizon": 32,
+          "backend": "fastwam",
+          "compiled": false,
+          "condition": "first_frame",
+          "model_class": "FastWAM",
+          "model_output_keys": [
+            "action"
+          ],
+          "num_inference_steps": 10,
+          "num_video_frames": 9,
+          "observation": {
+            "camera_layout": "head_above_wrists",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ],
+            "image_shape": [
+              1,
+              3,
+              384,
+              320
+            ]
+          },
+          "rand_device": "cpu",
+          "seed": 100006,
+          "sigma_shift": 5.0,
+          "text_cfg_scale": 1.0
+        },
+        {
+          "action_horizon": 32,
+          "backend": "fastwam",
+          "compiled": false,
+          "condition": "first_frame",
+          "model_class": "FastWAM",
+          "model_output_keys": [
+            "action"
+          ],
+          "num_inference_steps": 10,
+          "num_video_frames": 9,
+          "observation": {
+            "camera_layout": "head_above_wrists",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ],
+            "image_shape": [
+              1,
+              3,
+              384,
+              320
+            ]
+          },
+          "rand_device": "cpu",
+          "seed": 100007,
+          "sigma_shift": 5.0,
+          "text_cfg_scale": 1.0
+        },
+        {
+          "action_horizon": 32,
+          "backend": "fastwam",
+          "compiled": false,
+          "condition": "first_frame",
+          "model_class": "FastWAM",
+          "model_output_keys": [
+            "action"
+          ],
+          "num_inference_steps": 10,
+          "num_video_frames": 9,
+          "observation": {
+            "camera_layout": "head_above_wrists",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ],
+            "image_shape": [
+              1,
+              3,
+              384,
+              320
+            ]
+          },
+          "rand_device": "cpu",
+          "seed": 100008,
+          "sigma_shift": 5.0,
+          "text_cfg_scale": 1.0
+        },
+        {
+          "action_horizon": 32,
+          "backend": "fastwam",
+          "compiled": false,
+          "condition": "first_frame",
+          "model_class": "FastWAM",
+          "model_output_keys": [
+            "action"
+          ],
+          "num_inference_steps": 10,
+          "num_video_frames": 9,
+          "observation": {
+            "camera_layout": "head_above_wrists",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ],
+            "image_shape": [
+              1,
+              3,
+              384,
+              320
+            ]
+          },
+          "rand_device": "cpu",
+          "seed": 100009,
+          "sigma_shift": 5.0,
+          "text_cfg_scale": 1.0
+        },
+        {
+          "action_horizon": 32,
+          "backend": "fastwam",
+          "compiled": false,
+          "condition": "first_frame",
+          "model_class": "FastWAM",
+          "model_output_keys": [
+            "action"
+          ],
+          "num_inference_steps": 10,
+          "num_video_frames": 9,
+          "observation": {
+            "camera_layout": "head_above_wrists",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ],
+            "image_shape": [
+              1,
+              3,
+              384,
+              320
+            ]
+          },
+          "rand_device": "cpu",
+          "seed": 100010,
+          "sigma_shift": 5.0,
+          "text_cfg_scale": 1.0
+        }
+      ],
+      "instruction": "Pick the paymentsign with QR code up from the table and rotate it.",
+      "policy_steps": 150,
+      "seed": 100004,
+      "success": true,
+      "termination_reason": "success"
+    },
+    {
+      "episode": 5,
+      "inference_calls": 7,
+      "inference_latency_ms": [
+        236.77939700428396,
+        236.40857893042266,
+        235.75025307945907,
+        236.41977994702756,
+        235.64392304979265,
+        235.75048800557852,
+        236.85093794483691
+      ],
+      "inference_metadata": [
+        {
+          "action_horizon": 32,
+          "backend": "fastwam",
+          "compiled": false,
+          "condition": "first_frame",
+          "model_class": "FastWAM",
+          "model_output_keys": [
+            "action"
+          ],
+          "num_inference_steps": 10,
+          "num_video_frames": 9,
+          "observation": {
+            "camera_layout": "head_above_wrists",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ],
+            "image_shape": [
+              1,
+              3,
+              384,
+              320
+            ],
+            "seed": 100005,
+            "task_name": "rotate_qrcode"
+          },
+          "rand_device": "cpu",
+          "seed": 100005,
+          "sigma_shift": 5.0,
+          "text_cfg_scale": 1.0
+        },
+        {
+          "action_horizon": 32,
+          "backend": "fastwam",
+          "compiled": false,
+          "condition": "first_frame",
+          "model_class": "FastWAM",
+          "model_output_keys": [
+            "action"
+          ],
+          "num_inference_steps": 10,
+          "num_video_frames": 9,
+          "observation": {
+            "camera_layout": "head_above_wrists",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ],
+            "image_shape": [
+              1,
+              3,
+              384,
+              320
+            ]
+          },
+          "rand_device": "cpu",
+          "seed": 100006,
+          "sigma_shift": 5.0,
+          "text_cfg_scale": 1.0
+        },
+        {
+          "action_horizon": 32,
+          "backend": "fastwam",
+          "compiled": false,
+          "condition": "first_frame",
+          "model_class": "FastWAM",
+          "model_output_keys": [
+            "action"
+          ],
+          "num_inference_steps": 10,
+          "num_video_frames": 9,
+          "observation": {
+            "camera_layout": "head_above_wrists",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ],
+            "image_shape": [
+              1,
+              3,
+              384,
+              320
+            ]
+          },
+          "rand_device": "cpu",
+          "seed": 100007,
+          "sigma_shift": 5.0,
+          "text_cfg_scale": 1.0
+        },
+        {
+          "action_horizon": 32,
+          "backend": "fastwam",
+          "compiled": false,
+          "condition": "first_frame",
+          "model_class": "FastWAM",
+          "model_output_keys": [
+            "action"
+          ],
+          "num_inference_steps": 10,
+          "num_video_frames": 9,
+          "observation": {
+            "camera_layout": "head_above_wrists",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ],
+            "image_shape": [
+              1,
+              3,
+              384,
+              320
+            ]
+          },
+          "rand_device": "cpu",
+          "seed": 100008,
+          "sigma_shift": 5.0,
+          "text_cfg_scale": 1.0
+        },
+        {
+          "action_horizon": 32,
+          "backend": "fastwam",
+          "compiled": false,
+          "condition": "first_frame",
+          "model_class": "FastWAM",
+          "model_output_keys": [
+            "action"
+          ],
+          "num_inference_steps": 10,
+          "num_video_frames": 9,
+          "observation": {
+            "camera_layout": "head_above_wrists",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ],
+            "image_shape": [
+              1,
+              3,
+              384,
+              320
+            ]
+          },
+          "rand_device": "cpu",
+          "seed": 100009,
+          "sigma_shift": 5.0,
+          "text_cfg_scale": 1.0
+        },
+        {
+          "action_horizon": 32,
+          "backend": "fastwam",
+          "compiled": false,
+          "condition": "first_frame",
+          "model_class": "FastWAM",
+          "model_output_keys": [
+            "action"
+          ],
+          "num_inference_steps": 10,
+          "num_video_frames": 9,
+          "observation": {
+            "camera_layout": "head_above_wrists",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ],
+            "image_shape": [
+              1,
+              3,
+              384,
+              320
+            ]
+          },
+          "rand_device": "cpu",
+          "seed": 100010,
+          "sigma_shift": 5.0,
+          "text_cfg_scale": 1.0
+        },
+        {
+          "action_horizon": 32,
+          "backend": "fastwam",
+          "compiled": false,
+          "condition": "first_frame",
+          "model_class": "FastWAM",
+          "model_output_keys": [
+            "action"
+          ],
+          "num_inference_steps": 10,
+          "num_video_frames": 9,
+          "observation": {
+            "camera_layout": "head_above_wrists",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ],
+            "image_shape": [
+              1,
+              3,
+              384,
+              320
+            ]
+          },
+          "rand_device": "cpu",
+          "seed": 100011,
+          "sigma_shift": 5.0,
+          "text_cfg_scale": 1.0
+        }
+      ],
+      "instruction": "Grab the paymentsign with angled stand, lift it, and rotate to see the qrcode.",
+      "policy_steps": 149,
+      "seed": 100005,
+      "success": true,
+      "termination_reason": "success"
+    },
+    {
+      "episode": 6,
+      "inference_calls": 7,
+      "inference_latency_ms": [
+        237.21134394872934,
+        234.8045880207792,
+        236.82239593472332,
+        234.20813400298357,
+        236.6638840176165,
+        235.64188193995506,
+        235.3668960276991
+      ],
+      "inference_metadata": [
+        {
+          "action_horizon": 32,
+          "backend": "fastwam",
+          "compiled": false,
+          "condition": "first_frame",
+          "model_class": "FastWAM",
+          "model_output_keys": [
+            "action"
+          ],
+          "num_inference_steps": 10,
+          "num_video_frames": 9,
+          "observation": {
+            "camera_layout": "head_above_wrists",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ],
+            "image_shape": [
+              1,
+              3,
+              384,
+              320
+            ],
+            "seed": 100006,
+            "task_name": "rotate_qrcode"
+          },
+          "rand_device": "cpu",
+          "seed": 100006,
+          "sigma_shift": 5.0,
+          "text_cfg_scale": 1.0
+        },
+        {
+          "action_horizon": 32,
+          "backend": "fastwam",
+          "compiled": false,
+          "condition": "first_frame",
+          "model_class": "FastWAM",
+          "model_output_keys": [
+            "action"
+          ],
+          "num_inference_steps": 10,
+          "num_video_frames": 9,
+          "observation": {
+            "camera_layout": "head_above_wrists",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ],
+            "image_shape": [
+              1,
+              3,
+              384,
+              320
+            ]
+          },
+          "rand_device": "cpu",
+          "seed": 100007,
+          "sigma_shift": 5.0,
+          "text_cfg_scale": 1.0
+        },
+        {
+          "action_horizon": 32,
+          "backend": "fastwam",
+          "compiled": false,
+          "condition": "first_frame",
+          "model_class": "FastWAM",
+          "model_output_keys": [
+            "action"
+          ],
+          "num_inference_steps": 10,
+          "num_video_frames": 9,
+          "observation": {
+            "camera_layout": "head_above_wrists",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ],
+            "image_shape": [
+              1,
+              3,
+              384,
+              320
+            ]
+          },
+          "rand_device": "cpu",
+          "seed": 100008,
+          "sigma_shift": 5.0,
+          "text_cfg_scale": 1.0
+        },
+        {
+          "action_horizon": 32,
+          "backend": "fastwam",
+          "compiled": false,
+          "condition": "first_frame",
+          "model_class": "FastWAM",
+          "model_output_keys": [
+            "action"
+          ],
+          "num_inference_steps": 10,
+          "num_video_frames": 9,
+          "observation": {
+            "camera_layout": "head_above_wrists",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ],
+            "image_shape": [
+              1,
+              3,
+              384,
+              320
+            ]
+          },
+          "rand_device": "cpu",
+          "seed": 100009,
+          "sigma_shift": 5.0,
+          "text_cfg_scale": 1.0
+        },
+        {
+          "action_horizon": 32,
+          "backend": "fastwam",
+          "compiled": false,
+          "condition": "first_frame",
+          "model_class": "FastWAM",
+          "model_output_keys": [
+            "action"
+          ],
+          "num_inference_steps": 10,
+          "num_video_frames": 9,
+          "observation": {
+            "camera_layout": "head_above_wrists",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ],
+            "image_shape": [
+              1,
+              3,
+              384,
+              320
+            ]
+          },
+          "rand_device": "cpu",
+          "seed": 100010,
+          "sigma_shift": 5.0,
+          "text_cfg_scale": 1.0
+        },
+        {
+          "action_horizon": 32,
+          "backend": "fastwam",
+          "compiled": false,
+          "condition": "first_frame",
+          "model_class": "FastWAM",
+          "model_output_keys": [
+            "action"
+          ],
+          "num_inference_steps": 10,
+          "num_video_frames": 9,
+          "observation": {
+            "camera_layout": "head_above_wrists",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ],
+            "image_shape": [
+              1,
+              3,
+              384,
+              320
+            ]
+          },
+          "rand_device": "cpu",
+          "seed": 100011,
+          "sigma_shift": 5.0,
+          "text_cfg_scale": 1.0
+        },
+        {
+          "action_horizon": 32,
+          "backend": "fastwam",
+          "compiled": false,
+          "condition": "first_frame",
+          "model_class": "FastWAM",
+          "model_output_keys": [
+            "action"
+          ],
+          "num_inference_steps": 10,
+          "num_video_frames": 9,
+          "observation": {
+            "camera_layout": "head_above_wrists",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ],
+            "image_shape": [
+              1,
+              3,
+              384,
+              320
+            ]
+          },
+          "rand_device": "cpu",
+          "seed": 100012,
+          "sigma_shift": 5.0,
+          "text_cfg_scale": 1.0
+        }
+      ],
+      "instruction": "Pick up the QR code paymentsign and rotate it to face its QR code toward you.",
+      "policy_steps": 148,
+      "seed": 100006,
+      "success": true,
+      "termination_reason": "success"
+    },
+    {
+      "episode": 7,
+      "inference_calls": 17,
+      "inference_latency_ms": [
+        238.1180099910125,
+        237.018185085617,
+        236.740113934502,
+        235.07201904430985,
+        236.39639106113464,
+        235.3619629284367,
+        235.76939397025853,
+        237.97386803198606,
+        235.46347592491657,
+        234.82361703645438,
+        234.75818999577314,
+        236.05465795844793,
+        233.05331403389573,
+        234.85717899166048,
+        235.32380303367972,
+        234.5823619980365,
+        235.650144983083
+      ],
+      "inference_metadata": [
+        {
+          "action_horizon": 32,
+          "backend": "fastwam",
+          "compiled": false,
+          "condition": "first_frame",
+          "model_class": "FastWAM",
+          "model_output_keys": [
+            "action"
+          ],
+          "num_inference_steps": 10,
+          "num_video_frames": 9,
+          "observation": {
+            "camera_layout": "head_above_wrists",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ],
+            "image_shape": [
+              1,
+              3,
+              384,
+              320
+            ],
+            "seed": 100008,
+            "task_name": "rotate_qrcode"
+          },
+          "rand_device": "cpu",
+          "seed": 100008,
+          "sigma_shift": 5.0,
+          "text_cfg_scale": 1.0
+        },
+        {
+          "action_horizon": 32,
+          "backend": "fastwam",
+          "compiled": false,
+          "condition": "first_frame",
+          "model_class": "FastWAM",
+          "model_output_keys": [
+            "action"
+          ],
+          "num_inference_steps": 10,
+          "num_video_frames": 9,
+          "observation": {
+            "camera_layout": "head_above_wrists",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ],
+            "image_shape": [
+              1,
+              3,
+              384,
+              320
+            ]
+          },
+          "rand_device": "cpu",
+          "seed": 100009,
+          "sigma_shift": 5.0,
+          "text_cfg_scale": 1.0
+        },
+        {
+          "action_horizon": 32,
+          "backend": "fastwam",
+          "compiled": false,
+          "condition": "first_frame",
+          "model_class": "FastWAM",
+          "model_output_keys": [
+            "action"
+          ],
+          "num_inference_steps": 10,
+          "num_video_frames": 9,
+          "observation": {
+            "camera_layout": "head_above_wrists",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ],
+            "image_shape": [
+              1,
+              3,
+              384,
+              320
+            ]
+          },
+          "rand_device": "cpu",
+          "seed": 100010,
+          "sigma_shift": 5.0,
+          "text_cfg_scale": 1.0
+        },
+        {
+          "action_horizon": 32,
+          "backend": "fastwam",
+          "compiled": false,
+          "condition": "first_frame",
+          "model_class": "FastWAM",
+          "model_output_keys": [
+            "action"
+          ],
+          "num_inference_steps": 10,
+          "num_video_frames": 9,
+          "observation": {
+            "camera_layout": "head_above_wrists",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ],
+            "image_shape": [
+              1,
+              3,
+              384,
+              320
+            ]
+          },
+          "rand_device": "cpu",
+          "seed": 100011,
+          "sigma_shift": 5.0,
+          "text_cfg_scale": 1.0
+        },
+        {
+          "action_horizon": 32,
+          "backend": "fastwam",
+          "compiled": false,
+          "condition": "first_frame",
+          "model_class": "FastWAM",
+          "model_output_keys": [
+            "action"
+          ],
+          "num_inference_steps": 10,
+          "num_video_frames": 9,
+          "observation": {
+            "camera_layout": "head_above_wrists",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ],
+            "image_shape": [
+              1,
+              3,
+              384,
+              320
+            ]
+          },
+          "rand_device": "cpu",
+          "seed": 100012,
+          "sigma_shift": 5.0,
+          "text_cfg_scale": 1.0
+        },
+        {
+          "action_horizon": 32,
+          "backend": "fastwam",
+          "compiled": false,
+          "condition": "first_frame",
+          "model_class": "FastWAM",
+          "model_output_keys": [
+            "action"
+          ],
+          "num_inference_steps": 10,
+          "num_video_frames": 9,
+          "observation": {
+            "camera_layout": "head_above_wrists",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ],
+            "image_shape": [
+              1,
+              3,
+              384,
+              320
+            ]
+          },
+          "rand_device": "cpu",
+          "seed": 100013,
+          "sigma_shift": 5.0,
+          "text_cfg_scale": 1.0
+        },
+        {
+          "action_horizon": 32,
+          "backend": "fastwam",
+          "compiled": false,
+          "condition": "first_frame",
+          "model_class": "FastWAM",
+          "model_output_keys": [
+            "action"
+          ],
+          "num_inference_steps": 10,
+          "num_video_frames": 9,
+          "observation": {
+            "camera_layout": "head_above_wrists",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ],
+            "image_shape": [
+              1,
+              3,
+              384,
+              320
+            ]
+          },
+          "rand_device": "cpu",
+          "seed": 100014,
+          "sigma_shift": 5.0,
+          "text_cfg_scale": 1.0
+        },
+        {
+          "action_horizon": 32,
+          "backend": "fastwam",
+          "compiled": false,
+          "condition": "first_frame",
+          "model_class": "FastWAM",
+          "model_output_keys": [
+            "action"
+          ],
+          "num_inference_steps": 10,
+          "num_video_frames": 9,
+          "observation": {
+            "camera_layout": "head_above_wrists",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ],
+            "image_shape": [
+              1,
+              3,
+              384,
+              320
+            ]
+          },
+          "rand_device": "cpu",
+          "seed": 100015,
+          "sigma_shift": 5.0,
+          "text_cfg_scale": 1.0
+        },
+        {
+          "action_horizon": 32,
+          "backend": "fastwam",
+          "compiled": false,
+          "condition": "first_frame",
+          "model_class": "FastWAM",
+          "model_output_keys": [
+            "action"
+          ],
+          "num_inference_steps": 10,
+          "num_video_frames": 9,
+          "observation": {
+            "camera_layout": "head_above_wrists",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ],
+            "image_shape": [
+              1,
+              3,
+              384,
+              320
+            ]
+          },
+          "rand_device": "cpu",
+          "seed": 100016,
+          "sigma_shift": 5.0,
+          "text_cfg_scale": 1.0
+        },
+        {
+          "action_horizon": 32,
+          "backend": "fastwam",
+          "compiled": false,
+          "condition": "first_frame",
+          "model_class": "FastWAM",
+          "model_output_keys": [
+            "action"
+          ],
+          "num_inference_steps": 10,
+          "num_video_frames": 9,
+          "observation": {
+            "camera_layout": "head_above_wrists",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ],
+            "image_shape": [
+              1,
+              3,
+              384,
+              320
+            ]
+          },
+          "rand_device": "cpu",
+          "seed": 100017,
+          "sigma_shift": 5.0,
+          "text_cfg_scale": 1.0
+        },
+        {
+          "action_horizon": 32,
+          "backend": "fastwam",
+          "compiled": false,
+          "condition": "first_frame",
+          "model_class": "FastWAM",
+          "model_output_keys": [
+            "action"
+          ],
+          "num_inference_steps": 10,
+          "num_video_frames": 9,
+          "observation": {
+            "camera_layout": "head_above_wrists",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ],
+            "image_shape": [
+              1,
+              3,
+              384,
+              320
+            ]
+          },
+          "rand_device": "cpu",
+          "seed": 100018,
+          "sigma_shift": 5.0,
+          "text_cfg_scale": 1.0
+        },
+        {
+          "action_horizon": 32,
+          "backend": "fastwam",
+          "compiled": false,
+          "condition": "first_frame",
+          "model_class": "FastWAM",
+          "model_output_keys": [
+            "action"
+          ],
+          "num_inference_steps": 10,
+          "num_video_frames": 9,
+          "observation": {
+            "camera_layout": "head_above_wrists",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ],
+            "image_shape": [
+              1,
+              3,
+              384,
+              320
+            ]
+          },
+          "rand_device": "cpu",
+          "seed": 100019,
+          "sigma_shift": 5.0,
+          "text_cfg_scale": 1.0
+        },
+        {
+          "action_horizon": 32,
+          "backend": "fastwam",
+          "compiled": false,
+          "condition": "first_frame",
+          "model_class": "FastWAM",
+          "model_output_keys": [
+            "action"
+          ],
+          "num_inference_steps": 10,
+          "num_video_frames": 9,
+          "observation": {
+            "camera_layout": "head_above_wrists",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ],
+            "image_shape": [
+              1,
+              3,
+              384,
+              320
+            ]
+          },
+          "rand_device": "cpu",
+          "seed": 100020,
+          "sigma_shift": 5.0,
+          "text_cfg_scale": 1.0
+        },
+        {
+          "action_horizon": 32,
+          "backend": "fastwam",
+          "compiled": false,
+          "condition": "first_frame",
+          "model_class": "FastWAM",
+          "model_output_keys": [
+            "action"
+          ],
+          "num_inference_steps": 10,
+          "num_video_frames": 9,
+          "observation": {
+            "camera_layout": "head_above_wrists",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ],
+            "image_shape": [
+              1,
+              3,
+              384,
+              320
+            ]
+          },
+          "rand_device": "cpu",
+          "seed": 100021,
+          "sigma_shift": 5.0,
+          "text_cfg_scale": 1.0
+        },
+        {
+          "action_horizon": 32,
+          "backend": "fastwam",
+          "compiled": false,
+          "condition": "first_frame",
+          "model_class": "FastWAM",
+          "model_output_keys": [
+            "action"
+          ],
+          "num_inference_steps": 10,
+          "num_video_frames": 9,
+          "observation": {
+            "camera_layout": "head_above_wrists",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ],
+            "image_shape": [
+              1,
+              3,
+              384,
+              320
+            ]
+          },
+          "rand_device": "cpu",
+          "seed": 100022,
+          "sigma_shift": 5.0,
+          "text_cfg_scale": 1.0
+        },
+        {
+          "action_horizon": 32,
+          "backend": "fastwam",
+          "compiled": false,
+          "condition": "first_frame",
+          "model_class": "FastWAM",
+          "model_output_keys": [
+            "action"
+          ],
+          "num_inference_steps": 10,
+          "num_video_frames": 9,
+          "observation": {
+            "camera_layout": "head_above_wrists",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ],
+            "image_shape": [
+              1,
+              3,
+              384,
+              320
+            ]
+          },
+          "rand_device": "cpu",
+          "seed": 100023,
+          "sigma_shift": 5.0,
+          "text_cfg_scale": 1.0
+        },
+        {
+          "action_horizon": 32,
+          "backend": "fastwam",
+          "compiled": false,
+          "condition": "first_frame",
+          "model_class": "FastWAM",
+          "model_output_keys": [
+            "action"
+          ],
+          "num_inference_steps": 10,
+          "num_video_frames": 9,
+          "observation": {
+            "camera_layout": "head_above_wrists",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ],
+            "image_shape": [
+              1,
+              3,
+              384,
+              320
+            ]
+          },
+          "rand_device": "cpu",
+          "seed": 100024,
+          "sigma_shift": 5.0,
+          "text_cfg_scale": 1.0
+        }
+      ],
+      "instruction": "Grab the medium paymentsign with QR section, lift it, and rotate to see the qrcode.",
+      "policy_steps": 400,
+      "seed": 100008,
+      "success": false,
+      "termination_reason": "max_steps"
+    },
+    {
+      "episode": 8,
+      "inference_calls": 7,
+      "inference_latency_ms": [
+        234.93215104099363,
+        234.8266600165516,
+        234.56194705795497,
+        235.21698091644794,
+        234.8179529653862,
+        234.8205610178411,
+        236.65439593605697
+      ],
+      "inference_metadata": [
+        {
+          "action_horizon": 32,
+          "backend": "fastwam",
+          "compiled": false,
+          "condition": "first_frame",
+          "model_class": "FastWAM",
+          "model_output_keys": [
+            "action"
+          ],
+          "num_inference_steps": 10,
+          "num_video_frames": 9,
+          "observation": {
+            "camera_layout": "head_above_wrists",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ],
+            "image_shape": [
+              1,
+              3,
+              384,
+              320
+            ],
+            "seed": 100009,
+            "task_name": "rotate_qrcode"
+          },
+          "rand_device": "cpu",
+          "seed": 100009,
+          "sigma_shift": 5.0,
+          "text_cfg_scale": 1.0
+        },
+        {
+          "action_horizon": 32,
+          "backend": "fastwam",
+          "compiled": false,
+          "condition": "first_frame",
+          "model_class": "FastWAM",
+          "model_output_keys": [
+            "action"
+          ],
+          "num_inference_steps": 10,
+          "num_video_frames": 9,
+          "observation": {
+            "camera_layout": "head_above_wrists",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ],
+            "image_shape": [
+              1,
+              3,
+              384,
+              320
+            ]
+          },
+          "rand_device": "cpu",
+          "seed": 100010,
+          "sigma_shift": 5.0,
+          "text_cfg_scale": 1.0
+        },
+        {
+          "action_horizon": 32,
+          "backend": "fastwam",
+          "compiled": false,
+          "condition": "first_frame",
+          "model_class": "FastWAM",
+          "model_output_keys": [
+            "action"
+          ],
+          "num_inference_steps": 10,
+          "num_video_frames": 9,
+          "observation": {
+            "camera_layout": "head_above_wrists",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ],
+            "image_shape": [
+              1,
+              3,
+              384,
+              320
+            ]
+          },
+          "rand_device": "cpu",
+          "seed": 100011,
+          "sigma_shift": 5.0,
+          "text_cfg_scale": 1.0
+        },
+        {
+          "action_horizon": 32,
+          "backend": "fastwam",
+          "compiled": false,
+          "condition": "first_frame",
+          "model_class": "FastWAM",
+          "model_output_keys": [
+            "action"
+          ],
+          "num_inference_steps": 10,
+          "num_video_frames": 9,
+          "observation": {
+            "camera_layout": "head_above_wrists",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ],
+            "image_shape": [
+              1,
+              3,
+              384,
+              320
+            ]
+          },
+          "rand_device": "cpu",
+          "seed": 100012,
+          "sigma_shift": 5.0,
+          "text_cfg_scale": 1.0
+        },
+        {
+          "action_horizon": 32,
+          "backend": "fastwam",
+          "compiled": false,
+          "condition": "first_frame",
+          "model_class": "FastWAM",
+          "model_output_keys": [
+            "action"
+          ],
+          "num_inference_steps": 10,
+          "num_video_frames": 9,
+          "observation": {
+            "camera_layout": "head_above_wrists",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ],
+            "image_shape": [
+              1,
+              3,
+              384,
+              320
+            ]
+          },
+          "rand_device": "cpu",
+          "seed": 100013,
+          "sigma_shift": 5.0,
+          "text_cfg_scale": 1.0
+        },
+        {
+          "action_horizon": 32,
+          "backend": "fastwam",
+          "compiled": false,
+          "condition": "first_frame",
+          "model_class": "FastWAM",
+          "model_output_keys": [
+            "action"
+          ],
+          "num_inference_steps": 10,
+          "num_video_frames": 9,
+          "observation": {
+            "camera_layout": "head_above_wrists",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ],
+            "image_shape": [
+              1,
+              3,
+              384,
+              320
+            ]
+          },
+          "rand_device": "cpu",
+          "seed": 100014,
+          "sigma_shift": 5.0,
+          "text_cfg_scale": 1.0
+        },
+        {
+          "action_horizon": 32,
+          "backend": "fastwam",
+          "compiled": false,
+          "condition": "first_frame",
+          "model_class": "FastWAM",
+          "model_output_keys": [
+            "action"
+          ],
+          "num_inference_steps": 10,
+          "num_video_frames": 9,
+          "observation": {
+            "camera_layout": "head_above_wrists",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ],
+            "image_shape": [
+              1,
+              3,
+              384,
+              320
+            ]
+          },
+          "rand_device": "cpu",
+          "seed": 100015,
+          "sigma_shift": 5.0,
+          "text_cfg_scale": 1.0
+        }
+      ],
+      "instruction": "Pick the tabletop paymentsign off the table using the right arm and rotate it.",
+      "policy_steps": 149,
+      "seed": 100009,
+      "success": true,
+      "termination_reason": "success"
+    },
+    {
+      "episode": 9,
+      "inference_calls": 6,
+      "inference_latency_ms": [
+        236.54796392656863,
+        236.39010195620358,
+        234.9616209976375,
+        235.45082693453878,
+        234.56731508485973,
+        236.02696205489337
+      ],
+      "inference_metadata": [
+        {
+          "action_horizon": 32,
+          "backend": "fastwam",
+          "compiled": false,
+          "condition": "first_frame",
+          "model_class": "FastWAM",
+          "model_output_keys": [
+            "action"
+          ],
+          "num_inference_steps": 10,
+          "num_video_frames": 9,
+          "observation": {
+            "camera_layout": "head_above_wrists",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ],
+            "image_shape": [
+              1,
+              3,
+              384,
+              320
+            ],
+            "seed": 100010,
+            "task_name": "rotate_qrcode"
+          },
+          "rand_device": "cpu",
+          "seed": 100010,
+          "sigma_shift": 5.0,
+          "text_cfg_scale": 1.0
+        },
+        {
+          "action_horizon": 32,
+          "backend": "fastwam",
+          "compiled": false,
+          "condition": "first_frame",
+          "model_class": "FastWAM",
+          "model_output_keys": [
+            "action"
+          ],
+          "num_inference_steps": 10,
+          "num_video_frames": 9,
+          "observation": {
+            "camera_layout": "head_above_wrists",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ],
+            "image_shape": [
+              1,
+              3,
+              384,
+              320
+            ]
+          },
+          "rand_device": "cpu",
+          "seed": 100011,
+          "sigma_shift": 5.0,
+          "text_cfg_scale": 1.0
+        },
+        {
+          "action_horizon": 32,
+          "backend": "fastwam",
+          "compiled": false,
+          "condition": "first_frame",
+          "model_class": "FastWAM",
+          "model_output_keys": [
+            "action"
+          ],
+          "num_inference_steps": 10,
+          "num_video_frames": 9,
+          "observation": {
+            "camera_layout": "head_above_wrists",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ],
+            "image_shape": [
+              1,
+              3,
+              384,
+              320
+            ]
+          },
+          "rand_device": "cpu",
+          "seed": 100012,
+          "sigma_shift": 5.0,
+          "text_cfg_scale": 1.0
+        },
+        {
+          "action_horizon": 32,
+          "backend": "fastwam",
+          "compiled": false,
+          "condition": "first_frame",
+          "model_class": "FastWAM",
+          "model_output_keys": [
+            "action"
+          ],
+          "num_inference_steps": 10,
+          "num_video_frames": 9,
+          "observation": {
+            "camera_layout": "head_above_wrists",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ],
+            "image_shape": [
+              1,
+              3,
+              384,
+              320
+            ]
+          },
+          "rand_device": "cpu",
+          "seed": 100013,
+          "sigma_shift": 5.0,
+          "text_cfg_scale": 1.0
+        },
+        {
+          "action_horizon": 32,
+          "backend": "fastwam",
+          "compiled": false,
+          "condition": "first_frame",
+          "model_class": "FastWAM",
+          "model_output_keys": [
+            "action"
+          ],
+          "num_inference_steps": 10,
+          "num_video_frames": 9,
+          "observation": {
+            "camera_layout": "head_above_wrists",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ],
+            "image_shape": [
+              1,
+              3,
+              384,
+              320
+            ]
+          },
+          "rand_device": "cpu",
+          "seed": 100014,
+          "sigma_shift": 5.0,
+          "text_cfg_scale": 1.0
+        },
+        {
+          "action_horizon": 32,
+          "backend": "fastwam",
+          "compiled": false,
+          "condition": "first_frame",
+          "model_class": "FastWAM",
+          "model_output_keys": [
+            "action"
+          ],
+          "num_inference_steps": 10,
+          "num_video_frames": 9,
+          "observation": {
+            "camera_layout": "head_above_wrists",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ],
+            "image_shape": [
+              1,
+              3,
+              384,
+              320
+            ]
+          },
+          "rand_device": "cpu",
+          "seed": 100015,
+          "sigma_shift": 5.0,
+          "text_cfg_scale": 1.0
+        }
+      ],
+      "instruction": "Grab the black stand with angled display, lift it, and rotate to see the qrcode.",
+      "policy_steps": 140,
+      "seed": 100010,
+      "success": true,
+      "termination_reason": "success"
+    }
+  ]
+}

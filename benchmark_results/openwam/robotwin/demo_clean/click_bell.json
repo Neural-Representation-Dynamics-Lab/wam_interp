@@ -1,0 +1,1970 @@
+{
+  "accepted_seeds": [
+    100000,
+    100001,
+    100002,
+    100003,
+    100004,
+    100005,
+    100006,
+    100007,
+    100008,
+    100009
+  ],
+  "action_type": "ee",
+  "attempts": 10,
+  "benchmark": "robotwin",
+  "benchmark_revision": "c3ddfa8b97d5519efa828b075999bd0006778e5e",
+  "completed": true,
+  "config": {
+    "action_horizon": 32,
+    "clear_cache_freq": 5,
+    "inference_options": {},
+    "instruction_pool_size": 100,
+    "instruction_type": "unseen",
+    "max_repeated_screen_errors": 20,
+    "max_seed_attempts": 1000,
+    "max_steps": null,
+    "num_episodes": 10,
+    "output_dir": "/nethome/pi34/kv_results/rt10-openwam-13073",
+    "replan_steps": 32,
+    "robotwin_root": "/dev/shm/pi34-rt-13073/RoboTwin",
+    "run_metadata": {
+      "checkpoint": "/dev/shm/pi34-rt-13073/checkpoints/openwam",
+      "checkpoint_revision": "04b96af53eeeb111c64631f822efcbb82f4b186e",
+      "dtype": "bfloat16",
+      "repository_revision": "2a6a56a2a679da5b3d7b43ff92b0a6ad085c8d69",
+      "resolved_model_config": {
+        "dataloader": {
+          "action_mode": "eef",
+          "camera_layout": [
+            "head_camera",
+            "left_camera",
+            "right_camera"
+          ],
+          "color_jitter": {
+            "brightness": 0.2,
+            "contrast": 0.2,
+            "enabled": false,
+            "hue": 0.0,
+            "saturation": 0.2
+          },
+          "dataset_dir": "/path/to/robotwin_data",
+          "embodiment": "aloha-agilex",
+          "height": 384,
+          "multiview": true,
+          "normalize_mode": "min-max",
+          "num_frames": 33,
+          "seed": 42,
+          "split": "train",
+          "target_camera": "head_camera",
+          "type": "robotwin",
+          "unify_action": true,
+          "unify_action_map": [
+            "0-9",
+            "34-43"
+          ],
+          "unify_state_map": null,
+          "variant": "both",
+          "video_stride": 4,
+          "width": 320,
+          "window_stride": 1
+        },
+        "inference": {
+          "denoise_mode": "sync",
+          "denoise_steps": 10,
+          "height": 384,
+          "lead_modality": "video",
+          "linear_offset": 0.0,
+          "num_frames": 33,
+          "variance_shift_alpha": 1.0,
+          "video_num_frames": 9,
+          "width": 320
+        },
+        "model": {
+          "action_backbone": {
+            "dim": 1024,
+            "ffn_dim": 4096,
+            "shift_action": 5.0
+          },
+          "architecture": {
+            "action_dim": 80,
+            "attention_mask_mode": "mutual",
+            "bridge_interval": 1,
+            "bridge_layers": null,
+            "detach_bridge": false,
+            "framework": "dual_system",
+            "idm_video_cond_noise_prob": 0.5,
+            "mot_checkpoint_mixed_attn": true,
+            "state_dim": 80,
+            "use_proprioception": true,
+            "variant": "joint_self_attn",
+            "video_attention_mask_mode": "first_frame_causal"
+          },
+          "freeze": [
+            "video_backbone.text_encoder",
+            "video_backbone.reason1",
+            "video_backbone.vae",
+            "video_backbone.image_encoder",
+            "video_backbone.video_encoder"
+          ],
+          "video_backbone": {
+            "components": [
+              {
+                "attr": "dit",
+                "extra_kwargs": {
+                  "dim": 3072,
+                  "eps": 1e-06,
+                  "ffn_dim": 14336,
+                  "freq_dim": 256,
+                  "fuse_vae_embedding_in_latents": true,
+                  "has_image_input": false,
+                  "in_dim": 48,
+                  "num_heads": 24,
+                  "num_layers": 30,
+                  "out_dim": 48,
+                  "patch_size": [
+                    1,
+                    2,
+                    2
+                  ],
+                  "require_clip_embedding": false,
+                  "require_vae_embedding": false,
+                  "seperated_timestep": true,
+                  "text_dim": 4096
+                },
+                "model_class": "wam_interp.models.openwam.model_code.model.video_backbone.wan.models.dit.WanModel"
+              },
+              {
+                "attr": "vae",
+                "extra_kwargs": {},
+                "model_class": "wam_interp.models.openwam.model_code.model.video_backbone.wan.models.vae.WanVideoVAE38"
+              },
+              {
+                "attr": "text_encoder",
+                "extra_kwargs": {},
+                "model_class": "wam_interp.models.openwam.model_code.model.video_backbone.wan.models.text_encoder.WanTextEncoder"
+              }
+            ],
+            "encoder": {
+              "model_path": null,
+              "name": "wan22_vae"
+            },
+            "from_scratch": false,
+            "model_path": null,
+            "name": "wan22_ti2v_5b",
+            "shift_video": 5.0,
+            "tokenizer": {
+              "attr": "tokenizer",
+              "class": "wam_interp.models.openwam.model_code.model.video_backbone.wan.models.text_encoder.HuggingfaceTokenizer",
+              "kwargs": {
+                "clean": "whitespace",
+                "seq_len": 512
+              },
+              "path_kwarg": "name",
+              "subdir": "tokenizer/google/umt5-xxl"
+            }
+          }
+        },
+        "optimization": {
+          "compile": {
+            "enabled": false
+          },
+          "decode_video": false,
+          "dit_cache": {
+            "enabled": false
+          },
+          "prompt_embed_cache": {
+            "enabled": true,
+            "maxsize": 32
+          }
+        },
+        "project": {
+          "name": "openwam",
+          "output_dir": "outputs/${now:%Y-%m-%d_%H-%M-%S}",
+          "seed": 42,
+          "wandb": {
+            "entity": null,
+            "project": "openwam",
+            "run_name": null
+          }
+        },
+        "training": {
+          "action_lr": null,
+          "adam_betas": [
+            0.9,
+            0.95
+          ],
+          "batch_size": 4,
+          "dataset_num_workers": 8,
+          "debug": false,
+          "finetune_ckpt_path": "/path/to/OpenWAM-Pretrain-Foundation-Model",
+          "gradient_accumulation_steps": 1,
+          "initialize_model_on_cpu": false,
+          "keep_last_k_ckpts": 1,
+          "lambda_action": 1.0,
+          "lambda_video": 1.0,
+          "learning_rate": 0.0001,
+          "lr_min_ratio": 0.01,
+          "lr_scheduler": "cosine",
+          "max_grad_norm": 1.0,
+          "max_steps": null,
+          "max_timestep_boundary": 1.0,
+          "min_timestep_boundary": 0.0,
+          "mixed_precision": "bf16",
+          "num_epochs": 5,
+          "offload_optimizer_device": "none",
+          "output_path": "outputs/openwam_checkpoints",
+          "resume_ckpt_path": null,
+          "save_full_states_for_resume": false,
+          "save_steps": 2000,
+          "use_gradient_checkpointing": false,
+          "use_gradient_checkpointing_offload": false,
+          "video_lr": null,
+          "warmup_ratio": 0.05,
+          "weight_decay": 0.01,
+          "zero_stage": 2
+        }
+      }
+    },
+    "seed": 0,
+    "start_seed": null,
+    "task_config": "demo_clean",
+    "task_name": "click_bell"
+  },
+  "duration_seconds": 161.84012130997144,
+  "episodes": 10,
+  "model": {
+    "architecture": "DualSystemSelfAttnArchitecture",
+    "backend": "openwam",
+    "checkpoint": "/dev/shm/pi34-rt-13073/checkpoints/openwam/checkpoint_step_118655.safetensors",
+    "checkpoint_dir": "/dev/shm/pi34-rt-13073/checkpoints/openwam",
+    "checkpoint_load": {
+      "missing_keys": 0,
+      "parameter_count_by_dtype": {
+        "torch.bfloat16": 12406754092
+      },
+      "tensors": 2089,
+      "unexpected_keys": 0
+    },
+    "checkpoint_size_bytes": 24813767464,
+    "config": {
+      "dataloader": {
+        "action_mode": "eef",
+        "camera_layout": [
+          "head_camera",
+          "left_camera",
+          "right_camera"
+        ],
+        "color_jitter": {
+          "brightness": 0.2,
+          "contrast": 0.2,
+          "enabled": false,
+          "hue": 0.0,
+          "saturation": 0.2
+        },
+        "dataset_dir": "/path/to/robotwin_data",
+        "embodiment": "aloha-agilex",
+        "height": 384,
+        "multiview": true,
+        "normalize_mode": "min-max",
+        "num_frames": 33,
+        "seed": 42,
+        "split": "train",
+        "target_camera": "head_camera",
+        "type": "robotwin",
+        "unify_action": true,
+        "unify_action_map": [
+          "0-9",
+          "34-43"
+        ],
+        "unify_state_map": null,
+        "variant": "both",
+        "video_stride": 4,
+        "width": 320,
+        "window_stride": 1
+      },
+      "inference": {
+        "denoise_mode": "sync",
+        "denoise_steps": 10,
+        "height": 384,
+        "lead_modality": "video",
+        "linear_offset": 0.0,
+        "num_frames": 33,
+        "variance_shift_alpha": 1.0,
+        "video_num_frames": 9,
+        "width": 320
+      },
+      "model": {
+        "action_backbone": {
+          "dim": 1024,
+          "ffn_dim": 4096,
+          "shift_action": 5.0
+        },
+        "architecture": {
+          "action_dim": 80,
+          "attention_mask_mode": "mutual",
+          "bridge_interval": 1,
+          "bridge_layers": null,
+          "detach_bridge": false,
+          "framework": "dual_system",
+          "idm_video_cond_noise_prob": 0.5,
+          "mot_checkpoint_mixed_attn": true,
+          "state_dim": 80,
+          "use_proprioception": true,
+          "variant": "joint_self_attn",
+          "video_attention_mask_mode": "first_frame_causal"
+        },
+        "freeze": [
+          "video_backbone.text_encoder",
+          "video_backbone.reason1",
+          "video_backbone.vae",
+          "video_backbone.image_encoder",
+          "video_backbone.video_encoder"
+        ],
+        "video_backbone": {
+          "components": [
+            {
+              "attr": "dit",
+              "extra_kwargs": {
+                "dim": 3072,
+                "eps": 1e-06,
+                "ffn_dim": 14336,
+                "freq_dim": 256,
+                "fuse_vae_embedding_in_latents": true,
+                "has_image_input": false,
+                "in_dim": 48,
+                "num_heads": 24,
+                "num_layers": 30,
+                "out_dim": 48,
+                "patch_size": [
+                  1,
+                  2,
+                  2
+                ],
+                "require_clip_embedding": false,
+                "require_vae_embedding": false,
+                "seperated_timestep": true,
+                "text_dim": 4096
+              },
+              "model_class": "wam_interp.models.openwam.model_code.model.video_backbone.wan.models.dit.WanModel"
+            },
+            {
+              "attr": "vae",
+              "extra_kwargs": {},
+              "model_class": "wam_interp.models.openwam.model_code.model.video_backbone.wan.models.vae.WanVideoVAE38"
+            },
+            {
+              "attr": "text_encoder",
+              "extra_kwargs": {},
+              "model_class": "wam_interp.models.openwam.model_code.model.video_backbone.wan.models.text_encoder.WanTextEncoder"
+            }
+          ],
+          "encoder": {
+            "model_path": null,
+            "name": "wan22_vae"
+          },
+          "from_scratch": false,
+          "model_path": null,
+          "name": "wan22_ti2v_5b",
+          "shift_video": 5.0,
+          "tokenizer": {
+            "attr": "tokenizer",
+            "class": "wam_interp.models.openwam.model_code.model.video_backbone.wan.models.text_encoder.HuggingfaceTokenizer",
+            "kwargs": {
+              "clean": "whitespace",
+              "seq_len": 512
+            },
+            "path_kwarg": "name",
+            "subdir": "tokenizer/google/umt5-xxl"
+          }
+        }
+      },
+      "optimization": {
+        "compile": {
+          "enabled": false
+        },
+        "decode_video": false,
+        "dit_cache": {
+          "enabled": false
+        },
+        "prompt_embed_cache": {
+          "enabled": true,
+          "maxsize": 32
+        }
+      },
+      "project": {
+        "name": "openwam",
+        "output_dir": "outputs/${now:%Y-%m-%d_%H-%M-%S}",
+        "seed": 42,
+        "wandb": {
+          "entity": null,
+          "project": "openwam",
+          "run_name": null
+        }
+      },
+      "training": {
+        "action_lr": null,
+        "adam_betas": [
+          0.9,
+          0.95
+        ],
+        "batch_size": 4,
+        "dataset_num_workers": 8,
+        "debug": false,
+        "finetune_ckpt_path": "/path/to/OpenWAM-Pretrain-Foundation-Model",
+        "gradient_accumulation_steps": 1,
+        "initialize_model_on_cpu": false,
+        "keep_last_k_ckpts": 1,
+        "lambda_action": 1.0,
+        "lambda_video": 1.0,
+        "learning_rate": 0.0001,
+        "lr_min_ratio": 0.01,
+        "lr_scheduler": "cosine",
+        "max_grad_norm": 1.0,
+        "max_steps": null,
+        "max_timestep_boundary": 1.0,
+        "min_timestep_boundary": 0.0,
+        "mixed_precision": "bf16",
+        "num_epochs": 5,
+        "offload_optimizer_device": "none",
+        "output_path": "outputs/openwam_checkpoints",
+        "resume_ckpt_path": null,
+        "save_full_states_for_resume": false,
+        "save_steps": 2000,
+        "use_gradient_checkpointing": false,
+        "use_gradient_checkpointing_offload": false,
+        "video_lr": null,
+        "warmup_ratio": 0.05,
+        "weight_decay": 0.01,
+        "zero_stage": 2
+      }
+    },
+    "deploy_overrides": {
+      "inference": {
+        "denoise_mode": "sync",
+        "denoise_steps": 10,
+        "lead_modality": "video",
+        "linear_offset": 0.0,
+        "variance_shift_alpha": 1.0
+      },
+      "optimization": {
+        "compile": {
+          "enabled": false
+        },
+        "decode_video": false,
+        "dit_cache": {
+          "enabled": false
+        },
+        "prompt_embed_cache": {
+          "enabled": true,
+          "maxsize": 32
+        }
+      }
+    },
+    "model_device": "cuda",
+    "model_dtype": "bfloat16",
+    "model_name": "openwam",
+    "source_dirty": true,
+    "source_revision": "2a6a56a2a679da5b3d7b43ff92b0a6ad085c8d69",
+    "source_state": {
+      "dirty": true,
+      "dirty_paths": 37,
+      "revision": "2a6a56a2a679da5b3d7b43ff92b0a6ad085c8d69",
+      "status_and_diff_sha256": "92a158dc775f76904e5c5b14f59c22884aa46d4c893aecc7d689bfce39df3c26"
+    },
+    "statistics_content_sha256": null,
+    "upstream_revision": "3950b6d9ea848dc980a82a89b4554af2c082544a"
+  },
+  "output_path": "/nethome/pi34/kv_results/rt10-openwam-13073/robotwin_20261030T232559487128Z.json",
+  "package_versions": {
+    "diffusers": null,
+    "mplib": "0.2.1",
+    "mujoco": null,
+    "numpy": "1.26.4",
+    "robosuite": null,
+    "sapien": "3.0.0b1",
+    "torch": "2.7.1+cu128",
+    "transformers": "5.20.2"
+  },
+  "rejected_seeds": [],
+  "success_rate": 1.0,
+  "successes": 10,
+  "trials": [
+    {
+      "episode": 0,
+      "inference_calls": 3,
+      "inference_latency_ms": [
+        735.5778159108013,
+        670.4130859579891,
+        670.1366370543838
+      ],
+      "inference_metadata": [
+        {
+          "action_horizon": 32,
+          "action_shape": [
+            32,
+            80
+          ],
+          "action_space": "model (normalized)",
+          "architecture": "DualSystemSelfAttnArchitecture",
+          "attention_mask_hook": false,
+          "backend": "openwam",
+          "checkpoint": "/dev/shm/pi34-rt-13073/checkpoints/openwam/checkpoint_step_118655.safetensors",
+          "compiled": false,
+          "condition": "joint",
+          "condition_hook": false,
+          "dit_cache": false,
+          "model_device": "cuda",
+          "model_dtype": "torch.bfloat16",
+          "num_inference_steps": 10,
+          "num_video_frames": 9,
+          "observation": {
+            "camera_layout": [
+              "head_camera",
+              "left_camera",
+              "right_camera"
+            ],
+            "raw_state_eef20": [
+              -0.2979237139225006,
+              -0.31380388140678406,
+              0.9419986009597778,
+              1.0,
+              -1.53492801473476e-05,
+              4.819846253667492e-06,
+              -4.511927272687899e-06,
+              0.019998017698526382,
+              0.9998000264167786,
+              1.0,
+              0.30643314123153687,
+              -0.31279975175857544,
+              0.940998375415802,
+              1.0,
+              -1.5351264664786868e-05,
+              4.721201548818499e-06,
+              -4.567462383420207e-06,
+              0.009999384172260761,
+              0.9999499917030334,
+              1.0
+            ],
+            "seed": 100000,
+            "task_name": "click_bell"
+          },
+          "seed": 42,
+          "training_attention_mask_mode": "mutual",
+          "upstream_revision": "3950b6d9ea848dc980a82a89b4554af2c082544a"
+        },
+        {
+          "action_horizon": 32,
+          "action_shape": [
+            32,
+            80
+          ],
+          "action_space": "model (normalized)",
+          "architecture": "DualSystemSelfAttnArchitecture",
+          "attention_mask_hook": false,
+          "backend": "openwam",
+          "checkpoint": "/dev/shm/pi34-rt-13073/checkpoints/openwam/checkpoint_step_118655.safetensors",
+          "compiled": false,
+          "condition": "joint",
+          "condition_hook": false,
+          "dit_cache": false,
+          "model_device": "cuda",
+          "model_dtype": "torch.bfloat16",
+          "num_inference_steps": 10,
+          "num_video_frames": 9,
+          "observation": {
+            "camera_layout": [
+              "head_camera",
+              "left_camera",
+              "right_camera"
+            ],
+            "raw_state_eef20": [
+              -0.2975755035877228,
+              -0.31301021575927734,
+              0.9424086809158325,
+              0.9999980926513672,
+              0.0018749481532722712,
+              -0.0005595869733951986,
+              0.0005161754670552909,
+              0.023074444383382797,
+              0.9997336268424988,
+              1.0,
+              0.0722985565662384,
+              -0.10892682522535324,
+              0.9864826202392578,
+              0.0035695144906640053,
+              0.0051224795170128345,
+              0.9999805092811584,
+              -0.9999906420707703,
+              0.002470374805852771,
+              0.00355689600110054,
+              1.0
+            ]
+          },
+          "seed": 42,
+          "training_attention_mask_mode": "mutual",
+          "upstream_revision": "3950b6d9ea848dc980a82a89b4554af2c082544a"
+        },
+        {
+          "action_horizon": 32,
+          "action_shape": [
+            32,
+            80
+          ],
+          "action_space": "model (normalized)",
+          "architecture": "DualSystemSelfAttnArchitecture",
+          "attention_mask_hook": false,
+          "backend": "openwam",
+          "checkpoint": "/dev/shm/pi34-rt-13073/checkpoints/openwam/checkpoint_step_118655.safetensors",
+          "compiled": false,
+          "condition": "joint",
+          "condition_hook": false,
+          "dit_cache": false,
+          "model_device": "cuda",
+          "model_dtype": "torch.bfloat16",
+          "num_inference_steps": 10,
+          "num_video_frames": 9,
+          "observation": {
+            "camera_layout": [
+              "head_camera",
+              "left_camera",
+              "right_camera"
+            ],
+            "raw_state_eef20": [
+              -0.29753610491752625,
+              -0.3138135075569153,
+              0.9418413043022156,
+              0.9999960064888,
+              -0.0007104926044121385,
+              0.002737943083047867,
+              -0.0027197308372706175,
+              0.024479394778609276,
+              0.9996966123580933,
+              1.0,
+              0.06919888406991959,
+              -0.11062253266572952,
+              0.9757886528968811,
+              0.0056864796206355095,
+              -0.00014970336633268744,
+              0.9999838471412659,
+              -0.9999775290489197,
+              0.0035552384797483683,
+              0.0056869760155677795,
+              0.0
+            ]
+          },
+          "seed": 42,
+          "training_attention_mask_mode": "mutual",
+          "upstream_revision": "3950b6d9ea848dc980a82a89b4554af2c082544a"
+        }
+      ],
+      "instruction": "Use the right arm to press the bell with raised round top's top center.",
+      "policy_steps": 65,
+      "seed": 100000,
+      "success": true,
+      "termination_reason": "success"
+    },
+    {
+      "episode": 1,
+      "inference_calls": 3,
+      "inference_latency_ms": [
+        737.0737681630999,
+        672.7995409164578,
+        670.0317021459341
+      ],
+      "inference_metadata": [
+        {
+          "action_horizon": 32,
+          "action_shape": [
+            32,
+            80
+          ],
+          "action_space": "model (normalized)",
+          "architecture": "DualSystemSelfAttnArchitecture",
+          "attention_mask_hook": false,
+          "backend": "openwam",
+          "checkpoint": "/dev/shm/pi34-rt-13073/checkpoints/openwam/checkpoint_step_118655.safetensors",
+          "compiled": false,
+          "condition": "joint",
+          "condition_hook": false,
+          "dit_cache": false,
+          "model_device": "cuda",
+          "model_dtype": "torch.bfloat16",
+          "num_inference_steps": 10,
+          "num_video_frames": 9,
+          "observation": {
+            "camera_layout": [
+              "head_camera",
+              "left_camera",
+              "right_camera"
+            ],
+            "raw_state_eef20": [
+              -0.2979237139225006,
+              -0.31380388140678406,
+              0.9419986009597778,
+              1.0,
+              -1.53492801473476e-05,
+              4.819846253667492e-06,
+              -4.511927272687899e-06,
+              0.019998017698526382,
+              0.9998000264167786,
+              1.0,
+              0.30643314123153687,
+              -0.31279975175857544,
+              0.940998375415802,
+              1.0,
+              -1.5351264664786868e-05,
+              4.721201548818499e-06,
+              -4.567462383420207e-06,
+              0.009999384172260761,
+              0.9999499917030334,
+              1.0
+            ],
+            "seed": 100001,
+            "task_name": "click_bell"
+          },
+          "seed": 42,
+          "training_attention_mask_mode": "mutual",
+          "upstream_revision": "3950b6d9ea848dc980a82a89b4554af2c082544a"
+        },
+        {
+          "action_horizon": 32,
+          "action_shape": [
+            32,
+            80
+          ],
+          "action_space": "model (normalized)",
+          "architecture": "DualSystemSelfAttnArchitecture",
+          "attention_mask_hook": false,
+          "backend": "openwam",
+          "checkpoint": "/dev/shm/pi34-rt-13073/checkpoints/openwam/checkpoint_step_118655.safetensors",
+          "compiled": false,
+          "condition": "joint",
+          "condition_hook": false,
+          "dit_cache": false,
+          "model_device": "cuda",
+          "model_dtype": "torch.bfloat16",
+          "num_inference_steps": 10,
+          "num_video_frames": 9,
+          "observation": {
+            "camera_layout": [
+              "head_camera",
+              "left_camera",
+              "right_camera"
+            ],
+            "raw_state_eef20": [
+              -0.29734504222869873,
+              -0.31334125995635986,
+              0.9417820572853088,
+              0.999995768070221,
+              0.0014218506403267384,
+              0.0025449462700635195,
+              -0.0025780063588172197,
+              0.023754693567752838,
+              0.9997144937515259,
+              1.0,
+              0.0930701345205307,
+              -0.01042522955685854,
+              1.0158995389938354,
+              0.08615584671497345,
+              0.04751534014940262,
+              0.9951479434967041,
+              -0.996272087097168,
+              -0.0002725487865973264,
+              0.0862661823630333,
+              1.0
+            ]
+          },
+          "seed": 42,
+          "training_attention_mask_mode": "mutual",
+          "upstream_revision": "3950b6d9ea848dc980a82a89b4554af2c082544a"
+        },
+        {
+          "action_horizon": 32,
+          "action_shape": [
+            32,
+            80
+          ],
+          "action_space": "model (normalized)",
+          "architecture": "DualSystemSelfAttnArchitecture",
+          "attention_mask_hook": false,
+          "backend": "openwam",
+          "checkpoint": "/dev/shm/pi34-rt-13073/checkpoints/openwam/checkpoint_step_118655.safetensors",
+          "compiled": false,
+          "condition": "joint",
+          "condition_hook": false,
+          "dit_cache": false,
+          "model_device": "cuda",
+          "model_dtype": "torch.bfloat16",
+          "num_inference_steps": 10,
+          "num_video_frames": 9,
+          "observation": {
+            "camera_layout": [
+              "head_camera",
+              "left_camera",
+              "right_camera"
+            ],
+            "raw_state_eef20": [
+              -0.29820331931114197,
+              -0.31383875012397766,
+              0.9422551989555359,
+              0.9999951720237732,
+              -0.0010090774158015847,
+              -0.002940743463113904,
+              0.0029587133321911097,
+              0.01829446852207184,
+              0.9998282790184021,
+              1.0,
+              0.06896904110908508,
+              -0.003277416108176112,
+              0.9878279566764832,
+              -2.29734941967763e-05,
+              0.0005739300977438688,
+              0.9999998211860657,
+              -0.9999973773956299,
+              0.0022990917786955833,
+              -2.42929563682992e-05,
+              0.0
+            ]
+          },
+          "seed": 42,
+          "training_attention_mask_mode": "mutual",
+          "upstream_revision": "3950b6d9ea848dc980a82a89b4554af2c082544a"
+        }
+      ],
+      "instruction": "Find the blue bell with glossy finish and click its top center.",
+      "policy_steps": 75,
+      "seed": 100001,
+      "success": true,
+      "termination_reason": "success"
+    },
+    {
+      "episode": 2,
+      "inference_calls": 2,
+      "inference_latency_ms": [
+        734.4885640777647,
+        674.6151528786868
+      ],
+      "inference_metadata": [
+        {
+          "action_horizon": 32,
+          "action_shape": [
+            32,
+            80
+          ],
+          "action_space": "model (normalized)",
+          "architecture": "DualSystemSelfAttnArchitecture",
+          "attention_mask_hook": false,
+          "backend": "openwam",
+          "checkpoint": "/dev/shm/pi34-rt-13073/checkpoints/openwam/checkpoint_step_118655.safetensors",
+          "compiled": false,
+          "condition": "joint",
+          "condition_hook": false,
+          "dit_cache": false,
+          "model_device": "cuda",
+          "model_dtype": "torch.bfloat16",
+          "num_inference_steps": 10,
+          "num_video_frames": 9,
+          "observation": {
+            "camera_layout": [
+              "head_camera",
+              "left_camera",
+              "right_camera"
+            ],
+            "raw_state_eef20": [
+              -0.2979237139225006,
+              -0.31380388140678406,
+              0.9419986009597778,
+              1.0,
+              -1.53492801473476e-05,
+              4.819846253667492e-06,
+              -4.511927272687899e-06,
+              0.019998017698526382,
+              0.9998000264167786,
+              1.0,
+              0.30643314123153687,
+              -0.31279975175857544,
+              0.940998375415802,
+              1.0,
+              -1.5351264664786868e-05,
+              4.721201548818499e-06,
+              -4.567462383420207e-06,
+              0.009999384172260761,
+              0.9999499917030334,
+              1.0
+            ],
+            "seed": 100002,
+            "task_name": "click_bell"
+          },
+          "seed": 42,
+          "training_attention_mask_mode": "mutual",
+          "upstream_revision": "3950b6d9ea848dc980a82a89b4554af2c082544a"
+        },
+        {
+          "action_horizon": 32,
+          "action_shape": [
+            32,
+            80
+          ],
+          "action_space": "model (normalized)",
+          "architecture": "DualSystemSelfAttnArchitecture",
+          "attention_mask_hook": false,
+          "backend": "openwam",
+          "checkpoint": "/dev/shm/pi34-rt-13073/checkpoints/openwam/checkpoint_step_118655.safetensors",
+          "compiled": false,
+          "condition": "joint",
+          "condition_hook": false,
+          "dit_cache": false,
+          "model_device": "cuda",
+          "model_dtype": "torch.bfloat16",
+          "num_inference_steps": 10,
+          "num_video_frames": 9,
+          "observation": {
+            "camera_layout": [
+              "head_camera",
+              "left_camera",
+              "right_camera"
+            ],
+            "raw_state_eef20": [
+              -0.14967411756515503,
+              -0.06749037653207779,
+              0.9871406555175781,
+              -0.003388509387150407,
+              -0.0011351087596267462,
+              0.999993622303009,
+              -0.9995449781417847,
+              0.02997727505862713,
+              -0.0033529612701386213,
+              1.0,
+              0.3065401613712311,
+              -0.3122941851615906,
+              0.941499650478363,
+              0.9999954700469971,
+              0.001243632286787033,
+              -0.0027411533519625664,
+              0.002730367239564657,
+              0.008593347854912281,
+              0.9999593496322632,
+              0.998046875
+            ]
+          },
+          "seed": 42,
+          "training_attention_mask_mode": "mutual",
+          "upstream_revision": "3950b6d9ea848dc980a82a89b4554af2c082544a"
+        }
+      ],
+      "instruction": "Direct the left arm to click the blue bell with glossy finish's top.",
+      "policy_steps": 62,
+      "seed": 100002,
+      "success": true,
+      "termination_reason": "success"
+    },
+    {
+      "episode": 3,
+      "inference_calls": 2,
+      "inference_latency_ms": [
+        727.7946860995144,
+        664.9182958062738
+      ],
+      "inference_metadata": [
+        {
+          "action_horizon": 32,
+          "action_shape": [
+            32,
+            80
+          ],
+          "action_space": "model (normalized)",
+          "architecture": "DualSystemSelfAttnArchitecture",
+          "attention_mask_hook": false,
+          "backend": "openwam",
+          "checkpoint": "/dev/shm/pi34-rt-13073/checkpoints/openwam/checkpoint_step_118655.safetensors",
+          "compiled": false,
+          "condition": "joint",
+          "condition_hook": false,
+          "dit_cache": false,
+          "model_device": "cuda",
+          "model_dtype": "torch.bfloat16",
+          "num_inference_steps": 10,
+          "num_video_frames": 9,
+          "observation": {
+            "camera_layout": [
+              "head_camera",
+              "left_camera",
+              "right_camera"
+            ],
+            "raw_state_eef20": [
+              -0.2979237139225006,
+              -0.31380388140678406,
+              0.9419986009597778,
+              1.0,
+              -1.53492801473476e-05,
+              4.819846253667492e-06,
+              -4.511927272687899e-06,
+              0.019998017698526382,
+              0.9998000264167786,
+              1.0,
+              0.30643314123153687,
+              -0.31279975175857544,
+              0.940998375415802,
+              1.0,
+              -1.5351264664786868e-05,
+              4.721201548818499e-06,
+              -4.567462383420207e-06,
+              0.009999384172260761,
+              0.9999499917030334,
+              1.0
+            ],
+            "seed": 100003,
+            "task_name": "click_bell"
+          },
+          "seed": 42,
+          "training_attention_mask_mode": "mutual",
+          "upstream_revision": "3950b6d9ea848dc980a82a89b4554af2c082544a"
+        },
+        {
+          "action_horizon": 32,
+          "action_shape": [
+            32,
+            80
+          ],
+          "action_space": "model (normalized)",
+          "architecture": "DualSystemSelfAttnArchitecture",
+          "attention_mask_hook": false,
+          "backend": "openwam",
+          "checkpoint": "/dev/shm/pi34-rt-13073/checkpoints/openwam/checkpoint_step_118655.safetensors",
+          "compiled": false,
+          "condition": "joint",
+          "condition_hook": false,
+          "dit_cache": false,
+          "model_device": "cuda",
+          "model_dtype": "torch.bfloat16",
+          "num_inference_steps": 10,
+          "num_video_frames": 9,
+          "observation": {
+            "camera_layout": [
+              "head_camera",
+              "left_camera",
+              "right_camera"
+            ],
+            "raw_state_eef20": [
+              -0.29845985770225525,
+              -0.31238847970962524,
+              0.9423280954360962,
+              0.9999964237213135,
+              0.0008827272686176002,
+              0.002514071296900511,
+              -0.00253289844840765,
+              0.02201777696609497,
+              0.9997543692588806,
+              1.0,
+              0.16439101099967957,
+              -0.20097866654396057,
+              0.9962897896766663,
+              -0.0009636874310672283,
+              0.0048693204298615456,
+              0.9999876618385315,
+              -0.9999776482582092,
+              0.006608728319406509,
+              -0.0009958582231774926,
+              0.9375
+            ]
+          },
+          "seed": 42,
+          "training_attention_mask_mode": "mutual",
+          "upstream_revision": "3950b6d9ea848dc980a82a89b4554af2c082544a"
+        }
+      ],
+      "instruction": "Find the lightweight bell with smooth surface and click its top center.",
+      "policy_steps": 57,
+      "seed": 100003,
+      "success": true,
+      "termination_reason": "success"
+    },
+    {
+      "episode": 4,
+      "inference_calls": 2,
+      "inference_latency_ms": [
+        665.6891249585897,
+        664.8518180008978
+      ],
+      "inference_metadata": [
+        {
+          "action_horizon": 32,
+          "action_shape": [
+            32,
+            80
+          ],
+          "action_space": "model (normalized)",
+          "architecture": "DualSystemSelfAttnArchitecture",
+          "attention_mask_hook": false,
+          "backend": "openwam",
+          "checkpoint": "/dev/shm/pi34-rt-13073/checkpoints/openwam/checkpoint_step_118655.safetensors",
+          "compiled": false,
+          "condition": "joint",
+          "condition_hook": false,
+          "dit_cache": false,
+          "model_device": "cuda",
+          "model_dtype": "torch.bfloat16",
+          "num_inference_steps": 10,
+          "num_video_frames": 9,
+          "observation": {
+            "camera_layout": [
+              "head_camera",
+              "left_camera",
+              "right_camera"
+            ],
+            "raw_state_eef20": [
+              -0.2979237139225006,
+              -0.31380388140678406,
+              0.9419986009597778,
+              1.0,
+              -1.53492801473476e-05,
+              4.819846253667492e-06,
+              -4.511927272687899e-06,
+              0.019998017698526382,
+              0.9998000264167786,
+              1.0,
+              0.30643314123153687,
+              -0.31279975175857544,
+              0.940998375415802,
+              1.0,
+              -1.5351264664786868e-05,
+              4.721201548818499e-06,
+              -4.567462383420207e-06,
+              0.009999384172260761,
+              0.9999499917030334,
+              1.0
+            ],
+            "seed": 100004,
+            "task_name": "click_bell"
+          },
+          "seed": 42,
+          "training_attention_mask_mode": "mutual",
+          "upstream_revision": "3950b6d9ea848dc980a82a89b4554af2c082544a"
+        },
+        {
+          "action_horizon": 32,
+          "action_shape": [
+            32,
+            80
+          ],
+          "action_space": "model (normalized)",
+          "architecture": "DualSystemSelfAttnArchitecture",
+          "attention_mask_hook": false,
+          "backend": "openwam",
+          "checkpoint": "/dev/shm/pi34-rt-13073/checkpoints/openwam/checkpoint_step_118655.safetensors",
+          "compiled": false,
+          "condition": "joint",
+          "condition_hook": false,
+          "dit_cache": false,
+          "model_device": "cuda",
+          "model_dtype": "torch.bfloat16",
+          "num_inference_steps": 10,
+          "num_video_frames": 9,
+          "observation": {
+            "camera_layout": [
+              "head_camera",
+              "left_camera",
+              "right_camera"
+            ],
+            "raw_state_eef20": [
+              -0.13722382485866547,
+              -0.04648823291063309,
+              0.9873946309089661,
+              0.004940948449075222,
+              7.941298463265412e-06,
+              0.999987781047821,
+              -0.9995251297950745,
+              0.030415048822760582,
+              0.004938421305269003,
+              1.0,
+              0.30633899569511414,
+              -0.3123047947883606,
+              0.9414651393890381,
+              0.9999952912330627,
+              0.001957678934559226,
+              -0.0023736662697046995,
+              0.002355534816160798,
+              0.009212569333612919,
+              0.9999547600746155,
+              1.0
+            ]
+          },
+          "seed": 42,
+          "training_attention_mask_mode": "mutual",
+          "upstream_revision": "3950b6d9ea848dc980a82a89b4554af2c082544a"
+        }
+      ],
+      "instruction": "Direct the left arm to click the blue bell with glossy finish's top.",
+      "policy_steps": 59,
+      "seed": 100004,
+      "success": true,
+      "termination_reason": "success"
+    },
+    {
+      "episode": 5,
+      "inference_calls": 3,
+      "inference_latency_ms": [
+        728.0981987714767,
+        665.8871709369123,
+        663.974239025265
+      ],
+      "inference_metadata": [
+        {
+          "action_horizon": 32,
+          "action_shape": [
+            32,
+            80
+          ],
+          "action_space": "model (normalized)",
+          "architecture": "DualSystemSelfAttnArchitecture",
+          "attention_mask_hook": false,
+          "backend": "openwam",
+          "checkpoint": "/dev/shm/pi34-rt-13073/checkpoints/openwam/checkpoint_step_118655.safetensors",
+          "compiled": false,
+          "condition": "joint",
+          "condition_hook": false,
+          "dit_cache": false,
+          "model_device": "cuda",
+          "model_dtype": "torch.bfloat16",
+          "num_inference_steps": 10,
+          "num_video_frames": 9,
+          "observation": {
+            "camera_layout": [
+              "head_camera",
+              "left_camera",
+              "right_camera"
+            ],
+            "raw_state_eef20": [
+              -0.2979237139225006,
+              -0.31380388140678406,
+              0.9419986009597778,
+              1.0,
+              -1.53492801473476e-05,
+              4.819846253667492e-06,
+              -4.511927272687899e-06,
+              0.019998017698526382,
+              0.9998000264167786,
+              1.0,
+              0.30643314123153687,
+              -0.31279975175857544,
+              0.940998375415802,
+              1.0,
+              -1.5351264664786868e-05,
+              4.721201548818499e-06,
+              -4.567462383420207e-06,
+              0.009999384172260761,
+              0.9999499917030334,
+              1.0
+            ],
+            "seed": 100005,
+            "task_name": "click_bell"
+          },
+          "seed": 42,
+          "training_attention_mask_mode": "mutual",
+          "upstream_revision": "3950b6d9ea848dc980a82a89b4554af2c082544a"
+        },
+        {
+          "action_horizon": 32,
+          "action_shape": [
+            32,
+            80
+          ],
+          "action_space": "model (normalized)",
+          "architecture": "DualSystemSelfAttnArchitecture",
+          "attention_mask_hook": false,
+          "backend": "openwam",
+          "checkpoint": "/dev/shm/pi34-rt-13073/checkpoints/openwam/checkpoint_step_118655.safetensors",
+          "compiled": false,
+          "condition": "joint",
+          "condition_hook": false,
+          "dit_cache": false,
+          "model_device": "cuda",
+          "model_dtype": "torch.bfloat16",
+          "num_inference_steps": 10,
+          "num_video_frames": 9,
+          "observation": {
+            "camera_layout": [
+              "head_camera",
+              "left_camera",
+              "right_camera"
+            ],
+            "raw_state_eef20": [
+              -0.2973814308643341,
+              -0.3142513334751129,
+              0.9414230585098267,
+              0.9999887943267822,
+              0.0011376675684005022,
+              0.004597158636897802,
+              -0.004619669634848833,
+              0.02064567245543003,
+              0.9997761845588684,
+              1.0,
+              0.0858815461397171,
+              -0.0207744799554348,
+              0.9910783171653748,
+              0.007033102679997683,
+              0.008841884322464466,
+              0.9999361634254456,
+              -0.9999727010726929,
+              -0.0021974111441522837,
+              0.0070527903735637665,
+              1.0
+            ]
+          },
+          "seed": 42,
+          "training_attention_mask_mode": "mutual",
+          "upstream_revision": "3950b6d9ea848dc980a82a89b4554af2c082544a"
+        },
+        {
+          "action_horizon": 32,
+          "action_shape": [
+            32,
+            80
+          ],
+          "action_space": "model (normalized)",
+          "architecture": "DualSystemSelfAttnArchitecture",
+          "attention_mask_hook": false,
+          "backend": "openwam",
+          "checkpoint": "/dev/shm/pi34-rt-13073/checkpoints/openwam/checkpoint_step_118655.safetensors",
+          "compiled": false,
+          "condition": "joint",
+          "condition_hook": false,
+          "dit_cache": false,
+          "model_device": "cuda",
+          "model_dtype": "torch.bfloat16",
+          "num_inference_steps": 10,
+          "num_video_frames": 9,
+          "observation": {
+            "camera_layout": [
+              "head_camera",
+              "left_camera",
+              "right_camera"
+            ],
+            "raw_state_eef20": [
+              -0.2975267171859741,
+              -0.3140142858028412,
+              0.9415292739868164,
+              0.9999988079071045,
+              -0.0007570084999315441,
+              -0.0013619735836982727,
+              0.001378555316478014,
+              0.022353366017341614,
+              0.9997491836547852,
+              1.0,
+              0.08147206157445908,
+              -0.02005315013229847,
+              0.976771354675293,
+              0.0025353783275932074,
+              0.0009009634959511459,
+              0.9999963641166687,
+              -0.9999919533729553,
+              0.003120608627796173,
+              0.002532555488869548,
+              0.0
+            ]
+          },
+          "seed": 42,
+          "training_attention_mask_mode": "mutual",
+          "upstream_revision": "3950b6d9ea848dc980a82a89b4554af2c082544a"
+        }
+      ],
+      "instruction": "Direct the right arm to click the blue bell with glossy finish's top.",
+      "policy_steps": 65,
+      "seed": 100005,
+      "success": true,
+      "termination_reason": "success"
+    },
+    {
+      "episode": 6,
+      "inference_calls": 3,
+      "inference_latency_ms": [
+        662.9478419199586,
+        666.3722859229892,
+        663.1511140149087
+      ],
+      "inference_metadata": [
+        {
+          "action_horizon": 32,
+          "action_shape": [
+            32,
+            80
+          ],
+          "action_space": "model (normalized)",
+          "architecture": "DualSystemSelfAttnArchitecture",
+          "attention_mask_hook": false,
+          "backend": "openwam",
+          "checkpoint": "/dev/shm/pi34-rt-13073/checkpoints/openwam/checkpoint_step_118655.safetensors",
+          "compiled": false,
+          "condition": "joint",
+          "condition_hook": false,
+          "dit_cache": false,
+          "model_device": "cuda",
+          "model_dtype": "torch.bfloat16",
+          "num_inference_steps": 10,
+          "num_video_frames": 9,
+          "observation": {
+            "camera_layout": [
+              "head_camera",
+              "left_camera",
+              "right_camera"
+            ],
+            "raw_state_eef20": [
+              -0.2979237139225006,
+              -0.31380388140678406,
+              0.9419986009597778,
+              1.0,
+              -1.53492801473476e-05,
+              4.819846253667492e-06,
+              -4.511927272687899e-06,
+              0.019998017698526382,
+              0.9998000264167786,
+              1.0,
+              0.30643314123153687,
+              -0.31279975175857544,
+              0.940998375415802,
+              1.0,
+              -1.5351264664786868e-05,
+              4.721201548818499e-06,
+              -4.567462383420207e-06,
+              0.009999384172260761,
+              0.9999499917030334,
+              1.0
+            ],
+            "seed": 100006,
+            "task_name": "click_bell"
+          },
+          "seed": 42,
+          "training_attention_mask_mode": "mutual",
+          "upstream_revision": "3950b6d9ea848dc980a82a89b4554af2c082544a"
+        },
+        {
+          "action_horizon": 32,
+          "action_shape": [
+            32,
+            80
+          ],
+          "action_space": "model (normalized)",
+          "architecture": "DualSystemSelfAttnArchitecture",
+          "attention_mask_hook": false,
+          "backend": "openwam",
+          "checkpoint": "/dev/shm/pi34-rt-13073/checkpoints/openwam/checkpoint_step_118655.safetensors",
+          "compiled": false,
+          "condition": "joint",
+          "condition_hook": false,
+          "dit_cache": false,
+          "model_device": "cuda",
+          "model_dtype": "torch.bfloat16",
+          "num_inference_steps": 10,
+          "num_video_frames": 9,
+          "observation": {
+            "camera_layout": [
+              "head_camera",
+              "left_camera",
+              "right_camera"
+            ],
+            "raw_state_eef20": [
+              -0.2971077263355255,
+              -0.3142958879470825,
+              0.941970705986023,
+              0.9999939203262329,
+              0.0007763039320707321,
+              0.0033996382262557745,
+              -0.0034178022760897875,
+              0.024736765772104263,
+              0.9996881484985352,
+              1.0,
+              0.08729595690965652,
+              -0.0434100516140461,
+              0.9880024790763855,
+              0.0045783380046486855,
+              0.00651905732229352,
+              0.9999682903289795,
+              -0.9999788999557495,
+              0.0046442230232059956,
+              0.0045481096021831036,
+              1.0
+            ]
+          },
+          "seed": 42,
+          "training_attention_mask_mode": "mutual",
+          "upstream_revision": "3950b6d9ea848dc980a82a89b4554af2c082544a"
+        },
+        {
+          "action_horizon": 32,
+          "action_shape": [
+            32,
+            80
+          ],
+          "action_space": "model (normalized)",
+          "architecture": "DualSystemSelfAttnArchitecture",
+          "attention_mask_hook": false,
+          "backend": "openwam",
+          "checkpoint": "/dev/shm/pi34-rt-13073/checkpoints/openwam/checkpoint_step_118655.safetensors",
+          "compiled": false,
+          "condition": "joint",
+          "condition_hook": false,
+          "dit_cache": false,
+          "model_device": "cuda",
+          "model_dtype": "torch.bfloat16",
+          "num_inference_steps": 10,
+          "num_video_frames": 9,
+          "observation": {
+            "camera_layout": [
+              "head_camera",
+              "left_camera",
+              "right_camera"
+            ],
+            "raw_state_eef20": [
+              -0.2975151836872101,
+              -0.3140740394592285,
+              0.9419899582862854,
+              0.9999976754188538,
+              -0.0010606354335322976,
+              0.001879041432403028,
+              -0.0018563817720860243,
+              0.02097548544406891,
+              0.9997782707214355,
+              1.0,
+              0.08375441282987595,
+              -0.044339023530483246,
+              0.9760355949401855,
+              0.003787781810387969,
+              0.0004979968070983887,
+              0.9999927282333374,
+              -0.9999527335166931,
+              0.008956794627010822,
+              0.003783169900998473,
+              0.0
+            ]
+          },
+          "seed": 42,
+          "training_attention_mask_mode": "mutual",
+          "upstream_revision": "3950b6d9ea848dc980a82a89b4554af2c082544a"
+        }
+      ],
+      "instruction": "Use the right arm to press the bell with raised round top's top center.",
+      "policy_steps": 65,
+      "seed": 100006,
+      "success": true,
+      "termination_reason": "success"
+    },
+    {
+      "episode": 7,
+      "inference_calls": 2,
+      "inference_latency_ms": [
+        735.6242730747908,
+        668.4603199828416
+      ],
+      "inference_metadata": [
+        {
+          "action_horizon": 32,
+          "action_shape": [
+            32,
+            80
+          ],
+          "action_space": "model (normalized)",
+          "architecture": "DualSystemSelfAttnArchitecture",
+          "attention_mask_hook": false,
+          "backend": "openwam",
+          "checkpoint": "/dev/shm/pi34-rt-13073/checkpoints/openwam/checkpoint_step_118655.safetensors",
+          "compiled": false,
+          "condition": "joint",
+          "condition_hook": false,
+          "dit_cache": false,
+          "model_device": "cuda",
+          "model_dtype": "torch.bfloat16",
+          "num_inference_steps": 10,
+          "num_video_frames": 9,
+          "observation": {
+            "camera_layout": [
+              "head_camera",
+              "left_camera",
+              "right_camera"
+            ],
+            "raw_state_eef20": [
+              -0.2979237139225006,
+              -0.31380388140678406,
+              0.9419986009597778,
+              1.0,
+              -1.53492801473476e-05,
+              4.819846253667492e-06,
+              -4.511927272687899e-06,
+              0.019998017698526382,
+              0.9998000264167786,
+              1.0,
+              0.30643314123153687,
+              -0.31279975175857544,
+              0.940998375415802,
+              1.0,
+              -1.5351264664786868e-05,
+              4.721201548818499e-06,
+              -4.567462383420207e-06,
+              0.009999384172260761,
+              0.9999499917030334,
+              1.0
+            ],
+            "seed": 100007,
+            "task_name": "click_bell"
+          },
+          "seed": 42,
+          "training_attention_mask_mode": "mutual",
+          "upstream_revision": "3950b6d9ea848dc980a82a89b4554af2c082544a"
+        },
+        {
+          "action_horizon": 32,
+          "action_shape": [
+            32,
+            80
+          ],
+          "action_space": "model (normalized)",
+          "architecture": "DualSystemSelfAttnArchitecture",
+          "attention_mask_hook": false,
+          "backend": "openwam",
+          "checkpoint": "/dev/shm/pi34-rt-13073/checkpoints/openwam/checkpoint_step_118655.safetensors",
+          "compiled": false,
+          "condition": "joint",
+          "condition_hook": false,
+          "dit_cache": false,
+          "model_device": "cuda",
+          "model_dtype": "torch.bfloat16",
+          "num_inference_steps": 10,
+          "num_video_frames": 9,
+          "observation": {
+            "camera_layout": [
+              "head_camera",
+              "left_camera",
+              "right_camera"
+            ],
+            "raw_state_eef20": [
+              -0.17237621545791626,
+              -0.19583195447921753,
+              0.9859506487846375,
+              -0.004977388307452202,
+              0.0010098459897562861,
+              0.9999871253967285,
+              -0.9995990991592407,
+              0.02786819450557232,
+              -0.005003599915653467,
+              0.955078125,
+              0.30655092000961304,
+              -0.3133326470851898,
+              0.9405775666236877,
+              0.9999982118606567,
+              0.0010213054483756423,
+              -0.0015795567305758595,
+              0.0015673793386667967,
+              0.011816215701401234,
+              0.9999289512634277,
+              0.998046875
+            ]
+          },
+          "seed": 42,
+          "training_attention_mask_mode": "mutual",
+          "upstream_revision": "3950b6d9ea848dc980a82a89b4554af2c082544a"
+        }
+      ],
+      "instruction": "Use the left arm to press the palm-sized bell's top center.",
+      "policy_steps": 58,
+      "seed": 100007,
+      "success": true,
+      "termination_reason": "success"
+    },
+    {
+      "episode": 8,
+      "inference_calls": 2,
+      "inference_latency_ms": [
+        731.6397740505636,
+        667.8023869171739
+      ],
+      "inference_metadata": [
+        {
+          "action_horizon": 32,
+          "action_shape": [
+            32,
+            80
+          ],
+          "action_space": "model (normalized)",
+          "architecture": "DualSystemSelfAttnArchitecture",
+          "attention_mask_hook": false,
+          "backend": "openwam",
+          "checkpoint": "/dev/shm/pi34-rt-13073/checkpoints/openwam/checkpoint_step_118655.safetensors",
+          "compiled": false,
+          "condition": "joint",
+          "condition_hook": false,
+          "dit_cache": false,
+          "model_device": "cuda",
+          "model_dtype": "torch.bfloat16",
+          "num_inference_steps": 10,
+          "num_video_frames": 9,
+          "observation": {
+            "camera_layout": [
+              "head_camera",
+              "left_camera",
+              "right_camera"
+            ],
+            "raw_state_eef20": [
+              -0.2979237139225006,
+              -0.31380388140678406,
+              0.9419986009597778,
+              1.0,
+              -1.53492801473476e-05,
+              4.819846253667492e-06,
+              -4.511927272687899e-06,
+              0.019998017698526382,
+              0.9998000264167786,
+              1.0,
+              0.30643314123153687,
+              -0.31279975175857544,
+              0.940998375415802,
+              1.0,
+              -1.5351264664786868e-05,
+              4.721201548818499e-06,
+              -4.567462383420207e-06,
+              0.009999384172260761,
+              0.9999499917030334,
+              1.0
+            ],
+            "seed": 100008,
+            "task_name": "click_bell"
+          },
+          "seed": 42,
+          "training_attention_mask_mode": "mutual",
+          "upstream_revision": "3950b6d9ea848dc980a82a89b4554af2c082544a"
+        },
+        {
+          "action_horizon": 32,
+          "action_shape": [
+            32,
+            80
+          ],
+          "action_space": "model (normalized)",
+          "architecture": "DualSystemSelfAttnArchitecture",
+          "attention_mask_hook": false,
+          "backend": "openwam",
+          "checkpoint": "/dev/shm/pi34-rt-13073/checkpoints/openwam/checkpoint_step_118655.safetensors",
+          "compiled": false,
+          "condition": "joint",
+          "condition_hook": false,
+          "dit_cache": false,
+          "model_device": "cuda",
+          "model_dtype": "torch.bfloat16",
+          "num_inference_steps": 10,
+          "num_video_frames": 9,
+          "observation": {
+            "camera_layout": [
+              "head_camera",
+              "left_camera",
+              "right_camera"
+            ],
+            "raw_state_eef20": [
+              -0.09723784029483795,
+              -0.10942739993333817,
+              0.998308539390564,
+              -0.0007366355275735259,
+              0.000237046682741493,
+              0.9999997019767761,
+              -0.9996597170829773,
+              0.02607577294111252,
+              -0.0007425662479363382,
+              1.0,
+              0.30630993843078613,
+              -0.31317755579948425,
+              0.9404198527336121,
+              0.9999983906745911,
+              0.0010074569145217538,
+              -0.0014709150418639183,
+              0.0014582091243937612,
+              0.012498552910983562,
+              0.9999208450317383,
+              0.998046875
+            ]
+          },
+          "seed": 42,
+          "training_attention_mask_mode": "mutual",
+          "upstream_revision": "3950b6d9ea848dc980a82a89b4554af2c082544a"
+        }
+      ],
+      "instruction": "Use the left arm to press the medium-sized bell's top center.",
+      "policy_steps": 60,
+      "seed": 100008,
+      "success": true,
+      "termination_reason": "success"
+    },
+    {
+      "episode": 9,
+      "inference_calls": 3,
+      "inference_latency_ms": [
+        727.8333741705865,
+        667.0439199078828,
+        668.5116891749203
+      ],
+      "inference_metadata": [
+        {
+          "action_horizon": 32,
+          "action_shape": [
+            32,
+            80
+          ],
+          "action_space": "model (normalized)",
+          "architecture": "DualSystemSelfAttnArchitecture",
+          "attention_mask_hook": false,
+          "backend": "openwam",
+          "checkpoint": "/dev/shm/pi34-rt-13073/checkpoints/openwam/checkpoint_step_118655.safetensors",
+          "compiled": false,
+          "condition": "joint",
+          "condition_hook": false,
+          "dit_cache": false,
+          "model_device": "cuda",
+          "model_dtype": "torch.bfloat16",
+          "num_inference_steps": 10,
+          "num_video_frames": 9,
+          "observation": {
+            "camera_layout": [
+              "head_camera",
+              "left_camera",
+              "right_camera"
+            ],
+            "raw_state_eef20": [
+              -0.2979237139225006,
+              -0.31380388140678406,
+              0.9419986009597778,
+              1.0,
+              -1.53492801473476e-05,
+              4.819846253667492e-06,
+              -4.511927272687899e-06,
+              0.019998017698526382,
+              0.9998000264167786,
+              1.0,
+              0.30643314123153687,
+              -0.31279975175857544,
+              0.940998375415802,
+              1.0,
+              -1.5351264664786868e-05,
+              4.721201548818499e-06,
+              -4.567462383420207e-06,
+              0.009999384172260761,
+              0.9999499917030334,
+              1.0
+            ],
+            "seed": 100009,
+            "task_name": "click_bell"
+          },
+          "seed": 42,
+          "training_attention_mask_mode": "mutual",
+          "upstream_revision": "3950b6d9ea848dc980a82a89b4554af2c082544a"
+        },
+        {
+          "action_horizon": 32,
+          "action_shape": [
+            32,
+            80
+          ],
+          "action_space": "model (normalized)",
+          "architecture": "DualSystemSelfAttnArchitecture",
+          "attention_mask_hook": false,
+          "backend": "openwam",
+          "checkpoint": "/dev/shm/pi34-rt-13073/checkpoints/openwam/checkpoint_step_118655.safetensors",
+          "compiled": false,
+          "condition": "joint",
+          "condition_hook": false,
+          "dit_cache": false,
+          "model_device": "cuda",
+          "model_dtype": "torch.bfloat16",
+          "num_inference_steps": 10,
+          "num_video_frames": 9,
+          "observation": {
+            "camera_layout": [
+              "head_camera",
+              "left_camera",
+              "right_camera"
+            ],
+            "raw_state_eef20": [
+              -0.29808565974235535,
+              -0.31351372599601746,
+              0.9420174956321716,
+              0.9999939799308777,
+              5.7166700571542606e-05,
+              0.0034741314593702555,
+              -0.0034744846634566784,
+              0.024665432050824165,
+              0.9996896982192993,
+              1.0,
+              0.08508483320474625,
+              -0.05800138786435127,
+              0.986574113368988,
+              0.0028336511459201574,
+              0.003761787200346589,
+              0.9999889135360718,
+              -0.9999956488609314,
+              0.000826261006295681,
+              0.002830561948940158,
+              1.0
+            ]
+          },
+          "seed": 42,
+          "training_attention_mask_mode": "mutual",
+          "upstream_revision": "3950b6d9ea848dc980a82a89b4554af2c082544a"
+        },
+        {
+          "action_horizon": 32,
+          "action_shape": [
+            32,
+            80
+          ],
+          "action_space": "model (normalized)",
+          "architecture": "DualSystemSelfAttnArchitecture",
+          "attention_mask_hook": false,
+          "backend": "openwam",
+          "checkpoint": "/dev/shm/pi34-rt-13073/checkpoints/openwam/checkpoint_step_118655.safetensors",
+          "compiled": false,
+          "condition": "joint",
+          "condition_hook": false,
+          "dit_cache": false,
+          "model_device": "cuda",
+          "model_dtype": "torch.bfloat16",
+          "num_inference_steps": 10,
+          "num_video_frames": 9,
+          "observation": {
+            "camera_layout": [
+              "head_camera",
+              "left_camera",
+              "right_camera"
+            ],
+            "raw_state_eef20": [
+              -0.2973790168762207,
+              -0.31409355998039246,
+              0.9419045448303223,
+              0.9999960660934448,
+              0.000968004809692502,
+              0.002634583041071892,
+              -0.002656387398019433,
+              0.023260286077857018,
+              0.9997259378433228,
+              1.0,
+              0.08136007189750671,
+              -0.05860750377178192,
+              0.9754440784454346,
+              0.005804621614515781,
+              -0.002635208424180746,
+              0.9999796748161316,
+              -0.9999554753303528,
+              0.007424147333949804,
+              0.005824045743793249,
+              0.0
+            ]
+          },
+          "seed": 42,
+          "training_attention_mask_mode": "mutual",
+          "upstream_revision": "3950b6d9ea848dc980a82a89b4554af2c082544a"
+        }
+      ],
+      "instruction": "Click the blue bell with glossy finish's top center on the table.",
+      "policy_steps": 65,
+      "seed": 100009,
+      "success": true,
+      "termination_reason": "success"
+    }
+  ]
+}

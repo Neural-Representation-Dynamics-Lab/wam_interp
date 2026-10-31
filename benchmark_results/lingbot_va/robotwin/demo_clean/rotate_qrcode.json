@@ -1,0 +1,1891 @@
+{
+  "accepted_seeds": [
+    10000,
+    10001,
+    10002,
+    10003,
+    10004,
+    10005,
+    10006,
+    10007,
+    10008,
+    10009
+  ],
+  "action_type": "ee",
+  "attempts": 10,
+  "benchmark": "robotwin",
+  "benchmark_revision": "c3ddfa8b97d5519efa828b075999bd0006778e5e",
+  "completed": true,
+  "config": {
+    "action_horizon": 32,
+    "clear_cache_freq": 5,
+    "inference_options": {},
+    "instruction_pool_size": 100,
+    "instruction_type": "seen",
+    "max_repeated_screen_errors": 20,
+    "max_seed_attempts": 1000,
+    "max_steps": null,
+    "num_episodes": 10,
+    "output_dir": "/nethome/pi34/kv_results/rt10-lingbot_va-13068",
+    "replan_steps": 32,
+    "robotwin_root": "/dev/shm/pi34-rt-13068/RoboTwin",
+    "run_metadata": {
+      "checkpoint": "/dev/shm/pi34-rt-13068/checkpoints/lingbot",
+      "checkpoint_revision": "8c9dea8abbc5c91cc9e18bc3264b8915083bbe70",
+      "dtype": "bfloat16",
+      "repository_revision": "2a6a56a2a679da5b3d7b43ff92b0a6ad085c8d69",
+      "resolved_model_config": {
+        "__name__": "Config: VA robotwin",
+        "action_dim": 30,
+        "action_guidance_scale": 1,
+        "action_norm_method": "quantiles",
+        "action_num_inference_steps": 50,
+        "action_per_frame": 16,
+        "action_snr_shift": 1.0,
+        "attn_window": 72,
+        "enable_offload": false,
+        "env_type": "robotwin_tshape",
+        "frame_chunk_size": 2,
+        "guidance_scale": 5,
+        "height": 256,
+        "host": "0.0.0.0",
+        "inverse_used_action_channel_ids": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          16,
+          16,
+          16,
+          16,
+          16,
+          16,
+          16,
+          16,
+          16,
+          16,
+          16,
+          16,
+          16,
+          16,
+          7,
+          15
+        ],
+        "norm_stat": {
+          "q01": [
+            -0.06172713458538055,
+            -3.6716461181640625e-05,
+            -0.08783501386642456,
+            -1,
+            -1,
+            -1,
+            -1,
+            -0.3547105032205582,
+            -1.3113021850585938e-06,
+            -0.11975435614585876,
+            -1,
+            -1,
+            -1,
+            -1,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "q99": [
+            0.3462600058317184,
+            0.39966784834861746,
+            0.14745532035827624,
+            1,
+            1,
+            1,
+            1,
+            0.034201726913452024,
+            0.39142737388610793,
+            0.1792279863357542,
+            1,
+            1,
+            1,
+            1,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            1.0,
+            1.0
+          ]
+        },
+        "num_inference_steps": 25,
+        "obs_cam_keys": [
+          "observation.images.cam_high",
+          "observation.images.cam_left_wrist",
+          "observation.images.cam_right_wrist"
+        ],
+        "param_dtype": "torch.bfloat16",
+        "patch_size": [
+          1,
+          2,
+          2
+        ],
+        "port": 29536,
+        "save_root": "./train_out",
+        "snr_shift": 5.0,
+        "used_action_channel_ids": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          28,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          29
+        ],
+        "video_exec_step": -1,
+        "wan22_pretrained_model_name_or_path": "/path/to/pretrained/model",
+        "width": 320
+      }
+    },
+    "seed": 0,
+    "start_seed": 10000,
+    "task_config": "demo_clean",
+    "task_name": "rotate_qrcode"
+  },
+  "duration_seconds": 652.5945055440534,
+  "episodes": 10,
+  "model": {
+    "checkpoint": "/dev/shm/pi34-rt-13068/checkpoints/lingbot",
+    "model_device": "cuda",
+    "model_dtype": "torch.bfloat16",
+    "model_name": "lingbot_va",
+    "resolved_model_config": {
+      "__name__": "Config: VA robotwin",
+      "action_dim": 30,
+      "action_guidance_scale": 1,
+      "action_norm_method": "quantiles",
+      "action_num_inference_steps": 50,
+      "action_per_frame": 16,
+      "action_snr_shift": 1.0,
+      "attn_window": 72,
+      "enable_offload": false,
+      "env_type": "robotwin_tshape",
+      "frame_chunk_size": 2,
+      "guidance_scale": 5,
+      "height": 256,
+      "host": "0.0.0.0",
+      "inverse_used_action_channel_ids": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        16,
+        16,
+        16,
+        16,
+        16,
+        16,
+        16,
+        16,
+        16,
+        16,
+        16,
+        16,
+        16,
+        16,
+        7,
+        15
+      ],
+      "norm_stat": {
+        "q01": [
+          -0.06172713458538055,
+          -3.6716461181640625e-05,
+          -0.08783501386642456,
+          -1,
+          -1,
+          -1,
+          -1,
+          -0.3547105032205582,
+          -1.3113021850585938e-06,
+          -0.11975435614585876,
+          -1,
+          -1,
+          -1,
+          -1,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "q99": [
+          0.3462600058317184,
+          0.39966784834861746,
+          0.14745532035827624,
+          1,
+          1,
+          1,
+          1,
+          0.034201726913452024,
+          0.39142737388610793,
+          0.1792279863357542,
+          1,
+          1,
+          1,
+          1,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          1.0,
+          1.0
+        ]
+      },
+      "num_inference_steps": 25,
+      "obs_cam_keys": [
+        "observation.images.cam_high",
+        "observation.images.cam_left_wrist",
+        "observation.images.cam_right_wrist"
+      ],
+      "param_dtype": "torch.bfloat16",
+      "patch_size": [
+        1,
+        2,
+        2
+      ],
+      "port": 29536,
+      "save_root": "./train_out",
+      "snr_shift": 5.0,
+      "used_action_channel_ids": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        28,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        29
+      ],
+      "video_exec_step": -1,
+      "wan22_pretrained_model_name_or_path": "/path/to/pretrained/model",
+      "width": 320
+    },
+    "source_dirty": true,
+    "source_revision": "2a6a56a2a679da5b3d7b43ff92b0a6ad085c8d69",
+    "source_state": {
+      "dirty": true,
+      "dirty_paths": 37,
+      "revision": "2a6a56a2a679da5b3d7b43ff92b0a6ad085c8d69",
+      "status_and_diff_sha256": "92a158dc775f76904e5c5b14f59c22884aa46d4c893aecc7d689bfce39df3c26"
+    },
+    "statistics_content_sha256": null,
+    "upstream_revision": "7c6ffa9bfc4b83582cafc860fab4c82cc7deeeeb"
+  },
+  "output_path": "/nethome/pi34/kv_results/rt10-lingbot_va-13068/robotwin_20261031T010610117243Z.json",
+  "package_versions": {
+    "diffusers": "0.36.0",
+    "mplib": "0.2.1",
+    "mujoco": null,
+    "numpy": "1.26.4",
+    "robosuite": null,
+    "sapien": "3.0.0b1",
+    "torch": "2.7.1+cu128",
+    "transformers": "4.57.6"
+  },
+  "rejected_seeds": [],
+  "success_rate": 0.9,
+  "successes": 9,
+  "trials": [
+    {
+      "episode": 0,
+      "inference_calls": 5,
+      "inference_latency_ms": [
+        4453.857819084078,
+        4692.272616084665,
+        4815.909660188481,
+        4869.917919160798,
+        4925.6621489766985
+      ],
+      "inference_metadata": [
+        {
+          "action_horizon": 32,
+          "action_inference_steps": 50,
+          "action_per_frame": 16,
+          "backend": "lingbot_va",
+          "condition": "video",
+          "frame_chunk_size": 2,
+          "frame_st_id": 0,
+          "guidance_scale": 5,
+          "observation": {
+            "camera_layout": "latent_wrists_above_head",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ],
+            "seed": 10000,
+            "task_name": "rotate_qrcode"
+          },
+          "seed": 10000,
+          "video_exec_step": -1,
+          "video_inference_steps": 25
+        },
+        {
+          "action_horizon": 32,
+          "action_inference_steps": 50,
+          "action_per_frame": 16,
+          "backend": "lingbot_va",
+          "condition": "video",
+          "frame_chunk_size": 2,
+          "frame_st_id": 2,
+          "guidance_scale": 5,
+          "observation": {
+            "camera_layout": "latent_wrists_above_head",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ]
+          },
+          "seed": 10001,
+          "video_exec_step": -1,
+          "video_inference_steps": 25
+        },
+        {
+          "action_horizon": 32,
+          "action_inference_steps": 50,
+          "action_per_frame": 16,
+          "backend": "lingbot_va",
+          "condition": "video",
+          "frame_chunk_size": 2,
+          "frame_st_id": 4,
+          "guidance_scale": 5,
+          "observation": {
+            "camera_layout": "latent_wrists_above_head",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ]
+          },
+          "seed": 10002,
+          "video_exec_step": -1,
+          "video_inference_steps": 25
+        },
+        {
+          "action_horizon": 32,
+          "action_inference_steps": 50,
+          "action_per_frame": 16,
+          "backend": "lingbot_va",
+          "condition": "video",
+          "frame_chunk_size": 2,
+          "frame_st_id": 6,
+          "guidance_scale": 5,
+          "observation": {
+            "camera_layout": "latent_wrists_above_head",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ]
+          },
+          "seed": 10003,
+          "video_exec_step": -1,
+          "video_inference_steps": 25
+        },
+        {
+          "action_horizon": 32,
+          "action_inference_steps": 50,
+          "action_per_frame": 16,
+          "backend": "lingbot_va",
+          "condition": "video",
+          "frame_chunk_size": 2,
+          "frame_st_id": 8,
+          "guidance_scale": 5,
+          "observation": {
+            "camera_layout": "latent_wrists_above_head",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ]
+          },
+          "seed": 10004,
+          "video_exec_step": -1,
+          "video_inference_steps": 25
+        }
+      ],
+      "instruction": "Lift the payment sign with angled face from the table and rotate it so the code faces you.",
+      "policy_steps": 142,
+      "seed": 10000,
+      "success": true,
+      "termination_reason": "success"
+    },
+    {
+      "episode": 1,
+      "inference_calls": 6,
+      "inference_latency_ms": [
+        4488.534610951319,
+        4693.3657948393375,
+        4811.070090858266,
+        4853.983788052574,
+        4910.246914951131,
+        4964.724658057094
+      ],
+      "inference_metadata": [
+        {
+          "action_horizon": 32,
+          "action_inference_steps": 50,
+          "action_per_frame": 16,
+          "backend": "lingbot_va",
+          "condition": "video",
+          "frame_chunk_size": 2,
+          "frame_st_id": 0,
+          "guidance_scale": 5,
+          "observation": {
+            "camera_layout": "latent_wrists_above_head",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ],
+            "seed": 10001,
+            "task_name": "rotate_qrcode"
+          },
+          "seed": 10001,
+          "video_exec_step": -1,
+          "video_inference_steps": 25
+        },
+        {
+          "action_horizon": 32,
+          "action_inference_steps": 50,
+          "action_per_frame": 16,
+          "backend": "lingbot_va",
+          "condition": "video",
+          "frame_chunk_size": 2,
+          "frame_st_id": 2,
+          "guidance_scale": 5,
+          "observation": {
+            "camera_layout": "latent_wrists_above_head",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ]
+          },
+          "seed": 10002,
+          "video_exec_step": -1,
+          "video_inference_steps": 25
+        },
+        {
+          "action_horizon": 32,
+          "action_inference_steps": 50,
+          "action_per_frame": 16,
+          "backend": "lingbot_va",
+          "condition": "video",
+          "frame_chunk_size": 2,
+          "frame_st_id": 4,
+          "guidance_scale": 5,
+          "observation": {
+            "camera_layout": "latent_wrists_above_head",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ]
+          },
+          "seed": 10003,
+          "video_exec_step": -1,
+          "video_inference_steps": 25
+        },
+        {
+          "action_horizon": 32,
+          "action_inference_steps": 50,
+          "action_per_frame": 16,
+          "backend": "lingbot_va",
+          "condition": "video",
+          "frame_chunk_size": 2,
+          "frame_st_id": 6,
+          "guidance_scale": 5,
+          "observation": {
+            "camera_layout": "latent_wrists_above_head",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ]
+          },
+          "seed": 10004,
+          "video_exec_step": -1,
+          "video_inference_steps": 25
+        },
+        {
+          "action_horizon": 32,
+          "action_inference_steps": 50,
+          "action_per_frame": 16,
+          "backend": "lingbot_va",
+          "condition": "video",
+          "frame_chunk_size": 2,
+          "frame_st_id": 8,
+          "guidance_scale": 5,
+          "observation": {
+            "camera_layout": "latent_wrists_above_head",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ]
+          },
+          "seed": 10005,
+          "video_exec_step": -1,
+          "video_inference_steps": 25
+        },
+        {
+          "action_horizon": 32,
+          "action_inference_steps": 50,
+          "action_per_frame": 16,
+          "backend": "lingbot_va",
+          "condition": "video",
+          "frame_chunk_size": 2,
+          "frame_st_id": 10,
+          "guidance_scale": 5,
+          "observation": {
+            "camera_layout": "latent_wrists_above_head",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ]
+          },
+          "seed": 10006,
+          "video_exec_step": -1,
+          "video_inference_steps": 25
+        }
+      ],
+      "instruction": "Use the left arm to pick the sign with yellow payment section and turn it towards you.",
+      "policy_steps": 146,
+      "seed": 10001,
+      "success": true,
+      "termination_reason": "success"
+    },
+    {
+      "episode": 2,
+      "inference_calls": 13,
+      "inference_latency_ms": [
+        4485.774464905262,
+        4704.078222857788,
+        4794.2441129125655,
+        4848.66142901592,
+        4930.824096081778,
+        4984.787953086197,
+        5058.303753845394,
+        5136.843879939988,
+        5221.6893141157925,
+        5314.431434031576,
+        5368.0827401112765,
+        5455.7331178803,
+        5589.872702024877
+      ],
+      "inference_metadata": [
+        {
+          "action_horizon": 32,
+          "action_inference_steps": 50,
+          "action_per_frame": 16,
+          "backend": "lingbot_va",
+          "condition": "video",
+          "frame_chunk_size": 2,
+          "frame_st_id": 0,
+          "guidance_scale": 5,
+          "observation": {
+            "camera_layout": "latent_wrists_above_head",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ],
+            "seed": 10002,
+            "task_name": "rotate_qrcode"
+          },
+          "seed": 10002,
+          "video_exec_step": -1,
+          "video_inference_steps": 25
+        },
+        {
+          "action_horizon": 32,
+          "action_inference_steps": 50,
+          "action_per_frame": 16,
+          "backend": "lingbot_va",
+          "condition": "video",
+          "frame_chunk_size": 2,
+          "frame_st_id": 2,
+          "guidance_scale": 5,
+          "observation": {
+            "camera_layout": "latent_wrists_above_head",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ]
+          },
+          "seed": 10003,
+          "video_exec_step": -1,
+          "video_inference_steps": 25
+        },
+        {
+          "action_horizon": 32,
+          "action_inference_steps": 50,
+          "action_per_frame": 16,
+          "backend": "lingbot_va",
+          "condition": "video",
+          "frame_chunk_size": 2,
+          "frame_st_id": 4,
+          "guidance_scale": 5,
+          "observation": {
+            "camera_layout": "latent_wrists_above_head",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ]
+          },
+          "seed": 10004,
+          "video_exec_step": -1,
+          "video_inference_steps": 25
+        },
+        {
+          "action_horizon": 32,
+          "action_inference_steps": 50,
+          "action_per_frame": 16,
+          "backend": "lingbot_va",
+          "condition": "video",
+          "frame_chunk_size": 2,
+          "frame_st_id": 6,
+          "guidance_scale": 5,
+          "observation": {
+            "camera_layout": "latent_wrists_above_head",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ]
+          },
+          "seed": 10005,
+          "video_exec_step": -1,
+          "video_inference_steps": 25
+        },
+        {
+          "action_horizon": 32,
+          "action_inference_steps": 50,
+          "action_per_frame": 16,
+          "backend": "lingbot_va",
+          "condition": "video",
+          "frame_chunk_size": 2,
+          "frame_st_id": 8,
+          "guidance_scale": 5,
+          "observation": {
+            "camera_layout": "latent_wrists_above_head",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ]
+          },
+          "seed": 10006,
+          "video_exec_step": -1,
+          "video_inference_steps": 25
+        },
+        {
+          "action_horizon": 32,
+          "action_inference_steps": 50,
+          "action_per_frame": 16,
+          "backend": "lingbot_va",
+          "condition": "video",
+          "frame_chunk_size": 2,
+          "frame_st_id": 10,
+          "guidance_scale": 5,
+          "observation": {
+            "camera_layout": "latent_wrists_above_head",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ]
+          },
+          "seed": 10007,
+          "video_exec_step": -1,
+          "video_inference_steps": 25
+        },
+        {
+          "action_horizon": 32,
+          "action_inference_steps": 50,
+          "action_per_frame": 16,
+          "backend": "lingbot_va",
+          "condition": "video",
+          "frame_chunk_size": 2,
+          "frame_st_id": 12,
+          "guidance_scale": 5,
+          "observation": {
+            "camera_layout": "latent_wrists_above_head",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ]
+          },
+          "seed": 10008,
+          "video_exec_step": -1,
+          "video_inference_steps": 25
+        },
+        {
+          "action_horizon": 32,
+          "action_inference_steps": 50,
+          "action_per_frame": 16,
+          "backend": "lingbot_va",
+          "condition": "video",
+          "frame_chunk_size": 2,
+          "frame_st_id": 14,
+          "guidance_scale": 5,
+          "observation": {
+            "camera_layout": "latent_wrists_above_head",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ]
+          },
+          "seed": 10009,
+          "video_exec_step": -1,
+          "video_inference_steps": 25
+        },
+        {
+          "action_horizon": 32,
+          "action_inference_steps": 50,
+          "action_per_frame": 16,
+          "backend": "lingbot_va",
+          "condition": "video",
+          "frame_chunk_size": 2,
+          "frame_st_id": 16,
+          "guidance_scale": 5,
+          "observation": {
+            "camera_layout": "latent_wrists_above_head",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ]
+          },
+          "seed": 10010,
+          "video_exec_step": -1,
+          "video_inference_steps": 25
+        },
+        {
+          "action_horizon": 32,
+          "action_inference_steps": 50,
+          "action_per_frame": 16,
+          "backend": "lingbot_va",
+          "condition": "video",
+          "frame_chunk_size": 2,
+          "frame_st_id": 18,
+          "guidance_scale": 5,
+          "observation": {
+            "camera_layout": "latent_wrists_above_head",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ]
+          },
+          "seed": 10011,
+          "video_exec_step": -1,
+          "video_inference_steps": 25
+        },
+        {
+          "action_horizon": 32,
+          "action_inference_steps": 50,
+          "action_per_frame": 16,
+          "backend": "lingbot_va",
+          "condition": "video",
+          "frame_chunk_size": 2,
+          "frame_st_id": 20,
+          "guidance_scale": 5,
+          "observation": {
+            "camera_layout": "latent_wrists_above_head",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ]
+          },
+          "seed": 10012,
+          "video_exec_step": -1,
+          "video_inference_steps": 25
+        },
+        {
+          "action_horizon": 32,
+          "action_inference_steps": 50,
+          "action_per_frame": 16,
+          "backend": "lingbot_va",
+          "condition": "video",
+          "frame_chunk_size": 2,
+          "frame_st_id": 22,
+          "guidance_scale": 5,
+          "observation": {
+            "camera_layout": "latent_wrists_above_head",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ]
+          },
+          "seed": 10013,
+          "video_exec_step": -1,
+          "video_inference_steps": 25
+        },
+        {
+          "action_horizon": 32,
+          "action_inference_steps": 50,
+          "action_per_frame": 16,
+          "backend": "lingbot_va",
+          "condition": "video",
+          "frame_chunk_size": 2,
+          "frame_st_id": 24,
+          "guidance_scale": 5,
+          "observation": {
+            "camera_layout": "latent_wrists_above_head",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ]
+          },
+          "seed": 10014,
+          "video_exec_step": -1,
+          "video_inference_steps": 25
+        }
+      ],
+      "instruction": "Use the left arm to grab the plastic smooth paymentsign and rotate QR code towards you.",
+      "policy_steps": 400,
+      "seed": 10002,
+      "success": false,
+      "termination_reason": "max_steps"
+    },
+    {
+      "episode": 3,
+      "inference_calls": 5,
+      "inference_latency_ms": [
+        4471.77295293659,
+        4694.790899986401,
+        4810.306979110464,
+        4843.180079944432,
+        4914.546957006678
+      ],
+      "inference_metadata": [
+        {
+          "action_horizon": 32,
+          "action_inference_steps": 50,
+          "action_per_frame": 16,
+          "backend": "lingbot_va",
+          "condition": "video",
+          "frame_chunk_size": 2,
+          "frame_st_id": 0,
+          "guidance_scale": 5,
+          "observation": {
+            "camera_layout": "latent_wrists_above_head",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ],
+            "seed": 10003,
+            "task_name": "rotate_qrcode"
+          },
+          "seed": 10003,
+          "video_exec_step": -1,
+          "video_inference_steps": 25
+        },
+        {
+          "action_horizon": 32,
+          "action_inference_steps": 50,
+          "action_per_frame": 16,
+          "backend": "lingbot_va",
+          "condition": "video",
+          "frame_chunk_size": 2,
+          "frame_st_id": 2,
+          "guidance_scale": 5,
+          "observation": {
+            "camera_layout": "latent_wrists_above_head",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ]
+          },
+          "seed": 10004,
+          "video_exec_step": -1,
+          "video_inference_steps": 25
+        },
+        {
+          "action_horizon": 32,
+          "action_inference_steps": 50,
+          "action_per_frame": 16,
+          "backend": "lingbot_va",
+          "condition": "video",
+          "frame_chunk_size": 2,
+          "frame_st_id": 4,
+          "guidance_scale": 5,
+          "observation": {
+            "camera_layout": "latent_wrists_above_head",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ]
+          },
+          "seed": 10005,
+          "video_exec_step": -1,
+          "video_inference_steps": 25
+        },
+        {
+          "action_horizon": 32,
+          "action_inference_steps": 50,
+          "action_per_frame": 16,
+          "backend": "lingbot_va",
+          "condition": "video",
+          "frame_chunk_size": 2,
+          "frame_st_id": 6,
+          "guidance_scale": 5,
+          "observation": {
+            "camera_layout": "latent_wrists_above_head",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ]
+          },
+          "seed": 10006,
+          "video_exec_step": -1,
+          "video_inference_steps": 25
+        },
+        {
+          "action_horizon": 32,
+          "action_inference_steps": 50,
+          "action_per_frame": 16,
+          "backend": "lingbot_va",
+          "condition": "video",
+          "frame_chunk_size": 2,
+          "frame_st_id": 8,
+          "guidance_scale": 5,
+          "observation": {
+            "camera_layout": "latent_wrists_above_head",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ]
+          },
+          "seed": 10007,
+          "video_exec_step": -1,
+          "video_inference_steps": 25
+        }
+      ],
+      "instruction": "Catch the beige paymentsign with printed details with the left arm, then rotate it to make the QR code visible.",
+      "policy_steps": 143,
+      "seed": 10003,
+      "success": true,
+      "termination_reason": "success"
+    },
+    {
+      "episode": 4,
+      "inference_calls": 6,
+      "inference_latency_ms": [
+        4476.7748969607055,
+        4725.131805986166,
+        4813.900744076818,
+        4850.349292857572,
+        4918.767067836598,
+        4975.260006962344
+      ],
+      "inference_metadata": [
+        {
+          "action_horizon": 32,
+          "action_inference_steps": 50,
+          "action_per_frame": 16,
+          "backend": "lingbot_va",
+          "condition": "video",
+          "frame_chunk_size": 2,
+          "frame_st_id": 0,
+          "guidance_scale": 5,
+          "observation": {
+            "camera_layout": "latent_wrists_above_head",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ],
+            "seed": 10004,
+            "task_name": "rotate_qrcode"
+          },
+          "seed": 10004,
+          "video_exec_step": -1,
+          "video_inference_steps": 25
+        },
+        {
+          "action_horizon": 32,
+          "action_inference_steps": 50,
+          "action_per_frame": 16,
+          "backend": "lingbot_va",
+          "condition": "video",
+          "frame_chunk_size": 2,
+          "frame_st_id": 2,
+          "guidance_scale": 5,
+          "observation": {
+            "camera_layout": "latent_wrists_above_head",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ]
+          },
+          "seed": 10005,
+          "video_exec_step": -1,
+          "video_inference_steps": 25
+        },
+        {
+          "action_horizon": 32,
+          "action_inference_steps": 50,
+          "action_per_frame": 16,
+          "backend": "lingbot_va",
+          "condition": "video",
+          "frame_chunk_size": 2,
+          "frame_st_id": 4,
+          "guidance_scale": 5,
+          "observation": {
+            "camera_layout": "latent_wrists_above_head",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ]
+          },
+          "seed": 10006,
+          "video_exec_step": -1,
+          "video_inference_steps": 25
+        },
+        {
+          "action_horizon": 32,
+          "action_inference_steps": 50,
+          "action_per_frame": 16,
+          "backend": "lingbot_va",
+          "condition": "video",
+          "frame_chunk_size": 2,
+          "frame_st_id": 6,
+          "guidance_scale": 5,
+          "observation": {
+            "camera_layout": "latent_wrists_above_head",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ]
+          },
+          "seed": 10007,
+          "video_exec_step": -1,
+          "video_inference_steps": 25
+        },
+        {
+          "action_horizon": 32,
+          "action_inference_steps": 50,
+          "action_per_frame": 16,
+          "backend": "lingbot_va",
+          "condition": "video",
+          "frame_chunk_size": 2,
+          "frame_st_id": 8,
+          "guidance_scale": 5,
+          "observation": {
+            "camera_layout": "latent_wrists_above_head",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ]
+          },
+          "seed": 10008,
+          "video_exec_step": -1,
+          "video_inference_steps": 25
+        },
+        {
+          "action_horizon": 32,
+          "action_inference_steps": 50,
+          "action_per_frame": 16,
+          "backend": "lingbot_va",
+          "condition": "video",
+          "frame_chunk_size": 2,
+          "frame_st_id": 10,
+          "guidance_scale": 5,
+          "observation": {
+            "camera_layout": "latent_wrists_above_head",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ]
+          },
+          "seed": 10009,
+          "video_exec_step": -1,
+          "video_inference_steps": 25
+        }
+      ],
+      "instruction": "Take the rectangular paymentsign with colorful top, raise it, and make the qrcode face you.",
+      "policy_steps": 146,
+      "seed": 10004,
+      "success": true,
+      "termination_reason": "success"
+    },
+    {
+      "episode": 5,
+      "inference_calls": 6,
+      "inference_latency_ms": [
+        4477.824624860659,
+        4698.8778279628605,
+        4787.257232936099,
+        4845.381887163967,
+        4919.901591958478,
+        4967.361153103411
+      ],
+      "inference_metadata": [
+        {
+          "action_horizon": 32,
+          "action_inference_steps": 50,
+          "action_per_frame": 16,
+          "backend": "lingbot_va",
+          "condition": "video",
+          "frame_chunk_size": 2,
+          "frame_st_id": 0,
+          "guidance_scale": 5,
+          "observation": {
+            "camera_layout": "latent_wrists_above_head",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ],
+            "seed": 10005,
+            "task_name": "rotate_qrcode"
+          },
+          "seed": 10005,
+          "video_exec_step": -1,
+          "video_inference_steps": 25
+        },
+        {
+          "action_horizon": 32,
+          "action_inference_steps": 50,
+          "action_per_frame": 16,
+          "backend": "lingbot_va",
+          "condition": "video",
+          "frame_chunk_size": 2,
+          "frame_st_id": 2,
+          "guidance_scale": 5,
+          "observation": {
+            "camera_layout": "latent_wrists_above_head",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ]
+          },
+          "seed": 10006,
+          "video_exec_step": -1,
+          "video_inference_steps": 25
+        },
+        {
+          "action_horizon": 32,
+          "action_inference_steps": 50,
+          "action_per_frame": 16,
+          "backend": "lingbot_va",
+          "condition": "video",
+          "frame_chunk_size": 2,
+          "frame_st_id": 4,
+          "guidance_scale": 5,
+          "observation": {
+            "camera_layout": "latent_wrists_above_head",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ]
+          },
+          "seed": 10007,
+          "video_exec_step": -1,
+          "video_inference_steps": 25
+        },
+        {
+          "action_horizon": 32,
+          "action_inference_steps": 50,
+          "action_per_frame": 16,
+          "backend": "lingbot_va",
+          "condition": "video",
+          "frame_chunk_size": 2,
+          "frame_st_id": 6,
+          "guidance_scale": 5,
+          "observation": {
+            "camera_layout": "latent_wrists_above_head",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ]
+          },
+          "seed": 10008,
+          "video_exec_step": -1,
+          "video_inference_steps": 25
+        },
+        {
+          "action_horizon": 32,
+          "action_inference_steps": 50,
+          "action_per_frame": 16,
+          "backend": "lingbot_va",
+          "condition": "video",
+          "frame_chunk_size": 2,
+          "frame_st_id": 8,
+          "guidance_scale": 5,
+          "observation": {
+            "camera_layout": "latent_wrists_above_head",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ]
+          },
+          "seed": 10009,
+          "video_exec_step": -1,
+          "video_inference_steps": 25
+        },
+        {
+          "action_horizon": 32,
+          "action_inference_steps": 50,
+          "action_per_frame": 16,
+          "backend": "lingbot_va",
+          "condition": "video",
+          "frame_chunk_size": 2,
+          "frame_st_id": 10,
+          "guidance_scale": 5,
+          "observation": {
+            "camera_layout": "latent_wrists_above_head",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ]
+          },
+          "seed": 10010,
+          "video_exec_step": -1,
+          "video_inference_steps": 25
+        }
+      ],
+      "instruction": "Use the left arm to grab the small paymentsign for mobile payments and rotate it until the QR faces forward",
+      "policy_steps": 147,
+      "seed": 10005,
+      "success": true,
+      "termination_reason": "success"
+    },
+    {
+      "episode": 6,
+      "inference_calls": 6,
+      "inference_latency_ms": [
+        4486.069323960692,
+        4703.166309045628,
+        4799.594717100263,
+        4841.23920602724,
+        4917.8820790257305,
+        4975.936327129602
+      ],
+      "inference_metadata": [
+        {
+          "action_horizon": 32,
+          "action_inference_steps": 50,
+          "action_per_frame": 16,
+          "backend": "lingbot_va",
+          "condition": "video",
+          "frame_chunk_size": 2,
+          "frame_st_id": 0,
+          "guidance_scale": 5,
+          "observation": {
+            "camera_layout": "latent_wrists_above_head",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ],
+            "seed": 10006,
+            "task_name": "rotate_qrcode"
+          },
+          "seed": 10006,
+          "video_exec_step": -1,
+          "video_inference_steps": 25
+        },
+        {
+          "action_horizon": 32,
+          "action_inference_steps": 50,
+          "action_per_frame": 16,
+          "backend": "lingbot_va",
+          "condition": "video",
+          "frame_chunk_size": 2,
+          "frame_st_id": 2,
+          "guidance_scale": 5,
+          "observation": {
+            "camera_layout": "latent_wrists_above_head",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ]
+          },
+          "seed": 10007,
+          "video_exec_step": -1,
+          "video_inference_steps": 25
+        },
+        {
+          "action_horizon": 32,
+          "action_inference_steps": 50,
+          "action_per_frame": 16,
+          "backend": "lingbot_va",
+          "condition": "video",
+          "frame_chunk_size": 2,
+          "frame_st_id": 4,
+          "guidance_scale": 5,
+          "observation": {
+            "camera_layout": "latent_wrists_above_head",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ]
+          },
+          "seed": 10008,
+          "video_exec_step": -1,
+          "video_inference_steps": 25
+        },
+        {
+          "action_horizon": 32,
+          "action_inference_steps": 50,
+          "action_per_frame": 16,
+          "backend": "lingbot_va",
+          "condition": "video",
+          "frame_chunk_size": 2,
+          "frame_st_id": 6,
+          "guidance_scale": 5,
+          "observation": {
+            "camera_layout": "latent_wrists_above_head",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ]
+          },
+          "seed": 10009,
+          "video_exec_step": -1,
+          "video_inference_steps": 25
+        },
+        {
+          "action_horizon": 32,
+          "action_inference_steps": 50,
+          "action_per_frame": 16,
+          "backend": "lingbot_va",
+          "condition": "video",
+          "frame_chunk_size": 2,
+          "frame_st_id": 8,
+          "guidance_scale": 5,
+          "observation": {
+            "camera_layout": "latent_wrists_above_head",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ]
+          },
+          "seed": 10010,
+          "video_exec_step": -1,
+          "video_inference_steps": 25
+        },
+        {
+          "action_horizon": 32,
+          "action_inference_steps": 50,
+          "action_per_frame": 16,
+          "backend": "lingbot_va",
+          "condition": "video",
+          "frame_chunk_size": 2,
+          "frame_st_id": 10,
+          "guidance_scale": 5,
+          "observation": {
+            "camera_layout": "latent_wrists_above_head",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ]
+          },
+          "seed": 10011,
+          "video_exec_step": -1,
+          "video_inference_steps": 25
+        }
+      ],
+      "instruction": "Catch the tabletop-sized payment sign, lift it, and turn the qrcode towards you.",
+      "policy_steps": 147,
+      "seed": 10006,
+      "success": true,
+      "termination_reason": "success"
+    },
+    {
+      "episode": 7,
+      "inference_calls": 5,
+      "inference_latency_ms": [
+        4501.452956115827,
+        4697.2087398171425,
+        4805.721692042425,
+        4845.125742023811,
+        4916.990803088993
+      ],
+      "inference_metadata": [
+        {
+          "action_horizon": 32,
+          "action_inference_steps": 50,
+          "action_per_frame": 16,
+          "backend": "lingbot_va",
+          "condition": "video",
+          "frame_chunk_size": 2,
+          "frame_st_id": 0,
+          "guidance_scale": 5,
+          "observation": {
+            "camera_layout": "latent_wrists_above_head",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ],
+            "seed": 10007,
+            "task_name": "rotate_qrcode"
+          },
+          "seed": 10007,
+          "video_exec_step": -1,
+          "video_inference_steps": 25
+        },
+        {
+          "action_horizon": 32,
+          "action_inference_steps": 50,
+          "action_per_frame": 16,
+          "backend": "lingbot_va",
+          "condition": "video",
+          "frame_chunk_size": 2,
+          "frame_st_id": 2,
+          "guidance_scale": 5,
+          "observation": {
+            "camera_layout": "latent_wrists_above_head",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ]
+          },
+          "seed": 10008,
+          "video_exec_step": -1,
+          "video_inference_steps": 25
+        },
+        {
+          "action_horizon": 32,
+          "action_inference_steps": 50,
+          "action_per_frame": 16,
+          "backend": "lingbot_va",
+          "condition": "video",
+          "frame_chunk_size": 2,
+          "frame_st_id": 4,
+          "guidance_scale": 5,
+          "observation": {
+            "camera_layout": "latent_wrists_above_head",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ]
+          },
+          "seed": 10009,
+          "video_exec_step": -1,
+          "video_inference_steps": 25
+        },
+        {
+          "action_horizon": 32,
+          "action_inference_steps": 50,
+          "action_per_frame": 16,
+          "backend": "lingbot_va",
+          "condition": "video",
+          "frame_chunk_size": 2,
+          "frame_st_id": 6,
+          "guidance_scale": 5,
+          "observation": {
+            "camera_layout": "latent_wrists_above_head",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ]
+          },
+          "seed": 10010,
+          "video_exec_step": -1,
+          "video_inference_steps": 25
+        },
+        {
+          "action_horizon": 32,
+          "action_inference_steps": 50,
+          "action_per_frame": 16,
+          "backend": "lingbot_va",
+          "condition": "video",
+          "frame_chunk_size": 2,
+          "frame_st_id": 8,
+          "guidance_scale": 5,
+          "observation": {
+            "camera_layout": "latent_wrists_above_head",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ]
+          },
+          "seed": 10011,
+          "video_exec_step": -1,
+          "video_inference_steps": 25
+        }
+      ],
+      "instruction": "Lift the small payment stand with black base from the surface and adjust its angle towards you",
+      "policy_steps": 143,
+      "seed": 10007,
+      "success": true,
+      "termination_reason": "success"
+    },
+    {
+      "episode": 8,
+      "inference_calls": 5,
+      "inference_latency_ms": [
+        4485.853270860389,
+        4671.178082935512,
+        4794.059870066121,
+        4872.472945833579,
+        4931.122860871255
+      ],
+      "inference_metadata": [
+        {
+          "action_horizon": 32,
+          "action_inference_steps": 50,
+          "action_per_frame": 16,
+          "backend": "lingbot_va",
+          "condition": "video",
+          "frame_chunk_size": 2,
+          "frame_st_id": 0,
+          "guidance_scale": 5,
+          "observation": {
+            "camera_layout": "latent_wrists_above_head",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ],
+            "seed": 10008,
+            "task_name": "rotate_qrcode"
+          },
+          "seed": 10008,
+          "video_exec_step": -1,
+          "video_inference_steps": 25
+        },
+        {
+          "action_horizon": 32,
+          "action_inference_steps": 50,
+          "action_per_frame": 16,
+          "backend": "lingbot_va",
+          "condition": "video",
+          "frame_chunk_size": 2,
+          "frame_st_id": 2,
+          "guidance_scale": 5,
+          "observation": {
+            "camera_layout": "latent_wrists_above_head",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ]
+          },
+          "seed": 10009,
+          "video_exec_step": -1,
+          "video_inference_steps": 25
+        },
+        {
+          "action_horizon": 32,
+          "action_inference_steps": 50,
+          "action_per_frame": 16,
+          "backend": "lingbot_va",
+          "condition": "video",
+          "frame_chunk_size": 2,
+          "frame_st_id": 4,
+          "guidance_scale": 5,
+          "observation": {
+            "camera_layout": "latent_wrists_above_head",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ]
+          },
+          "seed": 10010,
+          "video_exec_step": -1,
+          "video_inference_steps": 25
+        },
+        {
+          "action_horizon": 32,
+          "action_inference_steps": 50,
+          "action_per_frame": 16,
+          "backend": "lingbot_va",
+          "condition": "video",
+          "frame_chunk_size": 2,
+          "frame_st_id": 6,
+          "guidance_scale": 5,
+          "observation": {
+            "camera_layout": "latent_wrists_above_head",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ]
+          },
+          "seed": 10011,
+          "video_exec_step": -1,
+          "video_inference_steps": 25
+        },
+        {
+          "action_horizon": 32,
+          "action_inference_steps": 50,
+          "action_per_frame": 16,
+          "backend": "lingbot_va",
+          "condition": "video",
+          "frame_chunk_size": 2,
+          "frame_st_id": 8,
+          "guidance_scale": 5,
+          "observation": {
+            "camera_layout": "latent_wrists_above_head",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ]
+          },
+          "seed": 10012,
+          "video_exec_step": -1,
+          "video_inference_steps": 25
+        }
+      ],
+      "instruction": "Slide the smooth plastic paymentsign with QR code off the table and turn it to face you.",
+      "policy_steps": 142,
+      "seed": 10008,
+      "success": true,
+      "termination_reason": "success"
+    },
+    {
+      "episode": 9,
+      "inference_calls": 5,
+      "inference_latency_ms": [
+        4486.678655957803,
+        4672.457565087825,
+        4796.799564966932,
+        4843.2635550852865,
+        4916.82687192224
+      ],
+      "inference_metadata": [
+        {
+          "action_horizon": 32,
+          "action_inference_steps": 50,
+          "action_per_frame": 16,
+          "backend": "lingbot_va",
+          "condition": "video",
+          "frame_chunk_size": 2,
+          "frame_st_id": 0,
+          "guidance_scale": 5,
+          "observation": {
+            "camera_layout": "latent_wrists_above_head",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ],
+            "seed": 10009,
+            "task_name": "rotate_qrcode"
+          },
+          "seed": 10009,
+          "video_exec_step": -1,
+          "video_inference_steps": 25
+        },
+        {
+          "action_horizon": 32,
+          "action_inference_steps": 50,
+          "action_per_frame": 16,
+          "backend": "lingbot_va",
+          "condition": "video",
+          "frame_chunk_size": 2,
+          "frame_st_id": 2,
+          "guidance_scale": 5,
+          "observation": {
+            "camera_layout": "latent_wrists_above_head",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ]
+          },
+          "seed": 10010,
+          "video_exec_step": -1,
+          "video_inference_steps": 25
+        },
+        {
+          "action_horizon": 32,
+          "action_inference_steps": 50,
+          "action_per_frame": 16,
+          "backend": "lingbot_va",
+          "condition": "video",
+          "frame_chunk_size": 2,
+          "frame_st_id": 4,
+          "guidance_scale": 5,
+          "observation": {
+            "camera_layout": "latent_wrists_above_head",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ]
+          },
+          "seed": 10011,
+          "video_exec_step": -1,
+          "video_inference_steps": 25
+        },
+        {
+          "action_horizon": 32,
+          "action_inference_steps": 50,
+          "action_per_frame": 16,
+          "backend": "lingbot_va",
+          "condition": "video",
+          "frame_chunk_size": 2,
+          "frame_st_id": 6,
+          "guidance_scale": 5,
+          "observation": {
+            "camera_layout": "latent_wrists_above_head",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ]
+          },
+          "seed": 10012,
+          "video_exec_step": -1,
+          "video_inference_steps": 25
+        },
+        {
+          "action_horizon": 32,
+          "action_inference_steps": 50,
+          "action_per_frame": 16,
+          "backend": "lingbot_va",
+          "condition": "video",
+          "frame_chunk_size": 2,
+          "frame_st_id": 8,
+          "guidance_scale": 5,
+          "observation": {
+            "camera_layout": "latent_wrists_above_head",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ]
+          },
+          "seed": 10013,
+          "video_exec_step": -1,
+          "video_inference_steps": 25
+        }
+      ],
+      "instruction": "Grab the paymentsign with glossy blue panel with the right arm, then rotate it to face yourself.",
+      "policy_steps": 143,
+      "seed": 10009,
+      "success": true,
+      "termination_reason": "success"
+    }
+  ]
+}

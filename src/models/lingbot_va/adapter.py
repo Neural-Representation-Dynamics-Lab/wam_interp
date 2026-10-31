@@ -15,6 +15,7 @@ class LingBotVAAdapter:
 
     def __init__(self, model: Any):
         self.model = model
+        self._checkpoint = None  # cache state every prediction since the last update starts from
 
     @property
     def action_horizon(self) -> int:
@@ -26,10 +27,12 @@ class LingBotVAAdapter:
 
     def reset(self, prompt: str) -> None:
         self.model.reset(prompt)
+        self._checkpoint = None
 
     def update(self, frames: list[Any], executed_chunk: Any) -> None:
         """Write the frames observed while executing the last chunk into the cache."""
         self.model.compute_kv_cache(frames, executed_chunk)
+        self._checkpoint = None
 
     def predict_action(self, request, recorder=None):
         import torch
@@ -52,7 +55,13 @@ class LingBotVAAdapter:
         frame_st_id = self.model.frame_st_id
         init_frames = [request.observation.image] if frame_st_id == 0 else None
 
-        with capture_module_outputs(self.model.transformer, request.trace_modules, recorder):
+        # Every prediction since the last cache update starts from the same state.
+        if self._checkpoint is None:
+            self._checkpoint = self.model.checkpoint_state()
+        else:
+            self.model.restore_state(self._checkpoint)
+        with self.model.saving_overwritten_rows(self._checkpoint), \
+                capture_module_outputs(self.model.transformer, request.trace_modules, recorder):
             actions, _latents = self.model.infer_chunk(
                 init_frames, generator=generator,
                 num_inference_steps=int(request.num_inference_steps))

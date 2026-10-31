@@ -83,12 +83,13 @@ class FastWAMLiberoAdapter(FastWAMAdapter):
                 raise TypeError(f"Stats for {kind}/{key} must be a mapping")
 
     def inference_defaults(self) -> dict[str, Any]:
-        """Derive FastWAM's sampled video-frame count from its training config."""
+        """Video-frame count from the training config plus the checkpoint's evaluation sampler shift."""
+        defaults = evaluation_sampler_defaults(self.model)
         num_frames = self.data_config.get("num_frames")
         frequency = self.data_config.get("action_video_freq_ratio")
         if num_frames is None or frequency is None or int(frequency) <= 0:
-            return {}
-        return {"num_video_frames": (int(num_frames) - 1) // int(frequency) + 1}
+            return defaults
+        return {**defaults, "num_video_frames": (int(num_frames) - 1) // int(frequency) + 1}
 
     def prepare_observation(
         self, observation: EnvironmentObservation
@@ -205,6 +206,12 @@ class FastWAMLiberoAdapter(FastWAMAdapter):
         if self.binarize_gripper:
             decoded[..., -1] = np.sign(decoded[..., -1])
         return decoded
+
+
+def evaluation_sampler_defaults(model: Any) -> dict[str, Any]:
+    """``sigma_shift`` from the composed ``EVALUATION`` block recorded by ``load_fastwam`` (None = model default)."""
+    shift = (getattr(model, "_wam_interp_metadata", None) or {}).get("evaluation", {}).get("sigma_shift")
+    return {} if shift is None else {"sigma_shift": float(shift)}
 
 
 def _plain_mapping(value: Any) -> dict[str, Any]:

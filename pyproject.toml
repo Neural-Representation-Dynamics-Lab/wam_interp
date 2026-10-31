@@ -109,8 +109,8 @@ libero = [
   "numpy>=1.26,<2",
   # LIBERO's BDDL environments depend on the robosuite 1.4 API.
   "robosuite>=1.4.0,<1.5",
-  # robosuite 1.4 uses the pre-3.10 mj_fullM signature.
-  "mujoco>=3.3,<3.10",
+  # robosuite 1.4 uses the pre-3.10 mj_fullM signature; benchmark_results/ were run on 3.3.2.
+  "mujoco==3.3.2",
   "bddl==1.0.1",
   "gym==0.25.2",
   "easydict>=1.9",
@@ -135,7 +135,7 @@ all = [
   "accelerate>=1.0",
   "ftfy>=6",
   "robosuite>=1.4.0,<1.5",
-  "mujoco>=3.3,<3.10",
+  "mujoco==3.3.2",
   "bddl==1.0.1",
   "gym==0.25.2",
   "easydict>=1.9",
@@ -278,6 +278,8 @@ wam_interp = "src"
 
 [tool.setuptools.package-data]
 "wam_interp.models.fasterwam.model_code" = ["LICENSE"]
+"wam_interp.models.fastwam.model_code" = ["LICENSE"]
+"wam_interp.models.lingbot_va.model_code" = ["LICENSE"]
 "wam_interp.models.longwam.model_code" = ["LICENSE", "NOTICE", "THIRD_PARTY_NOTICES.md", "licenses/*.txt"]
 "wam_interp.models.openwam.model_code" = ["LICENSE"]
 "wam_interp.models.openwam.model_code.model.video_backbone.wan" = ["license/LICENSE", "license/NOTICE"]

@@ -23,6 +23,8 @@ Per chunk, the model denoises 4 latent video frames (20 steps, text CFG 5), writ
 
 The model is stateful, so only the LIBERO adapter path is supported; the single-observation CLI in `main.py` is not.
 
+Repeated predictions from one state (A/B pairs, interventions) are exact: the adapter checkpoints the K/V and VAE cache state before the first prediction after each cache update and restores it for later ones. The next cache update uses the chunk postprocessed last.
+
 ## LIBERO protocol
 
 The LIBERO adapter uses the evaluator's optional `begin_episode` and `observe_step` hooks: it resets the cache with the instruction after warm-up and collects every observed frame for the next cache update. It needs the whole chunk executed before replanning. To follow upstream's client:

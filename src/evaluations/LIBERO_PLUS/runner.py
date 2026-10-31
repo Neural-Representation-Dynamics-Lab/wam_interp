@@ -4,7 +4,7 @@ from time import perf_counter
 
 from .._libero_rollout import run_libero_episode, _episode_seed, _max_steps, _json_safe
 from ..LIBERO.environment import create_libero_environment, reset_to_initial_state, step_libero
-from ..provenance import package_versions, model_provenance, file_hash, save_report
+from ..provenance import package_versions, model_provenance, file_hash, report_path, write_report
 from .config import LiberoPlusEvalConfig, LIBERO_PLUS_REVISION
 from .environment import identify_benchmark, initial_states_for_variant
 
@@ -47,7 +47,8 @@ def evaluate_libero_plus(model, config=None):
     suite, records, root, classification = identify_benchmark(config)
     selected = select_variants(suite, records, config)
     start = perf_counter()
-    report = {"benchmark": "libero_plus", "benchmark_revision": LIBERO_PLUS_REVISION,
+    path = report_path(config.output_dir, "libero_plus")
+    report = {"benchmark": "libero_plus", "completed": False, "benchmark_revision": LIBERO_PLUS_REVISION,
               "benchmark_root": str(root), "classification_sha256": file_hash(classification),
               "task_suite_name": config.task_suite_name, "suite_variant_count": int(suite.n_tasks),
               "partial_selection": len(selected) != int(suite.n_tasks), "selection": selected,
@@ -69,21 +70,32 @@ def evaluate_libero_plus(model, config=None):
                         seed=_episode_seed(config.seed, index, trial), max_steps=_max_steps(config),
                         reset_fn=reset_to_initial_state, step_fn=step_libero, environment="libero_plus")
                     report["trials"].append({**variant, **_json_safe(result)})
+                    if path is not None:
+                        write_report(_summarize(dict(report), start), path)
             finally:
                 env.close()
-    except Exception as exc:
+        report["completed"] = True
+    except BaseException as exc:
         report["error"] = {"type": type(exc).__name__, "message": str(exc)}
         raise
     finally:
-        report["duration_seconds"] = perf_counter() - start
-        for trial in report["trials"]:
-            group = report["by_category"].setdefault(trial["category"], {"successes": 0, "episodes": 0})
-            group["successes"] += int(trial["success"])
-            group["episodes"] += 1
-        for group in report["by_category"].values():
-            group["success_rate"] = group["successes"] / group["episodes"]
-        report["episodes"] = len(report["trials"])
-        report["successes"] = sum(int(trial["success"]) for trial in report["trials"])
-        report["success_rate"] = report["successes"] / report["episodes"] if report["episodes"] else None
-        save_report(report, config.output_dir, "libero_plus")
+        _summarize(report, start)
+        if path is not None:
+            write_report(report, path)
+    return report
+
+
+def _summarize(report, start):
+    """Fill duration, per-category and overall counts from the trials recorded so far."""
+    report["duration_seconds"] = perf_counter() - start
+    report["by_category"] = {}
+    for trial in report["trials"]:
+        group = report["by_category"].setdefault(trial["category"], {"successes": 0, "episodes": 0})
+        group["successes"] += int(trial["success"])
+        group["episodes"] += 1
+    for group in report["by_category"].values():
+        group["success_rate"] = group["successes"] / group["episodes"]
+    report["episodes"] = len(report["trials"])
+    report["successes"] = sum(int(trial["success"]) for trial in report["trials"])
+    report["success_rate"] = report["successes"] / report["episodes"] if report["episodes"] else None
     return report

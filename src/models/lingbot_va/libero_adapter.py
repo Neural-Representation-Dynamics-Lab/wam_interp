@@ -56,7 +56,8 @@ class LingBotVALiberoAdapter(LingBotVAAdapter):
     def predict_action(self, request, recorder=None):
         if not self._in_episode:
             raise RuntimeError("begin_episode() must run before LingBot-VA predicts in LIBERO")
-        if self._last_chunk is not None:
+        # New frames since the last chunk mean it was executed; none means a repeat prediction.
+        if self._last_chunk is not None and self._frames:
             cfg = self.model.config
             expected = self._last_chunk.shape[1] * self._last_chunk.shape[2]
             if self.model.frame_st_id == 0:
@@ -73,7 +74,7 @@ class LingBotVALiberoAdapter(LingBotVAAdapter):
     def postprocess_actions(self, actions: Any, *, environment: str = "libero"):
         if environment != "libero":
             raise ValueError(f"LingBotVALiberoAdapter only supports LIBERO, got {environment!r}")
-        first_chunk = self._last_chunk is None
+        first_chunk = self.model.frame_st_id == 0
         chunk = self.model.postprocess_action(actions)  # [7, frames, actions_per_frame]
         self._last_chunk = chunk
         commands = chunk.transpose(1, 2, 0).reshape(-1, chunk.shape[0])

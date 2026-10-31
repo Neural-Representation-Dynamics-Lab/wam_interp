@@ -46,6 +46,10 @@ class LiberoEvaluationResult:
     config: dict[str, Any]
     tasks: list[TaskResult]
     output_path: str | None = None
+    completed: bool = False          # False while running and after an error or kill
+    error: dict[str, Any] | None = None
+    partial_selection: bool = False  # True when task_ids covers only part of the suite
+    provenance: dict[str, Any] = field(default_factory=dict)
 
     @property
     def successes(self) -> int:
@@ -67,6 +71,10 @@ class LiberoEvaluationResult:
             "model_name": self.model_name,
             "started_at": self.started_at,
             "duration_seconds": self.duration_seconds,
+            "completed": self.completed,
+            "error": self.error,
+            "partial_selection": self.partial_selection,
+            "provenance": self.provenance,
             "successes": self.successes,
             "episodes": self.episodes,
             "success_rate": self.success_rate,

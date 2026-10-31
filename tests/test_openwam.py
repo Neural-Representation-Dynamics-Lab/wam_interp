@@ -605,9 +605,8 @@ def test_tiny_tracing_sees_projections_not_blocks(tiny_libero):
     paths = ("video_backbone.dit.blocks.0.self_attn.q", "action_backbone.blocks.1.ffn")
     result = adapter.predict_action(InferenceRequest(prepared, **{**defaults, "trace_modules": paths}))
     assert {event.metadata["module"] for event in result.trace} == set(paths) and len(result.trace) == 20
-    # The MoT driver bypasses block.forward, so hooks on whole blocks see nothing; trace projections.
-    blocks = adapter.predict_action(InferenceRequest(prepared, **{**defaults, "trace_modules": ("video_backbone.dit.blocks.0",)}))
-    assert blocks.trace == []
+    with pytest.raises(RuntimeError, match="never ran"):  # the MoT driver bypasses block.forward
+        adapter.predict_action(InferenceRequest(prepared, **{**defaults, "trace_modules": ("video_backbone.dit.blocks.0",)}))
 
 
 @pytest.mark.parametrize("variant,unify", [("joint_self_attn", True), ("joint_self_attn", False), ("idm", False),

@@ -16,6 +16,8 @@ class RoboTwinEvalConfig:
     seed: int = 0
     start_seed: int | None = None
     max_seed_attempts: int = 1000
+    max_repeated_screen_errors: int = 20   # identical consecutive screening exceptions => systematic failure
+    clear_cache_freq: int = 5              # upstream task_config default
     max_steps: int | None = None
     action_horizon: int = 32
     replan_steps: int = 28
@@ -32,7 +34,8 @@ class RoboTwinEvalConfig:
             raise ValueError("task_config must be demo_clean or demo_randomized")
         if self.instruction_type not in {"seen", "unseen"}:
             raise ValueError("instruction_type must be seen or unseen")
-        if min(self.num_episodes, self.action_horizon, self.replan_steps, self.max_seed_attempts, self.instruction_pool_size) < 1:
+        if min(self.num_episodes, self.action_horizon, self.replan_steps, self.max_seed_attempts, self.instruction_pool_size,
+               self.max_repeated_screen_errors, self.clear_cache_freq) < 1:
             raise ValueError("Episode counts, action horizons, and attempt limits must be positive")
         if self.max_seed_attempts < self.num_episodes:
             raise ValueError("max_seed_attempts cannot be smaller than num_episodes")

@@ -1,5 +1,6 @@
 """Single-process port of upstream wan_va_server.VA_Server (7c6ffa9), without the server, FSDP, or debug dumps."""
 
+from contextlib import contextmanager
 from pathlib import Path
 from typing import Any
 
@@ -282,6 +283,61 @@ class LingBotVARuntime:
 
         actions[:, ~self.action_mask] *= 0
         return actions, latents
+
+    # Checkpoint and restore the state infer_chunk changes, so repeated predictions from one state match.
+    def _cache_attentions(self):
+        return [block.attn1 for block in self.transformer.blocks if block.attn1.attn_caches is not None]
+
+    def _streaming_vaes(self):
+        return [vae for vae in (self.streaming_vae, self.streaming_vae_half) if vae is not None]
+
+    def checkpoint_state(self) -> dict:
+        """Capture what infer_chunk changes. K/V rows are copied only when first overwritten."""
+        layers = []
+        for attn in self._cache_attentions():
+            cache = attn.attn_caches[self.cache_name]
+            layers.append({"mask": cache["mask"].clone(), "id": cache["id"].clone(),
+                           "is_pred": cache["is_pred"].clone(),
+                           "saved": torch.zeros_like(cache["mask"]), "rows": []})
+        # The VAE encoder replaces feat_cache entries rather than editing them, so a list copy is enough.
+        return {"layers": layers, "init_latent": self.init_latent, "frame_st_id": self.frame_st_id,
+                "vae": [list(vae.feat_cache) for vae in self._streaming_vaes()]}
+
+    def restore_state(self, state: dict) -> None:
+        if state["frame_st_id"] != self.frame_st_id:
+            raise RuntimeError("This checkpoint was taken before the last cache update")
+        for attn, layer in zip(self._cache_attentions(), state["layers"], strict=True):
+            cache = attn.attn_caches[self.cache_name]
+            for slots, key, value in layer["rows"]:
+                cache["k"][:, slots] = key
+                cache["v"][:, slots] = value
+            for name in ("mask", "id", "is_pred"):
+                cache[name].copy_(layer[name])
+        self.init_latent = state["init_latent"]
+        for vae, feat_cache in zip(self._streaming_vaes(), state["vae"], strict=True):
+            vae.feat_cache = list(feat_cache)
+
+    @contextmanager
+    def saving_overwritten_rows(self, state: dict):
+        """While active, K/V rows that were valid at the checkpoint are copied before their first overwrite."""
+        patched = []
+        for attn, layer in zip(self._cache_attentions(), state["layers"], strict=True):
+            def allocate_slots(cache_name, key_size, _attn=attn, _layer=layer, _allocate=attn.allocate_slots):
+                slots = _allocate(cache_name, key_size)
+                if cache_name == self.cache_name:
+                    fresh = slots[_layer["mask"][slots] & ~_layer["saved"][slots]]
+                    if fresh.numel():
+                        cache = _attn.attn_caches[cache_name]
+                        _layer["saved"][fresh] = True
+                        _layer["rows"].append((fresh, cache["k"][:, fresh].clone(), cache["v"][:, fresh].clone()))
+                return slots
+            attn.allocate_slots = allocate_slots
+            patched.append(attn)
+        try:
+            yield
+        finally:
+            for attn in patched:
+                del attn.allocate_slots
 
     @torch.no_grad()
     def compute_kv_cache(self, frames: list[torch.Tensor], executed_chunk: np.ndarray) -> None:

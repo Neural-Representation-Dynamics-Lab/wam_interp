@@ -226,7 +226,7 @@ class Frontend:
         self.action_count += 1
         return raw_robot(), self.action_count == 2
 
-    def close(self):
+    def close(self, clear_cache=False):
         self.closed += 1
 
 
@@ -330,6 +330,16 @@ class LingNative:
         self.updates.append((frames, actions))
         self.frame_st_id += self.config.frame_chunk_size
 
+    def checkpoint_state(self):
+        return {"frame_st_id": self.frame_st_id}
+
+    def restore_state(self, state):
+        assert state["frame_st_id"] == self.frame_st_id
+
+    def saving_overwritten_rows(self, state):
+        from contextlib import nullcontext
+        return nullcontext()
+
 
 def test_lingbot_robotwin_chunk_cadence_relative_pose_and_reset():
     from wam_interp.models.lingbot_va.robotwin_adapter import LingBotVARobotWinAdapter
@@ -345,9 +355,13 @@ def test_lingbot_robotwin_chunk_cadence_relative_pose_and_reset():
     assert commands.shape == (16, 16)  # First latent action frame is skipped.
     np.testing.assert_allclose(commands[0, :3], [1,2,3])
     np.testing.assert_allclose(commands[0, 8:11], [4,5,6])
+    adapter.predict_action(request)  # nothing executed yet: a repeat prediction, no cache update
+    assert not native.updates
+    for command in commands[:3]:
+        adapter.observe_step(obs, command)
     with pytest.raises(ValueError, match="complete chunk"):
         adapter.predict_action(request)
-    for command in commands:
+    for command in commands[3:]:
         adapter.observe_step(obs, command)
     adapter.predict_action(request)
     assert len(native.updates[0][0]) == 4  # One observation every four executed actions.
@@ -480,7 +494,7 @@ def test_robotwin_frontend_native_expert_protocol_and_cleanup(tmp_path, expert_o
         def check_success(self):
             events.append("success")
             return True
-        def close_env(self):
+        def close_env(self, clear_cache=False):
             events.append("close")
     frontend = RobotWinFrontend.__new__(RobotWinFrontend)
     frontend.config = RoboTwinEvalConfig("fixture", tmp_path)

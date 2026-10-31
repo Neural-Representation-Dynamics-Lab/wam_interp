@@ -10,7 +10,7 @@ Use Python 3.10 or newer in a clean environment. From the repository root, insta
 python -m pip install -e ".[all]"
 ```
 
-This installs the FastWAM runtime plus the LIBERO simulation dependencies used here: `robosuite>=1.4.0,<1.5`, `mujoco>=3.3,<3.10`, and the BDDL/task support packages. LIBERO's upstream `requirements.txt` is for an older Python 3.8/PyTorch 1.11 stack; do not install it into this environment. The robosuite bound retains LIBERO's 1.4 environment API, and the MuJoCo upper bound avoids the 3.10 `mj_fullM` signature change. The evaluator does not need LIBERO's demonstration dataset.
+This installs the FastWAM runtime plus the LIBERO simulation dependencies used here: `robosuite>=1.4.0,<1.5`, `mujoco==3.3.2`, and the BDDL/task support packages. LIBERO's upstream `requirements.txt` is for an older Python 3.8/PyTorch 1.11 stack; do not install it into this environment. The robosuite bound retains LIBERO's 1.4 environment API, and MuJoCo is pinned to 3.3.2, the version FastWAM's LIBERO evaluation and `benchmark_results/` use (3.10 also changes the `mj_fullM` signature, and 3.9.0 gave different success rates). The evaluator does not need LIBERO's demonstration dataset.
 
 Clone LIBERO's official source checkout and install its package without allowing its legacy setup to resolve dependencies again:
 

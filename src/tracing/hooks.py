@@ -24,11 +24,13 @@ def capture_module_outputs(model: Any, module_names: tuple[str, ...],
     missing = [name for name in module_names if name not in modules]
     if missing:
         raise ValueError(f"Unknown module paths: {missing}")
+    calls = {name: 0 for name in module_names}
     with ExitStack() as stack:
         for name in module_names:
             module = modules[name]
 
             def hook(_module, inputs, output, path=name):
+                calls[path] += 1
                 recorder.record(
                     "module_forward",
                     {"inputs": inputs, "output": output},
@@ -38,3 +40,8 @@ def capture_module_outputs(model: Any, module_names: tuple[str, ...],
                 )
             stack.callback(module.register_forward_hook(hook).remove)
         yield
+    # MoT code calls sub-modules directly, so a block-level path may never run.
+    silent = [name for name, count in calls.items() if count == 0]
+    if silent:
+        raise RuntimeError(f"Traced modules never ran during this call: {silent}. "
+                           "Hook a module that is actually called (e.g. a projection, not its block).")

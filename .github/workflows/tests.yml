@@ -1,0 +1,37 @@
+name: tests
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  unit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.10"
+      - name: Install
+        run: |
+          pip install torch==2.7.1 torchvision==0.22.1 --index-url https://download.pytorch.org/whl/cpu
+          pip install -e ".[fasterwam,lingbot_va,longwam]" pytest scipy
+      - name: Test
+        run: pytest -q tests --ignore=tests/test_openwam.py
+
+  # OpenWAM needs transformers 5, which conflicts with the other backends' pins.
+  openwam:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.10"
+      - name: Install and test
+        run: |
+          if [ ! -f tests/test_openwam.py ]; then echo "No OpenWAM tests on this branch"; exit 0; fi
+          pip install torch==2.7.1 torchvision==0.22.1 --index-url https://download.pytorch.org/whl/cpu
+          pip install -e ".[openwam]" pytest
+          pytest -q tests/test_openwam.py

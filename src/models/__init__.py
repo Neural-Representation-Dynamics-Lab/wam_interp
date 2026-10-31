@@ -16,11 +16,17 @@ from .lingbot_va.adapter import LingBotVAAdapter
 from .lingbot_va.loader import load_lingbot_va
 from .fasterwam.adapter import FasterWAMAdapter
 from .fasterwam.loader import load_fasterwam_backend
+from .longwam.adapter import LongWAMAdapter
+from .longwam.loader import load_longwam_backend
+from .openwam.adapter import OpenWAMAdapter
+from .openwam.loader import load_openwam_backend
 
 __all__ = [
     "FastWAMAdapter",
     "FasterWAMAdapter",
     "LingBotVAAdapter",
+    "LongWAMAdapter",
+    "OpenWAMAdapter",
     "get_model_adapter",
     "load_model",
     "load_model_adapter",

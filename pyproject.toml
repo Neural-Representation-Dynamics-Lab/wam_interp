@@ -59,6 +59,40 @@ fastwam = [
   "modelscope>=1.34",
   "huggingface-hub==0.36.2",
 ]
+longwam = [
+  # Upstream Long-WAM validates torch 2.7.x.
+  "torch>=2.7,<2.8",
+  "hydra-core>=1.3",
+  "omegaconf>=2.3",
+  "numpy>=1.26,<2",
+  "einops>=0.8",
+  "Pillow>=10",
+  "safetensors>=0.5",
+  "transformers>=4.49,<5",
+  "huggingface-hub==0.36.2",
+  "tqdm>=4.66",
+  "ftfy>=6",
+  "regex",
+  "sentencepiece",
+  "PyYAML>=6",
+]
+# Needs transformers 5 and huggingface-hub>=1.5, so it is not in `all`; install it in its own env.
+openwam = [
+  "torch>=2.7",
+  "torchvision>=0.22",
+  "transformers>=5.5,<6",
+  "huggingface-hub>=1.5,<2",
+  "safetensors>=0.8",
+  "einops>=0.8",
+  "omegaconf>=2.3",
+  "PyYAML>=6",
+  "numpy>=1.26",
+  "Pillow>=10",
+  "ftfy>=6.1",
+  "regex>=2023.0",
+  "modelscope>=1.13",
+  "tqdm>=4.66",
+]
 lingbot_va = [
   "torch>=2.7",
   "diffusers==0.36.0",
@@ -135,6 +169,47 @@ packages = [
   "wam_interp.models.fasterwam.model_code",
   "wam_interp.models.fasterwam.model_code.helpers",
   "wam_interp.models.fasterwam.model_code.schedulers",
+  "wam_interp.models.longwam",
+  "wam_interp.models.longwam.model_code",
+  "wam_interp.models.longwam.model_code.models",
+  "wam_interp.models.longwam.model_code.models.wan22",
+  "wam_interp.models.longwam.model_code.models.wan22.helpers",
+  "wam_interp.models.longwam.model_code.models.wan22.schedulers",
+  "wam_interp.models.longwam.model_code.runtime",
+  "wam_interp.models.longwam.model_code.runtime.optim",
+  "wam_interp.models.longwam.model_code.utils",
+  "wam_interp.models.openwam",
+  "wam_interp.models.openwam.model_code",
+  "wam_interp.models.openwam.model_code.benchmarks",
+  "wam_interp.models.openwam.model_code.benchmarks.utils",
+  "wam_interp.models.openwam.model_code.dataloader",
+  "wam_interp.models.openwam.model_code.dataloader.transforms",
+  "wam_interp.models.openwam.model_code.dataloader.utils",
+  "wam_interp.models.openwam.model_code.deploy",
+  "wam_interp.models.openwam.model_code.deploy.optimizations",
+  "wam_interp.models.openwam.model_code.model",
+  "wam_interp.models.openwam.model_code.model.action_backbone",
+  "wam_interp.models.openwam.model_code.model.architectures",
+  "wam_interp.models.openwam.model_code.model.architectures.dual_system",
+  "wam_interp.models.openwam.model_code.model.architectures.utils",
+  "wam_interp.models.openwam.model_code.model.video_backbone",
+  "wam_interp.models.openwam.model_code.model.video_backbone.encoder",
+  "wam_interp.models.openwam.model_code.model.video_backbone.encoder.svae",
+  "wam_interp.models.openwam.model_code.model.video_backbone.wan",
+  "wam_interp.models.openwam.model_code.model.video_backbone.wan.models",
+  "wam_interp.models.openwam.model_code.model.video_backbone.wan.shared",
+  "wam_interp.models.openwam.model_code.model.video_backbone.wan.shared.configs",
+  "wam_interp.models.openwam.model_code.model.video_backbone.wan.shared.core",
+  "wam_interp.models.openwam.model_code.model.video_backbone.wan.shared.core.attention",
+  "wam_interp.models.openwam.model_code.model.video_backbone.wan.shared.core.device",
+  "wam_interp.models.openwam.model_code.model.video_backbone.wan.shared.core.gradient",
+  "wam_interp.models.openwam.model_code.model.video_backbone.wan.shared.core.loader",
+  "wam_interp.models.openwam.model_code.model.video_backbone.wan.shared.core.vram",
+  "wam_interp.models.openwam.model_code.model.video_backbone.wan.shared.diffusion",
+  "wam_interp.models.openwam.model_code.model.video_backbone.wan.shared.models",
+  "wam_interp.models.openwam.model_code.model.video_backbone.wan.shared.utils",
+  "wam_interp.models.openwam.model_code.model.video_backbone.wan.shared.utils.state_dict_converters",
+  "wam_interp.models.openwam.model_code.model.video_backbone.wan.variants",
   "wam_interp.tracing",
 ]
 
@@ -158,7 +233,51 @@ wam_interp = "src"
 "wam_interp.models.fasterwam.model_code" = "src/models/fasterwam/model_code"
 "wam_interp.models.fasterwam.model_code.helpers" = "src/models/fasterwam/model_code/helpers"
 "wam_interp.models.fasterwam.model_code.schedulers" = "src/models/fasterwam/model_code/schedulers"
+"wam_interp.models.longwam" = "src/models/longwam"
+"wam_interp.models.longwam.model_code" = "src/models/longwam/model_code"
+"wam_interp.models.longwam.model_code.models" = "src/models/longwam/model_code/models"
+"wam_interp.models.longwam.model_code.models.wan22" = "src/models/longwam/model_code/models/wan22"
+"wam_interp.models.longwam.model_code.models.wan22.helpers" = "src/models/longwam/model_code/models/wan22/helpers"
+"wam_interp.models.longwam.model_code.models.wan22.schedulers" = "src/models/longwam/model_code/models/wan22/schedulers"
+"wam_interp.models.longwam.model_code.runtime" = "src/models/longwam/model_code/runtime"
+"wam_interp.models.longwam.model_code.runtime.optim" = "src/models/longwam/model_code/runtime/optim"
+"wam_interp.models.longwam.model_code.utils" = "src/models/longwam/model_code/utils"
+"wam_interp.models.openwam" = "src/models/openwam"
+"wam_interp.models.openwam.model_code" = "src/models/openwam/model_code"
+"wam_interp.models.openwam.model_code.benchmarks" = "src/models/openwam/model_code/benchmarks"
+"wam_interp.models.openwam.model_code.benchmarks.utils" = "src/models/openwam/model_code/benchmarks/utils"
+"wam_interp.models.openwam.model_code.dataloader" = "src/models/openwam/model_code/dataloader"
+"wam_interp.models.openwam.model_code.dataloader.transforms" = "src/models/openwam/model_code/dataloader/transforms"
+"wam_interp.models.openwam.model_code.dataloader.utils" = "src/models/openwam/model_code/dataloader/utils"
+"wam_interp.models.openwam.model_code.deploy" = "src/models/openwam/model_code/deploy"
+"wam_interp.models.openwam.model_code.deploy.optimizations" = "src/models/openwam/model_code/deploy/optimizations"
+"wam_interp.models.openwam.model_code.model" = "src/models/openwam/model_code/model"
+"wam_interp.models.openwam.model_code.model.action_backbone" = "src/models/openwam/model_code/model/action_backbone"
+"wam_interp.models.openwam.model_code.model.architectures" = "src/models/openwam/model_code/model/architectures"
+"wam_interp.models.openwam.model_code.model.architectures.dual_system" = "src/models/openwam/model_code/model/architectures/dual_system"
+"wam_interp.models.openwam.model_code.model.architectures.utils" = "src/models/openwam/model_code/model/architectures/utils"
+"wam_interp.models.openwam.model_code.model.video_backbone" = "src/models/openwam/model_code/model/video_backbone"
+"wam_interp.models.openwam.model_code.model.video_backbone.encoder" = "src/models/openwam/model_code/model/video_backbone/encoder"
+"wam_interp.models.openwam.model_code.model.video_backbone.encoder.svae" = "src/models/openwam/model_code/model/video_backbone/encoder/svae"
+"wam_interp.models.openwam.model_code.model.video_backbone.wan" = "src/models/openwam/model_code/model/video_backbone/wan"
+"wam_interp.models.openwam.model_code.model.video_backbone.wan.models" = "src/models/openwam/model_code/model/video_backbone/wan/models"
+"wam_interp.models.openwam.model_code.model.video_backbone.wan.shared" = "src/models/openwam/model_code/model/video_backbone/wan/shared"
+"wam_interp.models.openwam.model_code.model.video_backbone.wan.shared.configs" = "src/models/openwam/model_code/model/video_backbone/wan/shared/configs"
+"wam_interp.models.openwam.model_code.model.video_backbone.wan.shared.core" = "src/models/openwam/model_code/model/video_backbone/wan/shared/core"
+"wam_interp.models.openwam.model_code.model.video_backbone.wan.shared.core.attention" = "src/models/openwam/model_code/model/video_backbone/wan/shared/core/attention"
+"wam_interp.models.openwam.model_code.model.video_backbone.wan.shared.core.device" = "src/models/openwam/model_code/model/video_backbone/wan/shared/core/device"
+"wam_interp.models.openwam.model_code.model.video_backbone.wan.shared.core.gradient" = "src/models/openwam/model_code/model/video_backbone/wan/shared/core/gradient"
+"wam_interp.models.openwam.model_code.model.video_backbone.wan.shared.core.loader" = "src/models/openwam/model_code/model/video_backbone/wan/shared/core/loader"
+"wam_interp.models.openwam.model_code.model.video_backbone.wan.shared.core.vram" = "src/models/openwam/model_code/model/video_backbone/wan/shared/core/vram"
+"wam_interp.models.openwam.model_code.model.video_backbone.wan.shared.diffusion" = "src/models/openwam/model_code/model/video_backbone/wan/shared/diffusion"
+"wam_interp.models.openwam.model_code.model.video_backbone.wan.shared.models" = "src/models/openwam/model_code/model/video_backbone/wan/shared/models"
+"wam_interp.models.openwam.model_code.model.video_backbone.wan.shared.utils" = "src/models/openwam/model_code/model/video_backbone/wan/shared/utils"
+"wam_interp.models.openwam.model_code.model.video_backbone.wan.shared.utils.state_dict_converters" = "src/models/openwam/model_code/model/video_backbone/wan/shared/utils/state_dict_converters"
+"wam_interp.models.openwam.model_code.model.video_backbone.wan.variants" = "src/models/openwam/model_code/model/video_backbone/wan/variants"
 "wam_interp.tracing" = "src/tracing"
 
 [tool.setuptools.package-data]
 "wam_interp.models.fasterwam.model_code" = ["LICENSE"]
+"wam_interp.models.longwam.model_code" = ["LICENSE", "NOTICE", "THIRD_PARTY_NOTICES.md", "licenses/*.txt"]
+"wam_interp.models.openwam.model_code" = ["LICENSE"]
+"wam_interp.models.openwam.model_code.model.video_backbone.wan" = ["license/LICENSE", "license/NOTICE"]

@@ -1,7 +1,8 @@
 # LIBERO-Plus and RoboTwin 2.0 handoff
 
-Status: implemented and CPU protocol-tested; **all six real-checkpoint/GPU
-episodes below are pending**. CPU fixtures do not establish policy performance,
+Status: implemented and CPU protocol-tested. RoboTwin has been run on GPU for
+all backends (see `benchmark_results/README.md`); the three LIBERO-Plus
+episodes below are still pending. CPU fixtures do not establish policy performance,
 simulator compatibility on your server, or numerical checkpoint parity. Do not
 report a success rate until retaining the JSON from an actual run. A single
 failed episode is not itself evidence of an incorrect integration.

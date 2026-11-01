@@ -1,0 +1,4885 @@
+{
+  "accepted_seeds": [
+    100001,
+    100002,
+    100005,
+    100006,
+    100008,
+    100010,
+    100012,
+    100013,
+    100015,
+    100016
+  ],
+  "action_type": "qpos",
+  "attempts": 17,
+  "benchmark": "robotwin",
+  "benchmark_revision": "c3ddfa8b97d5519efa828b075999bd0006778e5e",
+  "completed": true,
+  "config": {
+    "action_horizon": 32,
+    "clear_cache_freq": 5,
+    "inference_options": {},
+    "instruction_pool_size": 100,
+    "instruction_type": "unseen",
+    "max_repeated_screen_errors": 20,
+    "max_seed_attempts": 1000,
+    "max_steps": null,
+    "num_episodes": 10,
+    "output_dir": "/nethome/pi34/kv_results/rt10-longwam-13072",
+    "replan_steps": 24,
+    "robotwin_root": "/dev/shm/pi34-rt-13072/RoboTwin",
+    "run_metadata": {
+      "checkpoint": "/dev/shm/pi34-rt-13072/checkpoints/longwam/model.pt",
+      "checkpoint_revision": "f456378dec6c4d38ee74717f5d71c0e7490bcc78",
+      "checkpoint_sha256": "8013982c70d7dbd6cb8cd17b71a251409c69eb58e39f1e26005515262d11d711",
+      "dataset_stats": "/dev/shm/pi34-rt-13072/checkpoints/longwam/dataset_stats.json",
+      "dataset_stats_sha256": "639e69c81e35568e9a49a60b4ede4f28735594c9ab325ee73931d6360bfd5834",
+      "dtype": "bfloat16",
+      "model_config": "/dev/shm/pi34-rt-13072/checkpoints/longwam/config.yaml",
+      "model_config_sha256": "e4d9f600a46c078f461de083092aef2f454937b53c538f5977e5265bad720707",
+      "repository_revision": "2a6a56a2a679da5b3d7b43ff92b0a6ad085c8d69",
+      "resolved_model_config": {
+        "_target_": "wam_interp.models.longwam.runtime.create_longwam",
+        "action_dit_config": {
+          "action_dim": 14,
+          "attn_head_dim": 128,
+          "eps": 1e-06,
+          "ffn_dim": 4096,
+          "freq_dim": 256,
+          "hidden_dim": 1024,
+          "num_heads": 24,
+          "num_layers": 30,
+          "text_dim": 4096,
+          "use_gradient_checkpointing": true
+        },
+        "action_dit_pretrained_path": null,
+        "action_scheduler": {
+          "infer_shift": 5.0,
+          "num_train_timesteps": 1000,
+          "train_shift": 5.0
+        },
+        "load_text_encoder": true,
+        "longlive_video_weights": null,
+        "longwam_imagine_infer_steps": 4,
+        "longwam_imagine_sigma": 0.9,
+        "longwam_local_attn_size": -1,
+        "longwam_num_frame_per_block": 1,
+        "longwam_num_imagine_frames": 2,
+        "longwam_past_obs_size": 48,
+        "longwam_sink_size": 0,
+        "model_id": "Wan-AI/Wan2.2-TI2V-5B",
+        "mot_checkpoint_mixed_attn": true,
+        "proprio_dim": 14,
+        "redirect_common_files": false,
+        "skip_action_dit_load_from_pretrain": true,
+        "skip_dit_load_from_pretrain": true,
+        "skip_video_dit_load_from_pretrain": true,
+        "tokenizer_max_len": 128,
+        "tokenizer_model_id": "Wan-AI/Wan2.1-T2V-1.3B",
+        "video_dit_config": {
+          "action_conditioned": false,
+          "action_dim": 14,
+          "action_group_causal_mask_mode": "group_diagonal",
+          "attn_head_dim": 128,
+          "eps": 1e-06,
+          "ffn_dim": 14336,
+          "freq_dim": 256,
+          "fuse_vae_embedding_in_latents": true,
+          "has_image_input": false,
+          "hidden_dim": 3072,
+          "in_dim": 48,
+          "num_heads": 24,
+          "num_layers": 30,
+          "out_dim": 48,
+          "patch_size": [
+            1,
+            2,
+            2
+          ],
+          "require_clip_embedding": false,
+          "require_vae_embedding": false,
+          "seperated_timestep": true,
+          "text_dim": 4096,
+          "use_gradient_checkpointing": true,
+          "video_attention_mask_mode": "per_frame_causal"
+        },
+        "video_scheduler": {
+          "infer_shift": 5.0,
+          "num_train_timesteps": 1000,
+          "train_shift": 5.0
+        }
+      }
+    },
+    "seed": 0,
+    "start_seed": null,
+    "task_config": "demo_clean",
+    "task_name": "adjust_bottle"
+  },
+  "duration_seconds": 261.2909352129791,
+  "episodes": 10,
+  "model": {
+    "asset_environment": {
+      "DIFFSYNTH_DOWNLOAD_SOURCE": "huggingface",
+      "DIFFSYNTH_MODEL_BASE_PATH": "/dev/shm/pi34-rt-13072/wan_assets"
+    },
+    "asset_paths": {
+      "action_dit_backbone": "SKIPPED_PRETRAIN",
+      "text_encoder": "/dev/shm/pi34-rt-13072/wan_assets/Wan-AI/Wan2.2-TI2V-5B/models_t5_umt5-xxl-enc-bf16.pth",
+      "tokenizer": "/dev/shm/pi34-rt-13072/wan_assets/Wan-AI/Wan2.1-T2V-1.3B/google/umt5-xxl/",
+      "vae": "/dev/shm/pi34-rt-13072/wan_assets/Wan-AI/Wan2.2-TI2V-5B/Wan2.2_VAE.pth",
+      "video_dit": "SKIPPED_PRETRAIN"
+    },
+    "backend": "longwam",
+    "checkpoint": "/dev/shm/pi34-rt-13072/checkpoints/longwam/model.pt",
+    "checkpoint_load": {
+      "allow_partial": false,
+      "missing_keys": 0,
+      "modules_loaded": [
+        "mot",
+        "proprio_encoder"
+      ],
+      "problems": [],
+      "unexpected_key_examples": [],
+      "unexpected_keys": 0
+    },
+    "checkpoint_size_bytes": 12041813497,
+    "checkpoint_step": 29355,
+    "checkpoint_strict": true,
+    "checkpoint_torch_dtype": "torch.bfloat16",
+    "data_config": {
+      "action_chunk": 32,
+      "action_video_freq_ratio": 4,
+      "concat_multi_camera": "robotwin",
+      "context_len": 128,
+      "num_frames": 81,
+      "past_obs_size": 48,
+      "pretrained_norm_stats": "./dataset_stats.json",
+      "processor": {
+        "_target_": "longwam.datasets.lerobot.processors.longwam_processor.LongWAMProcessor",
+        "action_output_dim": 14,
+        "action_state_merger": {
+          "_target_": "longwam.datasets.lerobot.transforms.action_state_merger.ConcatLeftAlign"
+        },
+        "action_state_transforms": null,
+        "norm_default_mode": "z-score",
+        "norm_exception_mode": null,
+        "num_obs_steps": 81,
+        "num_output_cameras": 3,
+        "proprio_output_dim": 14,
+        "shape_meta": {
+          "action": [
+            {
+              "key": "default",
+              "raw_shape": 14,
+              "shape": 14
+            }
+          ],
+          "images": [
+            {
+              "key": "cam_high",
+              "raw_shape": [
+                3,
+                480,
+                640
+              ],
+              "shape": [
+                3,
+                240,
+                320
+              ]
+            },
+            {
+              "key": "cam_left_wrist",
+              "raw_shape": [
+                3,
+                480,
+                640
+              ],
+              "shape": [
+                3,
+                240,
+                320
+              ]
+            },
+            {
+              "key": "cam_right_wrist",
+              "raw_shape": [
+                3,
+                480,
+                640
+              ],
+              "shape": [
+                3,
+                240,
+                320
+              ]
+            }
+          ],
+          "state": [
+            {
+              "key": "default",
+              "raw_shape": 14,
+              "shape": 14
+            }
+          ]
+        },
+        "use_stepwise_action_norm": false,
+        "val_transforms": [
+          {
+            "_target_": "longwam.datasets.lerobot.transforms.image.ToTensor"
+          },
+          {
+            "_target_": "torchvision.transforms.Resize",
+            "size": [
+              240,
+              320
+            ]
+          }
+        ]
+      },
+      "shape_meta": {
+        "action": [
+          {
+            "key": "default",
+            "raw_shape": 14,
+            "shape": 14
+          }
+        ],
+        "images": [
+          {
+            "key": "cam_high",
+            "raw_shape": [
+              3,
+              480,
+              640
+            ],
+            "shape": [
+              3,
+              240,
+              320
+            ]
+          },
+          {
+            "key": "cam_left_wrist",
+            "raw_shape": [
+              3,
+              480,
+              640
+            ],
+            "shape": [
+              3,
+              240,
+              320
+            ]
+          },
+          {
+            "key": "cam_right_wrist",
+            "raw_shape": [
+              3,
+              480,
+              640
+            ],
+            "shape": [
+              3,
+              240,
+              320
+            ]
+          }
+        ],
+        "state": [
+          {
+            "key": "default",
+            "raw_shape": 14,
+            "shape": 14
+          }
+        ]
+      },
+      "video_size": [
+        384,
+        320
+      ]
+    },
+    "evaluation": {
+      "mixed_precision": "bf16",
+      "num_inference_steps": 10
+    },
+    "inference_mode": "idm",
+    "model_device": "cuda",
+    "model_dtype": "torch.bfloat16",
+    "model_name": "longwam",
+    "released_bundle": "robotwin2_idm",
+    "resolved_model_config": {
+      "_target_": "wam_interp.models.longwam.runtime.create_longwam",
+      "action_dit_config": {
+        "action_dim": 14,
+        "attn_head_dim": 128,
+        "eps": 1e-06,
+        "ffn_dim": 4096,
+        "freq_dim": 256,
+        "hidden_dim": 1024,
+        "num_heads": 24,
+        "num_layers": 30,
+        "text_dim": 4096,
+        "use_gradient_checkpointing": true
+      },
+      "action_dit_pretrained_path": null,
+      "action_scheduler": {
+        "infer_shift": 5.0,
+        "num_train_timesteps": 1000,
+        "train_shift": 5.0
+      },
+      "load_text_encoder": true,
+      "longlive_video_weights": null,
+      "longwam_imagine_infer_steps": 4,
+      "longwam_imagine_sigma": 0.9,
+      "longwam_local_attn_size": -1,
+      "longwam_num_frame_per_block": 1,
+      "longwam_num_imagine_frames": 2,
+      "longwam_past_obs_size": 48,
+      "longwam_sink_size": 0,
+      "model_id": "Wan-AI/Wan2.2-TI2V-5B",
+      "mot_checkpoint_mixed_attn": true,
+      "proprio_dim": 14,
+      "redirect_common_files": false,
+      "skip_action_dit_load_from_pretrain": true,
+      "skip_dit_load_from_pretrain": true,
+      "skip_video_dit_load_from_pretrain": true,
+      "tokenizer_max_len": 128,
+      "tokenizer_model_id": "Wan-AI/Wan2.1-T2V-1.3B",
+      "video_dit_config": {
+        "action_conditioned": false,
+        "action_dim": 14,
+        "action_group_causal_mask_mode": "group_diagonal",
+        "attn_head_dim": 128,
+        "eps": 1e-06,
+        "ffn_dim": 14336,
+        "freq_dim": 256,
+        "fuse_vae_embedding_in_latents": true,
+        "has_image_input": false,
+        "hidden_dim": 3072,
+        "in_dim": 48,
+        "num_heads": 24,
+        "num_layers": 30,
+        "out_dim": 48,
+        "patch_size": [
+          1,
+          2,
+          2
+        ],
+        "require_clip_embedding": false,
+        "require_vae_embedding": false,
+        "seperated_timestep": true,
+        "text_dim": 4096,
+        "use_gradient_checkpointing": true,
+        "video_attention_mask_mode": "per_frame_causal"
+      },
+      "video_scheduler": {
+        "infer_shift": 5.0,
+        "num_train_timesteps": 1000,
+        "train_shift": 5.0
+      }
+    },
+    "run_config": "/dev/shm/pi34-rt-13072/checkpoints/longwam/config.yaml",
+    "run_config_sha256": "e4d9f600a46c078f461de083092aef2f454937b53c538f5977e5265bad720707",
+    "source_dirty": true,
+    "source_revision": "2a6a56a2a679da5b3d7b43ff92b0a6ad085c8d69",
+    "source_state": {
+      "dirty": true,
+      "dirty_paths": 37,
+      "revision": "2a6a56a2a679da5b3d7b43ff92b0a6ad085c8d69",
+      "status_and_diff_sha256": "92a158dc775f76904e5c5b14f59c22884aa46d4c893aecc7d689bfce39df3c26"
+    },
+    "statistics_content_sha256": "38ed9c8d466356fb8f4688da470b14a036dbc51e0fc5484cc5959b507adbcd48",
+    "text_encoder_loaded": true,
+    "upstream_repository": "https://github.com/NVlabs/LongLive",
+    "upstream_revision": "242635807b4ebb89fa2609a84df7eacde6aed92f",
+    "upstream_subdirectory": "Long-WAM"
+  },
+  "output_path": "/nethome/pi34/kv_results/rt10-longwam-13072/robotwin_20261030T232001959839Z.json",
+  "package_versions": {
+    "diffusers": null,
+    "mplib": "0.2.1",
+    "mujoco": null,
+    "numpy": "1.26.4",
+    "robosuite": null,
+    "sapien": "3.0.0b1",
+    "torch": "2.7.1+cu128",
+    "transformers": "4.57.6"
+  },
+  "rejected_seeds": [
+    {
+      "reason": "UnStableError: Objects is unstable in seed(100000), unstable objects: 001_bottle",
+      "seed": 100000,
+      "stage": "expert"
+    },
+    {
+      "reason": "UnStableError: Objects is unstable in seed(100003), unstable objects: 001_bottle",
+      "seed": 100003,
+      "stage": "expert"
+    },
+    {
+      "reason": "UnStableError: Objects is unstable in seed(100004), unstable objects: 001_bottle",
+      "seed": 100004,
+      "stage": "expert"
+    },
+    {
+      "reason": "UnStableError: Objects is unstable in seed(100007), unstable objects: 001_bottle",
+      "seed": 100007,
+      "stage": "expert"
+    },
+    {
+      "reason": "UnStableError: Objects is unstable in seed(100009), unstable objects: 001_bottle",
+      "seed": 100009,
+      "stage": "expert"
+    },
+    {
+      "reason": "expert_failed",
+      "seed": 100011,
+      "stage": "expert"
+    },
+    {
+      "reason": "UnStableError: Objects is unstable in seed(100014), unstable objects: 001_bottle",
+      "seed": 100014,
+      "stage": "expert"
+    }
+  ],
+  "success_rate": 1.0,
+  "successes": 10,
+  "trials": [
+    {
+      "episode": 0,
+      "inference_calls": 5,
+      "inference_latency_ms": [
+        1031.0492659918964,
+        842.7267980296165,
+        848.2731289695948,
+        849.5075139217079,
+        854.9948341678828
+      ],
+      "inference_metadata": [
+        {
+          "action_dtype": "torch.float32",
+          "action_horizon": 32,
+          "action_inference_steps": 10,
+          "action_shape": [
+            32,
+            14
+          ],
+          "backend": "longwam",
+          "condition": "idm",
+          "history": {
+            "buffered_frames": 1,
+            "current_step": 0,
+            "observed_frames": 1,
+            "padded_frames": 48,
+            "past_obs_size": 48,
+            "sample_stride": 4,
+            "window_observation_indices": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          "imagine_sigma": 0.9,
+          "inference_method": "infer_joint_ar",
+          "input_image_shape": [
+            1,
+            3,
+            384,
+            320
+          ],
+          "model_class": "LongWAM",
+          "model_device": "cuda",
+          "model_dtype": "torch.bfloat16",
+          "num_clean_frames": 4,
+          "num_imagine_frames": 2,
+          "observation": {
+            "camera_layout": "head_above_left_right_wrists",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ],
+            "dataset_stats": "/dev/shm/pi34-rt-13072/checkpoints/longwam/dataset_stats.json",
+            "longwam_image_shape": [
+              1,
+              3,
+              384,
+              320
+            ],
+            "resize": "two_stage_antialiased_bilinear",
+            "seed": 100001,
+            "state_key": "default",
+            "task_name": "adjust_bottle"
+          },
+          "observation_window_shape": [
+            1,
+            3,
+            13,
+            384,
+            320
+          ],
+          "prompt": "A video recorded from a robot's point of view executing the following instruction: Pick up the plastic soda bottle from the table head-up.",
+          "rand_device": "cpu",
+          "seed": 100001,
+          "sigma_shift": null,
+          "text_context_shape": [
+            1,
+            128,
+            4096
+          ],
+          "tiled": false,
+          "trained_action_chunk": 32,
+          "video_inference_steps": 4
+        },
+        {
+          "action_dtype": "torch.float32",
+          "action_horizon": 32,
+          "action_inference_steps": 10,
+          "action_shape": [
+            32,
+            14
+          ],
+          "backend": "longwam",
+          "condition": "idm",
+          "history": {
+            "buffered_frames": 25,
+            "current_step": 24,
+            "observed_frames": 25,
+            "padded_frames": 24,
+            "past_obs_size": 48,
+            "sample_stride": 4,
+            "window_observation_indices": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              4,
+              8,
+              12,
+              16,
+              20,
+              24
+            ]
+          },
+          "imagine_sigma": 0.9,
+          "inference_method": "infer_joint_ar",
+          "input_image_shape": [
+            1,
+            3,
+            384,
+            320
+          ],
+          "model_class": "LongWAM",
+          "model_device": "cuda",
+          "model_dtype": "torch.bfloat16",
+          "num_clean_frames": 4,
+          "num_imagine_frames": 2,
+          "observation": {
+            "camera_layout": "head_above_left_right_wrists",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ],
+            "dataset_stats": "/dev/shm/pi34-rt-13072/checkpoints/longwam/dataset_stats.json",
+            "longwam_image_shape": [
+              1,
+              3,
+              384,
+              320
+            ],
+            "resize": "two_stage_antialiased_bilinear",
+            "state_key": "default"
+          },
+          "observation_window_shape": [
+            1,
+            3,
+            13,
+            384,
+            320
+          ],
+          "prompt": "A video recorded from a robot's point of view executing the following instruction: Pick up the plastic soda bottle from the table head-up.",
+          "rand_device": "cpu",
+          "seed": 100002,
+          "sigma_shift": null,
+          "text_context_shape": [
+            1,
+            128,
+            4096
+          ],
+          "tiled": false,
+          "trained_action_chunk": 32,
+          "video_inference_steps": 4
+        },
+        {
+          "action_dtype": "torch.float32",
+          "action_horizon": 32,
+          "action_inference_steps": 10,
+          "action_shape": [
+            32,
+            14
+          ],
+          "backend": "longwam",
+          "condition": "idm",
+          "history": {
+            "buffered_frames": 49,
+            "current_step": 48,
+            "observed_frames": 49,
+            "padded_frames": 0,
+            "past_obs_size": 48,
+            "sample_stride": 4,
+            "window_observation_indices": [
+              0,
+              4,
+              8,
+              12,
+              16,
+              20,
+              24,
+              28,
+              32,
+              36,
+              40,
+              44,
+              48
+            ]
+          },
+          "imagine_sigma": 0.9,
+          "inference_method": "infer_joint_ar",
+          "input_image_shape": [
+            1,
+            3,
+            384,
+            320
+          ],
+          "model_class": "LongWAM",
+          "model_device": "cuda",
+          "model_dtype": "torch.bfloat16",
+          "num_clean_frames": 4,
+          "num_imagine_frames": 2,
+          "observation": {
+            "camera_layout": "head_above_left_right_wrists",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ],
+            "dataset_stats": "/dev/shm/pi34-rt-13072/checkpoints/longwam/dataset_stats.json",
+            "longwam_image_shape": [
+              1,
+              3,
+              384,
+              320
+            ],
+            "resize": "two_stage_antialiased_bilinear",
+            "state_key": "default"
+          },
+          "observation_window_shape": [
+            1,
+            3,
+            13,
+            384,
+            320
+          ],
+          "prompt": "A video recorded from a robot's point of view executing the following instruction: Pick up the plastic soda bottle from the table head-up.",
+          "rand_device": "cpu",
+          "seed": 100003,
+          "sigma_shift": null,
+          "text_context_shape": [
+            1,
+            128,
+            4096
+          ],
+          "tiled": false,
+          "trained_action_chunk": 32,
+          "video_inference_steps": 4
+        },
+        {
+          "action_dtype": "torch.float32",
+          "action_horizon": 32,
+          "action_inference_steps": 10,
+          "action_shape": [
+            32,
+            14
+          ],
+          "backend": "longwam",
+          "condition": "idm",
+          "history": {
+            "buffered_frames": 49,
+            "current_step": 72,
+            "observed_frames": 73,
+            "padded_frames": 0,
+            "past_obs_size": 48,
+            "sample_stride": 4,
+            "window_observation_indices": [
+              24,
+              28,
+              32,
+              36,
+              40,
+              44,
+              48,
+              52,
+              56,
+              60,
+              64,
+              68,
+              72
+            ]
+          },
+          "imagine_sigma": 0.9,
+          "inference_method": "infer_joint_ar",
+          "input_image_shape": [
+            1,
+            3,
+            384,
+            320
+          ],
+          "model_class": "LongWAM",
+          "model_device": "cuda",
+          "model_dtype": "torch.bfloat16",
+          "num_clean_frames": 4,
+          "num_imagine_frames": 2,
+          "observation": {
+            "camera_layout": "head_above_left_right_wrists",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ],
+            "dataset_stats": "/dev/shm/pi34-rt-13072/checkpoints/longwam/dataset_stats.json",
+            "longwam_image_shape": [
+              1,
+              3,
+              384,
+              320
+            ],
+            "resize": "two_stage_antialiased_bilinear",
+            "state_key": "default"
+          },
+          "observation_window_shape": [
+            1,
+            3,
+            13,
+            384,
+            320
+          ],
+          "prompt": "A video recorded from a robot's point of view executing the following instruction: Pick up the plastic soda bottle from the table head-up.",
+          "rand_device": "cpu",
+          "seed": 100004,
+          "sigma_shift": null,
+          "text_context_shape": [
+            1,
+            128,
+            4096
+          ],
+          "tiled": false,
+          "trained_action_chunk": 32,
+          "video_inference_steps": 4
+        },
+        {
+          "action_dtype": "torch.float32",
+          "action_horizon": 32,
+          "action_inference_steps": 10,
+          "action_shape": [
+            32,
+            14
+          ],
+          "backend": "longwam",
+          "condition": "idm",
+          "history": {
+            "buffered_frames": 49,
+            "current_step": 96,
+            "observed_frames": 97,
+            "padded_frames": 0,
+            "past_obs_size": 48,
+            "sample_stride": 4,
+            "window_observation_indices": [
+              48,
+              52,
+              56,
+              60,
+              64,
+              68,
+              72,
+              76,
+              80,
+              84,
+              88,
+              92,
+              96
+            ]
+          },
+          "imagine_sigma": 0.9,
+          "inference_method": "infer_joint_ar",
+          "input_image_shape": [
+            1,
+            3,
+            384,
+            320
+          ],
+          "model_class": "LongWAM",
+          "model_device": "cuda",
+          "model_dtype": "torch.bfloat16",
+          "num_clean_frames": 4,
+          "num_imagine_frames": 2,
+          "observation": {
+            "camera_layout": "head_above_left_right_wrists",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ],
+            "dataset_stats": "/dev/shm/pi34-rt-13072/checkpoints/longwam/dataset_stats.json",
+            "longwam_image_shape": [
+              1,
+              3,
+              384,
+              320
+            ],
+            "resize": "two_stage_antialiased_bilinear",
+            "state_key": "default"
+          },
+          "observation_window_shape": [
+            1,
+            3,
+            13,
+            384,
+            320
+          ],
+          "prompt": "A video recorded from a robot's point of view executing the following instruction: Pick up the plastic soda bottle from the table head-up.",
+          "rand_device": "cpu",
+          "seed": 100005,
+          "sigma_shift": null,
+          "text_context_shape": [
+            1,
+            128,
+            4096
+          ],
+          "tiled": false,
+          "trained_action_chunk": 32,
+          "video_inference_steps": 4
+        }
+      ],
+      "instruction": "Pick up the plastic soda bottle from the table head-up.",
+      "policy_steps": 113,
+      "seed": 100001,
+      "success": true,
+      "termination_reason": "success"
+    },
+    {
+      "episode": 1,
+      "inference_calls": 5,
+      "inference_latency_ms": [
+        871.0628428962082,
+        851.4187268447131,
+        842.4577140249312,
+        845.0978961773217,
+        853.0336921103299
+      ],
+      "inference_metadata": [
+        {
+          "action_dtype": "torch.float32",
+          "action_horizon": 32,
+          "action_inference_steps": 10,
+          "action_shape": [
+            32,
+            14
+          ],
+          "backend": "longwam",
+          "condition": "idm",
+          "history": {
+            "buffered_frames": 1,
+            "current_step": 0,
+            "observed_frames": 1,
+            "padded_frames": 48,
+            "past_obs_size": 48,
+            "sample_stride": 4,
+            "window_observation_indices": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          "imagine_sigma": 0.9,
+          "inference_method": "infer_joint_ar",
+          "input_image_shape": [
+            1,
+            3,
+            384,
+            320
+          ],
+          "model_class": "LongWAM",
+          "model_device": "cuda",
+          "model_dtype": "torch.bfloat16",
+          "num_clean_frames": 4,
+          "num_imagine_frames": 2,
+          "observation": {
+            "camera_layout": "head_above_left_right_wrists",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ],
+            "dataset_stats": "/dev/shm/pi34-rt-13072/checkpoints/longwam/dataset_stats.json",
+            "longwam_image_shape": [
+              1,
+              3,
+              384,
+              320
+            ],
+            "resize": "two_stage_antialiased_bilinear",
+            "seed": 100002,
+            "state_key": "default",
+            "task_name": "adjust_bottle"
+          },
+          "observation_window_shape": [
+            1,
+            3,
+            13,
+            384,
+            320
+          ],
+          "prompt": "A video recorded from a robot's point of view executing the following instruction: Use the left arm to grab the bottle the green bottle",
+          "rand_device": "cpu",
+          "seed": 100002,
+          "sigma_shift": null,
+          "text_context_shape": [
+            1,
+            128,
+            4096
+          ],
+          "tiled": false,
+          "trained_action_chunk": 32,
+          "video_inference_steps": 4
+        },
+        {
+          "action_dtype": "torch.float32",
+          "action_horizon": 32,
+          "action_inference_steps": 10,
+          "action_shape": [
+            32,
+            14
+          ],
+          "backend": "longwam",
+          "condition": "idm",
+          "history": {
+            "buffered_frames": 25,
+            "current_step": 24,
+            "observed_frames": 25,
+            "padded_frames": 24,
+            "past_obs_size": 48,
+            "sample_stride": 4,
+            "window_observation_indices": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              4,
+              8,
+              12,
+              16,
+              20,
+              24
+            ]
+          },
+          "imagine_sigma": 0.9,
+          "inference_method": "infer_joint_ar",
+          "input_image_shape": [
+            1,
+            3,
+            384,
+            320
+          ],
+          "model_class": "LongWAM",
+          "model_device": "cuda",
+          "model_dtype": "torch.bfloat16",
+          "num_clean_frames": 4,
+          "num_imagine_frames": 2,
+          "observation": {
+            "camera_layout": "head_above_left_right_wrists",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ],
+            "dataset_stats": "/dev/shm/pi34-rt-13072/checkpoints/longwam/dataset_stats.json",
+            "longwam_image_shape": [
+              1,
+              3,
+              384,
+              320
+            ],
+            "resize": "two_stage_antialiased_bilinear",
+            "state_key": "default"
+          },
+          "observation_window_shape": [
+            1,
+            3,
+            13,
+            384,
+            320
+          ],
+          "prompt": "A video recorded from a robot's point of view executing the following instruction: Use the left arm to grab the bottle the green bottle",
+          "rand_device": "cpu",
+          "seed": 100003,
+          "sigma_shift": null,
+          "text_context_shape": [
+            1,
+            128,
+            4096
+          ],
+          "tiled": false,
+          "trained_action_chunk": 32,
+          "video_inference_steps": 4
+        },
+        {
+          "action_dtype": "torch.float32",
+          "action_horizon": 32,
+          "action_inference_steps": 10,
+          "action_shape": [
+            32,
+            14
+          ],
+          "backend": "longwam",
+          "condition": "idm",
+          "history": {
+            "buffered_frames": 49,
+            "current_step": 48,
+            "observed_frames": 49,
+            "padded_frames": 0,
+            "past_obs_size": 48,
+            "sample_stride": 4,
+            "window_observation_indices": [
+              0,
+              4,
+              8,
+              12,
+              16,
+              20,
+              24,
+              28,
+              32,
+              36,
+              40,
+              44,
+              48
+            ]
+          },
+          "imagine_sigma": 0.9,
+          "inference_method": "infer_joint_ar",
+          "input_image_shape": [
+            1,
+            3,
+            384,
+            320
+          ],
+          "model_class": "LongWAM",
+          "model_device": "cuda",
+          "model_dtype": "torch.bfloat16",
+          "num_clean_frames": 4,
+          "num_imagine_frames": 2,
+          "observation": {
+            "camera_layout": "head_above_left_right_wrists",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ],
+            "dataset_stats": "/dev/shm/pi34-rt-13072/checkpoints/longwam/dataset_stats.json",
+            "longwam_image_shape": [
+              1,
+              3,
+              384,
+              320
+            ],
+            "resize": "two_stage_antialiased_bilinear",
+            "state_key": "default"
+          },
+          "observation_window_shape": [
+            1,
+            3,
+            13,
+            384,
+            320
+          ],
+          "prompt": "A video recorded from a robot's point of view executing the following instruction: Use the left arm to grab the bottle the green bottle",
+          "rand_device": "cpu",
+          "seed": 100004,
+          "sigma_shift": null,
+          "text_context_shape": [
+            1,
+            128,
+            4096
+          ],
+          "tiled": false,
+          "trained_action_chunk": 32,
+          "video_inference_steps": 4
+        },
+        {
+          "action_dtype": "torch.float32",
+          "action_horizon": 32,
+          "action_inference_steps": 10,
+          "action_shape": [
+            32,
+            14
+          ],
+          "backend": "longwam",
+          "condition": "idm",
+          "history": {
+            "buffered_frames": 49,
+            "current_step": 72,
+            "observed_frames": 73,
+            "padded_frames": 0,
+            "past_obs_size": 48,
+            "sample_stride": 4,
+            "window_observation_indices": [
+              24,
+              28,
+              32,
+              36,
+              40,
+              44,
+              48,
+              52,
+              56,
+              60,
+              64,
+              68,
+              72
+            ]
+          },
+          "imagine_sigma": 0.9,
+          "inference_method": "infer_joint_ar",
+          "input_image_shape": [
+            1,
+            3,
+            384,
+            320
+          ],
+          "model_class": "LongWAM",
+          "model_device": "cuda",
+          "model_dtype": "torch.bfloat16",
+          "num_clean_frames": 4,
+          "num_imagine_frames": 2,
+          "observation": {
+            "camera_layout": "head_above_left_right_wrists",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ],
+            "dataset_stats": "/dev/shm/pi34-rt-13072/checkpoints/longwam/dataset_stats.json",
+            "longwam_image_shape": [
+              1,
+              3,
+              384,
+              320
+            ],
+            "resize": "two_stage_antialiased_bilinear",
+            "state_key": "default"
+          },
+          "observation_window_shape": [
+            1,
+            3,
+            13,
+            384,
+            320
+          ],
+          "prompt": "A video recorded from a robot's point of view executing the following instruction: Use the left arm to grab the bottle the green bottle",
+          "rand_device": "cpu",
+          "seed": 100005,
+          "sigma_shift": null,
+          "text_context_shape": [
+            1,
+            128,
+            4096
+          ],
+          "tiled": false,
+          "trained_action_chunk": 32,
+          "video_inference_steps": 4
+        },
+        {
+          "action_dtype": "torch.float32",
+          "action_horizon": 32,
+          "action_inference_steps": 10,
+          "action_shape": [
+            32,
+            14
+          ],
+          "backend": "longwam",
+          "condition": "idm",
+          "history": {
+            "buffered_frames": 49,
+            "current_step": 96,
+            "observed_frames": 97,
+            "padded_frames": 0,
+            "past_obs_size": 48,
+            "sample_stride": 4,
+            "window_observation_indices": [
+              48,
+              52,
+              56,
+              60,
+              64,
+              68,
+              72,
+              76,
+              80,
+              84,
+              88,
+              92,
+              96
+            ]
+          },
+          "imagine_sigma": 0.9,
+          "inference_method": "infer_joint_ar",
+          "input_image_shape": [
+            1,
+            3,
+            384,
+            320
+          ],
+          "model_class": "LongWAM",
+          "model_device": "cuda",
+          "model_dtype": "torch.bfloat16",
+          "num_clean_frames": 4,
+          "num_imagine_frames": 2,
+          "observation": {
+            "camera_layout": "head_above_left_right_wrists",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ],
+            "dataset_stats": "/dev/shm/pi34-rt-13072/checkpoints/longwam/dataset_stats.json",
+            "longwam_image_shape": [
+              1,
+              3,
+              384,
+              320
+            ],
+            "resize": "two_stage_antialiased_bilinear",
+            "state_key": "default"
+          },
+          "observation_window_shape": [
+            1,
+            3,
+            13,
+            384,
+            320
+          ],
+          "prompt": "A video recorded from a robot's point of view executing the following instruction: Use the left arm to grab the bottle the green bottle",
+          "rand_device": "cpu",
+          "seed": 100006,
+          "sigma_shift": null,
+          "text_context_shape": [
+            1,
+            128,
+            4096
+          ],
+          "tiled": false,
+          "trained_action_chunk": 32,
+          "video_inference_steps": 4
+        }
+      ],
+      "instruction": "Use the left arm to grab the bottle the green bottle",
+      "policy_steps": 110,
+      "seed": 100002,
+      "success": true,
+      "termination_reason": "success"
+    },
+    {
+      "episode": 2,
+      "inference_calls": 6,
+      "inference_latency_ms": [
+        863.6245769448578,
+        843.2607711292803,
+        847.33552695252,
+        849.9382701702416,
+        850.0005768146366,
+        848.4910628758371
+      ],
+      "inference_metadata": [
+        {
+          "action_dtype": "torch.float32",
+          "action_horizon": 32,
+          "action_inference_steps": 10,
+          "action_shape": [
+            32,
+            14
+          ],
+          "backend": "longwam",
+          "condition": "idm",
+          "history": {
+            "buffered_frames": 1,
+            "current_step": 0,
+            "observed_frames": 1,
+            "padded_frames": 48,
+            "past_obs_size": 48,
+            "sample_stride": 4,
+            "window_observation_indices": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          "imagine_sigma": 0.9,
+          "inference_method": "infer_joint_ar",
+          "input_image_shape": [
+            1,
+            3,
+            384,
+            320
+          ],
+          "model_class": "LongWAM",
+          "model_device": "cuda",
+          "model_dtype": "torch.bfloat16",
+          "num_clean_frames": 4,
+          "num_imagine_frames": 2,
+          "observation": {
+            "camera_layout": "head_above_left_right_wrists",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ],
+            "dataset_stats": "/dev/shm/pi34-rt-13072/checkpoints/longwam/dataset_stats.json",
+            "longwam_image_shape": [
+              1,
+              3,
+              384,
+              320
+            ],
+            "resize": "two_stage_antialiased_bilinear",
+            "seed": 100005,
+            "state_key": "default",
+            "task_name": "adjust_bottle"
+          },
+          "observation_window_shape": [
+            1,
+            3,
+            13,
+            384,
+            320
+          ],
+          "prompt": "A video recorded from a robot's point of view executing the following instruction: Pick up the green plastic bottle with ridged bottom using the left arm in an upright position",
+          "rand_device": "cpu",
+          "seed": 100005,
+          "sigma_shift": null,
+          "text_context_shape": [
+            1,
+            128,
+            4096
+          ],
+          "tiled": false,
+          "trained_action_chunk": 32,
+          "video_inference_steps": 4
+        },
+        {
+          "action_dtype": "torch.float32",
+          "action_horizon": 32,
+          "action_inference_steps": 10,
+          "action_shape": [
+            32,
+            14
+          ],
+          "backend": "longwam",
+          "condition": "idm",
+          "history": {
+            "buffered_frames": 25,
+            "current_step": 24,
+            "observed_frames": 25,
+            "padded_frames": 24,
+            "past_obs_size": 48,
+            "sample_stride": 4,
+            "window_observation_indices": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              4,
+              8,
+              12,
+              16,
+              20,
+              24
+            ]
+          },
+          "imagine_sigma": 0.9,
+          "inference_method": "infer_joint_ar",
+          "input_image_shape": [
+            1,
+            3,
+            384,
+            320
+          ],
+          "model_class": "LongWAM",
+          "model_device": "cuda",
+          "model_dtype": "torch.bfloat16",
+          "num_clean_frames": 4,
+          "num_imagine_frames": 2,
+          "observation": {
+            "camera_layout": "head_above_left_right_wrists",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ],
+            "dataset_stats": "/dev/shm/pi34-rt-13072/checkpoints/longwam/dataset_stats.json",
+            "longwam_image_shape": [
+              1,
+              3,
+              384,
+              320
+            ],
+            "resize": "two_stage_antialiased_bilinear",
+            "state_key": "default"
+          },
+          "observation_window_shape": [
+            1,
+            3,
+            13,
+            384,
+            320
+          ],
+          "prompt": "A video recorded from a robot's point of view executing the following instruction: Pick up the green plastic bottle with ridged bottom using the left arm in an upright position",
+          "rand_device": "cpu",
+          "seed": 100006,
+          "sigma_shift": null,
+          "text_context_shape": [
+            1,
+            128,
+            4096
+          ],
+          "tiled": false,
+          "trained_action_chunk": 32,
+          "video_inference_steps": 4
+        },
+        {
+          "action_dtype": "torch.float32",
+          "action_horizon": 32,
+          "action_inference_steps": 10,
+          "action_shape": [
+            32,
+            14
+          ],
+          "backend": "longwam",
+          "condition": "idm",
+          "history": {
+            "buffered_frames": 49,
+            "current_step": 48,
+            "observed_frames": 49,
+            "padded_frames": 0,
+            "past_obs_size": 48,
+            "sample_stride": 4,
+            "window_observation_indices": [
+              0,
+              4,
+              8,
+              12,
+              16,
+              20,
+              24,
+              28,
+              32,
+              36,
+              40,
+              44,
+              48
+            ]
+          },
+          "imagine_sigma": 0.9,
+          "inference_method": "infer_joint_ar",
+          "input_image_shape": [
+            1,
+            3,
+            384,
+            320
+          ],
+          "model_class": "LongWAM",
+          "model_device": "cuda",
+          "model_dtype": "torch.bfloat16",
+          "num_clean_frames": 4,
+          "num_imagine_frames": 2,
+          "observation": {
+            "camera_layout": "head_above_left_right_wrists",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ],
+            "dataset_stats": "/dev/shm/pi34-rt-13072/checkpoints/longwam/dataset_stats.json",
+            "longwam_image_shape": [
+              1,
+              3,
+              384,
+              320
+            ],
+            "resize": "two_stage_antialiased_bilinear",
+            "state_key": "default"
+          },
+          "observation_window_shape": [
+            1,
+            3,
+            13,
+            384,
+            320
+          ],
+          "prompt": "A video recorded from a robot's point of view executing the following instruction: Pick up the green plastic bottle with ridged bottom using the left arm in an upright position",
+          "rand_device": "cpu",
+          "seed": 100007,
+          "sigma_shift": null,
+          "text_context_shape": [
+            1,
+            128,
+            4096
+          ],
+          "tiled": false,
+          "trained_action_chunk": 32,
+          "video_inference_steps": 4
+        },
+        {
+          "action_dtype": "torch.float32",
+          "action_horizon": 32,
+          "action_inference_steps": 10,
+          "action_shape": [
+            32,
+            14
+          ],
+          "backend": "longwam",
+          "condition": "idm",
+          "history": {
+            "buffered_frames": 49,
+            "current_step": 72,
+            "observed_frames": 73,
+            "padded_frames": 0,
+            "past_obs_size": 48,
+            "sample_stride": 4,
+            "window_observation_indices": [
+              24,
+              28,
+              32,
+              36,
+              40,
+              44,
+              48,
+              52,
+              56,
+              60,
+              64,
+              68,
+              72
+            ]
+          },
+          "imagine_sigma": 0.9,
+          "inference_method": "infer_joint_ar",
+          "input_image_shape": [
+            1,
+            3,
+            384,
+            320
+          ],
+          "model_class": "LongWAM",
+          "model_device": "cuda",
+          "model_dtype": "torch.bfloat16",
+          "num_clean_frames": 4,
+          "num_imagine_frames": 2,
+          "observation": {
+            "camera_layout": "head_above_left_right_wrists",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ],
+            "dataset_stats": "/dev/shm/pi34-rt-13072/checkpoints/longwam/dataset_stats.json",
+            "longwam_image_shape": [
+              1,
+              3,
+              384,
+              320
+            ],
+            "resize": "two_stage_antialiased_bilinear",
+            "state_key": "default"
+          },
+          "observation_window_shape": [
+            1,
+            3,
+            13,
+            384,
+            320
+          ],
+          "prompt": "A video recorded from a robot's point of view executing the following instruction: Pick up the green plastic bottle with ridged bottom using the left arm in an upright position",
+          "rand_device": "cpu",
+          "seed": 100008,
+          "sigma_shift": null,
+          "text_context_shape": [
+            1,
+            128,
+            4096
+          ],
+          "tiled": false,
+          "trained_action_chunk": 32,
+          "video_inference_steps": 4
+        },
+        {
+          "action_dtype": "torch.float32",
+          "action_horizon": 32,
+          "action_inference_steps": 10,
+          "action_shape": [
+            32,
+            14
+          ],
+          "backend": "longwam",
+          "condition": "idm",
+          "history": {
+            "buffered_frames": 49,
+            "current_step": 96,
+            "observed_frames": 97,
+            "padded_frames": 0,
+            "past_obs_size": 48,
+            "sample_stride": 4,
+            "window_observation_indices": [
+              48,
+              52,
+              56,
+              60,
+              64,
+              68,
+              72,
+              76,
+              80,
+              84,
+              88,
+              92,
+              96
+            ]
+          },
+          "imagine_sigma": 0.9,
+          "inference_method": "infer_joint_ar",
+          "input_image_shape": [
+            1,
+            3,
+            384,
+            320
+          ],
+          "model_class": "LongWAM",
+          "model_device": "cuda",
+          "model_dtype": "torch.bfloat16",
+          "num_clean_frames": 4,
+          "num_imagine_frames": 2,
+          "observation": {
+            "camera_layout": "head_above_left_right_wrists",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ],
+            "dataset_stats": "/dev/shm/pi34-rt-13072/checkpoints/longwam/dataset_stats.json",
+            "longwam_image_shape": [
+              1,
+              3,
+              384,
+              320
+            ],
+            "resize": "two_stage_antialiased_bilinear",
+            "state_key": "default"
+          },
+          "observation_window_shape": [
+            1,
+            3,
+            13,
+            384,
+            320
+          ],
+          "prompt": "A video recorded from a robot's point of view executing the following instruction: Pick up the green plastic bottle with ridged bottom using the left arm in an upright position",
+          "rand_device": "cpu",
+          "seed": 100009,
+          "sigma_shift": null,
+          "text_context_shape": [
+            1,
+            128,
+            4096
+          ],
+          "tiled": false,
+          "trained_action_chunk": 32,
+          "video_inference_steps": 4
+        },
+        {
+          "action_dtype": "torch.float32",
+          "action_horizon": 32,
+          "action_inference_steps": 10,
+          "action_shape": [
+            32,
+            14
+          ],
+          "backend": "longwam",
+          "condition": "idm",
+          "history": {
+            "buffered_frames": 49,
+            "current_step": 120,
+            "observed_frames": 121,
+            "padded_frames": 0,
+            "past_obs_size": 48,
+            "sample_stride": 4,
+            "window_observation_indices": [
+              72,
+              76,
+              80,
+              84,
+              88,
+              92,
+              96,
+              100,
+              104,
+              108,
+              112,
+              116,
+              120
+            ]
+          },
+          "imagine_sigma": 0.9,
+          "inference_method": "infer_joint_ar",
+          "input_image_shape": [
+            1,
+            3,
+            384,
+            320
+          ],
+          "model_class": "LongWAM",
+          "model_device": "cuda",
+          "model_dtype": "torch.bfloat16",
+          "num_clean_frames": 4,
+          "num_imagine_frames": 2,
+          "observation": {
+            "camera_layout": "head_above_left_right_wrists",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ],
+            "dataset_stats": "/dev/shm/pi34-rt-13072/checkpoints/longwam/dataset_stats.json",
+            "longwam_image_shape": [
+              1,
+              3,
+              384,
+              320
+            ],
+            "resize": "two_stage_antialiased_bilinear",
+            "state_key": "default"
+          },
+          "observation_window_shape": [
+            1,
+            3,
+            13,
+            384,
+            320
+          ],
+          "prompt": "A video recorded from a robot's point of view executing the following instruction: Pick up the green plastic bottle with ridged bottom using the left arm in an upright position",
+          "rand_device": "cpu",
+          "seed": 100010,
+          "sigma_shift": null,
+          "text_context_shape": [
+            1,
+            128,
+            4096
+          ],
+          "tiled": false,
+          "trained_action_chunk": 32,
+          "video_inference_steps": 4
+        }
+      ],
+      "instruction": "Pick up the green plastic bottle with ridged bottom using the left arm in an upright position",
+      "policy_steps": 121,
+      "seed": 100005,
+      "success": true,
+      "termination_reason": "success"
+    },
+    {
+      "episode": 3,
+      "inference_calls": 5,
+      "inference_latency_ms": [
+        874.8832661658525,
+        856.1205449514091,
+        846.204750938341,
+        851.3691420666873,
+        859.6705470699817
+      ],
+      "inference_metadata": [
+        {
+          "action_dtype": "torch.float32",
+          "action_horizon": 32,
+          "action_inference_steps": 10,
+          "action_shape": [
+            32,
+            14
+          ],
+          "backend": "longwam",
+          "condition": "idm",
+          "history": {
+            "buffered_frames": 1,
+            "current_step": 0,
+            "observed_frames": 1,
+            "padded_frames": 48,
+            "past_obs_size": 48,
+            "sample_stride": 4,
+            "window_observation_indices": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          "imagine_sigma": 0.9,
+          "inference_method": "infer_joint_ar",
+          "input_image_shape": [
+            1,
+            3,
+            384,
+            320
+          ],
+          "model_class": "LongWAM",
+          "model_device": "cuda",
+          "model_dtype": "torch.bfloat16",
+          "num_clean_frames": 4,
+          "num_imagine_frames": 2,
+          "observation": {
+            "camera_layout": "head_above_left_right_wrists",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ],
+            "dataset_stats": "/dev/shm/pi34-rt-13072/checkpoints/longwam/dataset_stats.json",
+            "longwam_image_shape": [
+              1,
+              3,
+              384,
+              320
+            ],
+            "resize": "two_stage_antialiased_bilinear",
+            "seed": 100006,
+            "state_key": "default",
+            "task_name": "adjust_bottle"
+          },
+          "observation_window_shape": [
+            1,
+            3,
+            13,
+            384,
+            320
+          ],
+          "prompt": "A video recorded from a robot's point of view executing the following instruction: Use the right arm to grab the bottle with red screw cap head-up.",
+          "rand_device": "cpu",
+          "seed": 100006,
+          "sigma_shift": null,
+          "text_context_shape": [
+            1,
+            128,
+            4096
+          ],
+          "tiled": false,
+          "trained_action_chunk": 32,
+          "video_inference_steps": 4
+        },
+        {
+          "action_dtype": "torch.float32",
+          "action_horizon": 32,
+          "action_inference_steps": 10,
+          "action_shape": [
+            32,
+            14
+          ],
+          "backend": "longwam",
+          "condition": "idm",
+          "history": {
+            "buffered_frames": 25,
+            "current_step": 24,
+            "observed_frames": 25,
+            "padded_frames": 24,
+            "past_obs_size": 48,
+            "sample_stride": 4,
+            "window_observation_indices": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              4,
+              8,
+              12,
+              16,
+              20,
+              24
+            ]
+          },
+          "imagine_sigma": 0.9,
+          "inference_method": "infer_joint_ar",
+          "input_image_shape": [
+            1,
+            3,
+            384,
+            320
+          ],
+          "model_class": "LongWAM",
+          "model_device": "cuda",
+          "model_dtype": "torch.bfloat16",
+          "num_clean_frames": 4,
+          "num_imagine_frames": 2,
+          "observation": {
+            "camera_layout": "head_above_left_right_wrists",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ],
+            "dataset_stats": "/dev/shm/pi34-rt-13072/checkpoints/longwam/dataset_stats.json",
+            "longwam_image_shape": [
+              1,
+              3,
+              384,
+              320
+            ],
+            "resize": "two_stage_antialiased_bilinear",
+            "state_key": "default"
+          },
+          "observation_window_shape": [
+            1,
+            3,
+            13,
+            384,
+            320
+          ],
+          "prompt": "A video recorded from a robot's point of view executing the following instruction: Use the right arm to grab the bottle with red screw cap head-up.",
+          "rand_device": "cpu",
+          "seed": 100007,
+          "sigma_shift": null,
+          "text_context_shape": [
+            1,
+            128,
+            4096
+          ],
+          "tiled": false,
+          "trained_action_chunk": 32,
+          "video_inference_steps": 4
+        },
+        {
+          "action_dtype": "torch.float32",
+          "action_horizon": 32,
+          "action_inference_steps": 10,
+          "action_shape": [
+            32,
+            14
+          ],
+          "backend": "longwam",
+          "condition": "idm",
+          "history": {
+            "buffered_frames": 49,
+            "current_step": 48,
+            "observed_frames": 49,
+            "padded_frames": 0,
+            "past_obs_size": 48,
+            "sample_stride": 4,
+            "window_observation_indices": [
+              0,
+              4,
+              8,
+              12,
+              16,
+              20,
+              24,
+              28,
+              32,
+              36,
+              40,
+              44,
+              48
+            ]
+          },
+          "imagine_sigma": 0.9,
+          "inference_method": "infer_joint_ar",
+          "input_image_shape": [
+            1,
+            3,
+            384,
+            320
+          ],
+          "model_class": "LongWAM",
+          "model_device": "cuda",
+          "model_dtype": "torch.bfloat16",
+          "num_clean_frames": 4,
+          "num_imagine_frames": 2,
+          "observation": {
+            "camera_layout": "head_above_left_right_wrists",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ],
+            "dataset_stats": "/dev/shm/pi34-rt-13072/checkpoints/longwam/dataset_stats.json",
+            "longwam_image_shape": [
+              1,
+              3,
+              384,
+              320
+            ],
+            "resize": "two_stage_antialiased_bilinear",
+            "state_key": "default"
+          },
+          "observation_window_shape": [
+            1,
+            3,
+            13,
+            384,
+            320
+          ],
+          "prompt": "A video recorded from a robot's point of view executing the following instruction: Use the right arm to grab the bottle with red screw cap head-up.",
+          "rand_device": "cpu",
+          "seed": 100008,
+          "sigma_shift": null,
+          "text_context_shape": [
+            1,
+            128,
+            4096
+          ],
+          "tiled": false,
+          "trained_action_chunk": 32,
+          "video_inference_steps": 4
+        },
+        {
+          "action_dtype": "torch.float32",
+          "action_horizon": 32,
+          "action_inference_steps": 10,
+          "action_shape": [
+            32,
+            14
+          ],
+          "backend": "longwam",
+          "condition": "idm",
+          "history": {
+            "buffered_frames": 49,
+            "current_step": 72,
+            "observed_frames": 73,
+            "padded_frames": 0,
+            "past_obs_size": 48,
+            "sample_stride": 4,
+            "window_observation_indices": [
+              24,
+              28,
+              32,
+              36,
+              40,
+              44,
+              48,
+              52,
+              56,
+              60,
+              64,
+              68,
+              72
+            ]
+          },
+          "imagine_sigma": 0.9,
+          "inference_method": "infer_joint_ar",
+          "input_image_shape": [
+            1,
+            3,
+            384,
+            320
+          ],
+          "model_class": "LongWAM",
+          "model_device": "cuda",
+          "model_dtype": "torch.bfloat16",
+          "num_clean_frames": 4,
+          "num_imagine_frames": 2,
+          "observation": {
+            "camera_layout": "head_above_left_right_wrists",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ],
+            "dataset_stats": "/dev/shm/pi34-rt-13072/checkpoints/longwam/dataset_stats.json",
+            "longwam_image_shape": [
+              1,
+              3,
+              384,
+              320
+            ],
+            "resize": "two_stage_antialiased_bilinear",
+            "state_key": "default"
+          },
+          "observation_window_shape": [
+            1,
+            3,
+            13,
+            384,
+            320
+          ],
+          "prompt": "A video recorded from a robot's point of view executing the following instruction: Use the right arm to grab the bottle with red screw cap head-up.",
+          "rand_device": "cpu",
+          "seed": 100009,
+          "sigma_shift": null,
+          "text_context_shape": [
+            1,
+            128,
+            4096
+          ],
+          "tiled": false,
+          "trained_action_chunk": 32,
+          "video_inference_steps": 4
+        },
+        {
+          "action_dtype": "torch.float32",
+          "action_horizon": 32,
+          "action_inference_steps": 10,
+          "action_shape": [
+            32,
+            14
+          ],
+          "backend": "longwam",
+          "condition": "idm",
+          "history": {
+            "buffered_frames": 49,
+            "current_step": 96,
+            "observed_frames": 97,
+            "padded_frames": 0,
+            "past_obs_size": 48,
+            "sample_stride": 4,
+            "window_observation_indices": [
+              48,
+              52,
+              56,
+              60,
+              64,
+              68,
+              72,
+              76,
+              80,
+              84,
+              88,
+              92,
+              96
+            ]
+          },
+          "imagine_sigma": 0.9,
+          "inference_method": "infer_joint_ar",
+          "input_image_shape": [
+            1,
+            3,
+            384,
+            320
+          ],
+          "model_class": "LongWAM",
+          "model_device": "cuda",
+          "model_dtype": "torch.bfloat16",
+          "num_clean_frames": 4,
+          "num_imagine_frames": 2,
+          "observation": {
+            "camera_layout": "head_above_left_right_wrists",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ],
+            "dataset_stats": "/dev/shm/pi34-rt-13072/checkpoints/longwam/dataset_stats.json",
+            "longwam_image_shape": [
+              1,
+              3,
+              384,
+              320
+            ],
+            "resize": "two_stage_antialiased_bilinear",
+            "state_key": "default"
+          },
+          "observation_window_shape": [
+            1,
+            3,
+            13,
+            384,
+            320
+          ],
+          "prompt": "A video recorded from a robot's point of view executing the following instruction: Use the right arm to grab the bottle with red screw cap head-up.",
+          "rand_device": "cpu",
+          "seed": 100010,
+          "sigma_shift": null,
+          "text_context_shape": [
+            1,
+            128,
+            4096
+          ],
+          "tiled": false,
+          "trained_action_chunk": 32,
+          "video_inference_steps": 4
+        }
+      ],
+      "instruction": "Use the right arm to grab the bottle with red screw cap head-up.",
+      "policy_steps": 116,
+      "seed": 100006,
+      "success": true,
+      "termination_reason": "success"
+    },
+    {
+      "episode": 4,
+      "inference_calls": 5,
+      "inference_latency_ms": [
+        880.5877908598632,
+        856.2230609823018,
+        857.1632858365774,
+        858.1927749328315,
+        862.1051090303808
+      ],
+      "inference_metadata": [
+        {
+          "action_dtype": "torch.float32",
+          "action_horizon": 32,
+          "action_inference_steps": 10,
+          "action_shape": [
+            32,
+            14
+          ],
+          "backend": "longwam",
+          "condition": "idm",
+          "history": {
+            "buffered_frames": 1,
+            "current_step": 0,
+            "observed_frames": 1,
+            "padded_frames": 48,
+            "past_obs_size": 48,
+            "sample_stride": 4,
+            "window_observation_indices": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          "imagine_sigma": 0.9,
+          "inference_method": "infer_joint_ar",
+          "input_image_shape": [
+            1,
+            3,
+            384,
+            320
+          ],
+          "model_class": "LongWAM",
+          "model_device": "cuda",
+          "model_dtype": "torch.bfloat16",
+          "num_clean_frames": 4,
+          "num_imagine_frames": 2,
+          "observation": {
+            "camera_layout": "head_above_left_right_wrists",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ],
+            "dataset_stats": "/dev/shm/pi34-rt-13072/checkpoints/longwam/dataset_stats.json",
+            "longwam_image_shape": [
+              1,
+              3,
+              384,
+              320
+            ],
+            "resize": "two_stage_antialiased_bilinear",
+            "seed": 100008,
+            "state_key": "default",
+            "task_name": "adjust_bottle"
+          },
+          "observation_window_shape": [
+            1,
+            3,
+            13,
+            384,
+            320
+          ],
+          "prompt": "A video recorded from a robot's point of view executing the following instruction: Grab the green bottle with white label from the table with the left arm",
+          "rand_device": "cpu",
+          "seed": 100008,
+          "sigma_shift": null,
+          "text_context_shape": [
+            1,
+            128,
+            4096
+          ],
+          "tiled": false,
+          "trained_action_chunk": 32,
+          "video_inference_steps": 4
+        },
+        {
+          "action_dtype": "torch.float32",
+          "action_horizon": 32,
+          "action_inference_steps": 10,
+          "action_shape": [
+            32,
+            14
+          ],
+          "backend": "longwam",
+          "condition": "idm",
+          "history": {
+            "buffered_frames": 25,
+            "current_step": 24,
+            "observed_frames": 25,
+            "padded_frames": 24,
+            "past_obs_size": 48,
+            "sample_stride": 4,
+            "window_observation_indices": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              4,
+              8,
+              12,
+              16,
+              20,
+              24
+            ]
+          },
+          "imagine_sigma": 0.9,
+          "inference_method": "infer_joint_ar",
+          "input_image_shape": [
+            1,
+            3,
+            384,
+            320
+          ],
+          "model_class": "LongWAM",
+          "model_device": "cuda",
+          "model_dtype": "torch.bfloat16",
+          "num_clean_frames": 4,
+          "num_imagine_frames": 2,
+          "observation": {
+            "camera_layout": "head_above_left_right_wrists",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ],
+            "dataset_stats": "/dev/shm/pi34-rt-13072/checkpoints/longwam/dataset_stats.json",
+            "longwam_image_shape": [
+              1,
+              3,
+              384,
+              320
+            ],
+            "resize": "two_stage_antialiased_bilinear",
+            "state_key": "default"
+          },
+          "observation_window_shape": [
+            1,
+            3,
+            13,
+            384,
+            320
+          ],
+          "prompt": "A video recorded from a robot's point of view executing the following instruction: Grab the green bottle with white label from the table with the left arm",
+          "rand_device": "cpu",
+          "seed": 100009,
+          "sigma_shift": null,
+          "text_context_shape": [
+            1,
+            128,
+            4096
+          ],
+          "tiled": false,
+          "trained_action_chunk": 32,
+          "video_inference_steps": 4
+        },
+        {
+          "action_dtype": "torch.float32",
+          "action_horizon": 32,
+          "action_inference_steps": 10,
+          "action_shape": [
+            32,
+            14
+          ],
+          "backend": "longwam",
+          "condition": "idm",
+          "history": {
+            "buffered_frames": 49,
+            "current_step": 48,
+            "observed_frames": 49,
+            "padded_frames": 0,
+            "past_obs_size": 48,
+            "sample_stride": 4,
+            "window_observation_indices": [
+              0,
+              4,
+              8,
+              12,
+              16,
+              20,
+              24,
+              28,
+              32,
+              36,
+              40,
+              44,
+              48
+            ]
+          },
+          "imagine_sigma": 0.9,
+          "inference_method": "infer_joint_ar",
+          "input_image_shape": [
+            1,
+            3,
+            384,
+            320
+          ],
+          "model_class": "LongWAM",
+          "model_device": "cuda",
+          "model_dtype": "torch.bfloat16",
+          "num_clean_frames": 4,
+          "num_imagine_frames": 2,
+          "observation": {
+            "camera_layout": "head_above_left_right_wrists",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ],
+            "dataset_stats": "/dev/shm/pi34-rt-13072/checkpoints/longwam/dataset_stats.json",
+            "longwam_image_shape": [
+              1,
+              3,
+              384,
+              320
+            ],
+            "resize": "two_stage_antialiased_bilinear",
+            "state_key": "default"
+          },
+          "observation_window_shape": [
+            1,
+            3,
+            13,
+            384,
+            320
+          ],
+          "prompt": "A video recorded from a robot's point of view executing the following instruction: Grab the green bottle with white label from the table with the left arm",
+          "rand_device": "cpu",
+          "seed": 100010,
+          "sigma_shift": null,
+          "text_context_shape": [
+            1,
+            128,
+            4096
+          ],
+          "tiled": false,
+          "trained_action_chunk": 32,
+          "video_inference_steps": 4
+        },
+        {
+          "action_dtype": "torch.float32",
+          "action_horizon": 32,
+          "action_inference_steps": 10,
+          "action_shape": [
+            32,
+            14
+          ],
+          "backend": "longwam",
+          "condition": "idm",
+          "history": {
+            "buffered_frames": 49,
+            "current_step": 72,
+            "observed_frames": 73,
+            "padded_frames": 0,
+            "past_obs_size": 48,
+            "sample_stride": 4,
+            "window_observation_indices": [
+              24,
+              28,
+              32,
+              36,
+              40,
+              44,
+              48,
+              52,
+              56,
+              60,
+              64,
+              68,
+              72
+            ]
+          },
+          "imagine_sigma": 0.9,
+          "inference_method": "infer_joint_ar",
+          "input_image_shape": [
+            1,
+            3,
+            384,
+            320
+          ],
+          "model_class": "LongWAM",
+          "model_device": "cuda",
+          "model_dtype": "torch.bfloat16",
+          "num_clean_frames": 4,
+          "num_imagine_frames": 2,
+          "observation": {
+            "camera_layout": "head_above_left_right_wrists",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ],
+            "dataset_stats": "/dev/shm/pi34-rt-13072/checkpoints/longwam/dataset_stats.json",
+            "longwam_image_shape": [
+              1,
+              3,
+              384,
+              320
+            ],
+            "resize": "two_stage_antialiased_bilinear",
+            "state_key": "default"
+          },
+          "observation_window_shape": [
+            1,
+            3,
+            13,
+            384,
+            320
+          ],
+          "prompt": "A video recorded from a robot's point of view executing the following instruction: Grab the green bottle with white label from the table with the left arm",
+          "rand_device": "cpu",
+          "seed": 100011,
+          "sigma_shift": null,
+          "text_context_shape": [
+            1,
+            128,
+            4096
+          ],
+          "tiled": false,
+          "trained_action_chunk": 32,
+          "video_inference_steps": 4
+        },
+        {
+          "action_dtype": "torch.float32",
+          "action_horizon": 32,
+          "action_inference_steps": 10,
+          "action_shape": [
+            32,
+            14
+          ],
+          "backend": "longwam",
+          "condition": "idm",
+          "history": {
+            "buffered_frames": 49,
+            "current_step": 96,
+            "observed_frames": 97,
+            "padded_frames": 0,
+            "past_obs_size": 48,
+            "sample_stride": 4,
+            "window_observation_indices": [
+              48,
+              52,
+              56,
+              60,
+              64,
+              68,
+              72,
+              76,
+              80,
+              84,
+              88,
+              92,
+              96
+            ]
+          },
+          "imagine_sigma": 0.9,
+          "inference_method": "infer_joint_ar",
+          "input_image_shape": [
+            1,
+            3,
+            384,
+            320
+          ],
+          "model_class": "LongWAM",
+          "model_device": "cuda",
+          "model_dtype": "torch.bfloat16",
+          "num_clean_frames": 4,
+          "num_imagine_frames": 2,
+          "observation": {
+            "camera_layout": "head_above_left_right_wrists",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ],
+            "dataset_stats": "/dev/shm/pi34-rt-13072/checkpoints/longwam/dataset_stats.json",
+            "longwam_image_shape": [
+              1,
+              3,
+              384,
+              320
+            ],
+            "resize": "two_stage_antialiased_bilinear",
+            "state_key": "default"
+          },
+          "observation_window_shape": [
+            1,
+            3,
+            13,
+            384,
+            320
+          ],
+          "prompt": "A video recorded from a robot's point of view executing the following instruction: Grab the green bottle with white label from the table with the left arm",
+          "rand_device": "cpu",
+          "seed": 100012,
+          "sigma_shift": null,
+          "text_context_shape": [
+            1,
+            128,
+            4096
+          ],
+          "tiled": false,
+          "trained_action_chunk": 32,
+          "video_inference_steps": 4
+        }
+      ],
+      "instruction": "Grab the green bottle with white label from the table with the left arm",
+      "policy_steps": 115,
+      "seed": 100008,
+      "success": true,
+      "termination_reason": "success"
+    },
+    {
+      "episode": 5,
+      "inference_calls": 5,
+      "inference_latency_ms": [
+        878.8388650864363,
+        853.1872779130936,
+        850.9832620620728,
+        856.7606110591441,
+        873.3546449802816
+      ],
+      "inference_metadata": [
+        {
+          "action_dtype": "torch.float32",
+          "action_horizon": 32,
+          "action_inference_steps": 10,
+          "action_shape": [
+            32,
+            14
+          ],
+          "backend": "longwam",
+          "condition": "idm",
+          "history": {
+            "buffered_frames": 1,
+            "current_step": 0,
+            "observed_frames": 1,
+            "padded_frames": 48,
+            "past_obs_size": 48,
+            "sample_stride": 4,
+            "window_observation_indices": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          "imagine_sigma": 0.9,
+          "inference_method": "infer_joint_ar",
+          "input_image_shape": [
+            1,
+            3,
+            384,
+            320
+          ],
+          "model_class": "LongWAM",
+          "model_device": "cuda",
+          "model_dtype": "torch.bfloat16",
+          "num_clean_frames": 4,
+          "num_imagine_frames": 2,
+          "observation": {
+            "camera_layout": "head_above_left_right_wrists",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ],
+            "dataset_stats": "/dev/shm/pi34-rt-13072/checkpoints/longwam/dataset_stats.json",
+            "longwam_image_shape": [
+              1,
+              3,
+              384,
+              320
+            ],
+            "resize": "two_stage_antialiased_bilinear",
+            "seed": 100010,
+            "state_key": "default",
+            "task_name": "adjust_bottle"
+          },
+          "observation_window_shape": [
+            1,
+            3,
+            13,
+            384,
+            320
+          ],
+          "prompt": "A video recorded from a robot's point of view executing the following instruction: Grab the green plastic bottle with ridged bottom on the table and raise it.",
+          "rand_device": "cpu",
+          "seed": 100010,
+          "sigma_shift": null,
+          "text_context_shape": [
+            1,
+            128,
+            4096
+          ],
+          "tiled": false,
+          "trained_action_chunk": 32,
+          "video_inference_steps": 4
+        },
+        {
+          "action_dtype": "torch.float32",
+          "action_horizon": 32,
+          "action_inference_steps": 10,
+          "action_shape": [
+            32,
+            14
+          ],
+          "backend": "longwam",
+          "condition": "idm",
+          "history": {
+            "buffered_frames": 25,
+            "current_step": 24,
+            "observed_frames": 25,
+            "padded_frames": 24,
+            "past_obs_size": 48,
+            "sample_stride": 4,
+            "window_observation_indices": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              4,
+              8,
+              12,
+              16,
+              20,
+              24
+            ]
+          },
+          "imagine_sigma": 0.9,
+          "inference_method": "infer_joint_ar",
+          "input_image_shape": [
+            1,
+            3,
+            384,
+            320
+          ],
+          "model_class": "LongWAM",
+          "model_device": "cuda",
+          "model_dtype": "torch.bfloat16",
+          "num_clean_frames": 4,
+          "num_imagine_frames": 2,
+          "observation": {
+            "camera_layout": "head_above_left_right_wrists",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ],
+            "dataset_stats": "/dev/shm/pi34-rt-13072/checkpoints/longwam/dataset_stats.json",
+            "longwam_image_shape": [
+              1,
+              3,
+              384,
+              320
+            ],
+            "resize": "two_stage_antialiased_bilinear",
+            "state_key": "default"
+          },
+          "observation_window_shape": [
+            1,
+            3,
+            13,
+            384,
+            320
+          ],
+          "prompt": "A video recorded from a robot's point of view executing the following instruction: Grab the green plastic bottle with ridged bottom on the table and raise it.",
+          "rand_device": "cpu",
+          "seed": 100011,
+          "sigma_shift": null,
+          "text_context_shape": [
+            1,
+            128,
+            4096
+          ],
+          "tiled": false,
+          "trained_action_chunk": 32,
+          "video_inference_steps": 4
+        },
+        {
+          "action_dtype": "torch.float32",
+          "action_horizon": 32,
+          "action_inference_steps": 10,
+          "action_shape": [
+            32,
+            14
+          ],
+          "backend": "longwam",
+          "condition": "idm",
+          "history": {
+            "buffered_frames": 49,
+            "current_step": 48,
+            "observed_frames": 49,
+            "padded_frames": 0,
+            "past_obs_size": 48,
+            "sample_stride": 4,
+            "window_observation_indices": [
+              0,
+              4,
+              8,
+              12,
+              16,
+              20,
+              24,
+              28,
+              32,
+              36,
+              40,
+              44,
+              48
+            ]
+          },
+          "imagine_sigma": 0.9,
+          "inference_method": "infer_joint_ar",
+          "input_image_shape": [
+            1,
+            3,
+            384,
+            320
+          ],
+          "model_class": "LongWAM",
+          "model_device": "cuda",
+          "model_dtype": "torch.bfloat16",
+          "num_clean_frames": 4,
+          "num_imagine_frames": 2,
+          "observation": {
+            "camera_layout": "head_above_left_right_wrists",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ],
+            "dataset_stats": "/dev/shm/pi34-rt-13072/checkpoints/longwam/dataset_stats.json",
+            "longwam_image_shape": [
+              1,
+              3,
+              384,
+              320
+            ],
+            "resize": "two_stage_antialiased_bilinear",
+            "state_key": "default"
+          },
+          "observation_window_shape": [
+            1,
+            3,
+            13,
+            384,
+            320
+          ],
+          "prompt": "A video recorded from a robot's point of view executing the following instruction: Grab the green plastic bottle with ridged bottom on the table and raise it.",
+          "rand_device": "cpu",
+          "seed": 100012,
+          "sigma_shift": null,
+          "text_context_shape": [
+            1,
+            128,
+            4096
+          ],
+          "tiled": false,
+          "trained_action_chunk": 32,
+          "video_inference_steps": 4
+        },
+        {
+          "action_dtype": "torch.float32",
+          "action_horizon": 32,
+          "action_inference_steps": 10,
+          "action_shape": [
+            32,
+            14
+          ],
+          "backend": "longwam",
+          "condition": "idm",
+          "history": {
+            "buffered_frames": 49,
+            "current_step": 72,
+            "observed_frames": 73,
+            "padded_frames": 0,
+            "past_obs_size": 48,
+            "sample_stride": 4,
+            "window_observation_indices": [
+              24,
+              28,
+              32,
+              36,
+              40,
+              44,
+              48,
+              52,
+              56,
+              60,
+              64,
+              68,
+              72
+            ]
+          },
+          "imagine_sigma": 0.9,
+          "inference_method": "infer_joint_ar",
+          "input_image_shape": [
+            1,
+            3,
+            384,
+            320
+          ],
+          "model_class": "LongWAM",
+          "model_device": "cuda",
+          "model_dtype": "torch.bfloat16",
+          "num_clean_frames": 4,
+          "num_imagine_frames": 2,
+          "observation": {
+            "camera_layout": "head_above_left_right_wrists",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ],
+            "dataset_stats": "/dev/shm/pi34-rt-13072/checkpoints/longwam/dataset_stats.json",
+            "longwam_image_shape": [
+              1,
+              3,
+              384,
+              320
+            ],
+            "resize": "two_stage_antialiased_bilinear",
+            "state_key": "default"
+          },
+          "observation_window_shape": [
+            1,
+            3,
+            13,
+            384,
+            320
+          ],
+          "prompt": "A video recorded from a robot's point of view executing the following instruction: Grab the green plastic bottle with ridged bottom on the table and raise it.",
+          "rand_device": "cpu",
+          "seed": 100013,
+          "sigma_shift": null,
+          "text_context_shape": [
+            1,
+            128,
+            4096
+          ],
+          "tiled": false,
+          "trained_action_chunk": 32,
+          "video_inference_steps": 4
+        },
+        {
+          "action_dtype": "torch.float32",
+          "action_horizon": 32,
+          "action_inference_steps": 10,
+          "action_shape": [
+            32,
+            14
+          ],
+          "backend": "longwam",
+          "condition": "idm",
+          "history": {
+            "buffered_frames": 49,
+            "current_step": 96,
+            "observed_frames": 97,
+            "padded_frames": 0,
+            "past_obs_size": 48,
+            "sample_stride": 4,
+            "window_observation_indices": [
+              48,
+              52,
+              56,
+              60,
+              64,
+              68,
+              72,
+              76,
+              80,
+              84,
+              88,
+              92,
+              96
+            ]
+          },
+          "imagine_sigma": 0.9,
+          "inference_method": "infer_joint_ar",
+          "input_image_shape": [
+            1,
+            3,
+            384,
+            320
+          ],
+          "model_class": "LongWAM",
+          "model_device": "cuda",
+          "model_dtype": "torch.bfloat16",
+          "num_clean_frames": 4,
+          "num_imagine_frames": 2,
+          "observation": {
+            "camera_layout": "head_above_left_right_wrists",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ],
+            "dataset_stats": "/dev/shm/pi34-rt-13072/checkpoints/longwam/dataset_stats.json",
+            "longwam_image_shape": [
+              1,
+              3,
+              384,
+              320
+            ],
+            "resize": "two_stage_antialiased_bilinear",
+            "state_key": "default"
+          },
+          "observation_window_shape": [
+            1,
+            3,
+            13,
+            384,
+            320
+          ],
+          "prompt": "A video recorded from a robot's point of view executing the following instruction: Grab the green plastic bottle with ridged bottom on the table and raise it.",
+          "rand_device": "cpu",
+          "seed": 100014,
+          "sigma_shift": null,
+          "text_context_shape": [
+            1,
+            128,
+            4096
+          ],
+          "tiled": false,
+          "trained_action_chunk": 32,
+          "video_inference_steps": 4
+        }
+      ],
+      "instruction": "Grab the green plastic bottle with ridged bottom on the table and raise it.",
+      "policy_steps": 115,
+      "seed": 100010,
+      "success": true,
+      "termination_reason": "success"
+    },
+    {
+      "episode": 6,
+      "inference_calls": 5,
+      "inference_latency_ms": [
+        879.840126959607,
+        856.9470851216465,
+        855.3202608600259,
+        854.2807658668607,
+        852.6526470668614
+      ],
+      "inference_metadata": [
+        {
+          "action_dtype": "torch.float32",
+          "action_horizon": 32,
+          "action_inference_steps": 10,
+          "action_shape": [
+            32,
+            14
+          ],
+          "backend": "longwam",
+          "condition": "idm",
+          "history": {
+            "buffered_frames": 1,
+            "current_step": 0,
+            "observed_frames": 1,
+            "padded_frames": 48,
+            "past_obs_size": 48,
+            "sample_stride": 4,
+            "window_observation_indices": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          "imagine_sigma": 0.9,
+          "inference_method": "infer_joint_ar",
+          "input_image_shape": [
+            1,
+            3,
+            384,
+            320
+          ],
+          "model_class": "LongWAM",
+          "model_device": "cuda",
+          "model_dtype": "torch.bfloat16",
+          "num_clean_frames": 4,
+          "num_imagine_frames": 2,
+          "observation": {
+            "camera_layout": "head_above_left_right_wrists",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ],
+            "dataset_stats": "/dev/shm/pi34-rt-13072/checkpoints/longwam/dataset_stats.json",
+            "longwam_image_shape": [
+              1,
+              3,
+              384,
+              320
+            ],
+            "resize": "two_stage_antialiased_bilinear",
+            "seed": 100012,
+            "state_key": "default",
+            "task_name": "adjust_bottle"
+          },
+          "observation_window_shape": [
+            1,
+            3,
+            13,
+            384,
+            320
+          ],
+          "prompt": "A video recorded from a robot's point of view executing the following instruction: Use the left arm to grab the green bottle head-up.",
+          "rand_device": "cpu",
+          "seed": 100012,
+          "sigma_shift": null,
+          "text_context_shape": [
+            1,
+            128,
+            4096
+          ],
+          "tiled": false,
+          "trained_action_chunk": 32,
+          "video_inference_steps": 4
+        },
+        {
+          "action_dtype": "torch.float32",
+          "action_horizon": 32,
+          "action_inference_steps": 10,
+          "action_shape": [
+            32,
+            14
+          ],
+          "backend": "longwam",
+          "condition": "idm",
+          "history": {
+            "buffered_frames": 25,
+            "current_step": 24,
+            "observed_frames": 25,
+            "padded_frames": 24,
+            "past_obs_size": 48,
+            "sample_stride": 4,
+            "window_observation_indices": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              4,
+              8,
+              12,
+              16,
+              20,
+              24
+            ]
+          },
+          "imagine_sigma": 0.9,
+          "inference_method": "infer_joint_ar",
+          "input_image_shape": [
+            1,
+            3,
+            384,
+            320
+          ],
+          "model_class": "LongWAM",
+          "model_device": "cuda",
+          "model_dtype": "torch.bfloat16",
+          "num_clean_frames": 4,
+          "num_imagine_frames": 2,
+          "observation": {
+            "camera_layout": "head_above_left_right_wrists",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ],
+            "dataset_stats": "/dev/shm/pi34-rt-13072/checkpoints/longwam/dataset_stats.json",
+            "longwam_image_shape": [
+              1,
+              3,
+              384,
+              320
+            ],
+            "resize": "two_stage_antialiased_bilinear",
+            "state_key": "default"
+          },
+          "observation_window_shape": [
+            1,
+            3,
+            13,
+            384,
+            320
+          ],
+          "prompt": "A video recorded from a robot's point of view executing the following instruction: Use the left arm to grab the green bottle head-up.",
+          "rand_device": "cpu",
+          "seed": 100013,
+          "sigma_shift": null,
+          "text_context_shape": [
+            1,
+            128,
+            4096
+          ],
+          "tiled": false,
+          "trained_action_chunk": 32,
+          "video_inference_steps": 4
+        },
+        {
+          "action_dtype": "torch.float32",
+          "action_horizon": 32,
+          "action_inference_steps": 10,
+          "action_shape": [
+            32,
+            14
+          ],
+          "backend": "longwam",
+          "condition": "idm",
+          "history": {
+            "buffered_frames": 49,
+            "current_step": 48,
+            "observed_frames": 49,
+            "padded_frames": 0,
+            "past_obs_size": 48,
+            "sample_stride": 4,
+            "window_observation_indices": [
+              0,
+              4,
+              8,
+              12,
+              16,
+              20,
+              24,
+              28,
+              32,
+              36,
+              40,
+              44,
+              48
+            ]
+          },
+          "imagine_sigma": 0.9,
+          "inference_method": "infer_joint_ar",
+          "input_image_shape": [
+            1,
+            3,
+            384,
+            320
+          ],
+          "model_class": "LongWAM",
+          "model_device": "cuda",
+          "model_dtype": "torch.bfloat16",
+          "num_clean_frames": 4,
+          "num_imagine_frames": 2,
+          "observation": {
+            "camera_layout": "head_above_left_right_wrists",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ],
+            "dataset_stats": "/dev/shm/pi34-rt-13072/checkpoints/longwam/dataset_stats.json",
+            "longwam_image_shape": [
+              1,
+              3,
+              384,
+              320
+            ],
+            "resize": "two_stage_antialiased_bilinear",
+            "state_key": "default"
+          },
+          "observation_window_shape": [
+            1,
+            3,
+            13,
+            384,
+            320
+          ],
+          "prompt": "A video recorded from a robot's point of view executing the following instruction: Use the left arm to grab the green bottle head-up.",
+          "rand_device": "cpu",
+          "seed": 100014,
+          "sigma_shift": null,
+          "text_context_shape": [
+            1,
+            128,
+            4096
+          ],
+          "tiled": false,
+          "trained_action_chunk": 32,
+          "video_inference_steps": 4
+        },
+        {
+          "action_dtype": "torch.float32",
+          "action_horizon": 32,
+          "action_inference_steps": 10,
+          "action_shape": [
+            32,
+            14
+          ],
+          "backend": "longwam",
+          "condition": "idm",
+          "history": {
+            "buffered_frames": 49,
+            "current_step": 72,
+            "observed_frames": 73,
+            "padded_frames": 0,
+            "past_obs_size": 48,
+            "sample_stride": 4,
+            "window_observation_indices": [
+              24,
+              28,
+              32,
+              36,
+              40,
+              44,
+              48,
+              52,
+              56,
+              60,
+              64,
+              68,
+              72
+            ]
+          },
+          "imagine_sigma": 0.9,
+          "inference_method": "infer_joint_ar",
+          "input_image_shape": [
+            1,
+            3,
+            384,
+            320
+          ],
+          "model_class": "LongWAM",
+          "model_device": "cuda",
+          "model_dtype": "torch.bfloat16",
+          "num_clean_frames": 4,
+          "num_imagine_frames": 2,
+          "observation": {
+            "camera_layout": "head_above_left_right_wrists",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ],
+            "dataset_stats": "/dev/shm/pi34-rt-13072/checkpoints/longwam/dataset_stats.json",
+            "longwam_image_shape": [
+              1,
+              3,
+              384,
+              320
+            ],
+            "resize": "two_stage_antialiased_bilinear",
+            "state_key": "default"
+          },
+          "observation_window_shape": [
+            1,
+            3,
+            13,
+            384,
+            320
+          ],
+          "prompt": "A video recorded from a robot's point of view executing the following instruction: Use the left arm to grab the green bottle head-up.",
+          "rand_device": "cpu",
+          "seed": 100015,
+          "sigma_shift": null,
+          "text_context_shape": [
+            1,
+            128,
+            4096
+          ],
+          "tiled": false,
+          "trained_action_chunk": 32,
+          "video_inference_steps": 4
+        },
+        {
+          "action_dtype": "torch.float32",
+          "action_horizon": 32,
+          "action_inference_steps": 10,
+          "action_shape": [
+            32,
+            14
+          ],
+          "backend": "longwam",
+          "condition": "idm",
+          "history": {
+            "buffered_frames": 49,
+            "current_step": 96,
+            "observed_frames": 97,
+            "padded_frames": 0,
+            "past_obs_size": 48,
+            "sample_stride": 4,
+            "window_observation_indices": [
+              48,
+              52,
+              56,
+              60,
+              64,
+              68,
+              72,
+              76,
+              80,
+              84,
+              88,
+              92,
+              96
+            ]
+          },
+          "imagine_sigma": 0.9,
+          "inference_method": "infer_joint_ar",
+          "input_image_shape": [
+            1,
+            3,
+            384,
+            320
+          ],
+          "model_class": "LongWAM",
+          "model_device": "cuda",
+          "model_dtype": "torch.bfloat16",
+          "num_clean_frames": 4,
+          "num_imagine_frames": 2,
+          "observation": {
+            "camera_layout": "head_above_left_right_wrists",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ],
+            "dataset_stats": "/dev/shm/pi34-rt-13072/checkpoints/longwam/dataset_stats.json",
+            "longwam_image_shape": [
+              1,
+              3,
+              384,
+              320
+            ],
+            "resize": "two_stage_antialiased_bilinear",
+            "state_key": "default"
+          },
+          "observation_window_shape": [
+            1,
+            3,
+            13,
+            384,
+            320
+          ],
+          "prompt": "A video recorded from a robot's point of view executing the following instruction: Use the left arm to grab the green bottle head-up.",
+          "rand_device": "cpu",
+          "seed": 100016,
+          "sigma_shift": null,
+          "text_context_shape": [
+            1,
+            128,
+            4096
+          ],
+          "tiled": false,
+          "trained_action_chunk": 32,
+          "video_inference_steps": 4
+        }
+      ],
+      "instruction": "Use the left arm to grab the green bottle head-up.",
+      "policy_steps": 113,
+      "seed": 100012,
+      "success": true,
+      "termination_reason": "success"
+    },
+    {
+      "episode": 7,
+      "inference_calls": 5,
+      "inference_latency_ms": [
+        888.1565420888364,
+        859.727084171027,
+        866.1138019524515,
+        864.2830031458288,
+        869.0069718286395
+      ],
+      "inference_metadata": [
+        {
+          "action_dtype": "torch.float32",
+          "action_horizon": 32,
+          "action_inference_steps": 10,
+          "action_shape": [
+            32,
+            14
+          ],
+          "backend": "longwam",
+          "condition": "idm",
+          "history": {
+            "buffered_frames": 1,
+            "current_step": 0,
+            "observed_frames": 1,
+            "padded_frames": 48,
+            "past_obs_size": 48,
+            "sample_stride": 4,
+            "window_observation_indices": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          "imagine_sigma": 0.9,
+          "inference_method": "infer_joint_ar",
+          "input_image_shape": [
+            1,
+            3,
+            384,
+            320
+          ],
+          "model_class": "LongWAM",
+          "model_device": "cuda",
+          "model_dtype": "torch.bfloat16",
+          "num_clean_frames": 4,
+          "num_imagine_frames": 2,
+          "observation": {
+            "camera_layout": "head_above_left_right_wrists",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ],
+            "dataset_stats": "/dev/shm/pi34-rt-13072/checkpoints/longwam/dataset_stats.json",
+            "longwam_image_shape": [
+              1,
+              3,
+              384,
+              320
+            ],
+            "resize": "two_stage_antialiased_bilinear",
+            "seed": 100013,
+            "state_key": "default",
+            "task_name": "adjust_bottle"
+          },
+          "observation_window_shape": [
+            1,
+            3,
+            13,
+            384,
+            320
+          ],
+          "prompt": "A video recorded from a robot's point of view executing the following instruction: Use the right arm to grab the bottle the bottle with red screw cap",
+          "rand_device": "cpu",
+          "seed": 100013,
+          "sigma_shift": null,
+          "text_context_shape": [
+            1,
+            128,
+            4096
+          ],
+          "tiled": false,
+          "trained_action_chunk": 32,
+          "video_inference_steps": 4
+        },
+        {
+          "action_dtype": "torch.float32",
+          "action_horizon": 32,
+          "action_inference_steps": 10,
+          "action_shape": [
+            32,
+            14
+          ],
+          "backend": "longwam",
+          "condition": "idm",
+          "history": {
+            "buffered_frames": 25,
+            "current_step": 24,
+            "observed_frames": 25,
+            "padded_frames": 24,
+            "past_obs_size": 48,
+            "sample_stride": 4,
+            "window_observation_indices": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              4,
+              8,
+              12,
+              16,
+              20,
+              24
+            ]
+          },
+          "imagine_sigma": 0.9,
+          "inference_method": "infer_joint_ar",
+          "input_image_shape": [
+            1,
+            3,
+            384,
+            320
+          ],
+          "model_class": "LongWAM",
+          "model_device": "cuda",
+          "model_dtype": "torch.bfloat16",
+          "num_clean_frames": 4,
+          "num_imagine_frames": 2,
+          "observation": {
+            "camera_layout": "head_above_left_right_wrists",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ],
+            "dataset_stats": "/dev/shm/pi34-rt-13072/checkpoints/longwam/dataset_stats.json",
+            "longwam_image_shape": [
+              1,
+              3,
+              384,
+              320
+            ],
+            "resize": "two_stage_antialiased_bilinear",
+            "state_key": "default"
+          },
+          "observation_window_shape": [
+            1,
+            3,
+            13,
+            384,
+            320
+          ],
+          "prompt": "A video recorded from a robot's point of view executing the following instruction: Use the right arm to grab the bottle the bottle with red screw cap",
+          "rand_device": "cpu",
+          "seed": 100014,
+          "sigma_shift": null,
+          "text_context_shape": [
+            1,
+            128,
+            4096
+          ],
+          "tiled": false,
+          "trained_action_chunk": 32,
+          "video_inference_steps": 4
+        },
+        {
+          "action_dtype": "torch.float32",
+          "action_horizon": 32,
+          "action_inference_steps": 10,
+          "action_shape": [
+            32,
+            14
+          ],
+          "backend": "longwam",
+          "condition": "idm",
+          "history": {
+            "buffered_frames": 49,
+            "current_step": 48,
+            "observed_frames": 49,
+            "padded_frames": 0,
+            "past_obs_size": 48,
+            "sample_stride": 4,
+            "window_observation_indices": [
+              0,
+              4,
+              8,
+              12,
+              16,
+              20,
+              24,
+              28,
+              32,
+              36,
+              40,
+              44,
+              48
+            ]
+          },
+          "imagine_sigma": 0.9,
+          "inference_method": "infer_joint_ar",
+          "input_image_shape": [
+            1,
+            3,
+            384,
+            320
+          ],
+          "model_class": "LongWAM",
+          "model_device": "cuda",
+          "model_dtype": "torch.bfloat16",
+          "num_clean_frames": 4,
+          "num_imagine_frames": 2,
+          "observation": {
+            "camera_layout": "head_above_left_right_wrists",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ],
+            "dataset_stats": "/dev/shm/pi34-rt-13072/checkpoints/longwam/dataset_stats.json",
+            "longwam_image_shape": [
+              1,
+              3,
+              384,
+              320
+            ],
+            "resize": "two_stage_antialiased_bilinear",
+            "state_key": "default"
+          },
+          "observation_window_shape": [
+            1,
+            3,
+            13,
+            384,
+            320
+          ],
+          "prompt": "A video recorded from a robot's point of view executing the following instruction: Use the right arm to grab the bottle the bottle with red screw cap",
+          "rand_device": "cpu",
+          "seed": 100015,
+          "sigma_shift": null,
+          "text_context_shape": [
+            1,
+            128,
+            4096
+          ],
+          "tiled": false,
+          "trained_action_chunk": 32,
+          "video_inference_steps": 4
+        },
+        {
+          "action_dtype": "torch.float32",
+          "action_horizon": 32,
+          "action_inference_steps": 10,
+          "action_shape": [
+            32,
+            14
+          ],
+          "backend": "longwam",
+          "condition": "idm",
+          "history": {
+            "buffered_frames": 49,
+            "current_step": 72,
+            "observed_frames": 73,
+            "padded_frames": 0,
+            "past_obs_size": 48,
+            "sample_stride": 4,
+            "window_observation_indices": [
+              24,
+              28,
+              32,
+              36,
+              40,
+              44,
+              48,
+              52,
+              56,
+              60,
+              64,
+              68,
+              72
+            ]
+          },
+          "imagine_sigma": 0.9,
+          "inference_method": "infer_joint_ar",
+          "input_image_shape": [
+            1,
+            3,
+            384,
+            320
+          ],
+          "model_class": "LongWAM",
+          "model_device": "cuda",
+          "model_dtype": "torch.bfloat16",
+          "num_clean_frames": 4,
+          "num_imagine_frames": 2,
+          "observation": {
+            "camera_layout": "head_above_left_right_wrists",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ],
+            "dataset_stats": "/dev/shm/pi34-rt-13072/checkpoints/longwam/dataset_stats.json",
+            "longwam_image_shape": [
+              1,
+              3,
+              384,
+              320
+            ],
+            "resize": "two_stage_antialiased_bilinear",
+            "state_key": "default"
+          },
+          "observation_window_shape": [
+            1,
+            3,
+            13,
+            384,
+            320
+          ],
+          "prompt": "A video recorded from a robot's point of view executing the following instruction: Use the right arm to grab the bottle the bottle with red screw cap",
+          "rand_device": "cpu",
+          "seed": 100016,
+          "sigma_shift": null,
+          "text_context_shape": [
+            1,
+            128,
+            4096
+          ],
+          "tiled": false,
+          "trained_action_chunk": 32,
+          "video_inference_steps": 4
+        },
+        {
+          "action_dtype": "torch.float32",
+          "action_horizon": 32,
+          "action_inference_steps": 10,
+          "action_shape": [
+            32,
+            14
+          ],
+          "backend": "longwam",
+          "condition": "idm",
+          "history": {
+            "buffered_frames": 49,
+            "current_step": 96,
+            "observed_frames": 97,
+            "padded_frames": 0,
+            "past_obs_size": 48,
+            "sample_stride": 4,
+            "window_observation_indices": [
+              48,
+              52,
+              56,
+              60,
+              64,
+              68,
+              72,
+              76,
+              80,
+              84,
+              88,
+              92,
+              96
+            ]
+          },
+          "imagine_sigma": 0.9,
+          "inference_method": "infer_joint_ar",
+          "input_image_shape": [
+            1,
+            3,
+            384,
+            320
+          ],
+          "model_class": "LongWAM",
+          "model_device": "cuda",
+          "model_dtype": "torch.bfloat16",
+          "num_clean_frames": 4,
+          "num_imagine_frames": 2,
+          "observation": {
+            "camera_layout": "head_above_left_right_wrists",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ],
+            "dataset_stats": "/dev/shm/pi34-rt-13072/checkpoints/longwam/dataset_stats.json",
+            "longwam_image_shape": [
+              1,
+              3,
+              384,
+              320
+            ],
+            "resize": "two_stage_antialiased_bilinear",
+            "state_key": "default"
+          },
+          "observation_window_shape": [
+            1,
+            3,
+            13,
+            384,
+            320
+          ],
+          "prompt": "A video recorded from a robot's point of view executing the following instruction: Use the right arm to grab the bottle the bottle with red screw cap",
+          "rand_device": "cpu",
+          "seed": 100017,
+          "sigma_shift": null,
+          "text_context_shape": [
+            1,
+            128,
+            4096
+          ],
+          "tiled": false,
+          "trained_action_chunk": 32,
+          "video_inference_steps": 4
+        }
+      ],
+      "instruction": "Use the right arm to grab the bottle the bottle with red screw cap",
+      "policy_steps": 113,
+      "seed": 100013,
+      "success": true,
+      "termination_reason": "success"
+    },
+    {
+      "episode": 8,
+      "inference_calls": 5,
+      "inference_latency_ms": [
+        887.5983320176601,
+        865.9441631752998,
+        862.5128660351038,
+        857.3235149960965,
+        864.5941859576851
+      ],
+      "inference_metadata": [
+        {
+          "action_dtype": "torch.float32",
+          "action_horizon": 32,
+          "action_inference_steps": 10,
+          "action_shape": [
+            32,
+            14
+          ],
+          "backend": "longwam",
+          "condition": "idm",
+          "history": {
+            "buffered_frames": 1,
+            "current_step": 0,
+            "observed_frames": 1,
+            "padded_frames": 48,
+            "past_obs_size": 48,
+            "sample_stride": 4,
+            "window_observation_indices": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          "imagine_sigma": 0.9,
+          "inference_method": "infer_joint_ar",
+          "input_image_shape": [
+            1,
+            3,
+            384,
+            320
+          ],
+          "model_class": "LongWAM",
+          "model_device": "cuda",
+          "model_dtype": "torch.bfloat16",
+          "num_clean_frames": 4,
+          "num_imagine_frames": 2,
+          "observation": {
+            "camera_layout": "head_above_left_right_wrists",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ],
+            "dataset_stats": "/dev/shm/pi34-rt-13072/checkpoints/longwam/dataset_stats.json",
+            "longwam_image_shape": [
+              1,
+              3,
+              384,
+              320
+            ],
+            "resize": "two_stage_antialiased_bilinear",
+            "seed": 100015,
+            "state_key": "default",
+            "task_name": "adjust_bottle"
+          },
+          "observation_window_shape": [
+            1,
+            3,
+            13,
+            384,
+            320
+          ],
+          "prompt": "A video recorded from a robot's point of view executing the following instruction: Grab the bottle with red screw cap on the table and raise it.",
+          "rand_device": "cpu",
+          "seed": 100015,
+          "sigma_shift": null,
+          "text_context_shape": [
+            1,
+            128,
+            4096
+          ],
+          "tiled": false,
+          "trained_action_chunk": 32,
+          "video_inference_steps": 4
+        },
+        {
+          "action_dtype": "torch.float32",
+          "action_horizon": 32,
+          "action_inference_steps": 10,
+          "action_shape": [
+            32,
+            14
+          ],
+          "backend": "longwam",
+          "condition": "idm",
+          "history": {
+            "buffered_frames": 25,
+            "current_step": 24,
+            "observed_frames": 25,
+            "padded_frames": 24,
+            "past_obs_size": 48,
+            "sample_stride": 4,
+            "window_observation_indices": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              4,
+              8,
+              12,
+              16,
+              20,
+              24
+            ]
+          },
+          "imagine_sigma": 0.9,
+          "inference_method": "infer_joint_ar",
+          "input_image_shape": [
+            1,
+            3,
+            384,
+            320
+          ],
+          "model_class": "LongWAM",
+          "model_device": "cuda",
+          "model_dtype": "torch.bfloat16",
+          "num_clean_frames": 4,
+          "num_imagine_frames": 2,
+          "observation": {
+            "camera_layout": "head_above_left_right_wrists",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ],
+            "dataset_stats": "/dev/shm/pi34-rt-13072/checkpoints/longwam/dataset_stats.json",
+            "longwam_image_shape": [
+              1,
+              3,
+              384,
+              320
+            ],
+            "resize": "two_stage_antialiased_bilinear",
+            "state_key": "default"
+          },
+          "observation_window_shape": [
+            1,
+            3,
+            13,
+            384,
+            320
+          ],
+          "prompt": "A video recorded from a robot's point of view executing the following instruction: Grab the bottle with red screw cap on the table and raise it.",
+          "rand_device": "cpu",
+          "seed": 100016,
+          "sigma_shift": null,
+          "text_context_shape": [
+            1,
+            128,
+            4096
+          ],
+          "tiled": false,
+          "trained_action_chunk": 32,
+          "video_inference_steps": 4
+        },
+        {
+          "action_dtype": "torch.float32",
+          "action_horizon": 32,
+          "action_inference_steps": 10,
+          "action_shape": [
+            32,
+            14
+          ],
+          "backend": "longwam",
+          "condition": "idm",
+          "history": {
+            "buffered_frames": 49,
+            "current_step": 48,
+            "observed_frames": 49,
+            "padded_frames": 0,
+            "past_obs_size": 48,
+            "sample_stride": 4,
+            "window_observation_indices": [
+              0,
+              4,
+              8,
+              12,
+              16,
+              20,
+              24,
+              28,
+              32,
+              36,
+              40,
+              44,
+              48
+            ]
+          },
+          "imagine_sigma": 0.9,
+          "inference_method": "infer_joint_ar",
+          "input_image_shape": [
+            1,
+            3,
+            384,
+            320
+          ],
+          "model_class": "LongWAM",
+          "model_device": "cuda",
+          "model_dtype": "torch.bfloat16",
+          "num_clean_frames": 4,
+          "num_imagine_frames": 2,
+          "observation": {
+            "camera_layout": "head_above_left_right_wrists",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ],
+            "dataset_stats": "/dev/shm/pi34-rt-13072/checkpoints/longwam/dataset_stats.json",
+            "longwam_image_shape": [
+              1,
+              3,
+              384,
+              320
+            ],
+            "resize": "two_stage_antialiased_bilinear",
+            "state_key": "default"
+          },
+          "observation_window_shape": [
+            1,
+            3,
+            13,
+            384,
+            320
+          ],
+          "prompt": "A video recorded from a robot's point of view executing the following instruction: Grab the bottle with red screw cap on the table and raise it.",
+          "rand_device": "cpu",
+          "seed": 100017,
+          "sigma_shift": null,
+          "text_context_shape": [
+            1,
+            128,
+            4096
+          ],
+          "tiled": false,
+          "trained_action_chunk": 32,
+          "video_inference_steps": 4
+        },
+        {
+          "action_dtype": "torch.float32",
+          "action_horizon": 32,
+          "action_inference_steps": 10,
+          "action_shape": [
+            32,
+            14
+          ],
+          "backend": "longwam",
+          "condition": "idm",
+          "history": {
+            "buffered_frames": 49,
+            "current_step": 72,
+            "observed_frames": 73,
+            "padded_frames": 0,
+            "past_obs_size": 48,
+            "sample_stride": 4,
+            "window_observation_indices": [
+              24,
+              28,
+              32,
+              36,
+              40,
+              44,
+              48,
+              52,
+              56,
+              60,
+              64,
+              68,
+              72
+            ]
+          },
+          "imagine_sigma": 0.9,
+          "inference_method": "infer_joint_ar",
+          "input_image_shape": [
+            1,
+            3,
+            384,
+            320
+          ],
+          "model_class": "LongWAM",
+          "model_device": "cuda",
+          "model_dtype": "torch.bfloat16",
+          "num_clean_frames": 4,
+          "num_imagine_frames": 2,
+          "observation": {
+            "camera_layout": "head_above_left_right_wrists",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ],
+            "dataset_stats": "/dev/shm/pi34-rt-13072/checkpoints/longwam/dataset_stats.json",
+            "longwam_image_shape": [
+              1,
+              3,
+              384,
+              320
+            ],
+            "resize": "two_stage_antialiased_bilinear",
+            "state_key": "default"
+          },
+          "observation_window_shape": [
+            1,
+            3,
+            13,
+            384,
+            320
+          ],
+          "prompt": "A video recorded from a robot's point of view executing the following instruction: Grab the bottle with red screw cap on the table and raise it.",
+          "rand_device": "cpu",
+          "seed": 100018,
+          "sigma_shift": null,
+          "text_context_shape": [
+            1,
+            128,
+            4096
+          ],
+          "tiled": false,
+          "trained_action_chunk": 32,
+          "video_inference_steps": 4
+        },
+        {
+          "action_dtype": "torch.float32",
+          "action_horizon": 32,
+          "action_inference_steps": 10,
+          "action_shape": [
+            32,
+            14
+          ],
+          "backend": "longwam",
+          "condition": "idm",
+          "history": {
+            "buffered_frames": 49,
+            "current_step": 96,
+            "observed_frames": 97,
+            "padded_frames": 0,
+            "past_obs_size": 48,
+            "sample_stride": 4,
+            "window_observation_indices": [
+              48,
+              52,
+              56,
+              60,
+              64,
+              68,
+              72,
+              76,
+              80,
+              84,
+              88,
+              92,
+              96
+            ]
+          },
+          "imagine_sigma": 0.9,
+          "inference_method": "infer_joint_ar",
+          "input_image_shape": [
+            1,
+            3,
+            384,
+            320
+          ],
+          "model_class": "LongWAM",
+          "model_device": "cuda",
+          "model_dtype": "torch.bfloat16",
+          "num_clean_frames": 4,
+          "num_imagine_frames": 2,
+          "observation": {
+            "camera_layout": "head_above_left_right_wrists",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ],
+            "dataset_stats": "/dev/shm/pi34-rt-13072/checkpoints/longwam/dataset_stats.json",
+            "longwam_image_shape": [
+              1,
+              3,
+              384,
+              320
+            ],
+            "resize": "two_stage_antialiased_bilinear",
+            "state_key": "default"
+          },
+          "observation_window_shape": [
+            1,
+            3,
+            13,
+            384,
+            320
+          ],
+          "prompt": "A video recorded from a robot's point of view executing the following instruction: Grab the bottle with red screw cap on the table and raise it.",
+          "rand_device": "cpu",
+          "seed": 100019,
+          "sigma_shift": null,
+          "text_context_shape": [
+            1,
+            128,
+            4096
+          ],
+          "tiled": false,
+          "trained_action_chunk": 32,
+          "video_inference_steps": 4
+        }
+      ],
+      "instruction": "Grab the bottle with red screw cap on the table and raise it.",
+      "policy_steps": 117,
+      "seed": 100015,
+      "success": true,
+      "termination_reason": "success"
+    },
+    {
+      "episode": 9,
+      "inference_calls": 5,
+      "inference_latency_ms": [
+        883.2319099456072,
+        859.5068089198321,
+        864.377283025533,
+        859.4832778908312,
+        864.9079909082502
+      ],
+      "inference_metadata": [
+        {
+          "action_dtype": "torch.float32",
+          "action_horizon": 32,
+          "action_inference_steps": 10,
+          "action_shape": [
+            32,
+            14
+          ],
+          "backend": "longwam",
+          "condition": "idm",
+          "history": {
+            "buffered_frames": 1,
+            "current_step": 0,
+            "observed_frames": 1,
+            "padded_frames": 48,
+            "past_obs_size": 48,
+            "sample_stride": 4,
+            "window_observation_indices": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          "imagine_sigma": 0.9,
+          "inference_method": "infer_joint_ar",
+          "input_image_shape": [
+            1,
+            3,
+            384,
+            320
+          ],
+          "model_class": "LongWAM",
+          "model_device": "cuda",
+          "model_dtype": "torch.bfloat16",
+          "num_clean_frames": 4,
+          "num_imagine_frames": 2,
+          "observation": {
+            "camera_layout": "head_above_left_right_wrists",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ],
+            "dataset_stats": "/dev/shm/pi34-rt-13072/checkpoints/longwam/dataset_stats.json",
+            "longwam_image_shape": [
+              1,
+              3,
+              384,
+              320
+            ],
+            "resize": "two_stage_antialiased_bilinear",
+            "seed": 100016,
+            "state_key": "default",
+            "task_name": "adjust_bottle"
+          },
+          "observation_window_shape": [
+            1,
+            3,
+            13,
+            384,
+            320
+          ],
+          "prompt": "A video recorded from a robot's point of view executing the following instruction: Grab the plastic soda bottle from the table with the right arm",
+          "rand_device": "cpu",
+          "seed": 100016,
+          "sigma_shift": null,
+          "text_context_shape": [
+            1,
+            128,
+            4096
+          ],
+          "tiled": false,
+          "trained_action_chunk": 32,
+          "video_inference_steps": 4
+        },
+        {
+          "action_dtype": "torch.float32",
+          "action_horizon": 32,
+          "action_inference_steps": 10,
+          "action_shape": [
+            32,
+            14
+          ],
+          "backend": "longwam",
+          "condition": "idm",
+          "history": {
+            "buffered_frames": 25,
+            "current_step": 24,
+            "observed_frames": 25,
+            "padded_frames": 24,
+            "past_obs_size": 48,
+            "sample_stride": 4,
+            "window_observation_indices": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              4,
+              8,
+              12,
+              16,
+              20,
+              24
+            ]
+          },
+          "imagine_sigma": 0.9,
+          "inference_method": "infer_joint_ar",
+          "input_image_shape": [
+            1,
+            3,
+            384,
+            320
+          ],
+          "model_class": "LongWAM",
+          "model_device": "cuda",
+          "model_dtype": "torch.bfloat16",
+          "num_clean_frames": 4,
+          "num_imagine_frames": 2,
+          "observation": {
+            "camera_layout": "head_above_left_right_wrists",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ],
+            "dataset_stats": "/dev/shm/pi34-rt-13072/checkpoints/longwam/dataset_stats.json",
+            "longwam_image_shape": [
+              1,
+              3,
+              384,
+              320
+            ],
+            "resize": "two_stage_antialiased_bilinear",
+            "state_key": "default"
+          },
+          "observation_window_shape": [
+            1,
+            3,
+            13,
+            384,
+            320
+          ],
+          "prompt": "A video recorded from a robot's point of view executing the following instruction: Grab the plastic soda bottle from the table with the right arm",
+          "rand_device": "cpu",
+          "seed": 100017,
+          "sigma_shift": null,
+          "text_context_shape": [
+            1,
+            128,
+            4096
+          ],
+          "tiled": false,
+          "trained_action_chunk": 32,
+          "video_inference_steps": 4
+        },
+        {
+          "action_dtype": "torch.float32",
+          "action_horizon": 32,
+          "action_inference_steps": 10,
+          "action_shape": [
+            32,
+            14
+          ],
+          "backend": "longwam",
+          "condition": "idm",
+          "history": {
+            "buffered_frames": 49,
+            "current_step": 48,
+            "observed_frames": 49,
+            "padded_frames": 0,
+            "past_obs_size": 48,
+            "sample_stride": 4,
+            "window_observation_indices": [
+              0,
+              4,
+              8,
+              12,
+              16,
+              20,
+              24,
+              28,
+              32,
+              36,
+              40,
+              44,
+              48
+            ]
+          },
+          "imagine_sigma": 0.9,
+          "inference_method": "infer_joint_ar",
+          "input_image_shape": [
+            1,
+            3,
+            384,
+            320
+          ],
+          "model_class": "LongWAM",
+          "model_device": "cuda",
+          "model_dtype": "torch.bfloat16",
+          "num_clean_frames": 4,
+          "num_imagine_frames": 2,
+          "observation": {
+            "camera_layout": "head_above_left_right_wrists",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ],
+            "dataset_stats": "/dev/shm/pi34-rt-13072/checkpoints/longwam/dataset_stats.json",
+            "longwam_image_shape": [
+              1,
+              3,
+              384,
+              320
+            ],
+            "resize": "two_stage_antialiased_bilinear",
+            "state_key": "default"
+          },
+          "observation_window_shape": [
+            1,
+            3,
+            13,
+            384,
+            320
+          ],
+          "prompt": "A video recorded from a robot's point of view executing the following instruction: Grab the plastic soda bottle from the table with the right arm",
+          "rand_device": "cpu",
+          "seed": 100018,
+          "sigma_shift": null,
+          "text_context_shape": [
+            1,
+            128,
+            4096
+          ],
+          "tiled": false,
+          "trained_action_chunk": 32,
+          "video_inference_steps": 4
+        },
+        {
+          "action_dtype": "torch.float32",
+          "action_horizon": 32,
+          "action_inference_steps": 10,
+          "action_shape": [
+            32,
+            14
+          ],
+          "backend": "longwam",
+          "condition": "idm",
+          "history": {
+            "buffered_frames": 49,
+            "current_step": 72,
+            "observed_frames": 73,
+            "padded_frames": 0,
+            "past_obs_size": 48,
+            "sample_stride": 4,
+            "window_observation_indices": [
+              24,
+              28,
+              32,
+              36,
+              40,
+              44,
+              48,
+              52,
+              56,
+              60,
+              64,
+              68,
+              72
+            ]
+          },
+          "imagine_sigma": 0.9,
+          "inference_method": "infer_joint_ar",
+          "input_image_shape": [
+            1,
+            3,
+            384,
+            320
+          ],
+          "model_class": "LongWAM",
+          "model_device": "cuda",
+          "model_dtype": "torch.bfloat16",
+          "num_clean_frames": 4,
+          "num_imagine_frames": 2,
+          "observation": {
+            "camera_layout": "head_above_left_right_wrists",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ],
+            "dataset_stats": "/dev/shm/pi34-rt-13072/checkpoints/longwam/dataset_stats.json",
+            "longwam_image_shape": [
+              1,
+              3,
+              384,
+              320
+            ],
+            "resize": "two_stage_antialiased_bilinear",
+            "state_key": "default"
+          },
+          "observation_window_shape": [
+            1,
+            3,
+            13,
+            384,
+            320
+          ],
+          "prompt": "A video recorded from a robot's point of view executing the following instruction: Grab the plastic soda bottle from the table with the right arm",
+          "rand_device": "cpu",
+          "seed": 100019,
+          "sigma_shift": null,
+          "text_context_shape": [
+            1,
+            128,
+            4096
+          ],
+          "tiled": false,
+          "trained_action_chunk": 32,
+          "video_inference_steps": 4
+        },
+        {
+          "action_dtype": "torch.float32",
+          "action_horizon": 32,
+          "action_inference_steps": 10,
+          "action_shape": [
+            32,
+            14
+          ],
+          "backend": "longwam",
+          "condition": "idm",
+          "history": {
+            "buffered_frames": 49,
+            "current_step": 96,
+            "observed_frames": 97,
+            "padded_frames": 0,
+            "past_obs_size": 48,
+            "sample_stride": 4,
+            "window_observation_indices": [
+              48,
+              52,
+              56,
+              60,
+              64,
+              68,
+              72,
+              76,
+              80,
+              84,
+              88,
+              92,
+              96
+            ]
+          },
+          "imagine_sigma": 0.9,
+          "inference_method": "infer_joint_ar",
+          "input_image_shape": [
+            1,
+            3,
+            384,
+            320
+          ],
+          "model_class": "LongWAM",
+          "model_device": "cuda",
+          "model_dtype": "torch.bfloat16",
+          "num_clean_frames": 4,
+          "num_imagine_frames": 2,
+          "observation": {
+            "camera_layout": "head_above_left_right_wrists",
+            "camera_order": [
+              "head",
+              "left_wrist",
+              "right_wrist"
+            ],
+            "dataset_stats": "/dev/shm/pi34-rt-13072/checkpoints/longwam/dataset_stats.json",
+            "longwam_image_shape": [
+              1,
+              3,
+              384,
+              320
+            ],
+            "resize": "two_stage_antialiased_bilinear",
+            "state_key": "default"
+          },
+          "observation_window_shape": [
+            1,
+            3,
+            13,
+            384,
+            320
+          ],
+          "prompt": "A video recorded from a robot's point of view executing the following instruction: Grab the plastic soda bottle from the table with the right arm",
+          "rand_device": "cpu",
+          "seed": 100020,
+          "sigma_shift": null,
+          "text_context_shape": [
+            1,
+            128,
+            4096
+          ],
+          "tiled": false,
+          "trained_action_chunk": 32,
+          "video_inference_steps": 4
+        }
+      ],
+      "instruction": "Grab the plastic soda bottle from the table with the right arm",
+      "policy_steps": 111,
+      "seed": 100016,
+      "success": true,
+      "termination_reason": "success"
+    }
+  ]
+}

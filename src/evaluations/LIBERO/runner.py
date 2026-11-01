@@ -4,7 +4,6 @@ from dataclasses import asdict
 from datetime import datetime, timezone
 from pathlib import Path
 from time import perf_counter
-import json
 from typing import Any
 
 from wam_interp.models.base import EvaluationModelAdapter
@@ -21,6 +20,7 @@ from .results import EpisodeResult, LiberoEvaluationResult, TaskResult
 from .._libero_rollout import (
     run_libero_episode, _episode_seed, _max_steps, _json_safe, _request_for_call,
 )
+from ..provenance import model_provenance, package_versions, write_report
 
 
 def _get_suite(name: str) -> Any:
@@ -88,57 +88,66 @@ def evaluate_libero(
 
     task_results: list[TaskResult] = []
     max_steps = _max_steps(config)
-    for task_id in task_ids:
-        task = suite.get_task(int(task_id))
-        initial_states = initial_states_for_task(suite, int(task_id))
-        if len(initial_states) == 0:
-            raise ValueError(f"LIBERO returned no initial states for task {task_id}")
-        env_seed = _episode_seed(config.seed, int(task_id), 0)
-        env = create_libero_environment(task, config.camera_resolution, env_seed)
-        episodes: list[EpisodeResult] = []
-        try:
-            for trial_index in range(config.num_trials):
-                state_index = trial_index % len(initial_states)
-                seed = _episode_seed(config.seed, int(task_id), trial_index)
-                episode = _run_episode(
-                    model=model,
-                    env=env,
-                    task=task,
-                    task_id=int(task_id),
-                    trial_index=trial_index,
-                    initial_state_index=state_index,
-                    initial_state=initial_states[state_index],
-                    config=config,
-                    seed=seed,
-                    max_steps=max_steps,
-                )
-                episodes.append(episode)
-        finally:
-            close = getattr(env, "close", None)
-            if callable(close):
-                close()
-        task_results.append(
-            TaskResult(
-                task_id=int(task_id),
-                task_name=str(getattr(task, "name", f"task_{task_id}")),
-                instruction=str(task.language),
-                episodes=episodes,
-            )
-        )
-
     result = LiberoEvaluationResult(
         task_suite_name=suite_name,
         model_name=str(getattr(model, "name", type(model).__name__)),
         started_at=started_at,
-        duration_seconds=perf_counter() - started_clock,
+        duration_seconds=0.0,
         config=_json_safe(config),
         tasks=task_results,
+        partial_selection=config.task_ids is not None and len(task_ids) != int(suite_size),
+        provenance={"model": model_provenance(model), "package_versions": package_versions()},
     )
-    if output_dir is not None:
-        result_path = output_dir / f"libero_{suite_name}_{run_id}.json"
-        result.output_path = str(result_path)
-        result_path.write_text(
-            json.dumps(result.to_dict(), indent=2, sort_keys=True),
-            encoding="utf-8",
-        )
+    result_path = None if output_dir is None else output_dir / f"libero_{suite_name}_{run_id}.json"
+    result.output_path = None if result_path is None else str(result_path)
+
+    def flush():
+        # Rewritten after every episode, so a crash or walltime kill keeps finished episodes.
+        result.duration_seconds = perf_counter() - started_clock
+        if result_path is not None:
+            write_report(result.to_dict(), result_path)
+
+    try:
+        for task_id in task_ids:
+            task = suite.get_task(int(task_id))
+            initial_states = initial_states_for_task(suite, int(task_id))
+            if len(initial_states) == 0:
+                raise ValueError(f"LIBERO returned no initial states for task {task_id}")
+            env_seed = _episode_seed(config.seed, int(task_id), 0)
+            env = create_libero_environment(task, config.camera_resolution, env_seed)
+            episodes: list[EpisodeResult] = []
+            task_results.append(TaskResult(
+                task_id=int(task_id),
+                task_name=str(getattr(task, "name", f"task_{task_id}")),
+                instruction=str(task.language),
+                episodes=episodes,
+            ))
+            try:
+                for trial_index in range(config.num_trials):
+                    state_index = trial_index % len(initial_states)
+                    seed = _episode_seed(config.seed, int(task_id), trial_index)
+                    episode = _run_episode(
+                        model=model,
+                        env=env,
+                        task=task,
+                        task_id=int(task_id),
+                        trial_index=trial_index,
+                        initial_state_index=state_index,
+                        initial_state=initial_states[state_index],
+                        config=config,
+                        seed=seed,
+                        max_steps=max_steps,
+                    )
+                    episodes.append(episode)
+                    flush()
+            finally:
+                close = getattr(env, "close", None)
+                if callable(close):
+                    close()
+        result.completed = True
+    except BaseException as exc:
+        result.error = {"type": type(exc).__name__, "message": str(exc)}
+        raise
+    finally:
+        flush()
     return result

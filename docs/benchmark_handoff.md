@@ -154,6 +154,17 @@ default start seed is `100000 * (1 + seed)`; each rejected seed increments it.
 Instructions come verbatim from the native seen/unseen pool (100 descriptions),
 after expert-valid seed screening and a fresh reset with the same seed.
 
+### RoboTwin and LIBERO on a Slurm cluster
+
+Tested on GT Futurama L40/L40S nodes, without root or containers:
+
+1. `scripts/cluster/robotwin_probe.sbatch` checks that a node can render with SAPIEN (Vulkan, ray tracing).
+2. `scripts/cluster/curobo_build.sbatch` builds the CuRobo wheel once into `$HOME/wheels`. RoboTwin needs CuRobo even for evaluation, because seed screening plans with it.
+3. `scripts/cluster/robotwin_eval.sbatch --backend <name> --task-names ... --episodes N` builds the environment with the pins the legacy stack needs, downloads RoboTwin assets and the checkpoint at pinned revisions, and runs `scripts/evaluate_benchmark.py`.
+4. `scripts/cluster/libero_eval.sbatch --backend <name> --suite libero_10 ...` does the same for LIBERO.
+
+Each job writes its report after every episode. A RoboTwin run needs about 30 GB of GPU memory.
+
 ## Download matching checkpoints
 
 Run in either prepared environment; both use `checkpoints/` in this checkout.

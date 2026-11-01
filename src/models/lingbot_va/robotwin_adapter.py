@@ -83,7 +83,8 @@ class LingBotVARobotWinAdapter(LingBotVAAdapter):
     def predict_action(self, request, recorder=None):
         if not self._in_episode:
             raise RuntimeError("Call begin_episode() before LingBot RoboTwin inference")
-        if self._last_chunk is not None:
+        # Steps observed since the last chunk mean it was executed; none means a repeat prediction.
+        if self._last_chunk is not None and self._observed_steps:
             stride = self.model.config.action_per_frame // 4
             if self._observed_steps != self._expected_steps or len(self._frames) != self._expected_steps // stride:
                 raise ValueError("LingBot RoboTwin requires the complete chunk and every fourth observed frame")
@@ -94,7 +95,7 @@ class LingBotVARobotWinAdapter(LingBotVAAdapter):
 
     def postprocess_actions(self, actions, *, environment):
         self.environment_action_type(environment)
-        first = self._last_chunk is None
+        first = self.model.frame_st_id == 0
         self._last_chunk = self.model.postprocess_action(actions)
         if self._last_chunk.shape[0] != 16:
             raise ValueError("LingBot RoboTwin checkpoint must decode 16 EE channels")

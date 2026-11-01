@@ -59,6 +59,6 @@ The individual configs under `configs/fastwam/model/` are also used in training-
 
 ## Current boundary
 
-The ordinary adapter predicts one normalized action chunk from a prepared observation. The live LIBERO evaluator is in `src/evaluations/LIBERO/`; pass it a `FastWAMLiberoAdapter` built around an already-loaded model, its resolved `cfg.data.train`, and the matching dataset-statistics JSON. The evaluator owns simulator episodes and scoring; `libero_adapter.py` owns FastWAM-specific transforms. See [`docs/libero_evaluation.md`](../../../docs/libero_evaluation.md) for setup and the full call flow. RoboTwin evaluation is not implemented here.
+The ordinary adapter predicts one normalized action chunk from a prepared observation. The live LIBERO evaluator is in `src/evaluations/LIBERO/`; pass it a `FastWAMLiberoAdapter` built around an already-loaded model, its resolved `cfg.data.train`, and the matching dataset-statistics JSON. The evaluator owns simulator episodes and scoring; `libero_adapter.py` owns FastWAM-specific transforms. See [`docs/libero_evaluation.md`](../../../docs/libero_evaluation.md) for setup and the full call flow. RoboTwin uses `robotwin_adapter.py` with `src/evaluations/ROBOTWIN/` (see `docs/benchmark_handoff.md`).
 
 For upstream details and the paper's reported experiments, see the [FastWAM repository](https://github.com/yuantianyuan01/FastWAM). This README describes the implementation and configuration currently included in this checkout; where local behavior matters, the code and configs here are authoritative.

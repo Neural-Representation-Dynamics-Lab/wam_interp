@@ -9,6 +9,8 @@ LIBERO-Plus and pinned RoboTwin 2.0 evaluators now have adapters for FastWAM,
 Faster-WAM, and LingBot-VA. See the [isolated setup and six H100 smoke commands](docs/benchmark_handoff.md).
 CPU protocol checks are separate from real-checkpoint validation, which is pending.
 
+Long-WAM ([`src/models/longwam`](src/models/longwam/README.md)) and OpenWAM ([`src/models/openwam`](src/models/openwam/README.md)) are also registered backends. `scripts/cluster/` has Slurm jobs for RoboTwin and LIBERO evaluation without root or containers.
+
 This repository is research infrastructure for studying how world-action models use their internal representations to choose actions. FastWAM is the first model backend; the shared interfaces are intended to support other models and benchmarks without moving their implementation details into common code.
 
 The main design rule is: **a benchmark evaluator controls the benchmark; a model adapter controls the model-facing transforms.** The evaluator does not load a model, checkpoint, tokenizer, or normalization file. It receives a ready-to-use adapter and calls its public methods.
@@ -36,7 +38,7 @@ Install this repository, the FastWAM backend, and the LIBERO simulator runtime:
 python -m pip install -e ".[all]"
 ```
 
-The `all` extra includes FastWAM's Python dependencies and the LIBERO simulator runtime (`robosuite>=1.4.0,<1.5`, `mujoco>=3.3,<3.10`, and the task/parser packages). The bounds keep LIBERO on robosuite's required 1.4 API and avoid the MuJoCo 3.10 API change that breaks robosuite 1.4. LIBERO's legacy requirements file pins Python 3.8 and PyTorch 1.11; do not install it into this environment because that would replace the model stack. The upstream LIBERO source checkout is still needed for task definitions, fixed initial states, and simulator assets. Clone and install that source without re-resolving its old dependencies:
+The `all` extra includes FastWAM's Python dependencies and the LIBERO simulator runtime (`robosuite>=1.4.0,<1.5`, `mujoco==3.3.2`, and the task/parser packages). robosuite stays on its required 1.4 API, and MuJoCo is pinned to 3.3.2, the version behind `benchmark_results/` (3.10 breaks robosuite 1.4). LIBERO's legacy requirements file pins Python 3.8 and PyTorch 1.11; do not install it into this environment because that would replace the model stack. The upstream LIBERO source checkout is still needed for task definitions, fixed initial states, and simulator assets. Clone and install that source without re-resolving its old dependencies:
 
 ```bash
 mkdir -p third_party

@@ -83,10 +83,13 @@ class RobotWinFrontend:
             self.close()
 
     def begin(self, seed, episode, info, instruction_type):
+        import random
         import numpy as np
         from generate_episode_instructions import generate_episode_descriptions
 
         self._setup(seed, episode)
+        # Upstream picks instructions with unseeded `random`; seed it so each episode gets a fixed one.
+        random.seed(int(seed))
         descriptions = generate_episode_descriptions(self.config.task_name, [info["info"]], self.config.instruction_pool_size)
         choices = descriptions[0][instruction_type]
         if not choices:
@@ -112,10 +115,11 @@ class RobotWinFrontend:
         observation = observation_from_robotwin(self.env.get_obs(), self.instruction)
         return observation, bool(self.env.eval_success)
 
-    def close(self):
+    def close(self, clear_cache=False):
         if self.active:
             self.active = False
-            self.env.close_env()
+            # Upstream eval_policy.py clears SAPIEN's render cache every clear_cache_freq accepted episodes.
+            self.env.close_env(clear_cache=bool(clear_cache))
             viewer = getattr(self.env, "viewer", None)
             if self.args.get("render_freq") and viewer is not None:
                 viewer.close()

@@ -22,7 +22,7 @@ def compose_fasterwam_config(task="libero_fasterwam_2cam224_1e-4", repository_ro
                        overrides=[f"task={task}", *(overrides or [])])
 
 
-def load_fasterwam(config, checkpoint, *, device="cuda", dtype="bfloat16"):
+def load_fasterwam(config, checkpoint, *, device="cuda", dtype="bfloat16", allow_partial_checkpoint=False):
     checkpoint = Path(checkpoint).expanduser().resolve()
     if not checkpoint.is_file():
         raise FileNotFoundError(f"Faster-WAM checkpoint not found: {checkpoint}")
@@ -30,12 +30,18 @@ def load_fasterwam(config, checkpoint, *, device="cuda", dtype="bfloat16"):
     from omegaconf import OmegaConf
     from wam_interp.models.fastwam.loader import _resolve_dtype
 
+    from wam_interp.models.checkpoints import check_checkpoint_loads, record_state_dict_loads
+
     model = instantiate(config.model, model_dtype=_resolve_dtype(dtype), device=device)
-    model.load_checkpoint(str(checkpoint))
+    modules = {name: getattr(model, name, None) for name in ("mot", "video_expert", "proprio_encoder")}
+    with record_state_dict_loads(modules) as loads:
+        model.load_checkpoint(str(checkpoint))
+    load_summary = check_checkpoint_loads(loads, model, checkpoint, allow_partial=allow_partial_checkpoint)
     model.to(device=device)
     model.eval()
     model._wam_interp_metadata = {
         "checkpoint": str(checkpoint),
+        "checkpoint_load": load_summary,
         "checkpoint_size_bytes": checkpoint.stat().st_size,
         "upstream_revision": UPSTREAM_REVISION,
         "resolved_config": OmegaConf.to_container(config, resolve=True),

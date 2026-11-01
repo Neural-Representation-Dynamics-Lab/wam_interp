@@ -5,7 +5,7 @@ import numpy as np
 from wam_interp.types import PreparedObservation
 from .adapter import FastWAMAdapter
 from .libero_adapter import (
-    _plain_mapping, _load_stats, _normalization_mode, _normalize_field,
+    evaluation_sampler_defaults, _plain_mapping, _load_stats, _normalization_mode, _normalize_field,
     _denormalize_field, _as_numpy, _model_device, _model_dtype,
 )
 
@@ -64,7 +64,7 @@ class FastWAMRobotWinAdapter(FastWAMAdapter):
         self.transforms = RobotWinJointTransforms(model, data_config, dataset_stats)
 
     def inference_defaults(self):
-        return {"condition": "first_frame", "num_video_frames": 9}
+        return {**evaluation_sampler_defaults(self.model), "condition": "first_frame", "num_video_frames": 9}
 
     def environment_action_type(self, environment):
         if environment != "robotwin":

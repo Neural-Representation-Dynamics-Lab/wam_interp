@@ -36,17 +36,21 @@ def get_benchmark_module():
     return benchmark, get_libero_path, OffScreenRenderEnv
 
 
+def bddl_source_name(bddl_file: str) -> str:
+    """BDDL file the simulator opens: LIBERO-Plus variants (``<base>_view_..._initstate_<n>``) map to ``<base>.bddl``."""
+    if "_view_" in bddl_file and "_initstate_" in bddl_file:
+        return bddl_file.split("_view_")[0] + ".bddl"
+    return bddl_file
+
+
 def create_libero_environment(task: Any, resolution: int, seed: int | None):
     benchmark, get_libero_path, offscreen_render_env = get_benchmark_module()
     del benchmark
-    bddl_path = (
-        Path(get_libero_path("bddl_files"))
-        / task.problem_folder
-        / task.bddl_file
-    )
-    if not bddl_path.is_file():
+    folder = Path(get_libero_path("bddl_files")) / task.problem_folder
+    bddl_path = folder / task.bddl_file
+    if not (folder / bddl_source_name(task.bddl_file)).is_file():
         raise FileNotFoundError(
-            f"LIBERO BDDL task file does not exist: {bddl_path}. "
+            f"LIBERO BDDL task file does not exist: {folder / bddl_source_name(task.bddl_file)}. "
             "Check the upstream LIBERO path configuration."
         )
 

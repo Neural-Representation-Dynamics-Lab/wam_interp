@@ -5,7 +5,7 @@ import numpy as np
 
 from wam_interp.types import InferenceRequest, InferenceResult
 from .._libero_rollout import _json_safe
-from ..provenance import package_versions, model_provenance, save_report, synchronize_adapter
+from ..provenance import package_versions, model_provenance, report_path, synchronize_adapter, write_report
 from .config import RoboTwinEvalConfig, ROBOTWIN_REVISION
 from .environment import open_environment
 
@@ -24,12 +24,14 @@ def evaluate_robotwin(model, config: RoboTwinEvalConfig):
     begin_episode = getattr(model, "begin_episode", None)
     observe_step = getattr(model, "observe_step", None)
     start = perf_counter()
+    path = report_path(config.output_dir, "robotwin")
     report = {"benchmark": "robotwin", "benchmark_revision": ROBOTWIN_REVISION,
               "config": _json_safe(config), "model": model_provenance(model),
               "package_versions": package_versions(), "action_type": action_type,
               "accepted_seeds": [], "rejected_seeds": [], "trials": [], "completed": False}
     seed = config.start_seed if config.start_seed is not None else 100000 * (1 + config.seed)
     attempts = 0
+    repeated_error, repeats = None, 0
     try:
         with open_environment(config) as frontend:
             while len(report["trials"]) < config.num_episodes and attempts < config.max_seed_attempts:
@@ -38,8 +40,15 @@ def evaluate_robotwin(model, config: RoboTwinEvalConfig):
                 accepted, info, reason = frontend.screen_seed(seed, episode)
                 if not accepted:
                     report["rejected_seeds"].append({"seed": seed, "stage": "expert", "reason": reason})
+                    # The same non-expert error on every seed is a setup problem, not a bad seed.
+                    errored = reason not in (None, "expert_failed")
+                    repeats = repeats + 1 if errored and reason == repeated_error else int(errored)
+                    repeated_error = reason if errored else None
+                    if repeats >= config.max_repeated_screen_errors:
+                        raise RuntimeError(f"Seed screening failed {repeats} times in a row with: {reason}")
                     seed += 1
                     continue
+                repeated_error, repeats = None, 0
                 try:
                     observation = frontend.begin(seed, episode, info, config.instruction_type)
                 except Exception as exc:
@@ -93,24 +102,32 @@ def evaluate_robotwin(model, config: RoboTwinEvalConfig):
                                 break
                         if trial["success"]:
                             break
-                except Exception as exc:
+                except BaseException as exc:
                     trial["termination_reason"] = "error"
                     trial["error"] = {"type": type(exc).__name__, "message": str(exc)}
                     raise
                 finally:
-                    frontend.close()
+                    frontend.close(clear_cache=len(report["trials"]) % config.clear_cache_freq == 0)
+                if path is not None:
+                    write_report(_summarize(dict(report), attempts, start), path)
                 seed += 1
             if len(report["trials"]) != config.num_episodes:
                 raise RuntimeError(f"Seed search exhausted after {attempts} attempts")
             report["completed"] = True
-    except Exception as exc:
+    except BaseException as exc:
         report["error"] = {"type": type(exc).__name__, "message": str(exc)}
         raise
     finally:
-        report["attempts"] = attempts
-        report["duration_seconds"] = perf_counter() - start
-        report["episodes"] = len(report["trials"])
-        report["successes"] = sum(int(trial["success"]) for trial in report["trials"])
-        report["success_rate"] = report["successes"] / report["episodes"] if report["episodes"] else None
-        save_report(report, config.output_dir, "robotwin")
+        _summarize(report, attempts, start)
+        if path is not None:
+            write_report(report, path)
+    return report
+
+
+def _summarize(report, attempts, start):
+    report["attempts"] = attempts
+    report["duration_seconds"] = perf_counter() - start
+    report["episodes"] = len(report["trials"])
+    report["successes"] = sum(int(trial["success"]) for trial in report["trials"])
+    report["success_rate"] = report["successes"] / report["episodes"] if report["episodes"] else None
     return report

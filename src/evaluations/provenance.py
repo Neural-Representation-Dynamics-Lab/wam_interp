@@ -4,6 +4,8 @@ from importlib.metadata import PackageNotFoundError, version
 from pathlib import Path
 import hashlib
 import json
+import os
+import signal
 import subprocess
 from datetime import datetime, timezone
 
@@ -26,6 +28,17 @@ def checkout_revision(root, expected=None):
     return actual
 
 
+def source_state(root):
+    """HEAD plus whether the checkout has uncommitted changes (and a hash of them)."""
+    root = Path(root).expanduser().resolve()
+    status = subprocess.run(["git", "-C", str(root), "status", "--porcelain"],
+                            capture_output=True, text=True, check=True).stdout
+    diff = subprocess.run(["git", "-C", str(root), "diff", "HEAD"], capture_output=True, check=True).stdout
+    return {"revision": checkout_revision(root), "dirty": bool(status.strip()),
+            "dirty_paths": len(status.splitlines()),
+            "status_and_diff_sha256": hashlib.sha256(status.encode() + diff).hexdigest()}
+
+
 def package_versions():
     result = {}
     for name in ("torch", "numpy", "mujoco", "robosuite", "sapien", "mplib", "diffusers", "transformers"):
@@ -39,16 +52,23 @@ def package_versions():
 def model_provenance(adapter):
     model = getattr(adapter, "model", None)
     try:
-        source_revision = checkout_revision(Path(__file__).resolve().parents[2])
+        source = source_state(Path(__file__).resolve().parents[2])
     except (OSError, subprocess.CalledProcessError):
-        source_revision = None
+        source = {"revision": None, "dirty": None}
     transforms = getattr(adapter, "transforms", None)
-    statistics = getattr(adapter, "dataset_stats", getattr(transforms, "stats", None))
+    statistics = getattr(adapter, "dataset_stats", None)
+    for name in ("dataset_stats", "stats"):
+        if statistics is None:
+            statistics = getattr(transforms, name, None)
     statistics_hash = None
     if statistics is not None:
-        statistics_hash = hashlib.sha256(json.dumps(statistics, sort_keys=True).encode()).hexdigest()
+        # Content only: the loader adds the file path as "_source", which must not change the hash.
+        content = {key: value for key, value in statistics.items() if key != "_source"}
+        statistics_hash = hashlib.sha256(json.dumps(content, sort_keys=True).encode()).hexdigest()
     return {
-        "source_revision": source_revision,
+        "source_revision": source["revision"],
+        "source_dirty": source["dirty"],
+        "source_state": source,
         "model_name": getattr(adapter, "name", type(adapter).__name__),
         "model_dtype": str(getattr(model, "torch_dtype", getattr(model, "dtype", "unknown"))),
         "model_device": str(getattr(model, "device", "unknown")),
@@ -64,12 +84,32 @@ def synchronize_adapter(adapter):
         torch.cuda.synchronize(device)
 
 
-def save_report(report, output_dir, prefix):
+def report_path(output_dir, prefix):
+    """Timestamped report path in ``output_dir`` (created), or None when not saving."""
     if output_dir is None:
         return None
     output_dir = Path(output_dir).expanduser().resolve()
     output_dir.mkdir(parents=True, exist_ok=True)
-    path = output_dir / f"{prefix}_{datetime.now(timezone.utc).strftime('%Y%m%dT%H%M%S%fZ')}.json"
+    return output_dir / f"{prefix}_{datetime.now(timezone.utc).strftime('%Y%m%dT%H%M%S%fZ')}.json"
+
+
+def write_report(report, path):
+    """Atomically (re)write ``report`` as JSON at ``path``; safe to call after every episode."""
+    path = Path(path)
     report["output_path"] = str(path)
-    path.write_text(json.dumps(report, indent=2, sort_keys=True, default=str), encoding="utf-8")
+    temporary = path.with_name(path.name + ".tmp")
+    temporary.write_text(json.dumps(report, indent=2, sort_keys=True, default=str), encoding="utf-8")
+    os.replace(temporary, path)
     return str(path)
+
+
+def save_report(report, output_dir, prefix):
+    path = report_path(output_dir, prefix)
+    return None if path is None else write_report(report, path)
+
+
+def install_termination_handler():
+    """Turn SIGTERM (Slurm walltime/preemption) into SystemExit so ``finally`` blocks save results."""
+    def handler(signum, _frame):
+        raise SystemExit(128 + signum)
+    return signal.signal(signal.SIGTERM, handler)

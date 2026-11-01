@@ -79,7 +79,11 @@ def test_native_loader_factory_and_provenance(tmp_path, monkeypatch):
     native = Loadable()
     import hydra.utils
     monkeypatch.setattr(hydra.utils, "instantiate", lambda *args, **kwargs: native)
-    result = load_fasterwam(compose_fasterwam_config(), checkpoint, device="cpu", dtype="float32")
+    with pytest.raises(RuntimeError, match="did not load completely"):  # this fixture loads no weights
+        load_fasterwam(compose_fasterwam_config(), checkpoint, device="cpu", dtype="float32")
+    result = load_fasterwam(compose_fasterwam_config(), checkpoint, device="cpu", dtype="float32",
+                            allow_partial_checkpoint=True)
+    assert result._wam_interp_metadata["checkpoint_load"]["problems"]
     assert result.loaded == str(checkpoint.resolve())
     assert result.training is False
     assert result._wam_interp_metadata["resolved_config"]["model"]["condition_layers"] == list(range(0, 29, 4))

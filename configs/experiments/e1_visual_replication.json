@@ -1,0 +1,26 @@
+{
+  "schema_version": 1,
+  "suite": "libero_10",
+  "tasks": [
+    {"task_id": 0, "targets": {"a":"alphabet_soup_1", "b":"tomato_sauce_1"}, "labels":{"a":"soup", "b":"tomato"}},
+    {"task_id": 7, "targets": {"a":"alphabet_soup_1", "b":"cream_cheese_1"}, "labels":{"a":"soup", "b":"cream cheese"}}
+  ],
+  "calibration_states": [16,17],
+  "test_states": [20,21,22,23,24,25,26,27],
+  "previously_exposed": {"0":[0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15],"1":[0]},
+  "action_seeds": [0,1],
+  "pilot_config": "configs/experiments/e1_counterfactual_libero.json",
+  "reference_config": "configs/experiments/e1_simulator_pairs.json",
+  "appearance_candidates": {"tint_10":[0.9,1.0,0.9],"tint_25":[0.75,1.0,0.75],"tint_50":[0.5,1.0,0.5]},
+  "calibration_rule": "Encode all four calibration states under original current appearance; require valid source geometry/rendering and future RGB reconstruction MAE <= 5/255. Across all four states, choose the valid appearance level minimizing mean abs(log(mean-two-target appearance latent RMS / original target-motion latent RMS)). Tie breaks toward weaker level. No policy outcome enters selection. Actual AI-assisted visual review is required before selection is frozen.",
+  "codec_max_future_mae_255": 5.0,
+  "minimum_test_states_per_task": 4,
+  "baseline_limits": {"endpoint_separation_m":0.01,"mean_trajectory_separation_m":0.005},
+  "maximum_test_branches": 448,
+  "primary_measure": "Target b minus target a EEF endpoint contrast projected onto the initial a-to-b XY axis, with original current/future appearance. Average seeds within state; report tasks separately and an equal-task mean with state-stratified bootstrap intervals.",
+  "secondary_measures": ["motion effects across current/future appearances","future-only appearance effects at fixed target/current image","current-by-future appearance interaction","reference path and endpoint alignment","orientation and gripper state","all-integration-step contacts and object movement","pixel/latent intervention sizes"],
+  "inference": "FastWAM Optional IDM bf16, 10 inference steps, 9 video frames, 32 executed controls, no replanning. Donor input consists only of simulator RGB. Recipient instruction fixed within each task.",
+  "stopping_rule": "Keep all prespecified candidate states and both reference attempts per state. Exclude a state only before policy inference if either reference fails the unchanged geometry/rendering gates; never replace a failed state. Require both calibration states per task. Require >=4 of the 8 test candidates per task. Run all 192 maximum test controls before any donor branches; stop all donor execution if any baseline/identity/reconstruction gate fails. Reject failed visual codecs before outcomes, preserving full denominators. No silent restart or adaptation after test outcomes.",
+  "uncertainty": "16 prespecified test states is a bounded replication, not a powered final confirmatory study. No calibrated task-success equivalence margin is claimed. Baseline limits validate the instrument, not semantic invariance. Norm calibration does not eliminate differences in support or salience.",
+  "human_review": "pending"
+}

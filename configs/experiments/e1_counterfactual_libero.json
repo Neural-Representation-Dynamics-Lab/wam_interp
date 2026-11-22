@@ -1,0 +1,41 @@
+{
+  "backend": "fastwam_optional_idm",
+  "repository_root": ".",
+  "checkpoint": "checkpoints/fastwam/libero_optional_idm_2cam224.pt",
+  "statistics": "checkpoints/fastwam/libero_optional_idm_2cam224_dataset_stats.json",
+  "device": "cuda",
+  "precision": "bfloat16",
+  "suite": "libero_10",
+  "task_id": 0,
+  "initial_state_index": 0,
+  "environment_seed": 0,
+  "action_seed": 0,
+  "candidate_seeds": [
+    0,
+    1
+  ],
+  "camera_resolution": 256,
+  "warmup_steps": 30,
+  "execute_steps": 32,
+  "inference_steps": 10,
+  "behavior_axis": 1,
+  "identity_atol": 1E-05,
+  "property": "first_approach_target",
+  "frame_steps": [
+    0,
+    4,
+    8,
+    12,
+    16,
+    20,
+    24,
+    28,
+    32
+  ],
+  "donor_prompts": {
+    "soup_tomato": "put both the alphabet soup and the tomato sauce in the basket",
+    "cream_butter": "put both the cream cheese box and the butter in the basket",
+    "soup_cream": "put both the alphabet soup and the cream cheese box in the basket",
+    "tomato_soup": "put both the tomato sauce and the alphabet soup in the basket"
+  }
+}

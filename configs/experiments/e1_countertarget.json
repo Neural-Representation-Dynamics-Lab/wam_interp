@@ -1,0 +1,60 @@
+{
+  "schema_version": 1,
+  "label": "exploratory_two_alternative_targets",
+  "pilot_config": "configs/experiments/e1_counterfactual_libero.json",
+  "initial_states": [
+    13,
+    14,
+    15
+  ],
+  "action_seeds": [
+    0,
+    1
+  ],
+  "candidate_seeds": [
+    14,
+    15,
+    16,
+    17
+  ],
+  "donor_prompts": {
+    "cream_only": "put the cream cheese box in the basket",
+    "cream_pick": "pick up the cream cheese box",
+    "butter_only": "put the butter in the basket",
+    "butter_pick": "pick up the butter"
+  },
+  "intended_targets": {
+    "cream_only": "cream",
+    "cream_pick": "cream",
+    "butter_only": "butter",
+    "butter_pick": "butter"
+  },
+  "maximum_review_pairs_per_state": 8,
+  "matching": {
+    "latent_delta_relative_tolerance": 0.2,
+    "path_length_relative_tolerance": 0.15,
+    "endpoint_displacement_relative_tolerance": 0.15,
+    "normalized_progress_max_absolute_difference": 0.15
+  },
+  "landmark": "Same rounded lower-left corner of the camera-facing horizontal gripper palm housing in all nine external-camera frames; missing or ambiguous points cannot be interpolated",
+  "review_policy": "AI-assisted exploratory review authorized; independent human review remains pending. Prompt target is a hypothesis, never a semantic label.",
+  "selection_rule": "Rank cream/butter pairs by maximum norm discrepancy across both recipient seeds, then IDs. Review the first eight norm-eligible pairs per state. Require native all-nine-frame semantic/appearance review, visible motion landmarks, motion matching, and pair-level orientation/appearance review. Freeze every state before policy comparisons. No unmatched comparisons.",
+  "primary_measure": "dot(butter_donor_EEF_endpoint - cream_donor_EEF_endpoint, normalized_initial_world_XY_vector_from_cream_to_butter), meters; expected positive",
+  "secondary_measures": [
+    "world_y_endpoint_contrast",
+    "3D_endpoint_separation",
+    "mean_3D_trajectory_separation"
+  ],
+  "target_bodies": [
+    "cream_cheese_1_main",
+    "butter_1_main"
+  ],
+  "analysis_unit": "initial state, after averaging two recipient action seeds",
+  "no_match_behavior": "Do not execute unmatched policy comparisons",
+  "limitations": "Adaptive exploratory follow-up, same three states, one model/task. Both target instructions conflict with original task. Tests short-chunk directional coupling, not task usefulness, benchmark success or isolated target semantics.",
+  "contrast_labels": [
+    "cream",
+    "butter"
+  ],
+  "rationale": "Separate adaptive follow-up to the initial soup/cream search, whose first two states had no norm-eligible pair. Both donors now target objects outside the fixed original recipient instruction; this avoids comparing a near-baseline target with a distant alternative. No claim that either donor is the recipient native policy intent."
+}

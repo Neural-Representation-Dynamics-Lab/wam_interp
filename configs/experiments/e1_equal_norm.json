@@ -1,0 +1,20 @@
+{
+  "schema_version": 1,
+  "label": "exploratory_equal_norm_diagnostic",
+  "pilot_config": "configs/experiments/e1_counterfactual_libero.json",
+  "source_results": "results/e1_replication_20261120",
+  "initial_states": [3, 4, 5],
+  "action_seeds": [0, 1],
+  "same_donor": "soup_tomato_seed_2",
+  "alternative_donor": "cream_butter_seed_2",
+  "radius_fractions": [0.5, 1.0],
+  "random_direction_seeds": [101, 102],
+  "maximum_realized_norm_relative_error": 0.02,
+  "minimum_realized_direction_cosine": 0.99,
+  "primary_measure": "alternative_minus_same_eef_world_y_displacement_m_at_common_radius",
+  "secondary_measures": ["eef_endpoint_separation_m", "eef_mean_trajectory_separation_m", "random_direction_effects"],
+  "analysis_unit": "initial_state; average two action seeds first",
+  "selection": "All fixed arms included; no selection by action effects or decoded appearance",
+  "interpretation": "Development diagnostic on previously used states. Equal Euclidean latent norm controls perturbation size only; interpolated and random futures may be off manifold, and direction does not isolate semantics.",
+  "human_review": "pending, deferred by user"
+}

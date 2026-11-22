@@ -1,0 +1,35 @@
+{
+  "schema_version": 1,
+  "label": "exploratory_native_pair_search",
+  "pilot_config": "configs/experiments/e1_counterfactual_libero.json",
+  "initial_states": [13, 14, 15],
+  "action_seeds": [0, 1],
+  "candidate_seeds": [10, 11, 12, 13],
+  "donor_prompts": {
+    "soup_only": "put the alphabet soup in the basket",
+    "soup_first": "put the alphabet soup in the basket first, then put the tomato sauce in the basket",
+    "soup_pick": "pick up the alphabet soup",
+    "soup_move": "move the alphabet soup into the basket",
+    "cream_only": "put the cream cheese box in the basket",
+    "cream_first": "put the cream cheese box in the basket first, then put the butter in the basket",
+    "cream_pick": "pick up the cream cheese box",
+    "cream_move": "move the cream cheese box into the basket"
+  },
+  "intended_targets": {"soup_only": "soup", "soup_first": "soup", "soup_pick": "soup", "soup_move": "soup", "cream_only": "cream", "cream_first": "cream", "cream_pick": "cream", "cream_move": "cream"},
+  "maximum_review_pairs_per_state": 8,
+  "matching": {
+    "latent_delta_relative_tolerance": 0.20,
+    "path_length_relative_tolerance": 0.15,
+    "endpoint_displacement_relative_tolerance": 0.15,
+    "normalized_progress_max_absolute_difference": 0.15
+  },
+  "landmark": "Same rounded lower-left corner of the camera-facing horizontal gripper palm housing in all nine external-camera frames; missing or ambiguous points cannot be interpolated",
+  "review_policy": "AI-assisted exploratory review authorized; independent human review remains pending. Prompt target is a hypothesis, never a semantic label.",
+  "selection_rule": "Rank cross-instruction-target pairs by maximum latent-norm discrepancy across both recipient seeds, then candidate IDs. Inspect the first eight norm-eligible pairs per state. Require all-nine-frame native video semantic/appearance review and motion matching, then pair-level orientation/appearance review. Select the passing pair with minimum maximum normalized discrepancy across both seeds, then IDs. Freeze all state selections before recipient effects. Retain every rejected and unreviewed pair; a bounded no-match result does not establish absence of a match elsewhere in the bank.",
+  "primary_measure": "dot(alternative_EEF_endpoint - soup_EEF_endpoint, normalized_initial_world_XY_vector_from_soup_body_to_cream_body), in meters; expected positive",
+  "secondary_measures": ["world_y_endpoint_contrast", "3D_endpoint_separation", "mean_3D_trajectory_separation"],
+  "target_bodies": ["alphabet_soup_1_main", "cream_cheese_1_main"],
+  "analysis_unit": "initial state, after averaging two recipient action seeds",
+  "no_match_behavior": "Do not execute unmatched policy comparisons",
+  "limitations": "One model/task, three new states, fixed bounded donor search. Equal global norm and image-motion descriptors do not isolate every visual or semantic difference. AI review is provisional."
+}

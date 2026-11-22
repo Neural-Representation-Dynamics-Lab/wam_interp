@@ -1,0 +1,27 @@
+{
+  "schema_version": 1,
+  "label": "exploratory_native_counterfactual_replication",
+  "pilot_config": "configs/experiments/e1_counterfactual_libero.json",
+  "task_id": 0,
+  "initial_states": [3,4,5,6,7,8,9,10,11,12],
+  "action_seeds": [0,1],
+  "candidate_seeds": [2,3,4,5,6,7,8,9],
+  "same_primary": "soup_tomato_seed_2",
+  "alternative_primary": "cream_butter_seed_2",
+  "recipient_label": "soup_region",
+  "alternative_label": "cream_butter_region",
+  "expected_sign": -1,
+  "matching": {
+    "latent_delta_relative_tolerance": 0.20,
+    "path_length_relative_tolerance": 0.15,
+    "endpoint_displacement_relative_tolerance": 0.15,
+    "normalized_progress_max_absolute_difference": 0.15,
+    "minimum_visible_frames": 9,
+    "coordinate_system": "agentview_224_pixels_visible_palm_corner"
+  },
+  "selection_rule": "Fixed primary pair; reject invalid semantics without substituting another primary pair. Select additional same-target donor by smallest maximum normalized matching discrepancy, then candidate ID. Exclude the primary same donor. Use only donor imagery, reviewed coordinates and latent norms; never executed actions/effects. No match is a recorded feasibility result, not a matched comparison.",
+  "review_policy": "AI-assisted exploratory review authorized by user; independent human review deferred and remains pending.",
+  "analysis_unit": "initial_state; average the two action-seed contrasts within state before aggregation",
+  "contact_followup": {"initial_states": [3,4,5], "action_seed": 0, "max_chunks": 12, "execute_steps": 32, "object_motion_threshold_m": 0.01},
+  "limitations": "One task, one model; 10 previously untested states. Matching observed nuisance variables does not isolate all semantic or visual confounds. Object motion is not synonymous with grasp success."
+}

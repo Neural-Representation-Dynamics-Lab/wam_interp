@@ -1,0 +1,18 @@
+{
+  "schema_version":1,
+  "references":"results/e1_simulator_pairs_v3_20261121",
+  "previous_results":"results/e1_video_bottleneck_20261121",
+  "pilot_config":"configs/experiments/e1_counterfactual_libero.json",
+  "initial_states":[3,4,5],
+  "action_seeds":[0,1],
+  "observed_appearances":["original","tint_10"],
+  "future_appearances":["original","tint_10"],
+  "targets":["soup","tomato"],
+  "maximum_branches":84,
+  "baseline_limits":{"endpoint_separation_m":0.01,"mean_trajectory_separation_m":0.005},
+  "primary_measure":"Signed EEF endpoint contrast (tomato-reference minus soup-reference) projected onto the initial soup-to-tomato direction in the tabletop XY plane. Report separately for each observed/future appearance combination; average seeds within state.",
+  "appearance_measure":"Tinted-future minus original-future EEF endpoint/path change at fixed reference motion and observed appearance. Also report its interaction with observed appearance. No calibrated equivalence margin or invariance claim.",
+  "secondary_measures":["EEF path and endpoint separation","distance to reference target region","action changes","contacts and termination","pixel and latent edit size"],
+  "interpretation":"Scripted first approach is a motion/region composite, not isolated object identity. Table tint is a broad appearance perturbation. Original-observation/tinted-future is a mismatch stress test; the full observation/future factorial distinguishes consistency effects descriptively. Three development states and two recipient seeds only. No full-task success estimate.",
+  "stopping_rule":"36 native/identity/round-trip control branches first (3 states x 2 seeds x 2 observed appearances x 3 arms). All reconstruction gates must pass and all reference reconstructions must receive actual AI-assisted visual review before the 48 factorial donor branches. No silent resume, threshold change or candidate selection based on policy effects. Human review deferred as authorized."
+}

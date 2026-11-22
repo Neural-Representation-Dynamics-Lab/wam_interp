@@ -4,6 +4,7 @@ __pycache__/
 .pytest_cache/
 .venv-validation/
 .venv/
+.venv-e1/
 build/
 dist/
 checkpoints/

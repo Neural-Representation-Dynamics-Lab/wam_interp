@@ -58,7 +58,7 @@ def build(results):
         row={}
         for p in sorted(d.glob("libero_libero_10_*.json")):
             r=load(p)
-            row.update(completed=r.get("completed"), error=r.get("error"),results=[{"success":e["success"],"steps":e["policy_steps"]} for t in r["tasks"] for e in t["episodes"]])
+            row.update(completed=r.get("completed"), error=r.get("error"),results=[{"success":e["success"],"steps":e["policy_steps"]} for t in r["tasks"] for e in t["trials"]])
         if (d/"parity.json").is_file():
             row["parity"]= [{k:ch[k] for k in ("call","layer","stage","occurrence","capture_max_abs","identity_max_abs","same_features","ablation_max_abs","peak_allocated_bytes") if k in ch} for ch in load(d/"parity.json")["chunks"]]
         if (d/"scene_features/results.json").is_file():
@@ -76,6 +76,8 @@ def build(results):
             for p,row in zip(paths,trials):
                 if "selective_half_contrast_m" in row:
                     groups[(p.parents[2].name,row["state"])].append(row)
+            if stage=="held_out":
+                groups={k:rs for k,rs in groups.items() if {r["seed"] for r in rs}=={0,1}}
             stats={}
             for metric in ("relevant_half_contrast_m","nuisance_half_contrast_m","selective_half_contrast_m"):
                 by_state=[mean([r[metric] for r in rows]) for rows in groups.values()]
@@ -89,6 +91,9 @@ def build(results):
                        alternate_native_contacts=sum(bool(r.get("alternate_instruction",{}).get("native_first_contact",{}).get("valid")) for r in trials),
                        alternate_interactions=[r["alternate_instruction"]["instruction_by_property_interaction_m"] for r in trials if "instruction_by_property_interaction_m" in r.get("alternate_instruction",{})],
                        stats=stats)
+            interval=stats.get("nuisance_half_contrast_m_state_bootstrap_95")
+            if interval is not None and stage=="held_out":
+                entry[stage]["nuisance_interval_within_5mm"]=bool(interval[0]>=-.005 and interval[1]<=.005)
         summary[key]=entry
     return summary
 

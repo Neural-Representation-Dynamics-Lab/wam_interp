@@ -44,11 +44,30 @@ def contrast_statistics(groups):
     for metric in ("relevant_half_contrast_m", "nuisance_half_contrast_m", "selective_half_contrast_m"):
         state_values = [mean([r[metric] for r in rows]) for rows in groups.values()]
         stats[metric] = mean(state_values)
+        # Averaging opposite effects can hide heterogeneous sensitivity.
+        stats[metric + "_mean_abs_within_seed"] = mean([
+            mean([abs(r[metric]) for r in rows]) for rows in groups.values()
+        ])
         if len(state_values) > 1:
             rng = np.random.default_rng(20261122)
             bootstrap = rng.choice(state_values, size=(10000, len(state_values)), replace=True).mean(axis=1)
             stats[metric + "_state_bootstrap_95"] = np.quantile(bootstrap, [.025, .975]).tolist()
+    for role in ("relevant", "nuisance"):
+        field = role + "_endpoint_3d_half_distance_m"
+        magnitudes = [mean([r[field] for r in rows]) for rows in groups.values()
+                      if all(field in r for r in rows)]
+        stats[field] = mean(magnitudes)
     return stats
+
+
+def add_endpoint_magnitudes(row, path):
+    if "selective_half_contrast_m" not in row:
+        return
+    with np.load(path.with_name("execution.npz"), allow_pickle=False) as trajectories:
+        for role, obj in (("relevant", row["target"]), ("nuisance", row["distractor"])):
+            left = trajectories[obj + "_-1"][-1]
+            right = trajectories[obj + "_1"][-1]
+            row[role + "_endpoint_3d_half_distance_m"] = float(np.linalg.norm(right - left) / 2)
 
 
 def build(results):
@@ -63,6 +82,12 @@ def build(results):
     }
     summary["native_cost_scope"] = "Synchronized instrumented wall time. IDM includes forecast copying and saving."
     summary["large_swap_replan"] = stress_test(results / "e1_large_swap_replan")
+    motion = [load(p) for p in sorted((results/"e1_motion_control").glob("state_*/case.json"))]
+    effects = [r["motion_half_contrast_m"] for r in motion if "motion_half_contrast_m" in r]
+    summary["motion_control"] = {"attempted":len(motion), "source_passed":sum(r["source_pass"] for r in motion),
+                                  "sham_passed":sum(bool(r.get("sham_pass")) for r in motion),
+                                  "eligible_states":len(effects),"mean_motion_half_contrast_m":mean(effects),
+                                  "per_state":{str(r["state"]):r.get("motion_half_contrast_m") for r in motion}}
     native={}
     for r in p0["episodes"]:
         key=f"task_{r['task']}/{r['layout']}/{r['condition']}"
@@ -122,6 +147,7 @@ def build(results):
             trials=[load(p) for p in paths]
             groups=defaultdict(list)
             for p,row in zip(paths,trials):
+                add_endpoint_magnitudes(row, p)
                 if "selective_half_contrast_m" in row:
                     groups[(p.parents[2].name,row["state"])].append(row)
             if stage=="held_out":

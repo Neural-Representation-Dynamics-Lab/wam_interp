@@ -12,6 +12,7 @@ python -u scripts/e1_sliding_calibration.py
 python -u scripts/e1_sliding_targets.py
 python -u scripts/e1_replan_alignment.py
 python -u scripts/e1_large_swap_replan.py
+python -u scripts/e1_motion_control.py
 python scripts/report_e1_a100_study.py results results/e1_summary.json
 python scripts/e1_blind_review.py results results/e1_review
 ```
@@ -41,3 +42,5 @@ The separate large-swap diagnostic reruns the four previously studied soup/tomat
 For the held-out book analysis, [the recorded analysis specification](../configs/experiments/e1_slide_analysis.json) defines the state-level unit, two-seed requirement and five-millimetre nuisance margin. The two modes' native timing includes instrumentation. In particular, the native IDM timing includes the forecast copy and save at each replan.
 
 Give an independent reviewer only the generated `blind_review.zip`. It contains paired edit animations, shuffled forecast sheets, instructions and two CSV forms. Keep `review_answer_key.json` until their annotations are returned. The edit audit samples seed zero from each available state. The forecast sheets cover the first, fourth and ninth decisions of each episode when available. Each review item is blind to policy endpoint and task success.
+
+The secondary robot-motion control compares two real trajectories of the arm while the book and mug stay in place. Four book development states at seed zero use a fixed list of action biases. The first bias that shifts the gripper two to four centimetres in each direction while satisfying the contact and object-stability limits supplies the donors. An unedited encoding must pass the same two-centimetre endpoint check. The wrist viewpoint moves with the arm, so this manipulation includes egocentric camera motion.

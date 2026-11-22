@@ -65,8 +65,16 @@ def main(argv=None):
     parser.add_argument("--device", default="cuda")
     parser.add_argument("--dtype", choices=("bfloat16", "float32", "float16"), default="bfloat16")
     parser.add_argument("--condition")
+    parser.add_argument("--e1-feature-audit", type=Path,
+                        help="Record a three-chunk future-feature parity audit in the first LIBERO episode")
+    parser.add_argument("--e1-scene-protocol", type=Path,
+                        help="After a successful feature audit, use a saved native relocation protocol for paired transplants")
     parser.add_argument("--output", type=Path, default=Path("results/benchmarks"))
     args = parser.parse_args(argv)
+    if args.e1_scene_protocol and not args.e1_feature_audit:
+        parser.error("--e1-scene-protocol requires --e1-feature-audit")
+    if args.e1_feature_audit and (args.benchmark != "libero" or args.backend == "fastwam" or args.openwam_upstream_optimizations):
+        parser.error("--e1-feature-audit requires eager LIBERO inference with Faster-WAM, LingBot, Long-WAM or OpenWAM")
     from wam_interp.evaluations.provenance import install_termination_handler
     install_termination_handler()  # Slurm SIGTERM -> SystemExit, so partial reports are saved
     args.checkpoint = args.checkpoint.expanduser().resolve()
@@ -158,7 +166,8 @@ def main(argv=None):
         else:
             from wam_interp.models.fasterwam.loader import compose_fasterwam_config, load_fasterwam
             task = "libero_fasterwam_2cam224_1e-4" if libero else "robotwin_fasterwam_3cam_384_1e-4"
-            cfg = compose_fasterwam_config(task, benchmark=args.benchmark)
+            cfg = compose_fasterwam_config(task, benchmark=args.benchmark,
+                                           overrides=["model.redirect_common_files=false"] if args.e1_feature_audit else None)
             model = load_fasterwam(cfg, args.checkpoint, device=args.device, dtype=args.dtype)
             if plus:
                 from wam_interp.models.fasterwam.libero_plus_adapter import FasterWAMLiberoPlusAdapter as Adapter
@@ -174,6 +183,9 @@ def main(argv=None):
     options = {} if args.condition is None else {"condition": args.condition}
     if args.benchmark == "libero":
         from wam_interp.evaluations.LIBERO import evaluate_libero, LiberoEvalConfig
+        if args.e1_feature_audit:
+            from wam_interp.experiments.model_feature_audit import NativeFeatureAudit
+            adapter = NativeFeatureAudit(adapter, args.backend, args.e1_feature_audit)
         metadata["benchmark_root"] = str(args.benchmark_root.resolve())
         result = evaluate_libero(adapter, LiberoEvalConfig(
             task_suite_name=args.suite, task_ids=None if args.all_tasks else tuple(args.task_ids or [args.task_id]),
@@ -182,6 +194,13 @@ def main(argv=None):
         print({"benchmark": "libero", "suite": args.suite, "episodes": result.episodes, "successes": result.successes,
                "success_rate": result.success_rate, "per_task": [task.successes for task in result.tasks],
                "output_path": result.output_path}, flush=True)
+        if args.e1_scene_protocol:
+            if len(adapter.rows) < 3:
+                raise RuntimeError("Scene probe requires three native decisions with observed history updates")
+            from wam_interp.experiments.scene_feature_probe import run_scene_probe
+            probe_config = LiberoEvalConfig(task_suite_name=args.suite, **libero_protocol(args.backend, args.suite),
+                                            inference_options=options, seed=args.seed)
+            run_scene_probe(adapter, args.e1_scene_protocol, probe_config, args.output / "scene_features")
         return
     elif plus:
         from wam_interp.evaluations.LIBERO_PLUS import evaluate_libero_plus, LiberoPlusEvalConfig

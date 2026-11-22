@@ -47,11 +47,12 @@ def test_optional_idm_comparison_reuses_same_checkpoint_and_task():
     assert a[a.index("--fastwam-task") + 1] == "libero_optional_idm_2cam224_1e-4"
 
 
-def test_unimplemented_hooks_and_no_future_mode_fail_explicitly():
+def test_only_native_future_modes_offer_a_transplant_boundary():
     assert require_future_transplant("fastwam_optional_idm").boundary.startswith("fastwam.idm")
-    for entry in CAPABILITIES[1:]:
-        with pytest.raises(NotImplementedError):
-            require_future_transplant(entry.variant)
+    with pytest.raises(NotImplementedError):
+        require_future_transplant("fastwam_optional_first_frame")
+    for entry in CAPABILITIES[2:]:
+        assert require_future_transplant(entry.variant).e1_status == "native_feature_hook_implemented"
     with pytest.raises(ValueError):
         capability("unknown_model")
 

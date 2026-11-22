@@ -402,6 +402,16 @@ class JointWAM(FastWAM):
             video_attention_mask=video_attention_mask,
         )
 
+        hook = getattr(self, "_e1_features", None)
+        if hook is not None:
+            from wam_interp.experiments.native_features import edit_future_kv
+            entry = video_kv_cache[hook.layer]
+            if entry is None:
+                raise ValueError("Selected Faster-WAM layer has no fused video cache")
+            patched = edit_future_kv(hook, entry["k"], entry["v"], int(video_pre["meta"]["tokens_per_frame"]))
+            if patched is not None:
+                video_kv_cache[hook.layer] = dict(zip(("k", "v"), patched))
+
         infer_timesteps_action, infer_deltas_action = self.infer_action_scheduler.build_inference_schedule(
             num_inference_steps=num_inference_steps,
             device=self.device,

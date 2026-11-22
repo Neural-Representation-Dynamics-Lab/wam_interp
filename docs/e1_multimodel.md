@@ -4,7 +4,7 @@ Start with the [current research plan and TODOs](e1_next_steps_20261122.md), the
 
 ## What this PR implements
 
-The reusable runtime intervention is **FastWAM Optional IDM only**. `src/experiments/futures.py` captures/replaces future latents before action K/V construction, preserves the observed anchor, validates shape/dtype/device/finiteness, and removes its hook even after errors. Inactive instrumentation does not alter native inference. Do not share one hooked model concurrently between requests.
+The [A100 follow-up](e1_a100_study.md) adds native future-feature hooks for Faster-WAM, LingBot-VA, Long-WAM and OpenWAM. FastWAM Optional IDM provides the clean-latent path. `src/experiments/futures.py` captures/replaces future latents before action K/V construction, preserves the observed anchor, validates shape/dtype/device/finiteness, and removes its hook even after errors. Inactive instrumentation does not alter native inference. Do not share one hooked model concurrently between requests.
 
 | Reusable module | Purpose |
 |---|---|
@@ -100,4 +100,4 @@ The baseline defaults to task 0 of `libero_10`, one episode, seed 0. Expand a de
 4. Restore the complete environment/controller and backend state before every paired arm. Test exceptions, absent hooks and cleanup. For stateful backends test multiple chunks and observed-cache updates, not just episode initialization.
 5. Save normalized actions, decoded commands, executed physical states, contacts, success and termination reason separately. Never compare different backends' normalized action coordinates as if they were world positions.
 
-All four new model-specific content-transplant implementations remain on the TODO list. Existing module traces and attention-mask overrides are useful tools but do not satisfy these requirements by themselves. The catalog documents this distinction in machine-readable form.
+The A100 follow-up implements each backend’s native feature boundary and records capture, identity and intervention checks on real inputs. Consult each run’s per-backend parity report for completed checks and failures.

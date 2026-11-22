@@ -45,41 +45,41 @@ CAPABILITIES = (
     ),
     ModelCapability(
         "fasterwam", "fasterwam", "one_pass_future_cache", "fused_future_kv",
-        "planned: after SparseMoT.prefill_video_cache, before action denoising",
+        "after SparseMoT.prefill_video_cache, before action denoising",
         "Keep current-frame tokens, sparse None slots and layer/fusion layout unchanged.",
         "One video pass on Gaussian future slots; match timestep, seed and post-RoPE K/V layout.",
-        "boundary_audited_hook_pending",
+        "native_feature_hook_implemented",
         ("src/models/fasterwam/model_code/jointwam.py", "src/models/fasterwam/model_code/sparse_mot.py"),
         "https://arxiv.org/abs/2608.04404v1",
     ),
     ModelCapability(
         "lingbot_va", "lingbot_va", "video", "predicted_video_kv",
-        "planned: final video cache write in LingBotVARuntime.infer_chunk",
+        "final video cache write in LingBotVARuntime.infer_chunk",
         "Keep real history, action history, cache IDs/masks and the first-chunk anchor unchanged.",
         "Match the final video forward's timestep, both CFG branches and predicted cache slots; "
         "editing returned latents after the cache write would not change the actions.",
-        "boundary_audited_hook_pending",
+        "native_feature_hook_implemented",
         ("src/models/lingbot_va/runtime.py", "src/models/lingbot_va/libero_adapter.py"),
         "https://arxiv.org/abs/2601.21998v1",
         checkpoint_kind="directory", needs_statistics=False, stateful=True,
     ),
     ModelCapability(
         "longwam_idm", "longwam", "idm", "partially_noisy_future_latents",
-        "planned: infer_joint_ar, after _imagine_future_latents and before video prefill",
+        "infer_joint_ar, after _imagine_future_latents and before video prefill",
         "Protect all model.num_clean_frames history latents, not just the current frame.",
         "Match model.imagine_timestep / scheduler training steps (published default sigma=0.9). "
         "A clean RGB encoding is not a valid direct substitute.",
-        "boundary_audited_hook_pending",
+        "native_feature_hook_implemented",
         ("src/models/longwam/model_code/models/wan22/longwam_base.py", "src/models/longwam/libero_adapter.py"),
         "https://arxiv.org/abs/2610.10528v1", stateful=True,
     ),
     ModelCapability(
         "openwam", "openwam", "joint", "joint_denoising_features",
-        "planned: action-facing video K/V at a declared joint layer and denoising step",
+        "action-facing video K/V at a declared joint layer and denoising step",
         "Protect current-frame tokens, action states, training mask and unselected layers/steps.",
         "Match both video and action noise levels; preserve the checkpoint's native mask. "
         "Public mask hooks exist, but a mask ablation is not a content transplant.",
-        "boundary_audited_hook_pending",
+        "native_feature_hook_implemented",
         ("src/models/openwam/adapter.py", "src/models/openwam/model_code/model/architectures/dual_system/joint_self_attn.py"),
         "https://arxiv.org/abs/2609.07398",
         checkpoint_kind="directory", needs_statistics=False,
@@ -104,7 +104,7 @@ def capability_report() -> dict:
 
 def require_future_transplant(variant: str) -> ModelCapability:
     entry = capability(variant)
-    if entry.e1_status != "exploratory_gpu_evidence":
+    if entry.e1_status not in ("exploratory_gpu_evidence", "native_feature_hook_implemented"):
         raise NotImplementedError(
             f"{variant}: {entry.e1_status}. {entry.boundary}. "
             "Do not reuse the FastWAM clean-latent hook for this model."

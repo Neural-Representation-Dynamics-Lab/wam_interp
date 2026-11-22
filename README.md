@@ -20,8 +20,7 @@ The main design rule is: **a benchmark evaluator controls the benchmark; a model
 E1 research tooling now has a [modular handoff](docs/e1_multimodel.md),
 [current experiment TODO list](docs/e1_next_steps_20261122.md), and
 [literature/code review](docs/e1_research_review_20261122.md).
-The implemented future-transplant path is FastWAM Optional IDM; the five-backend
-capability inventory distinguishes native evaluation from pending E1 hooks.
+See the [paired A100 study](docs/e1_a100_study.md) for future-content interventions across the five backends and the [native FastWAM results](docs/e1_a100_native_results.md) for the 32 completed episodes.
 
 ```text
 configs/fastwam/                 FastWAM Hydra model/task configuration

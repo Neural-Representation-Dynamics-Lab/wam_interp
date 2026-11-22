@@ -2,6 +2,8 @@
 
 Prepared for the 22 November meeting, approximately 21:00 Malaysia time. Proposed priorities and owners below need team agreement; no teammate has been messaged or assigned work automatically. See the [source review](e1_research_review_20261122.md) for the literature and [model handoff](e1_multimodel.md) for commands.
 
+The [A100 follow-up protocol](e1_a100_study.md) and [completed native results](e1_a100_native_results.md) record the later execution of this planning document.
+
 ## Decision in one paragraph
 
 Keep the completed FastWAM experiments as exploratory causal-sensitivity evidence. **First establish native task/target following with replanning, then test one validated property while holding depicted motion fixed, then replicate across architectures.** Continue the forecast/execution measurement as a paired readout, not a substitute for the semantic intervention. Stop expanding counter-instruction donor banks that fail their visual gates. Do not rerun five large suites before knowing whether the measurement and the edit work.

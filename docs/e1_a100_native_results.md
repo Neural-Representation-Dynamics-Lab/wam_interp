@@ -14,3 +14,5 @@ Across the 16 IDM episodes, we compared all 369 forecasts to their own executed 
 The simulator-only initial-velocity study tested six speeds in each direction on one reset per object. Only the bowl achieved the required planar displacement, height stability and rotation bounds in both directions. A physically matched target/distractor pair could not be formed with those stimuli. The prescribed-render follow-up tests smooth visual translation while replaying identical robot motion. Its interpretation concerns the displayed motion of an externally moved object.
 
 The [study commands and protocols](e1_a100_study.md) reproduce the native test and forecast scoring. The experiment writes full JSON, saved latent forecasts and matched image frames under the local results directory.
+
+The [held-out fixed-motion result](e1_a100_fixed_motion_results.md) reports the book and mug contrasts, all attempted cases and the failed alternate-instruction control.

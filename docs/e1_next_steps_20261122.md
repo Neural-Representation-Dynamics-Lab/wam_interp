@@ -1,5 +1,7 @@
 # E1: next experiments and meeting checklist
 
+The [A100 results](e1_a100_native_results.md) and [executable study protocol](e1_a100_study.md) track execution of this dated proposal.
+
 Prepared for the 22 November meeting, approximately 21:00 Malaysia time. Proposed priorities and owners below need team agreement; no teammate has been messaged or assigned work automatically. See the [source review](e1_research_review_20261122.md) for the literature and [model handoff](e1_multimodel.md) for commands.
 
 The [A100 follow-up protocol](e1_a100_study.md) and [completed native results](e1_a100_native_results.md) record the later execution of this planning document.

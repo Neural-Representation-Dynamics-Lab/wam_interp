@@ -16,3 +16,11 @@ The simulator-only initial-velocity study tested six speeds in each direction on
 The [study commands and protocols](e1_a100_study.md) reproduce the native test and forecast scoring. The experiment writes full JSON, saved latent forecasts and matched image frames under the local results directory.
 
 The [held-out fixed-motion result](e1_a100_fixed_motion_results.md) reports the book and mug contrasts, all attempted cases and the failed alternate-instruction control.
+
+## Large physical swap with full replanning
+
+We returned to the four previously studied LIBERO-Object soup layouts (states 34–37). Each model received the official instruction to put the alphabet soup in the basket. With the original placement, first-frame and IDM each succeeded in 4/4 episodes and first contacted the soup. With the soup and tomato physically exchanged, both modes succeeded in 0/4. All eight swapped episodes first contacted the tomato at the soup's old position, reached the 400-control limit, and recorded zero gripper–soup contacts at control boundaries. Replanning every ten controls did not rescue the behavior in these layouts.
+
+Without forecast export, the mean of per-episode median inference times on the swaps was 0.611 s per call for first-frame and 1.099 s for IDM. Peak allocated GPU memory was 23.38 GiB in both modes. This stress test uses four familiar layouts on one object task; it supplies no estimate for all unseen layouts.
+
+The [four additional checkpoint audits](e1_a100_cross_model_results.md) report backend-specific controls and native task outcomes.

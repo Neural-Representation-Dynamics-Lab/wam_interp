@@ -11,7 +11,9 @@ python scripts/analyze_native_replan.py results/e1_native_replan
 python -u scripts/e1_sliding_calibration.py
 python -u scripts/e1_sliding_targets.py
 python -u scripts/e1_replan_alignment.py
+python -u scripts/e1_large_swap_replan.py
 python scripts/report_e1_a100_study.py results results/e1_summary.json
+python scripts/e1_blind_review.py results results/e1_review
 ```
 
 The native run resolves the official book and bowl instructions by name. It draws a second location from the same task's released initial states and keeps the recipient's object orientation, other bodies, robot and instruction. Each of four states enters four episodes with the same action seeds, one for each layout and Optional IDM mode. The shared evaluator uses 30 settling steps, an action horizon of 32 and replans after 10 actions up to 700 controls. Its untouched task predicate scores each episode. The per-episode task/state in the result and the study protocol identify the actual cases. The generic evaluator config stored with each case also contains unused default suite-selection fields.
@@ -32,3 +34,10 @@ To check a new backend, take its native CLI command from `scripts/e1_model_matri
 The first three native decisions compare native, capture-only and identity actions from identical state and noise. An additional zeroing intervention measures sensitivity at the selected site. Only the identity arm is executed. The subsequent scene probe collects future slots from a physically shifted target or distractor and puts those slots into the original recipient, preserving recipient context and action noise. It records the first ten executed controls in world coordinates. Select the same native condition as the baseline, use exact eager inference, and preserve backend-specific warm-up, history updates and action horizons. The scene probe measures the consequences of visual scene differences encoded at a future-facing site. It cannot distinguish every contribution of present versus predicted content to that site.
 
 The default experiment outputs are local. To resume the native experiment, use the same protocol and source file. The runner verifies the protocol and skips episodes with a complete result. Save prior output directories before rerunning a changed experiment.
+
+
+The separate large-swap diagnostic reruns the four previously studied soup/tomato layouts with their frozen offsets. It uses the official LIBERO-Object soup instruction and task predicate, four states, original versus exchanged XY slots, and same-weight first-frame versus IDM with full ten-step replanning. Each of the sixteen episodes uses seed zero and the native 400-control limit. It records first object contact, first soup contact, task success, inference latency, peak allocated memory and world trajectories. These are previously studied stress layouts.
+
+For the held-out book analysis, [the recorded analysis specification](../configs/experiments/e1_slide_analysis.json) defines the state-level unit, two-seed requirement and five-millimetre nuisance margin. The two modes' native timing includes instrumentation. In particular, the native IDM timing includes the forecast copy and save at each replan.
+
+Give an independent reviewer only the generated `blind_review.zip`. It contains paired edit animations, shuffled forecast sheets, instructions and two CSV forms. Keep `review_answer_key.json` until their annotations are returned. The edit audit samples seed zero from each available state. The forecast sheets cover the first, fourth and ninth decisions of each episode when available. Each review item is blind to policy endpoint and task success.

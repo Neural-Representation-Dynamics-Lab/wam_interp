@@ -186,11 +186,6 @@ def score(front, api, row, seed, out, spec, stage):
     source = json.loads((out / "longwam_source.json").read_text())
     if not source["passed"]:
         return
-    if stage == "behavior" and spec["split"] == "held_out":
-        g = json.loads((out.parents[2] / "longwam_feature_gate.json").read_text())
-        if not any(v["passed"] for v in g["properties"].values()):
-            save(marker, {"eligible": False, "reason": "neither_property_identifiable"})
-            return
     began = monotonic()
     obs = reset(front, api, row)
     if anchor_hash(obs) != source["anchor_hash"]:
@@ -269,6 +264,26 @@ def score(front, api, row, seed, out, spec, stage):
     save(marker, result)
 
 
+def skip_unidentified_properties(spec, manifest, dest):
+    gate = json.loads((dest / "longwam_feature_gate.json").read_text())
+    if gate["manifest_sha256"] != hashlib.sha256(manifest.read_bytes()).hexdigest():
+        raise ValueError("Feature gate belongs to a different manifest")
+    if any(v["passed"] for v in gate["properties"].values()):
+        return False
+    for task in spec["tasks"]:
+        for idx in spec["states"][task]:
+            for seed in spec["seeds"]:
+                folder = dest / f"task_{task}/state_{idx}/seed_{seed}"
+                source = json.loads((folder / "longwam_source.json").read_text())
+                marker = folder / "longwam_behavior.json"
+                if source["passed"] and not marker.exists():
+                    save(marker, {
+                        "eligible": False, "reason": "neither_property_identifiable",
+                        "source_hash": source["sha256"],
+                    })
+    return True
+
+
 def main():
     p = argparse.ArgumentParser(description=__doc__)
     p.add_argument("stage", choices=("sources", "features", "behavior", "calibrate"))
@@ -279,6 +294,9 @@ def main():
     root = a.root.resolve()
     dest = a.out.resolve()
     screened = a.screen_dir.resolve()
+    if a.stage == "behavior" and spec["split"] == "held_out":
+        if skip_unidentified_properties(spec, a.manifest, dest):
+            return
     api = api_for(a.weights.resolve())
     for task in spec["tasks"]:
         replay = json.loads((screened / f"smoke_{task}/fidelity.json").read_text())

@@ -219,3 +219,32 @@ def test_physical_trace_preserves_rendering_and_early_termination(monkeypatch, r
     assert len(rendered) == (2 if random_light else 0)
     assert ends == [False, True] and path.shape == (3, 2, 3)
     assert env._update_render is render
+
+
+def test_robotwin_failed_feature_gate_records_no_executed_actions(tmp_path, monkeypatch):
+    import hashlib
+    import json
+
+    monkeypatch.syspath_prepend(str(Path(__file__).parents[1] / "scripts"))
+    from e1_confirm_robotwin import skip_unidentified_properties
+
+    manifest = tmp_path / "held.json"
+    spec = {"tasks": ["room"], "states": {"room": [3]}, "seeds": [1, 2]}
+    manifest.write_text(json.dumps(spec))
+    out = tmp_path / "held"
+    for seed in spec["seeds"]:
+        folder = out / f"task_room/state_3/seed_{seed}"
+        folder.mkdir(parents=True)
+        (folder / "longwam_source.json").write_text(json.dumps({"passed": seed == 1, "sha256": "abc"}))
+    gate = {"manifest_sha256": hashlib.sha256(manifest.read_bytes()).hexdigest(),
+            "properties": {"arm": {"passed": False}, "colour": {"passed": False}}}
+    (out / "longwam_feature_gate.json").write_text(json.dumps(gate))
+    assert skip_unidentified_properties(spec, manifest, out)
+    markers = list(out.rglob("longwam_behavior.json"))
+    assert len(markers) == 1
+    assert json.loads(markers[0].read_text()) == {
+        "eligible": False, "reason": "neither_property_identifiable", "source_hash": "abc",
+    }
+    gate["properties"]["arm"]["passed"] = True
+    (out / "longwam_feature_gate.json").write_text(json.dumps(gate))
+    assert not skip_unidentified_properties(spec, manifest, out)

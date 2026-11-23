@@ -15,6 +15,7 @@ run_model() {
 }
 run_model references fastwam >"$root/logs/references.log" 2>&1
 "$py" scripts/e1_confirm_sources.py --manifest "$manifest" --out "$out" --workers "${E1_RENDER_WORKERS:-4}" >"$root/logs/sources.log" 2>&1
+"$py" scripts/e1_confirm_stimuli.py --manifest "$manifest" --out "$out"
 for model in fastwam longwam; do
   run_model features "$model" >"$root/logs/features_$model.log" 2>&1
   "$py" scripts/e1_confirm_analysis.py gate --backend "$model" --root "$root"

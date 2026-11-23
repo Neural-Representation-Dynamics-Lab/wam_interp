@@ -7,6 +7,46 @@ from pathlib import Path
 import numpy as np
 from PIL import Image, ImageDraw
 
+TASK_NAMES = {5: "Book and caddy", 3: "Bowl and drawer", 7: "Soup and cheese"}
+
+
+def task_name(task):
+    return TASK_NAMES.get(task, str(task).replace("_", " "))
+
+
+def table(result, dest):
+    rows = [
+        f"# {result['model']} on {result['suite']}",
+        "",
+        "| Task | Usable / attempted starts | Motion (mm) | Background (mm) | Selectivity (mm) |",
+        "|---|---:|---:|---:|---:|",
+    ]
+    keys = ("motion_32_mm", "background_rms_max_mm", "selectivity_mm")
+    for task in result["tasks"]:
+        states = [r for r in result["states"] if r["task"] == task]
+        usable = [r for r in states if r["eligible"]]
+        means = [
+            f"{np.mean([r['means'][k] for r in usable]):.2f}" if usable else "unavailable" for k in keys
+        ]
+        rows.append("| " + " | ".join([task_name(task), f"{len(usable)} / {len(states)}", *means]) + " |")
+    values = []
+    for k in keys:
+        s = result["estimates"][k]
+        if not s:
+            values.append("unavailable")
+            continue
+        lo, hi = s["ci90" if k == "background_rms_max_mm" else "ci95"]
+        values.append(f"{s['mean']:.2f} [{lo:.2f}, {hi:.2f}]")
+    rows += [
+        "| Equal task weights |  | " + " | ".join(values) + " |",
+        "",
+        "Brackets give state-stratified 95% bootstrap intervals for motion and selectivity. For background, the endpoints are one-sided 95% limits on the mean maximum trajectory RMS distance. The prespecified margin is 5 mm.",
+        "",
+        f"The motion generalization criterion evaluated to {result['motion_generalizes']}. The background decision was {result['background_decision']}.",
+        f"The same-axis selectivity criterion evaluated to {result['same_axis_selectivity']}.",
+    ]
+    (dest / f"{result['model']}_table.md").write_text("\n".join(rows) + "\n", encoding="utf8")
+
 
 def plot(paths, dest):
     import matplotlib
@@ -16,6 +56,7 @@ def plot(paths, dest):
 
     for path in paths:
         result = json.loads(path.read_text())
+        table(result, dest)
         fig, axes = plt.subplots(1, 2, figsize=(9, 3.8), constrained_layout=True)
         groups = result["tasks"]
         for ax, k, title, limit in zip(
@@ -41,7 +82,7 @@ def plot(paths, dest):
                 ax.errorbar(len(groups), v, yerr=[[v - lo], [hi - v]], fmt="D", color="black", capsize=4)
             ax.set_xticks(
                 range(len(groups) + 1),
-                [str(x).replace("_", " ") for x in groups] + ["Pooled"],
+                [task_name(x) for x in groups] + ["Pooled"],
                 rotation=15,
             )
             ax.set_title(title)
@@ -58,7 +99,7 @@ def sheet(root, out):
     for task in spec["tasks"]:
         for idx in spec["states"][str(task)]:
             folder = root / "held" / f"task_{task}/state_{idx}/seed_{spec['seeds'][0]}"
-            source = folder / "fastwam_source.npz"
+            source = folder / (spec.get("source_backend", "fastwam") + "_source.npz")
             if not source.exists():
                 continue
             with np.load(source, allow_pickle=False) as clips:
@@ -70,10 +111,23 @@ def sheet(root, out):
                     strip = Image.new("RGB", (768, 3 * 96), "white")
                     # Each row shows both camera views. Columns are anchor, middle, and final frames.
                     for side, key in enumerate(pair):
-                        frames = clips[key]
+                        if key in clips:
+                            frames = clips[key]
+                        else:
+                            head, left, right = (
+                                clips[key + "_" + c] for c in ("head", "left_wrist", "right_wrist")
+                            )
+                            frames = []
+                            for h, l, r in zip(head, left, right):
+                                bottom = np.concatenate(
+                                    [np.asarray(Image.fromarray(v).resize((160, 144))) for v in (l, r)],
+                                    axis=1,
+                                )
+                                frames.append(np.concatenate([h, bottom], axis=0))
                         for col, t in enumerate((0, len(frames) // 2, len(frames) - 1)):
-                            im = Image.fromarray(frames[t]).resize((256, 128), Image.Resampling.LANCZOS)
-                            strip.paste(im, (256 * col, side * 140))
+                            im = Image.fromarray(frames[t])
+                            im.thumbnail((256, 128), Image.Resampling.LANCZOS)
+                            strip.paste(im, (256 * col + (256 - im.width) // 2, side * 140))
                     panels.append(
                         (
                             strip,

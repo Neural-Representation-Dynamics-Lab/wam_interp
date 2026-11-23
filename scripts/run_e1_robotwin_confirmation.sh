@@ -32,6 +32,7 @@ if ! "$py" -c 'import json,sys;sys.exit(not json.load(open(sys.argv[1]))["passed
 for stage in sources features; do
  "$py" scripts/e1_confirm_robotwin.py "$stage" "${args[@]}" --manifest "$root/held.json" --out "$root/held" >"$root/logs/$stage.log" 2>&1
 done
+"$py" scripts/e1_confirm_stimuli.py --manifest "$root/held.json" --out "$root/held"
 "$py" scripts/e1_confirm_analysis.py gate --root "$root" --backend longwam
 "$py" scripts/e1_confirm_robotwin.py behavior "${args[@]}" --manifest "$root/held.json" --out "$root/held" >"$root/logs/behavior.log" 2>&1
 "$py" scripts/e1_confirm_analysis.py report --root "$root" --backend longwam

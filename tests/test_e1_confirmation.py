@@ -117,3 +117,51 @@ def test_state_level_gate_and_missing_seeds(tmp_path):
     assert g["properties"]["arm"]["n"] == 9 and g["properties"]["arm"]["passed"]
     assert not g["properties"]["colour"]["passed"]
     assert a.power_count(8) == 34
+
+
+def test_analysis_uses_independent_starts_and_retains_sham_failures(tmp_path):
+    a = analysis()
+    spec = {
+        "tasks": [3, 5],
+        "states": {"3": list(range(10)), "5": list(range(10))},
+        "seeds": [1, 2],
+        "minimum_complete_states_per_task": 4,
+        "minimum_task_coverage": 0.5,
+        "suite": "libero_10",
+        "background_rms_margin_mm": 5,
+        "sham_margin_mm": 20,
+    }
+    manifest = tmp_path / "held.json"
+    a.write(manifest, spec)
+    root = tmp_path / "held"
+    for task, idx, folders in a.cases(spec, root):
+        for seed, folder in zip(spec["seeds"], folders):
+            a.write(folder / "fastwam_source.json", {"passed": True, "sha256": "abc"})
+            vals = {k: 1.0 for k in a.METRICS}
+            vals.update(
+                motion_32_mm=6.0 + idx,
+                background_rms_max_mm=2.0,
+                selectivity_mm=5.0,
+                sham_drift_mm=30.0 if idx == 0 else 1.0,
+            )
+            a.write(
+                folder / "fastwam_behavior.json",
+                {
+                    "eligible": idx != 0,
+                    "metrics": vals,
+                    "depicted_half_mm": 30.0,
+                    "source_hash": "abc",
+                    "action_seed": seed,
+                },
+            )
+    check = {
+        "manifest_sha256": a.digest(manifest),
+        "properties": {k: {"passed": True} for k in a.PROPERTIES},
+    }
+    a.write(root / "fastwam_feature_gate.json", check)
+    r = a.summarize(manifest, root, "fastwam")
+    assert r["usable"] == {"3": 9, "5": 9} and r["attempted"] == 20
+    assert r["quality"]["sampled_seeds"] == 40 and r["quality"]["largest_sham_drift_mm"] == 30.0
+    assert r["motion_generalizes"] and r["background_decision"] == "bounded mean response"
+    assert r["sensitivity_all_complete_starts"]["motion_32_mm"]["mean"] == 10.5
+    a.write(tmp_path / "result.json", r)

@@ -4,7 +4,7 @@ This experiment asks whether moving the depicted gripper changes the executed re
 
 ## LIBERO
 
-Use the repository窶冱 LIBERO simulator environment, a CUDA device supporting bf16, and the two released LIBERO bundles. The FastWAM loader reads `configs/experiments/e1_libero.json`. The Long-WAM loader reads `checkpoints/longwam/libero_idm/{config.yaml,model.pt,dataset_stats.json}`. Install the research dependencies plus SciPy, Matplotlib and Pillow. Run from the repository root with the same PYTHONPATH, model asset cache, LIBERO configuration and EGL settings as the native benchmark smoke. The numerical outputs go to a new study directory.
+Use the repository's LIBERO simulator environment, a CUDA device supporting bf16, and the two released LIBERO bundles. The FastWAM loader reads `configs/experiments/e1_libero.json`. The Long-WAM loader reads `checkpoints/longwam/libero_idm/{config.yaml,model.pt,dataset_stats.json}`. Install the research dependencies plus SciPy, Matplotlib and Pillow. Run from the repository root with the same PYTHONPATH, model asset cache, LIBERO configuration and EGL settings as the native benchmark smoke. The numerical outputs go to a new study directory.
 
 ```bash
 export MUJOCO_GL=egl PYOPENGL_PLATFORM=egl
@@ -25,18 +25,21 @@ python scripts/e1_confirm_sources.py --workers 3 --manifest "$root/dev.json" --o
 for model in fastwam longwam; do
   python scripts/e1_confirm.py calibrate --backend "$model" --manifest "$root/dev.json" --out "$root/dev"
 done
+for model in fastwam longwam; do
+  python scripts/e1_confirm_parity.py --root "$root" --backend "$model"
+done
 bash scripts/run_e1_confirmation.sh "$root"
 ```
 
-The launcher freezes the held-out state IDs and sample-size rationale, generates and verifies the six stimuli, tests paired feature directions for both models, and executes the randomized branches on fresh simulator resets. Identical inputs to FastWAM窶冱 pre-intervention video denoiser can reuse its output within one request. Each action branch still runs the action policy. Replay verifies a hash over both native cameras, robot state and instruction at every reset. A soft reset that cannot reproduce the recipient falls back to a fresh native environment.
+The launcher freezes the held-out state IDs and sample-size rationale, generates and verifies the six stimuli, tests paired feature directions for both models, and executes the randomized branches on fresh simulator resets. Identical inputs to FastWAM's pre-intervention video denoiser can reuse its output within one request. Each action branch still runs the action policy. Replay verifies a hash over both native cameras, robot state and instruction at every reset. A soft reset that cannot reproduce the recipient falls back to a fresh native environment.
 
-The motion readout is half the right窶斗eft difference in end-effector world x after 32 controls. The colour readout is the maximum of four full three-dimensional trajectory RMS distances. Each compares warm or cool to neutral at fixed motion. A response is practically bounded when its one-sided 95% upper limit is below 5 mm. This is a prespecified engineering scale for a pre-contact reach. It is one quarter of the smallest allowed donor displacement. The intervals describe the tested tasks, checkpoints and starts. Both random seeds must qualify for a start to count. The feature checks and behavior coverage gates apply separately to each checkpoint and property.
+The motion readout is half the right-left difference in end-effector world x after 32 controls. The colour readout is the maximum of four full three-dimensional trajectory RMS distances. Each compares warm or cool to neutral at fixed motion. A response is practically bounded when its one-sided 95% upper limit is below 5 mm. This is a prespecified engineering scale for a pre-contact reach. It is one quarter of the smallest allowed donor displacement. The intervals describe the tested tasks, checkpoints and starts. Both random seeds must qualify for a start to count. The feature checks and behavior coverage gates apply separately to each checkpoint and property.
 
-Read `held.json`, `implementation_hashes.json`, `calibration_summary.json`, `held/*_feature_gate.json` and `{fastwam,longwam}_results.json`. Plots and a blinded stimulus sheet are under `figures/`. Give reviewers the sheet alone. The key contains the arm labels. Raw clips, masks, actions and trajectories stay in the results directory. With a failed feature check, a retained physical readout is descriptive for that property. If both properties fail before action measurement, the receipt records that exclusion.
+Per-camera motion and colour magnitudes are in `held/pixel_contrasts.json`. Read `held.json`, `implementation_hashes.json`, `calibration_summary.json`, `held/*_feature_gate.json` and `{fastwam,longwam}_results.json`. Plots and a blinded stimulus sheet are under `figures/`. Give reviewers the sheet alone. The key contains the arm labels. Raw clips, masks, actions and trajectories stay in the results directory. With a failed feature check, a retained physical readout is descriptive for that property. If both properties fail before action measurement, the receipt records that exclusion.
 
 ## RoboTwin
 
-Use the dedicated RoboTwin simulator environment and verify the NVIDIA Vulkan renderer. Install the simulator revision from `RoboTwinEvalConfig`, obtain the official objects and embodiment assets, and run `python script/update_embodiment_config_path.py` in that checkout before expert screening. Use Long-WAM窶冱 released RoboTwin 2.0 IDM config, model and statistics. The release revisions and checksums are in `src/models/longwam/loader.py`. The 14-D native joint commands, head and two wrist cameras, and checkpoint history all go through the RoboTwin adapter.
+Use the dedicated RoboTwin simulator environment and verify the NVIDIA Vulkan renderer. Install the simulator revision from `RoboTwinEvalConfig`, obtain the official objects and embodiment assets, and run `python script/update_embodiment_config_path.py` in that checkout before expert screening. Use Long-WAM's released RoboTwin 2.0 IDM config, model and statistics. The release revisions and checksums are in `src/models/longwam/loader.py`. The 14-D native joint commands, head and two wrist cameras, and checkpoint history all go through the RoboTwin adapter.
 
 ```bash
 screen=results/e1_confirmation/robotwin
@@ -52,7 +55,7 @@ args=(--root "$ROBOTWIN_ROOT" --weights "$ROBOTWIN_IDM" --screen-dir "$screen")
 python scripts/e1_confirm_robotwin.py calibrate "${args[@]}" --manifest "$study/dev.json" --out "$study/dev"
 ```
 
-After expert screening and the native smoke, `bash scripts/run_e1_robotwin_confirmation.sh "$screen" move_can_pot` runs the remaining stages for that task. Repeat for `place_can_basket`. It publishes the number of development starts passing both source and sham gates. Two of the four development starts are needed for stage progression. A successful task rollout, exact capture/replay, and an unedited video with small physical drift answer different questions. The expert labels the active arm. The donor controller solves for a world-x displacement of the active arm while preserving orientation through the articulation窶冱 native kinematics. The recipient always receives joint commands. The wall mask comes from the full actor ID in each camera. Every physics substep is checked for robot窶菟rop, wall or table contact. Source checks include both grippers, actual object drift, colour visibility after model preprocessing and elapsed simulation time.
+After expert screening and the native smoke, `bash scripts/run_e1_robotwin_confirmation.sh "$screen" move_can_pot` runs the remaining stages for that task. Repeat for `place_can_basket`. It publishes the number of development starts passing both source and sham gates. Two of the four development starts are needed for stage progression. A successful task rollout, exact capture/replay, and an unedited video with small physical drift answer different questions. The expert labels the active arm. The donor controller solves for a world-x displacement of the active arm while preserving orientation through the articulation's native kinematics. The recipient always receives joint commands. The wall mask comes from the full actor ID in each camera. Every physics substep is checked for robot-prop, wall or table contact. Source checks include both grippers, actual object drift, colour visibility after model preprocessing and elapsed simulation time.
 
 For eligible tasks with sufficient development coverage, run the following stages. Record any omitted task and its failed development gate. Keep the accepted and rejected expert seeds.
 
@@ -66,4 +69,4 @@ python scripts/e1_confirm_analysis.py report --root "$study" --backend longwam
 python scripts/e1_confirm_figures.py --root "$study" --out "$study/figures"
 ```
 
-LIBERO tests 32 fixed-rate controls. RoboTwin窶冱 joint planner can spend different numbers of physics substeps on the same number of commands. Read the timestamps and both-arm measurements before comparing magnitudes between simulators. These interventions measure pre-contact reach behavior. They do not establish target-identity understanding or a benefit to full-task success.
+LIBERO tests 32 fixed-rate controls. RoboTwin's joint planner can spend different numbers of physics substeps on the same number of commands. Read the timestamps and both-arm measurements before comparing magnitudes between simulators. These interventions measure pre-contact reach behavior. They do not establish target-identity understanding or a benefit to full-task success.

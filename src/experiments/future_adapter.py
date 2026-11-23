@@ -133,7 +133,6 @@ class FutureAdapter:
         Long-WAM uses its current episode history and training noise schedule. Use the
         same noise_seed for every arm of a comparison, independent of the action seed.
         """
-        schedule = self._schedule(request)
         if not self.supports_clip:
             raise NotImplementedError(
                 f"{self.backend} supports native feature donors; no clip encoder is validated"
@@ -150,10 +149,35 @@ class FutureAdapter:
                 None
             ]
             video = video.to(model.torch_dtype) * (2.0 / 255.0) - 1.0
+            return self._from_prepared_video(request, video, noise_seed)
+
+    def from_camera_frames(self, request, frames, *, noise_seed):
+        """Use the native Long-WAM RoboTwin preprocessing for every raw camera triplet."""
+        import torch
+        from wam_interp.models.longwam.transforms import robotwin_model_image
+
+        if self.backend != "longwam" or getattr(self.adapter, "benchmark", None) != "robotwin":
+            raise ValueError("Raw camera triplets require Long-WAM RoboTwin")
+        adapter = self.adapter
+        with torch.inference_mode():
+            images = [
+                robotwin_model_image(
+                    cameras, adapter.image_meta, device=self.owner.device, dtype=self.owner.torch_dtype
+                )
+                for cameras in frames
+            ]
+            return self._from_prepared_video(request, torch.stack(images, dim=2), noise_seed)
+
+    def _from_prepared_video(self, request, video, noise_seed):
+        import torch
+
+        schedule = self._schedule(request)
+        model = self.owner
+        with torch.inference_mode():
             if not torch.equal(video[:, :, 0], request.observation.image):
                 raise ValueError("Clip frame zero differs from the recipient observation")
             if self.backend == "fastwam":
-                if len(rgb) != request.num_video_frames or request.tiled or noise_seed is not None:
+                if video.shape[2] != request.num_video_frames or request.tiled or noise_seed is not None:
                     raise ValueError(
                         "FastWAM clip requires native frame count and untiled, clean encoding"
                     )
@@ -166,7 +190,7 @@ class FutureAdapter:
                 adapter = self.adapter
                 k = int(model.num_imagine_frames)
                 if (
-                    len(rgb) != 1 + k * model.vae.temporal_downsample_factor
+                    video.shape[2] != 1 + k * model.vae.temporal_downsample_factor
                     or type(noise_seed) is not int
                 ):
                     raise ValueError(

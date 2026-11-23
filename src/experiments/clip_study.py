@@ -28,11 +28,11 @@ def save(path, value):
 
 
 @contextmanager
-def start(futures, task, state, index):
+def start(futures, task, state, index, *, task_id=5, seed=0):
     random.seed(0)
     np.random.seed(0)
     env = create_libero_environment(task, 256, 0)
-    meta = {"instruction": task.language, "metadata": {"task_id": 5, "initial_state_index": index}}
+    meta = {"instruction": task.language, "metadata": {"task_id": task_id, "initial_state_index": index}}
     try:
         obs = reset_to_initial_state(env, state, **meta)
         for _ in range(30):
@@ -40,12 +40,15 @@ def start(futures, task, state, index):
             if step.done or step.success:
                 raise RuntimeError("Task ended during reset")
             obs = step.observation
+        if futures is None:
+            yield env, meta, obs, None
+            return
         adapter = futures.adapter
         begin = getattr(adapter, "begin_episode", None)
         if begin:
             begin(obs)
         config = LiberoEvalConfig(inference_options={"condition": "idm"})
-        request = _request_for_call(config, adapter, adapter.prepare_observation(obs), 0, 0)
+        request = _request_for_call(config, adapter, adapter.prepare_observation(obs), seed, 0)
         yield env, meta, obs, request
     finally:
         env.close()

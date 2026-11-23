@@ -1,0 +1,117 @@
+{
+  "libero_revision": "8f1084e3132a39270c3a13ebe37270a43ece2a01",
+  "selection": "nearest to 3 cm in [1,4] cm among official states 4 to 23, before outcomes",
+  "units": "world meters",
+  "plan": [
+    {
+      "task_id": 3,
+      "instruction": "put the black bowl in the bottom drawer of the cabinet and close it",
+      "target": "akita_black_bowl_1",
+      "layouts": [
+        {
+          "state": 0,
+          "donor_state": 7,
+          "xy_delta": [
+            -0.017177944424200217,
+            0.0231759270034401
+          ],
+          "initial_target_xy": [
+            0.046532713559829006,
+            -0.059829302456742985
+          ]
+        },
+        {
+          "state": 1,
+          "donor_state": 16,
+          "xy_delta": [
+            -0.0008486529869217441,
+            0.02955453329991179
+          ],
+          "initial_target_xy": [
+            0.014094580081438783,
+            -0.06574370167793075
+          ]
+        },
+        {
+          "state": 2,
+          "donor_state": 19,
+          "xy_delta": [
+            -0.019936761925316644,
+            0.023129169146977935
+          ],
+          "initial_target_xy": [
+            0.02968562438195126,
+            -0.06564207581832292
+          ]
+        },
+        {
+          "state": 3,
+          "donor_state": 10,
+          "xy_delta": [
+            0.017305651136923825,
+            -0.025880867836117517
+          ],
+          "initial_target_xy": [
+            0.031533021229688575,
+            -0.037066571637591174
+          ]
+        }
+      ]
+    },
+    {
+      "task_id": 5,
+      "instruction": "pick up the book and place it in the back compartment of the caddy",
+      "target": "black_book_1",
+      "layouts": [
+        {
+          "state": 0,
+          "donor_state": 8,
+          "xy_delta": [
+            -0.008626573998344461,
+            -0.028840117439648344
+          ],
+          "initial_target_xy": [
+            -0.21013614830519484,
+            0.16371472653790117
+          ]
+        },
+        {
+          "state": 1,
+          "donor_state": 18,
+          "xy_delta": [
+            -0.02442032050354115,
+            -0.0171096316425825
+          ],
+          "initial_target_xy": [
+            -0.18581022875307568,
+            0.14321695774234042
+          ]
+        },
+        {
+          "state": 2,
+          "donor_state": 11,
+          "xy_delta": [
+            -0.02859722948209259,
+            0.007159932048583589
+          ],
+          "initial_target_xy": [
+            -0.1930889341408667,
+            0.1468401925676131
+          ]
+        },
+        {
+          "state": 3,
+          "donor_state": 7,
+          "xy_delta": [
+            0.027387565017672616,
+            0.014854611241816917
+          ],
+          "initial_target_xy": [
+            -0.22193947252976418,
+            0.13574934783566575
+          ]
+        }
+      ]
+    }
+  ]
+}

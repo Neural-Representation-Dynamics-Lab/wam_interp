@@ -22,6 +22,7 @@ out.write_text(json.dumps(dev))
 PY
 python scripts/e1_confirm.py references --backend fastwam --manifest "$root/dev.json" --out "$root/dev"
 python scripts/e1_confirm_sources.py --workers 3 --manifest "$root/dev.json" --out "$root/dev"
+python scripts/e1_confirm_source_replay.py --workers 3 --manifest "$root/dev.json" --out "$root/dev"
 for model in fastwam longwam; do
   python scripts/e1_confirm.py calibrate --backend "$model" --manifest "$root/dev.json" --out "$root/dev"
 done

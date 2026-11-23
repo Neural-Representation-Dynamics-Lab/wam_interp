@@ -296,14 +296,15 @@ def gate(dev_path, held_path, dev_root, held_root, model):
 def estimates(values, rng):
     if not all(len(g) for g in values):
         return None
-    samples = np.stack([g[rng.integers(0, len(g), (10000, len(g)))].mean(axis=1) for g in values]).mean(
-        axis=0
-    )
+    by_task_draws = np.stack([g[rng.integers(0, len(g), (10000, len(g)))].mean(axis=1) for g in values])
+    samples = by_task_draws.mean(axis=0)
     return {
         "mean": float(np.mean([g.mean() for g in values])),
         "ci95": np.quantile(samples, [0.025, 0.975]).tolist(),
         "ci90": np.quantile(samples, [0.05, 0.95]).tolist(),
         "by_task": [float(g.mean()) for g in values],
+        "by_task_ci95": np.quantile(by_task_draws, [0.025, 0.975], axis=1).T.tolist(),
+        "by_task_ci90": np.quantile(by_task_draws, [0.05, 0.95], axis=1).T.tolist(),
         "p90": float(np.quantile(np.concatenate(values), 0.9)),
     }
 

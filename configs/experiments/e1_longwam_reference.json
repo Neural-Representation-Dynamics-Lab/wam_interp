@@ -1,0 +1,11 @@
+{
+  "registered_on": "2026-11-23",
+  "parent_split": "configs/experiments/e1_confirmation_split.json",
+  "parent_heldout_manifest_sha256": "22388318b88ad65b88d3eb86e924e2480ab1070cf71495df1a468fa18fd743b7",
+  "source_backend": "longwam",
+  "recipient": "longwam_idm",
+  "suite": "libero_10",
+  "design": "Use all 48 frozen starts, both action seeds, the same source construction, native/sham controls, latent-noise pairing, coverage gates and endpoints as the shared-video experiment. Change only the policy that supplies reference commands for the rendered videos. Fit this source's motion and tint templates on the original disjoint development starts.",
+  "motivation": "Prior to looking at held-out outcomes, the Long-WAM native-source sham qualified on all three single-seed development diagnostics. The shared-source sham qualified on four of twelve full two-seed development starts.",
+  "source_comparison": "Report how many paired starts pass native-vs-sham on each source, both, either or neither. On shared eligible starts estimate own-minus-shared motion, background RMS, and sham drift with task-stratified paired bootstrap intervals. Report per task and with equal task weights when every task contributes. This additional study has separate results and gates."
+}

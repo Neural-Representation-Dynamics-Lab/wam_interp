@@ -50,6 +50,35 @@ def copy_native(shared, dest, split):
     write(dest / f"{split}_reference_ledger.json", rows)
 
 
+def reference_paths(shared, dest, folder):
+    """Verify that each rendered source followed the same policy's native physical trajectory."""
+    sources = {}
+    audit = {}
+    for backend, root in (("fastwam", shared), ("longwam", dest)):
+        inputs = root / folder
+        source = inputs / f"{backend}_source.npz"
+        traces = inputs / f"{backend}_paths.npz"
+        if not source.is_file():
+            continue
+        with np.load(source, allow_pickle=False) as archive:
+            sources[backend] = archive["source_reference_path"]
+        if traces.is_file():
+            with np.load(traces, allow_pickle=False) as archive:
+                native = archive["native"]
+            ref = sources[backend]
+            if ref.shape != native.shape:
+                raise ValueError(f"Native trajectory length changed at {inputs}")
+            error = float(np.max(np.abs(ref - native)))
+            audit[backend + "_reference_max_abs_m"] = error
+            if error > 1e-7:
+                raise ValueError(f"Rendered reference differs from executed native trajectory at {inputs}")
+    if len(sources) == 2:
+        physical_distance = np.linalg.norm(sources["longwam"] - sources["fastwam"], axis=-1) * 1000
+        audit.update(endpoint_separation_mm=float(physical_distance[-1]),
+                     trajectory_rms_separation_mm=float(np.sqrt(np.mean(physical_distance[1:] ** 2))))
+    return audit
+
+
 def compare(shared, dest):
     first = read(shared / "longwam_results.json")
     second = read(dest / "longwam_results.json")
@@ -69,12 +98,16 @@ def compare(shared, dest):
             "eligible": x["eligible"] and y["eligible"],
         }
         rec["native_checks"] = []
+        rec["reference_trajectory_checks"] = []
         for left, right in zip(x["seeds"], y["seeds"], strict=True):
             if left["seed"] != right["seed"]:
                 raise ValueError("Mismatched action seeds")
+            f = Path("held") / f"task_{task}/state_{idx}/seed_{left['seed']}"
+            rec["reference_trajectory_checks"].append(
+                dict(seed=left["seed"], **reference_paths(shared, dest, f))
+            )
             if "metrics" not in left or "metrics" not in right:
                 continue
-            f = Path("held") / f"task_{task}/state_{idx}/seed_{left['seed']}"
             errs = {}
             for name in ("commands", "paths"):
                 rel = f / f"longwam_{name}.npz"

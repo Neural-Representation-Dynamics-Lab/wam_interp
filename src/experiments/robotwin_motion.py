@@ -101,32 +101,38 @@ def monitor(env):
         env.scene.step = step
 
 
+def can_skip_images(front):
+    env = front.env
+    return (front.config.task_config == "demo_clean" and not env.crazy_random_light
+            and not env.render_freq and env.eval_video_path is None)
+
+
+def unobserved_qpos(env, cmd):
+    render = env._update_render
+    try:
+        env._update_render = lambda: None
+        env.take_action(cmd, action_type="qpos")
+    finally:
+        env._update_render = render
+    return bool(env.eval_success)
+
+
 def physical_trace(front, commands, *, skip_images=False):
     """Execute an open-loop qpos chunk and read both physical TCPs after every control."""
     env = front.env
-    skip_images = (
-        skip_images and front.config.task_config == "demo_clean"
-        and not env.crazy_random_light and not env.render_freq and env.eval_video_path is None
-    )
+    skip_images = skip_images and can_skip_images(front)
     path = [tcp(env)]
     termination = []
-    render = env._update_render
-    try:
-        if skip_images:
-            env._update_render = lambda: None
-        with monitor(env) as log:
-            for cmd in commands:
-                if skip_images:
-                    env.take_action(cmd, action_type="qpos")
-                    success = bool(env.eval_success)
-                else:
-                    _, success = front.step(cmd, "qpos")
-                path.append(tcp(env))
-                termination.append(success)
-                if success:
-                    break
-    finally:
-        env._update_render = render
+    with monitor(env) as log:
+        for cmd in commands:
+            if skip_images:
+                success = unobserved_qpos(env, cmd)
+            else:
+                _, success = front.step(cmd, "qpos")
+            path.append(tcp(env))
+            termination.append(success)
+            if success:
+                break
     return np.stack(path), log, termination, bool(skip_images)
 
 
@@ -134,7 +140,10 @@ def copy_frames(obs):
     return {k: v.copy() for k, v in obs.cameras.items()}
 
 
-def record(front, obs, commands, side, dx, stride=4):
+def record(front, obs, commands, side, dx, stride=4, *, sampled_only=False):
+    from wam_interp.evaluations.ROBOTWIN.environment import observation_from_robotwin
+
+    sampled_only = sampled_only and can_skip_images(front)
     offset = CartesianOffset(front.env, side) if dx else None
     frames = [copy_frames(obs)]
     masks = [{k: np.zeros(v.shape[:2], bool) for k, v in frames[0].items()}]
@@ -143,7 +152,12 @@ def record(front, obs, commands, side, dx, stride=4):
     with monitor(front.env) as log:
         for i, cmd in enumerate(commands, 1):
             actual = offset.command(cmd, dx * i / len(commands)) if offset else cmd
-            obs, success = front.step(actual, "qpos")
+            if sampled_only:
+                success = unobserved_qpos(front.env, actual)
+                if i % stride == 0:
+                    obs = observation_from_robotwin(front.env.get_obs(), front.instruction)
+            else:
+                obs, success = front.step(actual, "qpos")
             path.append(tcp(front.env))
             times.append(log["substeps"] * front.env.scene.get_timestep())
             if i % stride == 0:

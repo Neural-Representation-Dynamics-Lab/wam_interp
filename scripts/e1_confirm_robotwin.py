@@ -13,7 +13,7 @@ from wam_interp.evaluations.ROBOTWIN.environment import open_environment
 from wam_interp.experiments.clip_study import save
 from wam_interp.experiments.confirm_replay import anchor_hash
 from wam_interp.experiments.confirmation import measured_effects, vectors
-from wam_interp.experiments.robotwin_motion import CAMERAS, physical_trace, record
+from wam_interp.experiments.robotwin_motion import CAMERAS, can_skip_images, physical_trace, record
 
 
 def reset(front, api, row):
@@ -25,7 +25,27 @@ def reset(front, api, row):
     return obs
 
 
-def sources(front, api, row, seed, out):
+def source_parity(full, sampled):
+    old, old_path, old_log = full
+    new, new_path, new_log = sampled
+    pixels = {}
+    for tint in old:
+        if len(old[tint]) != len(new[tint]):
+            return {"passed": False, "reason": "different_frame_count"}
+        pixels[tint] = {
+            cam: max(int(np.max(np.abs(a[cam].astype(int) - b[cam].astype(int))))
+                     for a, b in zip(old[tint], new[tint], strict=True))
+            for cam in CAMERAS
+        }
+    error = float(np.abs(old_path - new_path).max()) if old_path.shape == new_path.shape else None
+    return {
+        "max_pixel_difference": pixels, "max_abs_both_tcp_m": error, "same_audit": old_log == new_log,
+        "passed": bool(error is not None and error <= 1e-7 and old_log == new_log
+                       and all(max(v.values()) == 0 for v in pixels.values())),
+    }
+
+
+def sources(front, api, row, seed, out, *, development):
     marker = out / "longwam_source.json"
     if marker.is_file():
         return
@@ -37,12 +57,22 @@ def sources(front, api, row, seed, out):
     side = ("left", "right").index(row["active_arm"])
     audit = {}
     clips = {}
+    parity_file = out.parents[3] / "source_render_parity.json"
+    sampled_only = parity_file.is_file() and json.loads(parity_file.read_text())["passed"]
     for key, dx in (("sham", 0.0), ("left", -0.03), ("right", 0.03)):
         if key != "sham":
             obs = reset(front, api, row)
             if anchor_hash(obs) != anchor:
                 raise ValueError("Donor initial state changed")
-        variants, path, log = record(front, obs, cmds, row["active_arm"], dx, stride)
+        full = record(front, obs, cmds, row["active_arm"], dx, stride, sampled_only=sampled_only)
+        if development and key == "left" and not parity_file.is_file() and can_skip_images(front):
+            obs = reset(front, api, row)
+            if anchor_hash(obs) != anchor:
+                raise ValueError("Development source anchor changed before rendering comparison")
+            sampled = record(front, obs, cmds, row["active_arm"], dx, stride, sampled_only=True)
+            parity = source_parity(full, sampled)
+            save(parity_file, dict(parity, scene_seed=row["seed"], action_seed=seed, anchor_hash=anchor))
+        variants, path, log = full
         if key != "sham":
             from wam_interp.models.longwam.transforms import robotwin_model_image
 
@@ -104,6 +134,7 @@ def sources(front, api, row, seed, out):
         "arms": audit,
         "anchor_hash": anchor,
         "active_arm": row["active_arm"],
+        "rendered_at_sample_times_only": bool(sampled_only),
         "depicted_half_mm": float(500 * (target[1] - target[0])),
         "instruction": obs.instruction,
     }
@@ -252,7 +283,7 @@ def main():
                     folder = dest / f"task_{task}/state_{idx}/seed_{seed}"
                     folder.mkdir(parents=True, exist_ok=True)
                     if a.stage in ("sources", "calibrate"):
-                        sources(front, api, chosen[idx], seed, folder)
+                        sources(front, api, chosen[idx], seed, folder, development=spec["split"] == "development")
                     if a.stage != "sources":
                         for stage in ("features", "behavior") if a.stage == "calibrate" else (a.stage,):
                             score(front, api, chosen[idx], seed, folder, spec, stage)

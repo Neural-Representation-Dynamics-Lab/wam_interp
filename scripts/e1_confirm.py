@@ -49,6 +49,15 @@ def main():
     manifest = json.loads(args.manifest.read_text())
     suite = _get_suite("libero_10")
     api = load(args.backend)
+    from concurrent.futures import ProcessPoolExecutor
+    from multiprocessing import get_context
+
+    pending = []
+    pool = (
+        ProcessPoolExecutor(max_workers=2, mp_context=get_context("spawn"))
+        if args.stage == "calibrate"
+        else None
+    )
     for task_id in manifest["tasks"]:
         task = suite.get_task(task_id)
         states = initial_states_for_task(suite, task_id)
@@ -82,7 +91,11 @@ def main():
                     from wam_interp.experiments.confirmation import run_case
 
                     if args.stage == "calibrate":
-                        for stage in ("features", "behavior"):
+                        native_comparison = (
+                            idx == manifest["states"][str(task_id)][0] and seed == manifest["seeds"][0]
+                        )
+                        mode = "behavior" if native_comparison else "commands"
+                        for stage in ("features", mode):
                             run_case(
                                 api,
                                 stage,
@@ -94,6 +107,19 @@ def main():
                                 seed,
                                 folder,
                                 manifest,
+                            )
+                        if mode == "commands" and (folder / f"{args.backend}_commands.json").exists():
+                            from e1_confirm_execute import score_commands
+
+                            pending.append(
+                                pool.submit(
+                                    score_commands,
+                                    task,
+                                    states[idx],
+                                    folder,
+                                    args.backend,
+                                    manifest.get("sham_margin_mm", 20),
+                                )
                             )
                         if (
                             args.backend == "longwam"
@@ -143,6 +169,11 @@ def main():
                             manifest,
                         )
                 print(args.stage, args.backend, task_id, idx, seed, flush=True)
+
+    if pool is not None:
+        pool.shutdown(wait=True)
+        for job in pending:
+            job.result()
 
 
 if __name__ == "__main__":

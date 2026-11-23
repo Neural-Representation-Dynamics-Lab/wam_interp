@@ -342,6 +342,15 @@ def summarize(manifest_path, root, model):
             nuisance = "bounded mean response"
         if background["ci90"][0] > margin:
             nuisance = "mean response exceeds margin"
+    all_complete = []
+    for r in rows:
+        if all("metrics" in z for z in r["seeds"]):
+            means = {k: float(np.mean([z["metrics"][k] for z in r["seeds"]])) for k in METRICS}
+            all_complete.append(dict(r, eligible=True, means=means))
+    sensitivity = {
+        k: estimates(groups(all_complete, spec["tasks"], k), rng)
+        for k in ("motion_32_mm", "background_rms_max_mm", "selectivity_mm")
+    }
     all_runs = [trial for row in rows for trial in row["seeds"]]
     shams = [z["metrics"]["sham_drift_mm"] for z in all_runs if "metrics" in z]
     contact_comparisons = []
@@ -375,6 +384,7 @@ def summarize(manifest_path, root, model):
     }
     return {
         "quality": quality,
+        "sensitivity_all_complete_starts": sensitivity,
         "model": model,
         "suite": spec["suite"],
         "tasks": spec["tasks"],
@@ -461,6 +471,22 @@ def main():
     else:
         for model in [a.backend] if a.backend else MODELS:
             write(root / f"{model}_results.json", summarize(held, root / "held", model))
+        if not a.backend:
+            reports = {m: read(root / f"{m}_results.json") for m in MODELS}
+            paired = set.intersection(
+                *[
+                    {(r["task"], r["state"]) for r in report["states"] if r["eligible"]}
+                    for report in reports.values()
+                ]
+            )
+            common = {"ids": sorted(paired), "models": {}}
+            for m, report in reports.items():
+                rows = [r for r in report["states"] if (r["task"], r["state"]) in paired]
+                common["models"][m] = {
+                    k: estimates(groups(rows, report["tasks"], k), np.random.default_rng(20261123))
+                    for k in ("motion_32_mm", "background_rms_max_mm", "selectivity_mm")
+                }
+            write(root / "common_starts.json", common)
 
 
 if __name__ == "__main__":

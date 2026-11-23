@@ -14,8 +14,23 @@ def main():
     p.add_argument("--tasks", nargs="+", default=["move_can_pot", "place_can_basket"])
     a = p.parse_args()
     base = read(Path("configs/experiments/e1_confirmation.json"))
+    keys = (
+        "seeds",
+        "branches",
+        "sham_margin_mm",
+        "background_rms_margin_mm",
+        "margin_basis",
+        "minimum_task_coverage",
+        "minimum_complete_states_per_task",
+        "probe",
+        "primary_background",
+        "positive_motion",
+        "selectivity",
+    )
     common = dict(
-        base,
+        {k: base[k] for k in keys},
+        primary_motion="Neutral RGB signed half-difference of the active TCP world-x position after 32 native controls, with a 10-control secondary prefix.",
+        background="Symmetric warm and cool colour edits of the visible wall, same-physics RGB after the anchor, ramped over the first three sampled frames.",
         suite="RoboTwin2.0/demo_clean",
         tasks=a.tasks,
         source_backend="longwam",

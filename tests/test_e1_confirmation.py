@@ -165,3 +165,26 @@ def test_analysis_uses_independent_starts_and_retains_sham_failures(tmp_path):
     assert r["motion_generalizes"] and r["background_decision"] == "bounded mean response"
     assert r["sensitivity_all_complete_starts"]["motion_32_mm"]["mean"] == 10.5
     a.write(tmp_path / "result.json", r)
+
+
+def test_own_source_reuses_only_sealed_native_chunks(tmp_path, monkeypatch):
+    monkeypatch.syspath_prepend(str(Path(__file__).parents[1] / "scripts"))
+    from e1_longwam_reference import copy_native
+
+    a = analysis()
+    shared, dest = tmp_path / "original", tmp_path / "own"
+    a.write(dest / "held.json", {"tasks": [5], "states": {"5": [34]}, "seeds": [1, 2]})
+    native = np.arange(224, dtype="float32").reshape(32, 7)
+    for seed in (1, 2):
+        folder = shared / f"held/task_5/state_34/seed_{seed}"
+        folder.mkdir(parents=True)
+        np.savez(folder / "longwam_commands.npz", native=native, sham=native + 10)
+    a.write(shared / "held/task_5/state_34/seed_1/longwam_commands.json", {"order": ["sham", "native"]})
+    copy_native(shared, dest, "held")
+    rows = a.read(dest / "held_reference_ledger.json")
+    assert [r["copied"] for r in rows] == [True, False]
+    np.testing.assert_array_equal(
+        np.load(dest / "held/task_5/state_34/seed_1/longwam_reference.npy"), native
+    )
+    target = dest / "held/task_5/state_34/seed_2/longwam_reference.npy"
+    assert not target.exists()

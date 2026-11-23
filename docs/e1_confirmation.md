@@ -38,6 +38,16 @@ The motion readout is half the right-left difference in end-effector world x aft
 
 Per-camera motion and colour magnitudes are in `held/pixel_contrasts.json`. Read `held.json`, `implementation_hashes.json`, `calibration_summary.json`, `held/*_feature_gate.json` and `{fastwam,longwam}_results.json`. Plots and a blinded stimulus sheet are under `figures/`. Give reviewers the sheet alone. The key contains the arm labels. Raw clips, masks, actions and trajectories stay in the results directory. With a failed feature check, a retained physical readout is descriptive for that property. If both properties fail before action measurement, the receipt records that exclusion.
 
+## Long-WAM reference-source comparison
+
+The additional Long-WAM LIBERO study uses the registered 48 starts, two seeds and the same eight branches. Here the simulator records Long-WAM's native action chunk to make the reference video. The first study used a simulator recording of FastWAM's native action chunk. Long-WAM's recipient instruction, checkpoints, history, and paired action and video-noise seeds are identical across the two studies.
+
+```bash
+bash scripts/run_e1_longwam_reference.sh "$root" results/e1_longwam_reference
+```
+
+This reads the native branch of completed instruction-matched trials and recomputes any missing native reference. Start selection is independent of the original arm and background outcomes. The branch trajectories, own-source feature probes and sham checks go to the new output directory. Read `longwam_results.json` for the independent study and `paired_source_comparison.json` for differences on starts usable with both sources. The latter also gives the number of starts usable with each source per task. When sharing one A100 between this comparison and RoboTwin, both launchers can use the same `E1_GPU_LOCK` path.
+
 ## RoboTwin
 
 Use the dedicated RoboTwin simulator environment and verify the NVIDIA Vulkan renderer. Install the simulator revision from `RoboTwinEvalConfig`, obtain the official objects and embodiment assets, and run `python script/update_embodiment_config_path.py` in that checkout before expert screening. Use Long-WAM's released RoboTwin 2.0 IDM config, model and statistics. The release revisions and checksums are in `src/models/longwam/loader.py`. The 14-D native joint commands, head and two wrist cameras, and checkpoint history all go through the RoboTwin adapter.

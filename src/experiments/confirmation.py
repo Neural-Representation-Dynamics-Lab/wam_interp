@@ -95,13 +95,15 @@ def vectors(donors):
     return {"arm": arm, "colour": colour}
 
 
-def run_case(api, stage, backend, task, task_id, state, idx, seed, folder, manifest, source="fastwam"):
+def run_case(api, stage, backend, task, task_id, state, idx, seed, folder, manifest, source=None):
     import torch
 
+    primary_source = manifest.get("source_backend", "fastwam")
+    source = source or primary_source
     report = json.loads((folder / f"{source}_source.json").read_text())
     if not report["passed"]:
         return
-    prefix = f"{backend}" if source == "fastwam" else f"{backend}_own_source"
+    prefix = backend if source == primary_source else f"{backend}_own_source"
     receipt = folder / f"{prefix}_{stage}.json"
     if receipt.is_file():
         return

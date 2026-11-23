@@ -49,6 +49,7 @@ def main():
     p.add_argument("--task", type=int, help="Execute just one registered task")
     a = p.parse_args()
     spec = json.loads(a.manifest.read_text())
+    reference = spec.get("source_backend", "fastwam")
     suite = _get_suite("libero_10")
     for task in spec["tasks"]:
         if a.task is not None and a.task != task:
@@ -61,7 +62,7 @@ def main():
                 inputs = folder / f"{a.backend}_commands.json"
                 if receipt.is_file():
                     continue
-                if not json.loads((folder / "fastwam_source.json").read_text())["passed"]:
+                if not json.loads((folder / f"{reference}_source.json").read_text())["passed"]:
                     continue
                 until = monotonic() + 10800
                 while a.wait and not inputs.is_file() and monotonic() < until:

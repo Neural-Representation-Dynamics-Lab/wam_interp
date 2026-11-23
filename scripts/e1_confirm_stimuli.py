@@ -70,7 +70,9 @@ def main():
                 src = json.loads((folder / f"{prefix}_source.json").read_text())
                 row = {"task": t, "state": idx, "seed": s, "source_pass": src["passed"]}
                 if src["passed"]:
-                    row["views"] = audit(folder / f"{prefix}_source.npz", prefix == "longwam")
+                    row["views"] = audit(
+                        folder / f"{prefix}_source.npz", spec.get("suite", "").startswith("RoboTwin")
+                    )
                     row["source_hash"] = src["sha256"]
                 rows.append(row)
     (a.out / "pixel_contrasts.json").write_text(json.dumps(rows, indent=2))

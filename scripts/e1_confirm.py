@@ -47,6 +47,7 @@ def main():
     parser.add_argument("--wait-sources", action="store_true")
     args = parser.parse_args()
     manifest = json.loads(args.manifest.read_text())
+    reference = manifest.get("source_backend", "fastwam")
     suite = _get_suite("libero_10")
     api = load(args.backend)
     from concurrent.futures import ProcessPoolExecutor
@@ -84,7 +85,7 @@ def main():
                         import time
 
                         until = time.monotonic() + 1800
-                        while not (folder / "fastwam_source.json").exists():
+                        while not (folder / f"{reference}_source.json").exists():
                             if time.monotonic() > until:
                                 raise TimeoutError(f"No source at {folder}")
                             time.sleep(2)
@@ -123,6 +124,7 @@ def main():
                             )
                         if (
                             args.backend == "longwam"
+                            and reference != "longwam"
                             and idx == manifest["states"][str(task_id)][0]
                             and seed == manifest["seeds"][0]
                         ):

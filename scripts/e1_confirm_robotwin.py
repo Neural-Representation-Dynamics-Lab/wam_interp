@@ -1,6 +1,7 @@
 """Run the paired E1 controls on expert-screened RoboTwin scenes with Long-WAM IDM."""
 
 import argparse
+import gc
 import hashlib
 import json
 from pathlib import Path
@@ -17,7 +18,15 @@ from wam_interp.experiments.robotwin_motion import CAMERAS, can_skip_images, phy
 
 
 def reset(front, api, row):
-    front.close()
+    count = getattr(front, "_e1_resets", 0)
+    clear = count > 0 and count % front.config.clear_cache_freq == 0
+    front.close(clear_cache=clear)
+    if clear:
+        import torch
+
+        gc.collect()
+        torch.cuda.empty_cache()
+    front._e1_resets = count + 1
     obs = front.begin(row["seed"], 0, row["info"], "unseen")
     api.adapter.begin_episode(obs)
     if obs.instruction != row["instruction"] or str(front.env.arm_tag) != row["active_arm"]:

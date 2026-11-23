@@ -7,6 +7,22 @@ py=${PYTHON:-python}
 root="$screen/$task"
 lock=${E1_GPU_LOCK:-"$screen/../research_gpu.lock"}
 gpu() { flock "$lock" "$@"; }
+# A fresh simulator process can reclaim Vulkan camera buffers. Retry only this
+# specific allocation failure and only while new scene/seed receipts are being sealed.
+run_stage() {
+ local stage=$1 split=$2 count after attempt=1 log="$root/logs/$1.log"
+ local marker=longwam_${stage}.json
+ case "$stage" in calibrate) marker=longwam_behavior.json;; sources) marker=longwam_source.json;; esac
+ while true; do
+  count=$(find "$root/$split" -name "$marker" 2>/dev/null | wc -l) || count=0
+  if gpu "$py" scripts/e1_confirm_robotwin.py "$stage" "${args[@]}" --manifest "$root/$split.json" --out "$root/$split" >"$log" 2>&1; then return 0; fi
+  if ! grep -Fq "RuntimeError: cannot create buffer" "$log"; then return 1; fi
+  after=$(find "$root/$split" -name "$marker" | wc -l)
+  if (( after <= count )); then return 1; fi
+  mv "$log" "$root/logs/${stage}_allocation_${attempt}_$(date +%s).log"
+  attempt=$((attempt + 1))
+ done
+}
 mkdir -p "$root/logs"
 "$py" scripts/e1_robotwin_manifest.py --screen-dir "$screen" --out "$root" --tasks "$task"
 args=(--root "${ROBOTWIN_ROOT:?Set ROBOTWIN_ROOT}" --weights "${ROBOTWIN_IDM:?Set ROBOTWIN_IDM}" --screen-dir "$screen")
@@ -21,7 +37,7 @@ if ! "$py" -c 'import json,sys;sys.exit(not json.load(open(sys.argv[1]))["passed
   echo "Development unedited-video fidelity has not passed" >"$root/stop_reason.txt"
   exit 0
 fi
-gpu "$py" scripts/e1_confirm_robotwin.py calibrate "${args[@]}" --manifest "$root/dev.json" --out "$root/dev" >"$root/logs/calibrate.log" 2>&1
+run_stage calibrate dev
 "$py" - "$root" <<'PY'
 import sys,json
 from pathlib import Path
@@ -38,10 +54,10 @@ if usable<2:
 PY
 if ! "$py" -c 'import json,sys;sys.exit(not json.load(open(sys.argv[1]))["passed"])' "$root/development_gate.json"; then exit 0; fi
 for stage in sources features; do
- gpu "$py" scripts/e1_confirm_robotwin.py "$stage" "${args[@]}" --manifest "$root/held.json" --out "$root/held" >"$root/logs/$stage.log" 2>&1
+ run_stage "$stage" held
 done
 "$py" scripts/e1_confirm_stimuli.py --manifest "$root/held.json" --out "$root/held"
 "$py" scripts/e1_confirm_analysis.py gate --root "$root" --backend longwam
-gpu "$py" scripts/e1_confirm_robotwin.py behavior "${args[@]}" --manifest "$root/held.json" --out "$root/held" >"$root/logs/behavior.log" 2>&1
+run_stage behavior held
 "$py" scripts/e1_confirm_analysis.py report --root "$root" --backend longwam
 "$py" scripts/e1_confirm_figures.py --root "$root" --out "$root/figures"

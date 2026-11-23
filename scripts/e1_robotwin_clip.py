@@ -119,19 +119,35 @@ def main():
     root = args.root.resolve()
     api = api_for(args.weights.resolve())
     rows = [x for x in json.loads(args.screen.read_text()) if x["accepted"]]
-    row = rows[0]
     from wam_interp.evaluations.ROBOTWIN.runner import evaluate_robotwin
 
-    cfg = RoboTwinEvalConfig(
-        task_name=args.task,
-        robotwin_root=root,
-        start_seed=row["seed"],
-        replan_steps=24,
-        max_seed_attempts=1,
-        inference_options={"condition": "idm"},
-        output_dir=out,
-    )
-    evaluate_robotwin(api.adapter, cfg)
+    # The expert planner can reject a previously accepted seed when it plans again.
+    # Preserve each official evaluation file; try only the screened development starts.
+    attempts = []
+    for row in rows:
+        cfg = RoboTwinEvalConfig(
+            task_name=args.task,
+            robotwin_root=root,
+            start_seed=row["seed"],
+            replan_steps=24,
+            max_seed_attempts=1,
+            inference_options={"condition": "idm"},
+            output_dir=out,
+        )
+        try:
+            evaluate_robotwin(api.adapter, cfg)
+        except RuntimeError as exc:
+            if "Seed search exhausted after 1 attempts" not in str(exc):
+                raise
+            attempts.append({"seed": row["seed"], "status": "expert_rejected_on_repeat"})
+            save(out / "native_attempts.json", attempts)
+            continue
+        attempts.append({"seed": row["seed"], "status": "episode_completed"})
+        save(out / "native_attempts.json", attempts)
+        break
+    else:
+        raise RuntimeError("No previously expert-accepted development start passed repeated screening")
+    rows = [row] + [candidate for candidate in rows if candidate["seed"] != row["seed"]]
     tested = []
     for i, candidate in enumerate(rows):
         marker = out / ("replay.json" if i == 0 else f"replay_{candidate['seed']}.json")

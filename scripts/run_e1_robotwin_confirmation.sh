@@ -8,6 +8,9 @@ root="$screen/$task"
 mkdir -p "$root/logs"
 "$py" scripts/e1_robotwin_manifest.py --screen-dir "$screen" --out "$root" --tasks "$task"
 args=(--root "${ROBOTWIN_ROOT:?Set ROBOTWIN_ROOT}" --weights "${ROBOTWIN_IDM:?Set ROBOTWIN_IDM}" --screen-dir "$screen")
+if [[ ! -s "$screen/smoke_$task/fidelity.json" ]]; then
+ "$py" scripts/e1_robotwin_clip.py --root "$ROBOTWIN_ROOT" --weights "$ROBOTWIN_IDM" --task "$task" --screen "$screen/dev_$task.json" --out "$screen/smoke_$task" >"$root/logs/native_retry.log" 2>&1
+fi
 test -s "$screen/smoke_$task/fidelity.json"
 if ! "$py" -c 'import json,sys;sys.exit(not json.load(open(sys.argv[1]))["passed"])' "$screen/smoke_$task/fidelity.json"; then
   echo "Development unedited-video fidelity has not passed" >"$root/stop_reason.txt"

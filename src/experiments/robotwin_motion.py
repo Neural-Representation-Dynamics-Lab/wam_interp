@@ -101,6 +101,35 @@ def monitor(env):
         env.scene.step = step
 
 
+def physical_trace(front, commands, *, skip_images=False):
+    """Execute an open-loop qpos chunk and read both physical TCPs after every control."""
+    env = front.env
+    skip_images = (
+        skip_images and front.config.task_config == "demo_clean"
+        and not env.crazy_random_light and not env.render_freq and env.eval_video_path is None
+    )
+    path = [tcp(env)]
+    termination = []
+    render = env._update_render
+    try:
+        if skip_images:
+            env._update_render = lambda: None
+        with monitor(env) as log:
+            for cmd in commands:
+                if skip_images:
+                    env.take_action(cmd, action_type="qpos")
+                    success = bool(env.eval_success)
+                else:
+                    _, success = front.step(cmd, "qpos")
+                path.append(tcp(env))
+                termination.append(success)
+                if success:
+                    break
+    finally:
+        env._update_render = render
+    return np.stack(path), log, termination, bool(skip_images)
+
+
 def copy_frames(obs):
     return {k: v.copy() for k, v in obs.cameras.items()}
 

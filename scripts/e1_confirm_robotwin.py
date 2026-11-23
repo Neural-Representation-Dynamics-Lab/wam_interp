@@ -13,7 +13,7 @@ from wam_interp.evaluations.ROBOTWIN.environment import open_environment
 from wam_interp.experiments.clip_study import save
 from wam_interp.experiments.confirm_replay import anchor_hash
 from wam_interp.experiments.confirmation import measured_effects, vectors
-from wam_interp.experiments.robotwin_motion import CAMERAS, monitor, record, tcp
+from wam_interp.experiments.robotwin_motion import CAMERAS, physical_trace, record
 
 
 def reset(front, api, row):
@@ -113,6 +113,32 @@ def sources(front, api, row, seed, out):
     save(marker, result)
 
 
+def verify_physical_readout(front, api, row, seed, out, source):
+    """Compare one real development policy chunk in this task before suppressing unused images."""
+    obs = reset(front, api, row)
+    expected = source["anchor_hash"]
+    if anchor_hash(obs) != expected:
+        raise ValueError("Development anchor changed before readout calibration")
+    cmds = joints(api, api.adapter.predict_action(request(api, obs, seed)))
+    runs = []
+    for skip in (False, True):
+        if anchor_hash(reset(front, api, row)) != expected:
+            raise ValueError("Readout comparison requires identical initial observations")
+        start = monotonic()
+        path, contacts, termination, skipped = physical_trace(front, cmds, skip_images=skip)
+        runs.append((path, contacts, termination, skipped, monotonic() - start))
+    full, fast = runs
+    error = float(np.max(np.abs(full[0] - fast[0]))) if full[0].shape == fast[0].shape else None
+    save(out, {
+        "task": front.config.task_name, "scene_seed": row["seed"], "action_seed": seed,
+        "anchor_hash": expected, "commands_sha256": hashlib.sha256(cmds.tobytes()).hexdigest(),
+        "max_abs_both_tcp_m": error, "contacts": [full[1], fast[1]],
+        "termination": [full[2], fast[2]], "seconds": [full[4], fast[4]],
+        "passed": bool(fast[3] and error is not None and error <= 1e-7
+                       and full[1] == fast[1] and full[2] == fast[2]),
+    })
+
+
 def score(front, api, row, seed, out, spec, stage):
     marker = out / f"longwam_{stage}.json"
     if marker.is_file():
@@ -160,6 +186,10 @@ def score(front, api, row, seed, out, spec, stage):
     paths = {}
     contact = {}
     chunks = {}
+    parity_file = out.parents[3] / "physical_readout_parity.json"
+    if spec["split"] != "held_out" and not parity_file.exists():
+        verify_physical_readout(front, api, row, seed, parity_file, source)
+    skip_images = parity_file.is_file() and json.loads(parity_file.read_text())["passed"]
     for key in keys:
         obs = reset(front, api, row)
         if anchor_hash(obs) != source["anchor_hash"]:
@@ -172,20 +202,14 @@ def score(front, api, row, seed, out, spec, stage):
         )
         cmds = joints(api, result)
         chunks[key] = cmds
-        path = [tcp(front.env)]
-        with monitor(front.env) as log:
-            for cmd in cmds:
-                _, success = front.step(cmd, "qpos")
-                path.append(tcp(front.env))
-                if success:
-                    break
-        paths[key] = np.stack(path)
+        paths[key], log, _, skipped = physical_trace(front, cmds, skip_images=skip_images)
         contact[key] = log
     np.savez_compressed(out / "longwam_paths.npz", **paths)
     np.savez_compressed(out / "longwam_commands.npz", **chunks)
     result = {
         "source_hash": source["sha256"],
         "order": keys,
+        "skipped_unused_images": skipped,
         "depicted_half_mm": source["depicted_half_mm"],
         "contacts": contact,
         "action_seed": seed,

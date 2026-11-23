@@ -188,3 +188,34 @@ def test_own_source_reuses_only_sealed_native_chunks(tmp_path, monkeypatch):
     )
     target = dest / "held/task_5/state_34/seed_2/longwam_reference.npy"
     assert not target.exists()
+
+@pytest.mark.parametrize("random_light", [True, False])
+def test_physical_trace_preserves_rendering_and_early_termination(monkeypatch, random_light):
+    from contextlib import nullcontext
+    from wam_interp.experiments import robotwin_motion as motion
+
+    rendered = []
+    render = lambda: rendered.append(True)
+    env = SimpleNamespace(crazy_random_light=random_light, render_freq=0, eval_video_path=None,
+                          _update_render=render, eval_success=False)
+    count = []
+
+    def take(action, action_type):
+        assert action_type == "qpos"
+        env._update_render()
+        count.append(action)
+        env.eval_success = len(count) == 2
+
+    def step(action, action_type):
+        take(action, action_type)
+        return None, env.eval_success
+
+    env.take_action = take
+    front = SimpleNamespace(env=env, config=SimpleNamespace(task_config="demo_clean"), step=step)
+    monkeypatch.setattr(motion, "monitor", lambda env: nullcontext({}))
+    monkeypatch.setattr(motion, "tcp", lambda env: np.full((2, 3), len(count)))
+    path, _, ends, skipped = motion.physical_trace(front, [1, 2, 3], skip_images=True)
+    assert skipped == (not random_light)
+    assert len(rendered) == (2 if random_light else 0)
+    assert ends == [False, True] and path.shape == (3, 2, 3)
+    assert env._update_render is render

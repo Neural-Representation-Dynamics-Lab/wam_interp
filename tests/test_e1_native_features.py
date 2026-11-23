@@ -44,3 +44,9 @@ def test_lingbot_protects_observed_history_and_first_chunk_anchor():
     assert torch.equal(cache["k"][:,4:6],zeros)
     assert torch.equal(cache["k"][:,6:],keys[:,6:])
     assert cache["mask"].tolist()==[1,1,1,1,1,1,0,0]
+
+    assert cap.frame_start == 0
+    with pytest.raises(ValueError, match="different video frames"):
+        with native_features(runtime, layer=0, expected_frame_start=4) as wrong:
+            lingbot_predicted_kv(runtime, wrong)
+    assert not hasattr(runtime, "_e1_features")

@@ -47,7 +47,7 @@ def apply_future_hook(model, latents):
 
 
 @contextmanager
-def capture_future(model, donor=None):
+def capture_future(model, donor=None, *, future_only=False):
     """Capture CPU latents and optionally replace future time slices only.
 
     Sequential use only. The model must expose the explicit native boundary.
@@ -64,14 +64,18 @@ def capture_future(model, donor=None):
     def hook(latents):
         if captured:
             raise RuntimeError("Expected exactly one future boundary per inference")
-        captured["original"] = latents.detach().cpu().clone()
+        editable = latents[:, :, 1:] if future_only else latents
+        captured["original"] = editable.detach().to("cpu", copy=True)
         if donor is not None:
             import torch
+            if future_only and (donor.dtype != latents.dtype or not torch.isfinite(donor).all()):
+                raise ValueError("Invalid future precision or values")
             replacement = torch.as_tensor(donor, device=latents.device, dtype=latents.dtype)
-            if replacement.shape != latents.shape:
+            if replacement.shape != editable.shape:
                 raise ValueError("Donor and recipient latent shapes differ")
-            latents[:, :, 1:] = replacement[:, :, 1:]
-        captured["used"] = latents.detach().cpu().clone()
+            latents[:, :, 1:] = replacement if future_only else replacement[:, :, 1:]
+        if not future_only:
+            captured["used"] = latents.detach().cpu().clone()
         return latents
 
     model._research_future_hook = hook

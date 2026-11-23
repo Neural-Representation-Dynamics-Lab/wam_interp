@@ -1,5 +1,7 @@
 # Running the paired LIBERO E1 study
 
+Use the [shared future adapter](e1_future_adapter.md) for new five-backend capture and replay studies.
+
 Run from the repository root on Linux with a 40 GB A100, the Optional IDM checkpoint, its matching statistics, official LIBERO initial states and MuJoCo 3.3.2. The [model handoff](e1_multimodel.md) gives the backend installation and asset paths. Use the OpenWAM environment for OpenWAM and the transformers 4 environments for the other backends.
 
 ```bash

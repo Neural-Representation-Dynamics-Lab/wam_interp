@@ -3,10 +3,12 @@ from contextlib import contextmanager
 
 
 class FeatureCapture:
-    def __init__(self, layer=None, donors=None, stage=None):
+    def __init__(self, layer=None, donors=None, stage=None, expected_frame_start=None):
         self.layer = layer
         self.stage = stage
         self.donors = donors
+        self.expected_frame_start = expected_frame_start
+        self.frame_start = None
         self.captured = {}
         self.seen = 0
 
@@ -31,11 +33,11 @@ class FeatureCapture:
 
 
 @contextmanager
-def native_features(owner, *, layer=None, stage=None, donors=None):
+def native_features(owner, *, layer=None, stage=None, donors=None, expected_frame_start=None):
     """Install for one eager predict_action call. The caller pairs context and schedules."""
     if getattr(owner, "_e1_features", None) is not None:
         raise RuntimeError("An E1 hook is already active")
-    capture = FeatureCapture(layer, donors, stage)
+    capture = FeatureCapture(layer, donors, stage, expected_frame_start)
     owner._e1_features = capture
     try:
         yield capture
@@ -59,6 +61,11 @@ def edit_future_kv(hook, key, value, first):
 
 
 def lingbot_predicted_kv(runtime, hook):
+    # The adapter may have just consumed a pending observed chunk. Check the
+    # actual rotary position here, after that update and before editing K/V.
+    hook.frame_start = int(runtime.frame_st_id)
+    if hook.expected_frame_start is not None and hook.expected_frame_start != hook.frame_start:
+        raise ValueError("LingBot donor and recipient start at different video frames")
     cache = runtime._cache_attentions()[hook.layer].attn_caches[runtime.cache_name]
     ids = cache["id"]
     slots = (cache["mask"] & cache["is_pred"] & (ids == ids[cache["mask"]].max())).nonzero().flatten()

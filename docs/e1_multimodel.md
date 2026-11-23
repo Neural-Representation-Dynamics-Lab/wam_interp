@@ -4,6 +4,8 @@ Start with the [current research plan and TODOs](e1_next_steps_20261122.md), the
 
 ## What this PR implements
 
+For the shared capture and replay API on all five backends, see [the future adapter guide](e1_future_adapter.md).
+
 The [A100 follow-up](e1_a100_study.md) adds native future-feature hooks for Faster-WAM, LingBot-VA, Long-WAM and OpenWAM. FastWAM Optional IDM provides the clean-latent path. `src/experiments/futures.py` captures/replaces future latents before action K/V construction, preserves the observed anchor, validates shape/dtype/device/finiteness, and removes its hook even after errors. Inactive instrumentation does not alter native inference. Do not share one hooked model concurrently between requests.
 
 | Reusable module | Purpose |

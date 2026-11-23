@@ -1,6 +1,5 @@
 """First-decision native feature transplants from physically relocated scenes."""
 import json
-from contextlib import nullcontext
 from pathlib import Path
 
 import numpy as np
@@ -10,7 +9,6 @@ from wam_interp.evaluations.LIBERO.environment import (
     create_libero_environment, initial_states_for_task, reset_to_initial_state, step_libero,
 )
 from wam_interp.evaluations.LIBERO.runner import _get_suite
-from wam_interp.experiments.native_features import native_features
 from wam_interp.experiments.physical_relocation import reset_relocated
 
 
@@ -52,8 +50,7 @@ def collect(audit, suite, task_id, state_id, config, offsets, *, donors=None):
         if callable(getattr(adapter,"begin_episode",None)):
             adapter.begin_episode(obs)
         request=_request_for_call(config,adapter,adapter.prepare_observation(obs),0,0)
-        with native_features(audit.owner,layer=audit.layer,stage=0,donors=donors) as cap:
-            prediction=adapter.predict_action(request)
+        prediction, features = audit.futures.capture(request, donor=donors)
         commands=adapter.postprocess_actions(prediction.actions,environment="libero")
         commands=torch.as_tensor(commands).detach().float().cpu().numpy().reshape(-1,7)
         if not np.isfinite(commands).all():
@@ -64,7 +61,7 @@ def collect(audit, suite, task_id, state_id, config, offsets, *, donors=None):
             eef.append(step.observation.state["eef_position"].tolist())
             if step.done or step.success:
                 break
-        return dict(anchor=anchor,proprio=proprio,features=cap.captured,actions=commands,eef=np.asarray(eef))
+        return dict(anchor=anchor,proprio=proprio,features=features,actions=commands,eef=np.asarray(eef))
     finally:
         env.close()
 
@@ -106,7 +103,7 @@ def run_scene_probe(audit, protocol, config, out):
                         raise RuntimeError("Donor robot start differs")
                     current_mae=float(np.abs(base["anchor"]["agentview"].astype(float)-shifted["anchor"]["agentview"]).mean())
                     image_mae.append(current_mae)
-                    a,b=base["features"][0],shifted["features"][0]
+                    a,b=base["features"].parts,shifted["features"].parts
                     d_feature=float(np.sqrt(np.mean([float((v.float()-w.float()).square().mean()) for v,w in zip(a,b)])))
                     for name,case in (("native_shifted",shifted),("future_only",patched)):
                         if case["eef"].shape!=base["eef"].shape:

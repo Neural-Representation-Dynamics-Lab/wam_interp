@@ -67,14 +67,19 @@ def main(argv=None):
     parser.add_argument("--condition")
     parser.add_argument("--e1-feature-audit", type=Path,
                         help="Record a three-chunk future-feature parity audit in the first LIBERO episode")
+    parser.add_argument("--e1-clip-study", type=Path, help="Replay archived E1 book clips after the native audit")
     parser.add_argument("--e1-scene-protocol", type=Path,
                         help="After a successful feature audit, use a saved native relocation protocol for paired transplants")
     parser.add_argument("--output", type=Path, default=Path("results/benchmarks"))
     args = parser.parse_args(argv)
+    if args.e1_clip_study and (not args.e1_feature_audit or args.backend not in ("fastwam", "longwam")):
+        parser.error("--e1-clip-study requires a FastWAM/Long-WAM IDM feature audit")
     if args.e1_scene_protocol and not args.e1_feature_audit:
         parser.error("--e1-scene-protocol requires --e1-feature-audit")
-    if args.e1_feature_audit and (args.benchmark != "libero" or args.backend == "fastwam" or args.openwam_upstream_optimizations):
-        parser.error("--e1-feature-audit requires eager LIBERO inference with Faster-WAM, LingBot, Long-WAM or OpenWAM")
+    if args.e1_feature_audit and (args.benchmark != "libero" or args.openwam_upstream_optimizations):
+        parser.error("--e1-feature-audit requires eager LIBERO inference")
+    if args.e1_feature_audit and args.backend == "fastwam" and (args.fastwam_task != FASTWAM_TASKS["libero"][1] or args.condition != "idm"):
+        parser.error("FastWAM future audit requires the Optional IDM task and --condition idm")
     from wam_interp.evaluations.provenance import install_termination_handler
     install_termination_handler()  # Slurm SIGTERM -> SystemExit, so partial reports are saved
     args.checkpoint = args.checkpoint.expanduser().resolve()
@@ -155,7 +160,8 @@ def main(argv=None):
             from wam_interp.models.fastwam.loader import compose_fastwam_config, load_fastwam
             task = args.fastwam_task or FASTWAM_TASKS[family][0]
             metadata["fastwam_task"] = task
-            cfg = compose_fastwam_config(task, benchmark=args.benchmark)
+            cfg = compose_fastwam_config(task, benchmark=args.benchmark,
+                                         overrides=["model.redirect_common_files=false"] if args.e1_feature_audit else None)
             model = load_fastwam(cfg, args.checkpoint, device=args.device, dtype=args.dtype)
             if plus:
                 from wam_interp.models.fastwam.libero_plus_adapter import FastWAMLiberoPlusAdapter as Adapter
@@ -194,6 +200,9 @@ def main(argv=None):
         print({"benchmark": "libero", "suite": args.suite, "episodes": result.episodes, "successes": result.successes,
                "success_rate": result.success_rate, "per_task": [task.successes for task in result.tasks],
                "output_path": result.output_path}, flush=True)
+        if args.e1_clip_study:
+            from wam_interp.experiments.clip_study import run_clip_study
+            run_clip_study(adapter.futures, args.e1_clip_study, args.output / "clips")
         if args.e1_scene_protocol:
             if len(adapter.rows) < 3:
                 raise RuntimeError("Scene probe requires three native decisions with observed history updates")

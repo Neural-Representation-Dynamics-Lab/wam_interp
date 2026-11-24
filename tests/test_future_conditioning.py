@@ -1,5 +1,6 @@
 """CPU checks for the Faster-WAM future-conditioning ablations (Roadmap E7)."""
 
+import copy
 from dataclasses import dataclass
 from types import SimpleNamespace
 
@@ -54,7 +55,7 @@ class Request:
     seed: int
 
 
-def setup(condition="normal", probes=()):
+def make_policy(condition="normal", probes=()):
     adapter = TinyAdapter()
     ablation = FasterWAMFutureAblation(adapter.model, latent_frames=3)
     return adapter, ablation, FutureAblationPolicy(adapter, ablation, condition, probes=probes, resample_offset=100)
@@ -63,7 +64,7 @@ def setup(condition="normal", probes=()):
 @pytest.mark.parametrize("condition, columns", [("future_mask", (2, 6)), ("current_mask", (0, 2)),
                                                 ("future1_mask", (2, 4)), ("future2_mask", (4, 6))])
 def test_masks_drop_keys_only_from_action_rows_of_condition_layers(condition, columns):
-    adapter, _, policy = setup(condition)
+    adapter, _, policy = make_policy(condition)
     policy.predict_action(Request(seed=7))
     masks = adapter.model.mot.seen["masks"]
     for layer, mask in enumerate(masks):
@@ -78,7 +79,7 @@ def test_masks_drop_keys_only_from_action_rows_of_condition_layers(condition, co
 
 
 def test_resample_keeps_current_positions_and_swaps_in_donor_future():
-    adapter, _, policy = setup()
+    adapter, _, policy = make_policy()
     policy.run(Request(seed=7), "resample")
     for layer in adapter.model.mot.seen["cache"]:
         if layer is not None:
@@ -87,7 +88,7 @@ def test_resample_keeps_current_positions_and_swaps_in_donor_future():
 
 
 def test_probes_measure_action_change_and_drop_run_level_metadata():
-    _, _, policy = setup(probes=("normal", "future_mask"))
+    _, _, policy = make_policy(probes=("normal", "future_mask"))
     result = policy.predict_action(Request(seed=7))
     record = result.metadata["future_ablation"]
     assert record["condition"] == "normal"
@@ -101,3 +102,8 @@ def test_unknown_condition_is_rejected():
     adapter = TinyAdapter()
     with pytest.raises(ValueError, match="Unknown condition"):
         FutureAblationPolicy(adapter, FasterWAMFutureAblation(adapter.model, latent_frames=3), "zero_future")
+
+
+def test_policy_can_be_deep_copied():
+    _, _, policy = make_policy("future_mask")
+    assert copy.deepcopy(policy).condition == "future_mask"

@@ -93,6 +93,8 @@ class FutureAblationPolicy:
         self.run_level_keys = set(getattr(adapter.model, "_wam_interp_metadata", {}))
 
     def __getattr__(self, name):
+        if name == "adapter":  # not set yet, e.g. while copying
+            raise AttributeError(name)
         return getattr(self.adapter, name)
 
     def run(self, request, condition, recorder=None):

@@ -39,6 +39,7 @@ from wam_interp.interventions.future_conditioning import (
 from wam_interp.models.fasterwam.libero_plus_adapter import FasterWAMLiberoPlusAdapter
 from wam_interp.models.fasterwam.loader import compose_fasterwam_config, load_fasterwam
 
+# LIBERO-Plus replaces the libero_10 suite with its variants, so the original tasks are listed here.
 ORIGINAL_LIBERO_10 = (
     "LIVING_ROOM_SCENE2_put_both_the_alphabet_soup_and_the_tomato_sauce_in_the_basket",
     "LIVING_ROOM_SCENE2_put_both_the_cream_cheese_box_and_the_butter_in_the_basket",
@@ -128,7 +129,7 @@ def run_checks(adapter, latent_frames, args):
         observation = step_libero(env, LIBERO_DUMMY_ACTION, instruction=task.language, metadata={}).observation
     env.close()
     request = _request_for_call(LiberoEvalConfig(task_suite_name="libero_10", **PROTOCOL), adapter,
-                                adapter.prepare_observation(observation), 7, 0)
+                                adapter.prepare_observation(observation), episode_seed=7, inference_call=0)
     reference = adapter.predict_action(request).actions
 
     ablation = FasterWAMFutureAblation(adapter.model, latent_frames)
@@ -139,7 +140,7 @@ def run_checks(adapter, latent_frames, args):
     checks["same_noise_resample_bitwise"] = torch.equal(reference, policy.run(request, "resample").actions)
     policy.run(request, "future_mask")
     checks["mask_leaves_video_cache"] = all(
-        a is None and b is None or torch.equal(a["k"], b["k"]) and torch.equal(a["v"], b["v"])
+        (a is None and b is None) or (torch.equal(a["k"], b["k"]) and torch.equal(a["v"], b["v"]))
         for a, b in zip(normal_cache, ablation.last_cache))
     passed = all(checks.values())
     policy.resample_offset = args.resample_offset
@@ -158,7 +159,8 @@ def main(argv=None):
     parser.add_argument("--probes", default="normal,future_mask,current_mask,future1_mask,future2_mask,resample",
                         help="conditions rerun at every call of the normal runs to measure action change")
     parser.add_argument("--checkpoint", type=Path, default=Path("checkpoints/fasterwam/libero/step_021700.pt"))
-    parser.add_argument("--checkpoint-revision", default="6bf9471ced6919a15ab8fded89f7772f5060c44b")
+    parser.add_argument("--checkpoint-revision", default="6bf9471ced6919a15ab8fded89f7772f5060c44b",
+                        help="Hugging Face revision of the checkpoint, recorded with the results")
     parser.add_argument("--dataset-stats", type=Path, default=Path("checkpoints/fasterwam/libero/dataset_stats.json"))
     parser.add_argument("--task-config", default="libero_fasterwam_2cam224_1e-4")
     parser.add_argument("--output-dir", type=Path, default=Path("results/e7"))

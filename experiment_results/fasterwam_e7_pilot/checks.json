@@ -1,0 +1,31 @@
+{
+  "patched_normal_bitwise": true,
+  "same_noise_resample_bitwise": true,
+  "mask_leaves_video_cache": true,
+  "action_abs_diff": {
+    "normal": {
+      "chunk": 0.0,
+      "executed": 0.0
+    },
+    "future_mask": {
+      "chunk": 0.09687042236328125,
+      "executed": 0.10244489461183548
+    },
+    "current_mask": {
+      "chunk": 0.0082762585952878,
+      "executed": 0.009570312686264515
+    },
+    "future1_mask": {
+      "chunk": 0.055846624076366425,
+      "executed": 0.1123744398355484
+    },
+    "future2_mask": {
+      "chunk": 0.05740029364824295,
+      "executed": 0.0044956752099096775
+    },
+    "resample": {
+      "chunk": 0.0058304923586547375,
+      "executed": 0.005078124813735485
+    }
+  }
+}

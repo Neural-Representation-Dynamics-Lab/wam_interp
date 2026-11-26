@@ -1,0 +1,49 @@
+{
+  "alpha": 0.05,
+  "analysis": "mean signed future-only minus clear at control 16; paired cluster bootstrap over starts; 90% equivalence interval for off-route within +/-2 mm",
+  "attempted_per_task": 11,
+  "backend": "fastwam",
+  "coverage_floor_per_task": 0.75,
+  "cross_model_control": 8,
+  "development_replay_counts": {
+    "0": 4
+  },
+  "held_side_accuracy_floor": 0.75,
+  "minimum_relevant_steering_mm": 2.0,
+  "minimum_retained_controls": 24,
+  "off_route_equivalence_margin_mm": 2.0,
+  "pilot_upper_task_sd_mm": 0.30062004694767697,
+  "planned_usable_per_task": 8,
+  "power": 0.8,
+  "primary_control": 16,
+  "reasons": [],
+  "seeds": [
+    1
+  ],
+  "sham_margin_mm": 20,
+  "side_template_states": [
+    0,
+    1
+  ],
+  "source_station": 28,
+  "split": "confirmation",
+  "states": {
+    "0": [
+      14,
+      8,
+      16,
+      11,
+      18,
+      9,
+      17,
+      10,
+      12,
+      19,
+      13
+    ]
+  },
+  "tasks": [
+    0
+  ],
+  "unit": "initial state, mean over mirrored sides"
+}

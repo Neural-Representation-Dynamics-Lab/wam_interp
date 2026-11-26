@@ -70,7 +70,13 @@ class FutureAdapter:
 
     @property
     def supports_clip(self):
+        """Accepts an already assembled uint8 RGB montage through from_clip()."""
         return self.backend in ("fastwam", "longwam")
+
+    @property
+    def supports_prepared_frames(self):
+        """The selected site supports a clean-video donor from native camera tensors."""
+        return self.backend != "fasterwam" and (self.backend != "openwam" or self.stage > 0)
 
     def _schedule(self, request):
         if request.condition != self.capability.condition or request.compile_action_infer:
@@ -163,6 +169,8 @@ class FutureAdapter:
             raise NotImplementedError(
                 "The native one-pass cache uses sigma=1; a matched clean-video edit has zero signal"
             )
+        if self.backend == "openwam" and not 0 < self.stage < request.num_inference_steps:
+            raise ValueError("OpenWAM requires a noninitial stage within the requested schedule")
         if len(frames) < 2 or not torch.equal(frames[0], request.observation.image):
             raise ValueError("Expected prepared frames starting at the recipient observation")
         if self.backend in ("fastwam", "longwam"):

@@ -153,3 +153,10 @@ def test_prepared_frames_match_rgb_donor_and_reject_one_pass():
         api.from_prepared_frames(req,frames[::-1])
     with pytest.raises(NotImplementedError,match="sigma=1"):
         FutureAdapter(Stub("fasterwam")).from_prepared_frames(request("one_pass_future_cache"),frames)
+
+
+def test_prepared_video_capability_depends_on_openwam_stage():
+    assert FutureAdapter(Stub("lingbot_va")).supports_prepared_frames
+    assert not FutureAdapter(Stub("fasterwam")).supports_prepared_frames
+    assert not FutureAdapter(Stub("openwam")).supports_prepared_frames
+    assert FutureAdapter(Stub("openwam"), stage=1).supports_prepared_frames

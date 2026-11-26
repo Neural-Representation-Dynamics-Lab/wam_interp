@@ -1938,6 +1938,12 @@ class LongWAMBase(InferenceModelMixin, torch.nn.Module):
             use_precomputed_video_cross_kv=use_video_cache,
         )
 
+        hook = getattr(self, "_e1_features", None)
+        if hook is not None:
+            replacement = hook.visit((future_latents,))
+            if replacement is not None:
+                future_latents, = replacement
+
         # 2) Build the joint video sequence [clean (sigma=0) | imagined future (sigma=imagine_timestep)].
         #    pre_dit forces the leading M clean frames to t=0; the trailing k future frames carry the
         #    high imagine timestep, EXACTLY matching the action's training-time future view.

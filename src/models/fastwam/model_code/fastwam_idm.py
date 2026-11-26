@@ -8,6 +8,8 @@ from .fastwam_joint import FastWAMJoint
 class FastWAMIDM(FastWAMJoint):
     """IDM variant with teacher-forcing video conditioning for action denoising."""
 
+    research_future_boundary = "fastwam.idm.clean_video_before_action_prefill"
+
     video_cond_noise_prob: float
 
     @classmethod
@@ -493,6 +495,12 @@ class FastWAMIDM(FastWAMJoint):
             )
             latents_video = self.infer_video_scheduler.step(pred_video, step_delta_video, latents_video)
             latents_video[:, :, 0:1] = first_frame_latents.clone()
+
+        if getattr(self, "_research_future_hook", None) is not None:
+            if compile_action_infer:
+                raise ValueError("E1 future hooks require eager inference")
+            from wam_interp.experiments.futures import apply_future_hook
+            latents_video = apply_future_hook(self, latents_video)
 
         # Stage 2: freeze denoised video as cond and denoise action via video K/V cache.
         timestep_video_cond = torch.zeros(

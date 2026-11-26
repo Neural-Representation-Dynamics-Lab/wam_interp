@@ -258,6 +258,11 @@ class LingBotVARuntime:
                 latents = self.scheduler.step(video_noise_pred, t, latents, return_dict=False)
             latents[:, :, 0:1] = latent_cond if frame_st_id == 0 else latents[:, :, 0:1]
 
+        hook = getattr(self, "_e1_features", None)
+        if hook is not None:
+            from wam_interp.experiments.native_features import lingbot_predicted_kv
+            lingbot_predicted_kv(self, hook)
+
         # 2. Action chunk attending to the cache (past real frames/actions + predicted video).
         for i, t in enumerate(action_timesteps):
             last_step = i == len(action_timesteps) - 1

@@ -1,0 +1,63 @@
+{
+  "study": "future motion and task-irrelevant visible background appearance",
+  "suite": "libero_10",
+  "tasks": [
+    5,
+    3,
+    7
+  ],
+  "development_states": [
+    20,
+    21,
+    22,
+    23
+  ],
+  "fresh_candidate_states": [
+    34,
+    35,
+    36,
+    37,
+    38,
+    39,
+    40,
+    41,
+    42,
+    43,
+    44,
+    45,
+    46,
+    47,
+    48,
+    49
+  ],
+  "seeds": [
+    1,
+    2
+  ],
+  "motion_axis": "world x",
+  "background": "Symmetric tint on visible, segmented floor, walls or static backdrop meshes in each room. Both colour variants share identical physics and the untinted anchor.",
+  "branches": [
+    "native",
+    "sham",
+    "left_neutral",
+    "right_neutral",
+    "left_warm",
+    "left_cool",
+    "right_warm",
+    "right_cool"
+  ],
+  "sham_margin_mm": 20,
+  "background_rms_margin_mm": 5,
+  "margin_basis": "Proposed engineering limit of 5 mm full path RMS for a pre-contact reach. Choose before held-out outcomes. This is at most one quarter of the minimum 20 mm per-side depicted displacement; it is not a contact tolerance or a perceptual threshold.",
+  "minimum_task_coverage": 0.5,
+  "minimum_complete_states_per_task": 4,
+  "probe": "Per task, fit normalized direction templates to paired feature differences on unique development starts, then orient blinded held-out pairs. Pool seeds within start. At least 75% correctly oriented, one-sided binomial p<.05 vs random signs per property across tasks; positive majority per task. Report shuffled-label control, per-task errors and scores.",
+  "primary_motion": "World-x signed half-difference after 32 controls with neutral appearance; equal task weights, paired seeds averaged per start, task-stratified state bootstrap 95% CI.",
+  "primary_background": "Within each side compare warm/cool against neutral, calculate full 3D path RMS after 32 controls, take max across four contrasts per seed, then average seeds by state. One-sided upper 95% bound <5 mm for bounded mean; lower bound >5 mm for nuisance sensitivity.",
+  "positive_motion": "95% lower bound above zero and positive mean in every claimed task. For broad family claims require supporting checkpoints and environments separately.",
+  "selectivity": "Mean within-start signed motion half-difference minus absolute projected warm-cool endpoint half-difference averaged over motion sides.",
+  "sample_size": "Plan 80% power for 4 mm motion with pooled within-task SD (minimum planning SD 8 mm); separately use calibration for a one-sided background bound; allow for complete-pair eligibility. Minimum 12 fresh attempts/task, maximum 16 given unused book starts. Also report when margin cannot be resolved.",
+  "alternatives": "Flag inconclusive where coverage, test precision, or the property manipulation fails. Show all measured data; do not replace an unsuccessful control.",
+  "secondary": "10-control prefix, developing-camera stabilized wrist, Long-WAM's own source on development starts, raw same-scale magnitude and run timing.",
+  "scope": "Explicit LIBERO clips in FastWAM Optional IDM and Long-WAM IDM. Separate RoboTwin Long-WAM release after native validation. Other three backends remain a distinct native feature experiment."
+}

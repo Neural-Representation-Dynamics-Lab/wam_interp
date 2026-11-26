@@ -246,6 +246,15 @@ class DualSystemMoTDriver:
             mixed = self._mixed_attention(q_cat, k_cat, v_cat, attn_mask)
 
         attn_v, attn_a = mixed.split([s_video, s_action], dim=1)
+        hook = getattr(self, "_e1_features", None)
+        if hook is not None and layer_id == hook.layer:
+            from wam_interp.experiments.native_features import edit_future_kv
+            patched = edit_future_kv(hook, k_v, v_v, self._video_tokens_per_frame(vstate))
+            if patched is not None:
+                # Preserve video query outputs and use native query/mask shapes for parity.
+                action_view = self._mixed_attention(q_cat, torch.cat([patched[0], k_a], dim=1),
+                                                    torch.cat([patched[1], v_a], dim=1), attn_mask)
+                attn_a = action_view[:, s_video:]
         vstate = vb.post_attn_at_layer(layer_id, vstate, attn_v.contiguous(), vpost)
         astate = ab.post_attn_at_layer(layer_id, astate, attn_a.contiguous(), apost)
         return vstate, astate

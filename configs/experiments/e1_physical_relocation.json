@@ -1,0 +1,112 @@
+{
+  "schema_version": 2,
+  "suite": "libero_object",
+  "task_id": 0,
+  "states": [
+    34,
+    35,
+    36,
+    37
+  ],
+  "layouts": {
+    "34": {
+      "alphabet_soup_1": [
+        -0.025,
+        0.015
+      ],
+      "tomato_sauce_1": [
+        0.02,
+        -0.025
+      ],
+      "cream_cheese_1": [
+        0.02,
+        0.02
+      ]
+    },
+    "35": {
+      "alphabet_soup_1": [
+        0.025,
+        -0.015
+      ],
+      "tomato_sauce_1": [
+        -0.02,
+        0.025
+      ],
+      "cream_cheese_1": [
+        -0.02,
+        -0.02
+      ]
+    },
+    "36": {
+      "alphabet_soup_1": [
+        -0.015,
+        -0.025
+      ],
+      "tomato_sauce_1": [
+        -0.025,
+        -0.01
+      ],
+      "cream_cheese_1": [
+        0.025,
+        -0.015
+      ]
+    },
+    "37": {
+      "alphabet_soup_1": [
+        0.015,
+        0.025
+      ],
+      "tomato_sauce_1": [
+        0.025,
+        0.01
+      ],
+      "cream_cheese_1": [
+        -0.025,
+        0.015
+      ]
+    }
+  },
+  "pilot_config": "configs/experiments/e1_counterfactual_libero.json",
+  "variants": [
+    "original",
+    "swapped"
+  ],
+  "swap_objects": [
+    "alphabet_soup_1",
+    "tomato_sauce_1"
+  ],
+  "instruction_objects": {
+    "soup": "alphabet_soup_1",
+    "tomato": "tomato_sauce_1",
+    "cream": "cream_cheese_1"
+  },
+  "instructions": {
+    "soup": "pick up the alphabet soup and place it in the basket",
+    "tomato": "pick up the tomato sauce and place it in the basket",
+    "cream": "pick up the cream cheese and place it in the basket"
+  },
+  "action_seeds": [
+    0,
+    1
+  ],
+  "maximum_branches": 60,
+  "minimum_passing_layouts": 3,
+  "identity_limits": {
+    "minimum_shift_m": 0.08,
+    "maximum_control_shift_m": 0.02
+  },
+  "maximum_object_motion_m": 0.001,
+  "source_limits": {
+    "maximum_settling_xy_m": 0.005,
+    "maximum_slot_error_m": 0.001,
+    "minimum_agentview_pixels_per_target": 16,
+    "paired_robot_absolute_tolerance": 1e-12
+  },
+  "primary": "Within each layout and seed, operational target following requires all frozen identity_reversal criteria and contact/object stability. A layout passes both seeds; validate if >=3 of 4 layouts pass. Retain all layouts regardless of outcome.",
+  "secondary": "Continuous noun-selective relocation interaction=(soup swap shift - tomato swap shift)/2; average seeds within layout and bootstrap layouts. Distances to actual named targets; all trajectories, contacts and timings.",
+  "replay_selection": "Every layout, original/swapped arrangement and instruction at seed zero; 24 independent simulator replays. Twelve native policy repeats in original scenes at seed zero.",
+  "stopping": "Stop all policy inference if any source engineering or actual review gate fails. After starting inference, retain every planned condition and failure. No outcome-driven exclusions, threshold changes or silent restarts. No automatic future-video interventions.",
+  "interpretation": "Exploratory native physical-scene positive control, not isolated future-video semantics or task success. Four designed small-offset layouts on one table, previously used as source arrangements; not a new independent scene sample. Same object XY slots exchanged physically by about 0.35-0.4 m. Current images and native futures both change.",
+  "human_review": "pending",
+  "pre_policy_revision": "Version 1 had zero policy runs. Exact paired-start comparison failed at <=1.03e-15 control and <=1.74e-18 m EEF roundoff. Version 2 uses absolute 1e-12 for paired robot proprio/control only and reports exactness/differences. All physical, behavioural, sample and independent replay criteria unchanged. Preserve the failed attempt."
+}

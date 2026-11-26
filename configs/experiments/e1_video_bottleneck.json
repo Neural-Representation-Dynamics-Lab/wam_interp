@@ -1,0 +1,17 @@
+{
+  "schema_version": 1,
+  "source_results": "results/e1_equal_norm_20261120",
+  "pilot_config": "configs/experiments/e1_counterfactual_libero.json",
+  "initial_states": [3,4,5],
+  "action_seeds": [0,1],
+  "maximum_branches": 42,
+  "baseline_feasibility_limits": {"endpoint_separation_m":0.01,"mean_trajectory_separation_m":0.005},
+  "gate_interpretation": "Prospective engineering stop limits, not calibrated equivalence bounds or a statistical test: <=1 cm endpoint and <=5 mm mean path difference for every round-tripped baseline. Three previously studied development states only. If any fails, finish baseline controls and stop before donor branches.",
+  "arms": ["baseline","identity","roundtrip_baseline","raw_same","raw_alternative","roundtrip_same","roundtrip_alternative"],
+  "primary_measure": "Within-state seed-averaged alternative-minus-same world-y contrast, separately for raw and round-tripped donors. Also report the paired change between these contrasts.",
+  "secondary_measures": ["3D endpoint separation","mean 3D trajectory separation","codec reconstruction error","individual arm changes from baseline"],
+  "codec": "Native eager temporal VAE at bf16; decoded RGB clamp [-1,1], full floating tensor with no uint8/JPEG; whole nine-frame encoding; original observed latent anchor restored exactly",
+  "review": "AI-assisted exploratory visual codec review before donor execution; independent human review deferred. No new donor labels or matched-semantic claims.",
+  "limitations": "Existing confounded whole-future donors. Survival through RGB does not erase language influence or prove human-readable semantics. Loss of effect may reflect codec corruption. No success-rate claim.",
+  "stopping_rule": "One bounded pilot; no threshold relaxation, no donor search, no partial-run silent restart, no donor execution until all baseline gates and codec review pass."
+}

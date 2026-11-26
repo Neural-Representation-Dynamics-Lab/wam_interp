@@ -9,11 +9,15 @@ as ``wam_interp.models`` working in both cases.
 
 from pathlib import Path
 
-_source_package = str(Path(__file__).resolve().parent / "src")
-if _source_package not in __path__:
-    __path__.append(_source_package)
-
-from .types import InferenceRequest, InferenceResult, PreparedObservation
+if "__path__" in globals():
+    _source_package = str(Path(__file__).resolve().parent / "src")
+    if _source_package not in __path__:
+        __path__.append(_source_package)
+    from .types import InferenceRequest, InferenceResult, PreparedObservation
+else:
+    # Pytest imports this file as a standalone module when the checkout name
+    # contains hyphens. Use the editable package in that case.
+    from wam_interp.types import InferenceRequest, InferenceResult, PreparedObservation
 
 __all__ = ["InferenceRequest", "InferenceResult", "PreparedObservation"]
 __version__ = "0.1.0"

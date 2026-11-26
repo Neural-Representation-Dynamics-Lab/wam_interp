@@ -17,6 +17,11 @@ The main design rule is: **a benchmark evaluator controls the benchmark; a model
 
 ## Repository map
 
+E1 research tooling now has a [modular handoff](docs/e1_multimodel.md),
+[current experiment TODO list](docs/e1_next_steps_20261122.md), and
+[literature/code review](docs/e1_research_review_20261122.md).
+See the [paired A100 study](docs/e1_a100_study.md) for future-content interventions across the five backends and the [native FastWAM results](docs/e1_a100_native_results.md) for the 32 completed episodes.
+
 ```text
 configs/fastwam/                 FastWAM Hydra model/task configuration
 src/types.py                     Shared raw/prepared observation and inference types
@@ -25,6 +30,7 @@ src/evaluations/LIBERO/          LIBERO suite, simulator, rollout, and result ha
 src/data/                        Offline prepared-observation helpers (for example NPZ)
 src/tracing/                     Passive module-output capture
 src/interventions/               Scoped changes to named module outputs
+src/experiments/                 Paired E1 experiments, simulator controls and trajectory analysis
 docs/                            Architecture, experiment, and evaluation guidance
 ```
 

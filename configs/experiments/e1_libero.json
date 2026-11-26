@@ -1,0 +1,22 @@
+{
+  "backend": "fastwam_optional_idm",
+  "repository_root": ".",
+  "checkpoint": "checkpoints/fastwam/libero_optional_idm_2cam224.pt",
+  "statistics": "checkpoints/fastwam/libero_optional_idm_2cam224_dataset_stats.json",
+  "device": "cuda",
+  "precision": "bfloat16",
+  "suite": "libero_10",
+  "task_id": 0,
+  "initial_state_index": 0,
+  "environment_seed": 0,
+  "action_seed": 0,
+  "candidate_seeds": [1, 2, 3, 4, 5, 6, 7, 8],
+  "camera_resolution": 256,
+  "warmup_steps": 30,
+  "execute_steps": 32,
+  "inference_steps": 10,
+  "behavior_axis": 0,
+  "identity_atol": 0.00001,
+  "property": "approach_direction",
+  "frame_steps": [0, 4, 8, 12, 16, 20, 24, 28, 32]
+}

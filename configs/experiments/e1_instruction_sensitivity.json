@@ -1,0 +1,20 @@
+{
+  "schema_version": 1,
+  "source": "results/e1_later_state_20261120",
+  "states": [3, 4, 5],
+  "seeds": [18, 19, 20, 21],
+  "conditions": {
+    "cream_only": {"target": "cream", "wording": "put", "prompt": "put the cream cheese box in the basket"},
+    "cream_pick": {"target": "cream", "wording": "pick", "prompt": "pick up the cream cheese box"},
+    "butter_only": {"target": "butter", "wording": "put", "prompt": "put the butter in the basket"},
+    "butter_pick": {"target": "butter", "wording": "pick", "prompt": "pick up the butter"}
+  },
+  "design": "Exploratory secondary analysis of all 48 already-generated futures, without norm or semantic filtering. Prior 27 video reviews and shortlist outcomes were known before this analysis; not preregistered or blinded.",
+  "primary_comparison": "Cream versus butter instruction at identical state, action wording and seed: 24 paired comparisons, 8 within each of 3 states.",
+  "controls": ["Same target and seed, different action wording: 24 pairs. Pick and put are different requests, not equivalent paraphrases.", "Same full prompt and state, different seed: 72 pairs. Shared candidates make these comparisons dependent."],
+  "metrics": ["Generated-slot latent RMSE excluding the observed anchor", "Per-camera decoded RGB MAE on frames 1 through 8, descriptive only", "Provisional first-approach target label and both-intended-target fraction with all pairs in denominator"],
+  "review": "Reuse explicitly recorded AI reviews with hashes; inspect every previously unreviewed video in all nine frames and both cameras. Preserve unclear labels. No policy outcomes are used; no new policy actions are executed.",
+  "analysis_unit": "state; average repeated seeds and wordings within state, then average states equally; no inferential p-values from 24 dependent comparisons",
+  "stopping_rule": "Analyze exactly this complete bank. No new acquisition, threshold changes, or retrospective modification of the previous E1 selection.",
+  "limits": "One checkpoint, one task, three previously selected later states. Countertask instructions and short horizon. Pixel/latent differences do not establish semantic correctness, imagination-policy causality, or benchmark success. Human review remains pending."
+}

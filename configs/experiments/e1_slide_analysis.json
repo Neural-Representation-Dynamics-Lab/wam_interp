@@ -1,0 +1,13 @@
+{
+  "scope": "Prescribed-render held-out FastWAM contrast on tasks passing both native and development checks",
+  "status": "Analysis specification recorded after the native closed-loop diagnostic and before held-out transplant outcomes",
+  "unit": "One initial state with both seeds eligible and both unedited encoding controls passed",
+  "units": "world meters",
+  "estimand": "Half-difference between positive-x and negative-x gripper endpoints under target translation minus the corresponding half-difference under distractor translation",
+  "horizon_controls": 32,
+  "prospective_nuisance_margin_m": 0.005,
+  "margin_basis": "Engineering tolerance equal to one sixth of the prescribed 3 cm object translation; the previous native VAE round-trip pilot drift was approximately 1-2 mm. This is an engineering interpretation, not a learned perceptual threshold.",
+  "grouping": "Average two seeds within state, then report by task with state-block bootstrap intervals. Keep all failed manipulation, sham and alternate native checks in denominators.",
+  "criteria": "Report the signed target, nuisance and difference estimates separately. Treat an interval entirely within +/-5 mm as conditional evidence of limited nuisance sensitivity. A near-zero selective contrast alone cannot distinguish insensitivity to both from sensitivity to both.",
+  "alternate_prompt": "A different official-style instruction for the distractor has a separate native first-contact and unedited-sham check. Only valid instruction pairs support a crossover interpretation."
+}

@@ -1,0 +1,76 @@
+{
+  "registered_on": "2026-11-23",
+  "suite": "libero_10",
+  "tasks": [
+    5,
+    3,
+    7
+  ],
+  "states": {
+    "5": [
+      45,
+      35,
+      46,
+      49,
+      43,
+      40,
+      39,
+      47,
+      48,
+      36,
+      42,
+      38,
+      44,
+      34,
+      41,
+      37
+    ],
+    "3": [
+      44,
+      35,
+      38,
+      36,
+      46,
+      37,
+      41,
+      49,
+      45,
+      40,
+      43,
+      39,
+      34,
+      48,
+      47,
+      42
+    ],
+    "7": [
+      34,
+      36,
+      49,
+      40,
+      44,
+      48,
+      41,
+      35,
+      39,
+      45,
+      47,
+      37,
+      42,
+      38,
+      43,
+      46
+    ]
+  },
+  "action_seeds": [
+    1,
+    2
+  ],
+  "heldout_manifest_sha256": "22388318b88ad65b88d3eb86e924e2480ab1070cf71495df1a468fa18fd743b7",
+  "design_sha256": "0e78588aefdb4e92aa08026286b680a041e4eae6a966a27b4c4135c5f854158f",
+  "unit": "One unique simulator start, paired across both seeds. Equal task weights.",
+  "planned_backends": [
+    "fastwam_optional_idm",
+    "longwam_idm"
+  ]
+}

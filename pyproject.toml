@@ -10,6 +10,7 @@ requires-python = ">=3.10"
 dependencies = []
 
 [project.optional-dependencies]
+research = ["numpy>=1.26", "pytest>=8"]
 libero_plus = [
   "wand>=0.6",
   "scikit-image>=0.21",

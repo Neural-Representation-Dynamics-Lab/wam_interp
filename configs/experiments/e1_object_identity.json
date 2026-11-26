@@ -1,0 +1,170 @@
+{
+  "schema_version": 2,
+  "motions": [
+    "a"
+  ],
+  "suite": "libero_object",
+  "task_id": 0,
+  "states": [
+    34,
+    35,
+    36,
+    37,
+    38,
+    39
+  ],
+  "minimum_states": 3,
+  "action_seeds": [
+    0,
+    1
+  ],
+  "targets": {
+    "a": "alphabet_soup_1",
+    "b": "tomato_sauce_1"
+  },
+  "instructions": {
+    "soup": "pick up the alphabet soup and place it in the basket",
+    "tomato": "pick up the tomato sauce and place it in the basket",
+    "cream": "pick up the cream cheese and place it in the basket"
+  },
+  "pilot_config": "configs/experiments/e1_counterfactual_libero.json",
+  "reference_config": "configs/experiments/e1_simulator_pairs.json",
+  "variants": [
+    "original",
+    "swapped"
+  ],
+  "baseline_limits": {
+    "endpoint_separation_m": 0.01,
+    "mean_trajectory_separation_m": 0.005
+  },
+  "codec_max_future_mae_255": 5.0,
+  "codec_max_gripper_mae_255": 5.0,
+  "codec_max_gripper_shift_pixels": 1.0,
+  "minimum_measurable_gripper_frames_total": 4,
+  "minimum_changed_pixels": 16,
+  "minimum_visible_frames_per_camera": 4,
+  "maximum_branches": 288,
+  "primary": "For each fixed current appearance, depicted motion and seed, project swapped-minus-original future-asset endpoint changes onto the original original soup-to-tomato XY axis. Primary interaction = (soup-instruction change minus tomato-instruction change)/2. Average both current appearances and seeds within each initial state for the one fixed depicted path; bootstrap whole states. Report both noun-specific signs, every factor cell and cream instruction negative control. Do not count seeds as independent states; initial states share one object arrangement.",
+  "secondary": [
+    "native instruction response",
+    "current-by-future cue consistency",
+    "cream instruction response to identical visual edits",
+    "reference alignment",
+    "contacts and object movement",
+    "decoded gripper registration and cue-region reconstruction",
+    "native full-asset identity reversal",
+    "material-only current-image comparison on development layouts"
+  ],
+  "stopping": "Freeze all six layouts, source, criteria and future analysis before native outcomes. All six reference paths must pass input engineering gates. Actually review each source arrangement. If development identity gate fails, stop before heldout inference. If heldout native or codec/control gates fail, stop before future interventions. No silent restart or threshold relaxation.",
+  "interpretation": "Exploratory operational identity-reassignment test followed conditionally by a four-layout fixed-motion future-video factorial. Native validation changes current images and consequently native futures; it does not isolate direct perception or direct language use. Full assets change geometry, texture and occlusions together. Shadows/background outside union of edited-object supports and unambiguous robot pixels must remain exact. Future/current mismatches remain explicit. Six synthetic small XY perturbations on one table scene, not a benchmark or scene-generalization claim. Independent human review pending.",
+  "human_review": "pending",
+  "development_states": [
+    34,
+    35
+  ],
+  "heldout_states": [
+    36,
+    37,
+    38,
+    39
+  ],
+  "minimum_heldout_identity_states": 3,
+  "identity_limits": {
+    "minimum_shift_m": 0.08,
+    "maximum_control_shift_m": 0.02
+  },
+  "intervention": "Translate the complete native soup/tomato visual assets between XY slots only during rendering. Preserve mesh, UV, texture, material, orientation and height; physical collision geometry remains original.",
+  "native_validation": "Both development layouts must pass both seeds: native tomato-minus-soup axis separation >=80mm; full-asset-swapped separation <=-80mm; soup image-edit shift >=80mm, tomato <=-80mm; untouched cream endpoint change <=20mm; zero robot-scene contacts and <=1mm object motion. Material-only condition is diagnostic and never a substitute for the frozen full-asset edit.",
+  "holdout_validation": "Repeat the same criterion in four new layouts using native control branches. Require at least 3/4 layouts to pass both seeds before any future intervention. Retain ALL four layouts in the primary future analysis, including a nonpassing layout; disclose each validation outcome. No outcome-dependent replacement.",
+  "layouts": {
+    "34": {
+      "alphabet_soup_1": [
+        -0.025,
+        0.015
+      ],
+      "tomato_sauce_1": [
+        0.02,
+        -0.025
+      ],
+      "cream_cheese_1": [
+        0.02,
+        0.02
+      ]
+    },
+    "35": {
+      "alphabet_soup_1": [
+        0.025,
+        -0.015
+      ],
+      "tomato_sauce_1": [
+        -0.02,
+        0.025
+      ],
+      "cream_cheese_1": [
+        -0.02,
+        -0.02
+      ]
+    },
+    "36": {
+      "alphabet_soup_1": [
+        -0.015,
+        -0.025
+      ],
+      "tomato_sauce_1": [
+        -0.025,
+        -0.01
+      ],
+      "cream_cheese_1": [
+        0.025,
+        -0.015
+      ]
+    },
+    "37": {
+      "alphabet_soup_1": [
+        0.015,
+        0.025
+      ],
+      "tomato_sauce_1": [
+        0.025,
+        0.01
+      ],
+      "cream_cheese_1": [
+        -0.025,
+        0.015
+      ]
+    },
+    "38": {
+      "alphabet_soup_1": [
+        -0.03,
+        0
+      ],
+      "tomato_sauce_1": [
+        0,
+        0.03
+      ],
+      "cream_cheese_1": [
+        0.015,
+        -0.025
+      ]
+    },
+    "39": {
+      "alphabet_soup_1": [
+        0.03,
+        0
+      ],
+      "tomato_sauce_1": [
+        0,
+        -0.03
+      ],
+      "cream_cheese_1": [
+        -0.015,
+        0.025
+      ]
+    }
+  },
+  "reference_controller": {
+    "ramp_steps": 12,
+    "max_command": 0.8
+  },
+  "pre_policy_revision": "Version 1 stopped with zero policy branches. Source rendering and state restoration passed for all six layouts, but states 35 and 36 ended 2.38 and 2.72 cm from goal while their Y commands remained capped at 0.6. Version 2 uses a 12-control ramp and 0.8 command cap for all six reference paths. The 2 cm endpoint gate, layout choices, 32-control horizon, zero-contact requirement and all behavioural criteria remain unchanged. Current-input hashes are also saved explicitly. Preserve version 1."
+}

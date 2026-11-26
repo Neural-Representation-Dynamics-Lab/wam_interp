@@ -1,0 +1,70 @@
+{
+  "schema_version": 1,
+  "label": "exploratory_later_state_native_countertargets",
+  "pilot_config": "configs/experiments/e1_counterfactual_libero.json",
+  "initial_states": [
+    3,
+    4,
+    5
+  ],
+  "action_seeds": [
+    0,
+    1
+  ],
+  "candidate_seeds": [
+    18,
+    19,
+    20,
+    21
+  ],
+  "donor_prompts": {
+    "cream_only": "put the cream cheese box in the basket",
+    "cream_pick": "pick up the cream cheese box",
+    "butter_only": "put the butter in the basket",
+    "butter_pick": "pick up the butter"
+  },
+  "intended_targets": {
+    "cream_only": "cream",
+    "cream_pick": "cream",
+    "butter_only": "butter",
+    "butter_pick": "butter"
+  },
+  "maximum_review_pairs_per_state": 8,
+  "matching": {
+    "latent_delta_relative_tolerance": 0.2,
+    "path_length_relative_tolerance": 0.15,
+    "endpoint_displacement_relative_tolerance": 0.15,
+    "normalized_progress_max_absolute_difference": 0.15
+  },
+  "landmark": "Same rounded lower-left corner of the camera-facing horizontal gripper palm housing in all nine external-camera frames; missing or ambiguous points cannot be interpolated",
+  "review_policy": "AI-assisted exploratory review authorized; independent human review remains pending. Prompt target is a hypothesis, never a semantic label.",
+  "selection_rule": "Rank cream/butter pairs by maximum norm discrepancy across both recipient seeds, then IDs. Review the first eight norm-eligible pairs per state. Require native all-nine-frame semantic/appearance review, visible motion landmarks, motion matching, and pair-level orientation/appearance review. Freeze every state before policy comparisons. No unmatched comparisons.",
+  "primary_measure": "dot(butter_donor_EEF_endpoint - cream_donor_EEF_endpoint, normalized_initial_world_XY_vector_from_cream_to_butter), meters; expected positive",
+  "secondary_measures": [
+    "world_y_endpoint_contrast",
+    "3D_endpoint_separation",
+    "mean_3D_trajectory_separation"
+  ],
+  "target_bodies": [
+    "cream_cheese_1_main",
+    "butter_1_main"
+  ],
+  "analysis_unit": "initial state, after averaging two recipient action seeds",
+  "no_match_behavior": "Do not execute unmatched policy comparisons",
+  "limitations": "Adaptive development pilot on previously used states, one model/task. Exact recorded-command replay is required at every prefix frame. Both donors countertask. AI-assisted semantics and coordinates are provisional; independent human review deferred by explicit user instruction.",
+  "contrast_labels": [
+    "cream",
+    "butter"
+  ],
+  "rationale": "Fixed next feasibility round after initial-state shortlists lacked confidently distinct targets. Replay exactly the first native 32-control chunk from existing states 3,4,5, chosen in protocol order, before generating any new donor futures. No selection by new action effects.",
+  "replay_prefix": {
+    "directory": "results/e1_later_prefix_inputs_20261120",
+    "steps": 32,
+    "sha256": {
+      "3": "df42b6e705e1bb0efbff8febf0c146e2877d7a91d4dac9dbc4384830c5ebe4c8",
+      "4": "c3366f09b548dcb2322aa49b32da0ae8efc919af221334eec640458cc16b58ff",
+      "5": "e2cf64c47ea55e98d280507a5689dea80ff49741a00182f8e7a5088e72683fd9"
+    }
+  },
+  "stopping_rule": "One 48-future bank, eight norm-ranked review pairs per state, no expansion or tolerance relaxation. No policy comparisons unless all matching/review checks pass."
+}

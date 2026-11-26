@@ -58,3 +58,6 @@ python -m pytest -q tests/test_e1_obstacles.py tests/test_e1_future_adapter.py t
 ```
 
 The development manifest contains six starts on two tasks and one action seed. Keep design iterations and exclusions in the results export. Freeze new states, task weights, maximum exclusions, a minimum relevant steering effect, an off-route equivalence margin and sample size before a confirmatory run. Report source feasibility, unedited replay fidelity, side decoding and behavioral contrasts separately. An obstacle effect on these fixtures would concern anticipation during an open-loop approach. It would require further trials to establish avoidance over a complete replanned task.
+
+
+For a second-room development check, `e1_obstacle.py sources --station 32` places the bar at the final native reach. Store that variant separately from the registered station-28 results. `e1_obstacle_freeze.py` computes each IDM backend’s proposed fresh-start allocation and records outstanding feasibility checks before a confirmation run.

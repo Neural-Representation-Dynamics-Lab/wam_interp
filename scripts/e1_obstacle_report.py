@@ -9,6 +9,22 @@ from wam_interp.experiments.clip_study import save
 from wam_interp.experiments.obstacle import Barrier, score
 
 
+def side_scores(directions):
+    # Task-0 states 0/1 fit a direction; 2/3 test its orientation without using policy actions.
+    training = [
+        v for (t, i, s), v in directions.items() if t == 0 and i in (0, 1) and s == 0
+    ]
+    decoder = {}
+    if len(training) == 2:
+        template = np.mean(training, axis=0)
+        for (task, idx, seed), v in directions.items():
+            if task == 0 and idx in (2, 3):
+                decoder[f"{task}/{idx}/{seed}"] = float(
+                    template @ v / max(np.linalg.norm(template), 1e-12)
+                )
+    return decoder
+
+
 def summarize(folder):
     rows, directions = [], {}
     for p in sorted(folder.glob("task_*/state_*/seed_*/sources.json")):
@@ -62,18 +78,7 @@ def summarize(folder):
             if n:
                 directions[(row["task"], row["state"], row["seed"])] = a / n
         rows.append(row)
-    # Task-0 states 0/1 fit a direction; 2/3 test its orientation without using policy actions.
-    training = [
-        v for (t, i, s), v in directions.items() if t == 0 and i in (0, 1) and s == 0
-    ]
-    decoder = {}
-    if len(training) == 2:
-        template = np.mean(training, axis=0)
-        for (task, idx, seed), v in directions.items():
-            if task == 0 and idx in (2, 3):
-                decoder[f"{task}/{idx}/{seed}"] = float(
-                    template @ v / max(np.linalg.norm(template), 1e-12)
-                )
+    decoder = side_scores(directions)
     groups = {}
     for task in sorted({r["task"] for r in rows}):
         eligible = [r for r in rows if r["task"] == task and r.get("behavior_pass")]

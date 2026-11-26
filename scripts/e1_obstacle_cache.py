@@ -196,7 +196,6 @@ def run(api, source, dest, *, calibrate_only=False):
             result["metrics_at_8"][label + "_" + side] = score(
                 paths[a], paths[b], Barrier(**meta["placements"][geom]["geometry"]), 8
             )
-    result["passed_sham"] = result["sham_drift_mm"] <= 20
     np.savez_compressed(dest / "paths.npz", **paths)
     save(dest / "behavior.json", result)
 

@@ -92,12 +92,13 @@ def rollout(
     )
 
 
-def render_sources(task, task_id, state, idx, seed, actions, out):
+def render_sources(task, task_id, state, idx, seed, actions, out, *, station=28):
     out = Path(out)
     out.mkdir(parents=True, exist_ok=True)
     info = {
         "task": task_id,
         "instruction": task.language,
+        "placement_station": station,
         "state": idx,
         "seed": seed,
         "passed": False,
@@ -125,6 +126,7 @@ def render_sources(task, task_id, state, idx, seed, actions, out):
                 native_path,
                 -1 if name.endswith("minus") else 1,
                 off_route=name.startswith("off"),
+                station=station,
             )
         except ValueError as exc:
             info["reason"] = str(exc)

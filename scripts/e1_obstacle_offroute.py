@@ -47,6 +47,7 @@ def refine(source, dest, task, state):
                 off_route=True,
                 off_distance=distance,
                 forward_offset=forward_offset,
+                station=meta.get("placement_station", 28),
             )
             with scene(
                 None, task, state, meta["state"], meta["task"], meta["seed"], box

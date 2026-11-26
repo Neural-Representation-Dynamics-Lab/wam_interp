@@ -60,10 +60,14 @@ class Barrier:
         return asdict(self)
 
 
-def placement(path, side, *, off_route=False, off_distance=0.14, forward_offset=0.0):
+def placement(
+    path, side, *, off_route=False, off_distance=0.14, forward_offset=0.0, station=28
+):
     path = np.asarray(path, dtype=float)
     if path.shape != (33, 3) or not np.isfinite(path).all() or side not in (-1, 1):
         raise ValueError("Expected a finite 32-control reach and a signed side")
+    if station not in (28, 32):
+        raise ValueError("Expected a registered late-reach station")
     heading = path[-1, :2] - path[0, :2]
     distance = np.linalg.norm(heading)
     if distance < 0.025:
@@ -71,10 +75,10 @@ def placement(path, side, *, off_route=False, off_distance=0.14, forward_offset=
     forward = heading / distance
     lateral = np.array([-forward[1], forward[0]])
     # A world-fixed horizontal bar at the late reach, above tabletop clutter.
-    xy = path[28, :2] + side * (off_distance if off_route else 0.024) * lateral
+    xy = path[station, :2] + side * (off_distance if off_route else 0.024) * lateral
     xy = xy + forward_offset * forward
     return Barrier(
-        tuple(xy) + (path[28, 2],),
+        tuple(xy) + (path[station, 2],),
         tuple(forward),
         (0.012, 0.037, 0.012),
         side,

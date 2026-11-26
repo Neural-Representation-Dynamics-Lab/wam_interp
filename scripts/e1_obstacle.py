@@ -134,6 +134,7 @@ def main():
     p.add_argument("--manifest", type=Path, required=True)
     p.add_argument("--refs", type=Path, required=True)
     p.add_argument("--out", type=Path, required=True)
+    p.add_argument("--station", type=int, choices=(28, 32), default=28)
     a = p.parse_args()
     if a.stage == "behavior" and a.backend not in ("fastwam", "longwam"):
         p.error("Use e1_obstacle_cache.py for a KV intervention")
@@ -159,7 +160,14 @@ def main():
                 ref = a.refs / sub / f"{a.backend}_reference.npy"
                 if a.stage == "sources":
                     render_sources(
-                        task, task_id, states[idx], idx, seed, np.load(ref), dest
+                        task,
+                        task_id,
+                        states[idx],
+                        idx,
+                        seed,
+                        np.load(ref),
+                        dest,
+                        station=a.station,
                     )
                 else:
                     if api is None:

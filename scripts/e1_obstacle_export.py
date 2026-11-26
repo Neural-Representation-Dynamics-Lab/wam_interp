@@ -9,7 +9,7 @@ from importlib.metadata import PackageNotFoundError, version
 from pathlib import Path
 
 import numpy as np
-from e1_obstacle_report import summarize
+from e1_obstacle_report import side_scores, summarize
 from PIL import Image
 from wam_interp.experiments.clip_study import save
 
@@ -25,6 +25,43 @@ def export(root, dest):
                 (root / "cache" / backend).glob("task_*/state_*/seed_*/behavior.json")
             )
         ]
+    summary["cache_calibration"] = {}
+    for backend in ("lingbot_va", "openwam"):
+        rows = []
+        directions = {}
+        for feature in sorted(
+            (root / "cache" / backend).glob("task_*/state_*/seed_*/side_difference.npy")
+        ):
+            receipt = feature.with_name("behavior.json")
+            if not receipt.exists():
+                receipt = feature.with_name("calibration.json")
+            if not receipt.is_file():
+                continue
+            case = json.loads(receipt.read_text())
+            rows.append(
+                {
+                    k: case[k]
+                    for k in (
+                        "task",
+                        "state",
+                        "seed",
+                        "sham_drift_mm",
+                        "passed_sham",
+                        "kv_side_rms",
+                    )
+                }
+            )
+            vec = np.load(feature).reshape(-1)
+            norm = np.linalg.norm(vec)
+            if norm:
+                directions[(case["task"], case["state"], case["seed"])] = vec / norm
+        summary["cache_calibration"][backend] = {
+            "rows": rows,
+            "side_test_cosines": side_scores(directions),
+        }
+    summary["task3_alternate_geometry"] = {
+        m: summarize(root / "task3_matched" / m) for m in ("fastwam", "longwam")
+    }
     sched = root / "fasterwam_schedule.json"
     summary["fasterwam"] = json.loads(sched.read_text()) if sched.is_file() else None
     audit = root / "fasterwam_real" / "audit.json"
@@ -35,6 +72,7 @@ def export(root, dest):
     examples = []
     for section in (
         "qualified",
+        "task3_matched",
         "cache",
         "settled",
         "precontact",
@@ -46,7 +84,8 @@ def export(root, dest):
             continue
         for p in (root / section).glob("*/*/*/*/*"):
             if p.suffix == ".json" or (
-                section in ("qualified", "cache") and p.name == "paths.npz"
+                section in ("qualified", "task3_matched", "cache")
+                and p.name == "paths.npz"
             ):
                 out = dest / p.relative_to(root)
                 out.parent.mkdir(parents=True, exist_ok=True)

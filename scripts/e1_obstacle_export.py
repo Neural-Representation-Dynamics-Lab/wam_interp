@@ -68,6 +68,30 @@ def export(root, dest):
     if audit.is_file():
         summary["fasterwam"]["released_checkpoint"] = json.loads(audit.read_text())
         shutil.copytree(audit.parent, dest / "fasterwam_real", dirs_exist_ok=True)
+    summary["second_room_development"] = {
+        m: summarize(root / "room_extension" / "qualified" / m)
+        for m in ("fastwam", "longwam")
+    }
+    for k in ("registration", "room_extension", "hold"):
+        folder = root / k
+        if not folder.is_dir():
+            continue
+        for p in folder.rglob("*"):
+            if p.is_file() and (p.suffix == ".json" or p.name == "paths.npz"):
+                target = dest / p.relative_to(root)
+                target.parent.mkdir(parents=True, exist_ok=True)
+                shutil.copyfile(p, target)
+    if (root / "hold" / "behavior.exit").is_file() and (
+        root / "hold" / "behavior.exit"
+    ).read_text().strip() == "0":
+        from e1_obstacle_held_report import report
+
+        held = report(
+            root / "registration/fastwam_task0.json",
+            root / "qualified",
+            root / "hold/qualified",
+        )
+        save(dest / "heldout.json", held)
     save(dest / "pilot.json", summary)
     examples = []
     for section in (

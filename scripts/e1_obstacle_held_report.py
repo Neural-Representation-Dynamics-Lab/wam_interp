@@ -48,6 +48,10 @@ def report(manifest, development, held):
                     v = np.load(side).reshape(-1)
                     n = np.linalg.norm(v)
                     row["held_side_cosine"] = float(v @ template / n) if n else 0.0
+                elif row.get("behavior_pass"):
+                    raise FileNotFoundError(
+                        f"Missing side feature for eligible start: {side}"
+                    )
                 tasks.append(row)
         good = [r for r in tasks if r.get("behavior_pass")]
         states = sorted({r["state"] for r in good})

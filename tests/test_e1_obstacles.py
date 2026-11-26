@@ -1,10 +1,12 @@
+import json
+from pathlib import Path
 from xml.etree import ElementTree as ET
 
 import numpy as np
 import pytest
 import torch
-from wam_interp.experiments.obstacle import placement, score
 from wam_interp.experiments.clip_cache import _replace_future
+from wam_interp.experiments.obstacle import placement, score
 from wam_interp.experiments.obstacle_libero import (
     recipient_clip,
     settle_without_barrier,
@@ -15,6 +17,46 @@ def path():
     return np.column_stack(
         (np.linspace(0, 0.16, 33), np.zeros(33), np.linspace(0.7, 0.61, 33))
     )
+
+
+def test_short_rollout_records_exclusion_before_readout(tmp_path, monkeypatch):
+    monkeypatch.syspath_prepend(str(Path(__file__).resolve().parents[1] / "scripts"))
+    from e1_obstacle_report import summarize
+
+    case = tmp_path / "task_0/state_0/seed_1"
+    case.mkdir(parents=True)
+    (case / "sources.json").write_text(
+        json.dumps({"task": 0, "state": 0, "seed": 1, "passed": True, "placements": {}})
+    )
+    (case / "behavior.json").write_text(
+        json.dumps({"passed": False, "clear_sham_drift_mm": 0, "metrics": {}})
+    )
+    arms = ("clear", "minus", "plus", "off_minus", "off_plus")
+    np.savez(case / "paths.npz", **{"clear__" + arm: np.zeros((5, 3)) for arm in arms})
+    summary = summarize(tmp_path)
+    assert summary["by_task"]["0"] == {"count": 0, "attempted": 1}
+    assert "future_only_mm_at_8" not in summary["rows"][0]
+
+
+def test_held_report_flags_missing_side_feature_for_eligible_start(
+    tmp_path, monkeypatch
+):
+    monkeypatch.syspath_prepend(str(Path(__file__).resolve().parents[1] / "scripts"))
+    import e1_obstacle_held_report as held
+
+    configs = Path(__file__).resolve().parents[1] / "configs/experiments"
+    manifest = configs / "e1_obstacle_fastwam_task0.json"
+    spec = json.loads(manifest.read_text())
+    for state in spec["side_template_states"]:
+        case = tmp_path / f"dev/fastwam/task_0/state_{state}/seed_0"
+        case.mkdir(parents=True)
+        np.save(case / "side_difference.npy", [1.0, 0.0])
+    row = {"task": 0, "state": spec["states"]["0"][0], "seed": 1, "behavior_pass": True}
+    monkeypatch.setattr(held, "summarize", lambda folder: {"rows": [row]})
+    with pytest.raises(
+        FileNotFoundError, match="Missing side feature for eligible start"
+    ):
+        held.report(manifest, tmp_path / "dev", tmp_path / "held")
 
 
 def test_mirrored_box_has_collision_mask_and_signed_side():

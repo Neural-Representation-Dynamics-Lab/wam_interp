@@ -1,4 +1,4 @@
-# E1 obstacle pilot
+# E1 obstacle interventions on LIBERO
 
 Does a visible obstacle in a model's future change its initial reach toward the open side? This is a first-chunk LIBERO experiment. A positive signed lateral displacement means the gripper moved away from the obstructed side. The primary comparison changes the future while the current scene, instruction, action seed and robot state are fixed.
 
@@ -34,7 +34,29 @@ Use fixed-seed native capture and identity replay before interpreting an edited 
 
 ## Reproduce on Linux
 
-Use the existing LIBERO environments, pinned checkpoints, BF16 and EGL configuration in the E1 confirmation handoff. Run from the root of a checkout named `wam_interp`, with its parent on `PYTHONPATH`. OpenWAM uses its own pinned environment. Use a fresh results directory when changing the design.
+### FastWAM smoke and held-out study
+
+Run these commands from the root of a checkout named `wam_interp` on a BF16-capable GPU. On a fresh Linux machine, the setup script installs the Python 3.10 LIBERO environment, fetches the pinned FastWAM Optional IDM checkpoint, its statistics, and the Wan VAE, text encoder and tokenizer. An existing matching environment and asset directory can be reused. [Setup script](../scripts/setup_e1_linux.sh)
+
+```bash
+bash scripts/setup_e1_linux.sh             # once on a fresh checkout
+source .venv-e1/bin/activate
+export PYTHONPATH="$(dirname "$PWD"):${PYTHONPATH:-}"
+export LIBERO_CONFIG_PATH="$PWD/results/libero_config"
+export DIFFSYNTH_MODEL_BASE_PATH="$PWD/checkpoints"
+export MUJOCO_GL=egl PYOPENGL_PLATFORM=egl
+
+bash scripts/run_e1_obstacle_fastwam.sh smoke results/obstacle_reproduction
+bash scripts/run_e1_obstacle_fastwam.sh heldout results/obstacle_reproduction
+```
+
+The smoke tests one development start (task 0, state 0, seed 0) through source rendering, off-route placement, calibration and paired behavior. It exits with an error if the case fails. The held-out command verifies the original design hashes, runs development and the 11 registered task-0 starts with seed 1, and writes `results/obstacle_reproduction/heldout.json`. It fits the side decoder on development states 0 and 1 only. Each run can resume from its own output directory. Use a new directory if you change the checkpoint, settings or code. [Frozen design](../configs/experiments/e1_obstacle_fastwam_task0.json) · [Prespecified 3D analysis](../configs/experiments/e1_obstacle_unsigned_supplement.json)
+
+**Reference result.** On an A100 with BF16, all 11 registered starts passed the replay and geometry checks. The decoder identified the obstacle side on 11/11 starts. At control 16, the mean shift was 0.75 mm toward the future-only barrier (95% bootstrap interval 0.47–1.02 mm). Mean 3D displacement was 3.17 mm for on-route edits and 3.03 mm for off-route edits. The off-route 90% interval of 2.78–3.30 mm exceeded the registered 2 mm margin for total displacement. These are first-chunk measurements on one task and one held-out policy seed.
+
+### Other backends and individual stages
+
+The individual stage commands below also run Long-WAM with its own reference motion. Use the matching checkpoint and statistics for each backend. OpenWAM uses its own environment. [Confirmation setup](e1_confirmation.md)
 
 ```bash
 export MUJOCO_GL=egl PYOPENGL_PLATFORM=egl
@@ -59,10 +81,4 @@ python scripts/e1_obstacle_fasterwam.py --source "$out/qualified/fastwam/task_0/
 python -m pytest -q tests/test_e1_obstacles.py tests/test_e1_future_adapter.py tests/test_e1_confirmation.py
 ```
 
-The development manifest contains six starts on two tasks and one action seed. Keep design iterations and exclusions in the results export. Freeze new states, task weights, maximum exclusions, a minimum relevant steering effect, an off-route equivalence margin and sample size before a confirmatory run. Report source feasibility, unedited replay fidelity, side decoding and behavioral contrasts separately. An obstacle effect on these fixtures would concern anticipation during an open-loop approach. It would require further trials to establish avoidance over a complete replanned task.
-
-
-For a second-room development check, `e1_obstacle.py sources --station 32` places the bar at the final native reach. Store that variant separately from the registered station-28 results. `e1_obstacle_freeze.py` computes each IDM backend’s proposed fresh-start allocation and records outstanding feasibility checks before a confirmation run.
-
-
-A task-specific replication can proceed when its development checks pass. Use `--task0-only` to freeze that scope, run the reference, source, off-route selection and pilot commands above with the frozen manifest and a separate output root, then run `e1_obstacle_held_report.py --manifest MANIFEST --development DEV_QUALIFIED --held HELD_QUALIFIED --out OUT_JSON`. The report uses the original development template, all registered starts, and a bootstrap over starts. It records the coverage floor and checks the off-route equivalence margin only after the gates pass.
+The development manifest contains six starts on two tasks and one action seed. For a second-room development check, `e1_obstacle.py sources --station 32` places the bar at the final native reach. Keep that variant separate from the registered station-28 results. For a new IDM replication, `e1_obstacle_freeze.py` records the independent development checks and proposed fresh-start allocation. Save a new manifest for each new study. The published task-0 replication uses the original frozen design above.

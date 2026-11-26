@@ -1,0 +1,5 @@
+{
+  "recorded_utc": "2026-11-26T08:10:32.108683+00:00",
+  "held_behavior_files": 0,
+  "analysis": "Supplementary: paired mean 3D displacement norm (mean of the two sides' magnitudes) at control 16. Bound off-route movement with a 90% bootstrap interval across initial states and the same 2 mm margin. Signed steering remains primary."
+}

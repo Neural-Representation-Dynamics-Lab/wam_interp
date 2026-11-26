@@ -81,19 +81,17 @@ def summarize(folder):
                             row[f"{prop}_displacement_mm_at_{step}"] = float(
                                 1000 * np.mean(np.linalg.norm(offsets, axis=1))
                             )
-                    row["future_only_mm_at_8"] = float(
-                        np.mean(
-                            [
-                                score(
-                                    paths["clear__" + side],
-                                    paths["clear__clear"],
-                                    Barrier(**meta["placements"][side]["geometry"]),
-                                    8,
-                                )["open_side_mm"]
-                                for side in ("minus", "plus")
-                            ]
-                        )
-                    )
+                            if prop == "future_only" and step == 8:
+                                signed = [
+                                    score(
+                                        paths["clear__" + side],
+                                        baseline,
+                                        Barrier(**meta["placements"][side]["geometry"]),
+                                        step,
+                                    )["open_side_mm"]
+                                    for side in ("minus", "plus")
+                                ]
+                                row["future_only_mm_at_8"] = float(np.mean(signed))
         feature = p.with_name("side_difference.npy")
         if feature.is_file():
             a = np.load(feature).reshape(-1)

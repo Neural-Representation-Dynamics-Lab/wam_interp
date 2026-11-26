@@ -28,6 +28,8 @@ Measure displacement in simulator world coordinates at control 16 for the two ID
 | LingBot-VA | Encode 13 native camera observations with a separate streaming VAE cache. During a donor pass, supply the three future latent slots at the terminal predicted-video write. Replay the selected layer's future K/V in an ordinary recipient pass. Both CFG rows keep their original observed slot. |
 | OpenWAM | Encode the native nine-frame composite. At the last joint denoising evaluation, mix the clean future with the recipient's original Gaussian at the native sigma. Capture the middle layer's future K/V, then replay only those rows on the recipient's action-facing attention path. |
 
+The public `FutureAdapter.from_prepared_frames(request, image_tensors)` accepts camera frames transformed by the loaded backend. Pass `noise_seed` for Long-WAM. OpenWAM also needs a noninitial `stage` on the adapter. Faster-WAM reports its native one-pass limitation explicitly. Use `predict_with_future(request, donor)` for recipient replay.
+
 Use fixed-seed native capture and identity replay before interpreting an edited branch. In development the sham endpoint must be within 20 mm of native. The shared-fixture cache pilot tests whether the model can use a rendered donor. Signed K/V differences alone do not establish that the policy represents left versus right. For a side decoder, fit a mean normalized difference on independent training starts, then predict the orientation of unseen matched pairs. A successful transfer to a new scene requires its own test. Report usable and attempted starts and the independent unit for every interval.
 
 ## Reproduce on Linux

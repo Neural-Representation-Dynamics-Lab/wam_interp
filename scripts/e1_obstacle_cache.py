@@ -12,7 +12,6 @@ from wam_interp.experiments.clip_study import save
 from wam_interp.experiments.confirm_replay import anchor_hash, omit_unused_rgb
 from wam_interp.experiments.future_adapter import FutureAdapter
 from wam_interp.experiments.obstacle import Barrier, score
-from wam_interp.experiments.obstacle_features import lingbot_clip, openwam_clip
 from wam_interp.experiments.obstacle_libero import PLACEMENTS, rollout, scene
 from wam_interp.experiments.simulator_video import paired_camera_clip
 from wam_interp.types import InferenceRequest
@@ -115,7 +114,6 @@ def run(api, source, dest, *, calibrate_only=False):
                     ).image
                     for t in range(len(path))
                 ]
-    context = lingbot_clip if api.backend == "lingbot_va" else openwam_clip
     paths = {}
     for live in ("clear",) if calibrate_only else ("clear", "minus", "plus"):
         box = (
@@ -139,8 +137,7 @@ def run(api, source, dest, *, calibrate_only=False):
                     if (len(video) - 1) % (req.num_video_frames - 1):
                         raise ValueError("Nonintegral native video stride")
                     video = video[:: (len(video) - 1) // (req.num_video_frames - 1)]
-                with context(api, req, video):
-                    _, donor = api.capture(req)
+                donor = api.from_prepared_frames(req, video)
                 if not calibrate_only or future == "clear":
                     plans[future] = commands(api, api.predict_with_future(req, donor))
                 if live == "clear" and future in ("minus", "plus"):

@@ -58,6 +58,29 @@ def summarize(folder):
                     ]
                     row[metric] = float(np.mean(sides)) if len(sides) == 2 else None
                 with np.load(p.with_name("paths.npz")) as paths:
+                    for prop, prefix in (("future_only", ""), ("off_route", "off_")):
+                        baseline = paths["clear__clear"]
+                        for step in (8, 16):
+                            if (
+                                min(
+                                    len(paths["clear__" + prefix + side])
+                                    for side in ("minus", "plus")
+                                )
+                                <= step
+                                or len(baseline) <= step
+                            ):
+                                continue
+                            offsets = [
+                                (
+                                    paths["clear__" + prefix + side][step]
+                                    - paths["clear__" + prefix + side][0]
+                                )
+                                - (baseline[step] - baseline[0])
+                                for side in ("minus", "plus")
+                            ]
+                            row[f"{prop}_displacement_mm_at_{step}"] = float(
+                                1000 * np.mean(np.linalg.norm(offsets, axis=1))
+                            )
                     row["future_only_mm_at_8"] = float(
                         np.mean(
                             [

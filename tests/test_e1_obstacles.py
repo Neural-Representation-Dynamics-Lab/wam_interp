@@ -4,7 +4,7 @@ import numpy as np
 import pytest
 import torch
 from wam_interp.experiments.obstacle import placement, score
-from wam_interp.experiments.obstacle_features import _replace_future
+from wam_interp.experiments.clip_cache import _replace_future
 from wam_interp.experiments.obstacle_libero import (
     recipient_clip,
     settle_without_barrier,

@@ -79,6 +79,8 @@ def report(manifest, development, held):
                 "both_minus_live",
                 "off_route",
                 "future_only_mm_at_8",
+                "future_only_displacement_mm_at_16",
+                "off_route_displacement_mm_at_16",
             ):
                 values = np.array(
                     [np.mean([r[key] for r in good if r["state"] == i]) for i in states]
@@ -88,7 +90,7 @@ def report(manifest, development, held):
                     "mean_mm": float(values.mean()),
                     "ci95_mm": np.quantile(draws, [0.025, 0.975]).tolist(),
                 }
-                if key == "off_route":
+                if key in ("off_route", "off_route_displacement_mm_at_16"):
                     ci = np.quantile(draws, [0.05, 0.95])
                     stats[key]["ci90_mm"] = ci.tolist()
                     stats[key]["within_margin"] = bool(

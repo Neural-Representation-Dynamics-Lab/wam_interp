@@ -86,6 +86,18 @@ def summarize(folder):
                 k: float(np.mean([r[k] for r in eligible]))
                 for k in ("future_only", "both_minus_live", "live_only", "off_route")
             }
+            starts = sorted({r["state"] for r in eligible})
+            if len(starts) >= 3:
+                per_start = [
+                    np.mean([r["future_only"] for r in eligible if r["state"] == i])
+                    for i in starts
+                ]
+                draws = np.random.default_rng(20261126).choice(
+                    per_start, size=(10000, len(starts)), replace=True
+                )
+                groups[str(task)]["development_future_only_ci95_mm"] = np.quantile(
+                    draws.mean(1), [0.025, 0.975]
+                ).tolist()
     return {
         "rows": rows,
         "by_task": groups,

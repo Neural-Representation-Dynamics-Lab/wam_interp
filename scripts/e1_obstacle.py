@@ -20,7 +20,7 @@ from wam_interp.experiments.obstacle_libero import (
 )
 
 
-def behavior(api, task, task_id, state, idx, seed, folder):
+def behavior(api, task, task_id, state, idx, seed, folder, split="development"):
     from e1_confirm import commands
 
     meta = json.loads((folder / "sources.json").read_text())
@@ -29,7 +29,7 @@ def behavior(api, task, task_id, state, idx, seed, folder):
         "task": task_id,
         "state": idx,
         "seed": seed,
-        "design": "development",
+        "design": split,
         "passed": False,
         "readout": READOUT,
         "arms": {},
@@ -139,10 +139,12 @@ def main():
     if a.stage == "behavior" and a.backend not in ("fastwam", "longwam"):
         p.error("Use e1_obstacle_cache.py for a KV intervention")
     m = json.loads(a.manifest.read_text())
-    if m["split"] != "development":
-        p.error(
-            "This runner is for development. A separately frozen design is required for confirmation."
-        )
+    if m["split"] not in ("development", "confirmation") or m.get("reasons"):
+        p.error("Expected a development manifest or an eligible frozen design")
+    if m["split"] == "confirmation" and (
+        m.get("backend") != a.backend or m.get("source_station") != a.station
+    ):
+        p.error("Backend or geometry differs from the frozen design")
     suite = _get_suite("libero_10")
     api = None
     for task_id in m["tasks"]:
@@ -174,7 +176,9 @@ def main():
                         from e1_confirm import load
 
                         api = load(a.backend)
-                    behavior(api, task, task_id, states[idx], idx, seed, dest)
+                    behavior(
+                        api, task, task_id, states[idx], idx, seed, dest, m["split"]
+                    )
                 print(marker, flush=True)
 
 

@@ -61,3 +61,6 @@ The development manifest contains six starts on two tasks and one action seed. K
 
 
 For a second-room development check, `e1_obstacle.py sources --station 32` places the bar at the final native reach. Store that variant separately from the registered station-28 results. `e1_obstacle_freeze.py` computes each IDM backend’s proposed fresh-start allocation and records outstanding feasibility checks before a confirmation run.
+
+
+A task-specific replication can proceed when its development checks pass. Use `--task0-only` to freeze that scope, run the reference, source, off-route selection and pilot commands above with the frozen manifest and a separate output root, then run `e1_obstacle_held_report.py --manifest MANIFEST --development DEV_QUALIFIED --held HELD_QUALIFIED --out OUT_JSON`. The report uses the original development template, all registered starts, and a bootstrap over starts. It records the coverage floor and checks the off-route equivalence margin only after the gates pass.

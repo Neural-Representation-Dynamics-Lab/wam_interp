@@ -100,3 +100,25 @@ def test_hold_last_sample_excludes_contact_frame():
     assert raw[-1] == 32
     with pytest.raises(ValueError):
         hold_after(raw, -1)
+
+
+def test_second_placement_uses_the_later_reach_and_same_side_convention():
+    trajectory = path()
+    early = placement(trajectory, 1)
+    later = placement(trajectory, 1, station=32)
+    off = placement(
+        trajectory,
+        1,
+        station=32,
+        off_route=True,
+        off_distance=0.024,
+        forward_offset=-0.13,
+    )
+    assert np.allclose(
+        np.array(later.center) - early.center, trajectory[32] - trajectory[28]
+    )
+    assert np.allclose(
+        np.array(off.center)[:2] - later.center[:2], -0.13 * np.array(later.forward)
+    )
+    with pytest.raises(ValueError):
+        placement(trajectory, 1, station=5)

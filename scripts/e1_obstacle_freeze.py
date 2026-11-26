@@ -10,10 +10,9 @@ import numpy as np
 from e1_obstacle_report import summarize
 
 
-def freeze(root, backend):
+def freeze(root, backend, tasks):
     pilot = summarize(root / backend)
     eligible = [r for r in pilot["rows"] if r.get("behavior_pass")]
-    tasks = [0, 3]
     counts = {t: sum(r["task"] == t for r in eligible) for t in tasks}
     reasons = []
     if not pilot["task0_side_check_passed"]:
@@ -35,6 +34,9 @@ def freeze(root, backend):
         "cross_model_control": 8,
         "unit": "initial state, mean over mirrored sides",
         "source_station": 28,
+        "held_side_accuracy_floor": 0.75,
+        "side_template_states": [0, 1],
+        "analysis": "mean signed future-only minus clear at control 16; paired cluster bootstrap over starts; 90% equivalence interval for off-route within +/-2 mm",
         "coverage_floor_per_task": 0.75,
         "sham_margin_mm": 20,
         "minimum_retained_controls": 24,
@@ -73,8 +75,9 @@ if __name__ == "__main__":
     p.add_argument("--root", type=Path, required=True)
     p.add_argument("--backend", choices=["fastwam", "longwam"], required=True)
     p.add_argument("--out", type=Path, required=True)
+    p.add_argument("--task0-only", action="store_true")
     a = p.parse_args()
-    design = freeze(a.root, a.backend)
+    design = freeze(a.root, a.backend, [0] if a.task0_only else [0, 3])
     data = (json.dumps(design, indent=2, sort_keys=True) + "\n").encode()
     if a.out.exists() and a.out.read_bytes() != data:
         raise ValueError(

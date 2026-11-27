@@ -1,0 +1,359 @@
+{
+  "id": {
+    "fastwam": {
+      "successes": 50,
+      "n": 50,
+      "wilson95": [
+        0.9286499658256813,
+        1.0
+      ]
+    },
+    "fasterwam": {
+      "successes": 50,
+      "n": 50,
+      "wilson95": [
+        0.9286499658256813,
+        1.0
+      ]
+    },
+    "paired": {
+      "both": 50,
+      "only_fastwam": 0,
+      "only_fasterwam": 0,
+      "neither": 0,
+      "mcnemar_p": 1.0
+    },
+    "failures": []
+  },
+  "ood": {
+    "fastwam": {
+      "successes": 108,
+      "n": 140,
+      "wilson95": [
+        0.695174201504757,
+        0.8331847711429333
+      ]
+    },
+    "fasterwam": {
+      "successes": 103,
+      "n": 140,
+      "wilson95": [
+        0.6570827509682577,
+        0.8017553042257892
+      ]
+    },
+    "paired": {
+      "both": 88,
+      "only_fastwam": 20,
+      "only_fasterwam": 15,
+      "neither": 17,
+      "mcnemar_p": 0.49955983320251107
+    },
+    "by_factor": {
+      "Background Textures": {
+        "fastwam": {
+          "successes": 9,
+          "n": 20,
+          "wilson95": [
+            0.25819502085709295,
+            0.6579179916924003
+          ]
+        },
+        "fasterwam": {
+          "successes": 6,
+          "n": 20,
+          "wilson95": [
+            0.14547527396899385,
+            0.5189767762289793
+          ]
+        },
+        "fastwam_by_level": {
+          "2": {
+            "successes": 5,
+            "n": 10,
+            "wilson95": [
+              0.23658959361548731,
+              0.7634104063845126
+            ]
+          },
+          "4": {
+            "successes": 4,
+            "n": 10,
+            "wilson95": [
+              0.16817758120350967,
+              0.6873304525498135
+            ]
+          }
+        },
+        "paired": {
+          "both": 5,
+          "only_fastwam": 4,
+          "only_fasterwam": 1,
+          "neither": 10,
+          "mcnemar_p": 0.375
+        }
+      },
+      "Camera Viewpoints": {
+        "fastwam": {
+          "successes": 13,
+          "n": 20,
+          "wilson95": [
+            0.43285051021946463,
+            0.8188104521320554
+          ]
+        },
+        "fasterwam": {
+          "successes": 17,
+          "n": 20,
+          "wilson95": [
+            0.6395767041130426,
+            0.9476322080405041
+          ]
+        },
+        "fastwam_by_level": {
+          "2": {
+            "successes": 7,
+            "n": 10,
+            "wilson95": [
+              0.39677321997956516,
+              0.892210712513788
+            ]
+          },
+          "4": {
+            "successes": 6,
+            "n": 10,
+            "wilson95": [
+              0.3126695474501864,
+              0.8318224187964902
+            ]
+          }
+        },
+        "paired": {
+          "both": 11,
+          "only_fastwam": 2,
+          "only_fasterwam": 6,
+          "neither": 1,
+          "mcnemar_p": 0.2890625
+        }
+      },
+      "Language Instructions": {
+        "fastwam": {
+          "successes": 19,
+          "n": 20,
+          "wilson95": [
+            0.7638641064874331,
+            0.9911187805671268
+          ]
+        },
+        "fasterwam": {
+          "successes": 19,
+          "n": 20,
+          "wilson95": [
+            0.7638641064874331,
+            0.9911187805671268
+          ]
+        },
+        "fastwam_by_level": {
+          "2": {
+            "successes": 10,
+            "n": 10,
+            "wilson95": [
+              0.7224598312333834,
+              1.0
+            ]
+          },
+          "4": {
+            "successes": 9,
+            "n": 10,
+            "wilson95": [
+              0.5958436145024278,
+              0.9821242504842788
+            ]
+          }
+        },
+        "paired": {
+          "both": 18,
+          "only_fastwam": 1,
+          "only_fasterwam": 1,
+          "neither": 0,
+          "mcnemar_p": 1.0
+        }
+      },
+      "Light Conditions": {
+        "fastwam": {
+          "successes": 15,
+          "n": 20,
+          "wilson95": [
+            0.5312949900419365,
+            0.888139947210597
+          ]
+        },
+        "fasterwam": {
+          "successes": 20,
+          "n": 20,
+          "wilson95": [
+            0.8388698745050667,
+            1.0
+          ]
+        },
+        "fastwam_by_level": {
+          "2": {
+            "successes": 8,
+            "n": 10,
+            "wilson95": [
+              0.49015684672072335,
+              0.9433190520193067
+            ]
+          },
+          "4": {
+            "successes": 7,
+            "n": 10,
+            "wilson95": [
+              0.39677321997956516,
+              0.892210712513788
+            ]
+          }
+        },
+        "paired": {
+          "both": 15,
+          "only_fastwam": 0,
+          "only_fasterwam": 5,
+          "neither": 0,
+          "mcnemar_p": 0.0625
+        }
+      },
+      "Objects Layout": {
+        "fastwam": {
+          "successes": 19,
+          "n": 20,
+          "wilson95": [
+            0.7638641064874331,
+            0.9911187805671268
+          ]
+        },
+        "fasterwam": {
+          "successes": 19,
+          "n": 20,
+          "wilson95": [
+            0.7638641064874331,
+            0.9911187805671268
+          ]
+        },
+        "fastwam_by_level": {
+          "2": {
+            "successes": 9,
+            "n": 10,
+            "wilson95": [
+              0.5958436145024278,
+              0.9821242504842788
+            ]
+          },
+          "4": {
+            "successes": 10,
+            "n": 10,
+            "wilson95": [
+              0.7224598312333834,
+              1.0
+            ]
+          }
+        },
+        "paired": {
+          "both": 18,
+          "only_fastwam": 1,
+          "only_fasterwam": 1,
+          "neither": 0,
+          "mcnemar_p": 1.0
+        }
+      },
+      "Robot Initial States": {
+        "fastwam": {
+          "successes": 18,
+          "n": 20,
+          "wilson95": [
+            0.6989617935882066,
+            0.9721341060158468
+          ]
+        },
+        "fasterwam": {
+          "successes": 13,
+          "n": 20,
+          "wilson95": [
+            0.43285051021946463,
+            0.8188104521320554
+          ]
+        },
+        "fastwam_by_level": {
+          "2": {
+            "successes": 10,
+            "n": 10,
+            "wilson95": [
+              0.7224598312333834,
+              1.0
+            ]
+          },
+          "4": {
+            "successes": 8,
+            "n": 10,
+            "wilson95": [
+              0.49015684672072335,
+              0.9433190520193067
+            ]
+          }
+        },
+        "paired": {
+          "both": 13,
+          "only_fastwam": 5,
+          "only_fasterwam": 0,
+          "neither": 2,
+          "mcnemar_p": 0.0625
+        }
+      },
+      "Sensor Noise": {
+        "fastwam": {
+          "successes": 15,
+          "n": 20,
+          "wilson95": [
+            0.5312949900419365,
+            0.888139947210597
+          ]
+        },
+        "fasterwam": {
+          "successes": 9,
+          "n": 20,
+          "wilson95": [
+            0.25819502085709295,
+            0.6579179916924003
+          ]
+        },
+        "fastwam_by_level": {
+          "2": {
+            "successes": 8,
+            "n": 10,
+            "wilson95": [
+              0.49015684672072335,
+              0.9433190520193067
+            ]
+          },
+          "4": {
+            "successes": 7,
+            "n": 10,
+            "wilson95": [
+              0.39677321997956516,
+              0.892210712513788
+            ]
+          }
+        },
+        "paired": {
+          "both": 8,
+          "only_fastwam": 7,
+          "only_fasterwam": 1,
+          "neither": 4,
+          "mcnemar_p": 0.0703125
+        }
+      }
+    },
+    "failure_terminations": {
+      "max_steps": 32
+    }
+  }
+}

@@ -1,0 +1,83 @@
+{
+  "unit": "task0_state0",
+  "base_task": 0,
+  "task_id": 0,
+  "task": "LIVING_ROOM_SCENE2_put_both_the_alphabet_soup_and_the_tomato_sauce_in_the_basket",
+  "instruction": "put both the alphabet soup and the tomato sauce in the basket",
+  "labels": [
+    "soup",
+    "tomato"
+  ],
+  "approach": {
+    "soup": {
+      "endpoint_goal_error_m": 0.0015687763802216604,
+      "endpoint_target_xy_distance_m": 0.0013167237946733906,
+      "endpoint_other_xy_distance_m": 0.20914274839863214,
+      "maximum_object_translation_m": 3.851086116668512e-15,
+      "robot_scene_contact_substeps": 0,
+      "target_xy_separation_m": 0.20846847274783017
+    },
+    "tomato": {
+      "endpoint_goal_error_m": 0.0002941212674811009,
+      "endpoint_target_xy_distance_m": 0.00024601929994852483,
+      "endpoint_other_xy_distance_m": 0.2085157115890708,
+      "maximum_object_translation_m": 3.851086116668512e-15,
+      "robot_scene_contact_substeps": 0,
+      "target_xy_separation_m": 0.20846847274783017
+    }
+  },
+  "seeds": {
+    "0": {
+      "axis_shift_m": {
+        "native": -0.13756754957886835,
+        "soup": -0.13889110343681563,
+        "tomato": 0.026795501928350906
+      },
+      "toward_shown_m": 0.16568660536516652,
+      "endpoint_separation_m": 0.16613952821661368,
+      "closer_to_shown": {
+        "soup": true,
+        "tomato": true
+      },
+      "action_abs_diff_executed": {
+        "soup-native": 0.11724853515625,
+        "tomato-native": 0.20623866489955356,
+        "tomato-soup": 0.10542079380580358
+      },
+      "termination": {
+        "native": "chunk_complete",
+        "soup": "chunk_complete",
+        "tomato": "chunk_complete"
+      }
+    },
+    "1": {
+      "axis_shift_m": {
+        "native": -0.13772048344749832,
+        "soup": -0.13889010858464132,
+        "tomato": 0.02598599670269421
+      },
+      "toward_shown_m": 0.16487610528733554,
+      "endpoint_separation_m": 0.16532802590012693,
+      "closer_to_shown": {
+        "soup": true,
+        "tomato": true
+      },
+      "action_abs_diff_executed": {
+        "soup-native": 0.11996808733258929,
+        "tomato-native": 0.2090175083705357,
+        "tomato-soup": 0.10429251534598215
+      },
+      "termination": {
+        "native": "chunk_complete",
+        "soup": "chunk_complete",
+        "tomato": "chunk_complete"
+      }
+    }
+  },
+  "anchor_error": {
+    "0/soup": 0.0,
+    "0/tomato": 0.0,
+    "1/soup": 0.0,
+    "1/tomato": 0.0
+  }
+}

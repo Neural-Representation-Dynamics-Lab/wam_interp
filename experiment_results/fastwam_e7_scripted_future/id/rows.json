@@ -1,0 +1,3375 @@
+{
+ "experiment": "E7 scripted future",
+ "arm": "id",
+ "protocol": {
+  "schema_version": 1,
+  "purpose": "E7 content arm: replace Fast-WAM's imagined future with a scripted pre-contact approach to one of two objects, in and out of distribution, and measure whether the executed chunk moves toward the object the future shows.",
+  "pilot": {
+   "backend": "fastwam_optional_idm",
+   "precision": "bfloat16",
+   "device": "cuda",
+   "repository_root": ".",
+   "suite": "libero_10",
+   "environment_seed": 0,
+   "camera_resolution": 256,
+   "warmup_steps": 30,
+   "execute_steps": 32,
+   "inference_steps": 10,
+   "behavior_axis": 1,
+   "identity_atol": 1e-05,
+   "candidate_seeds": [
+    0,
+    1
+   ],
+   "property": "first_approach_target",
+   "frame_steps": [
+    0,
+    4,
+    8,
+    12,
+    16,
+    20,
+    24,
+    28,
+    32
+   ]
+  },
+  "reference": {
+   "control_steps": 32,
+   "hover_above_object_center_m": 0.14,
+   "controller": {
+    "ramp_steps": 16,
+    "max_command": 0.6
+   },
+   "approach_limits": {
+    "endpoint_goal_error_m": 0.02,
+    "maximum_object_translation_m": 0.001,
+    "target_margin_m": 0.1
+   }
+  },
+  "pairs": {
+   "0": {
+    "soup": "alphabet_soup_1",
+    "tomato": "tomato_sauce_1"
+   },
+   "1": {
+    "cream_cheese": "cream_cheese_1",
+    "butter": "butter_1"
+   },
+   "2": {
+    "moka_pot": "moka_pot_1",
+    "frypan": "chefmate_8_frypan_1"
+   },
+   "3": {
+    "bowl": "akita_black_bowl_1",
+    "wine_bottle": "wine_bottle_1"
+   },
+   "4": {
+    "white_mug": "porcelain_mug_1",
+    "yellow_mug": "white_yellow_mug_1"
+   },
+   "5": {
+    "book": "black_book_1",
+    "mug": "white_yellow_mug_1"
+   },
+   "6": {
+    "white_mug": "porcelain_mug_1",
+    "pudding": "chocolate_pudding_1"
+   },
+   "7": {
+    "soup": "alphabet_soup_1",
+    "cream_cheese": "cream_cheese_1"
+   },
+   "8": {
+    "moka_pot_1": "moka_pot_1",
+    "moka_pot_2": "moka_pot_2"
+   },
+   "9": {
+    "yellow_mug": "white_yellow_mug_1",
+    "white_mug": "porcelain_mug_1"
+   }
+  },
+  "pair_note": "Tasks 0, 1, 4, 6, 7 and 8 pair two objects the task moves; tasks 2, 3, 5 and 9 pair the task's object with a distractor in the scene.",
+  "action_seeds": [
+   0,
+   1
+  ],
+  "id_states": 5,
+  "ood": {
+   "levels": [
+    2,
+    4
+   ],
+   "variants_per_cell": 10,
+   "sample_seed": 0
+  },
+  "primary_measure": "Endpoint of the end effector after the 32-control chunk under the second object's future minus under the first object's future, projected on the tabletop XY direction from the first object to the second. Positive means the chunk moves toward the object the future shows.",
+  "validity": "A start is used only if both scripted approaches pass the E1 approach limits and the scripted run starts from the same observation as the policy."
+ },
+ "checkpoint": "/home/infidea/jiwon-file/research/NRDL/wam-proj/wam_interp/checkpoints/fastwam_release/libero_optional_idm_2cam224.pt",
+ "source": {
+  "revision": "7a678f9d4df15a0c4cd9b6ac0ab233c68524eec1",
+  "dirty": true
+ },
+ "package_versions": {
+  "torch": "2.7.1+cu128",
+  "numpy": "1.26.4",
+  "mujoco": "3.3.2",
+  "robosuite": "1.4.1",
+  "sapien": null,
+  "mplib": null,
+  "diffusers": "0.36.0",
+  "transformers": "4.57.6"
+ },
+ "started": "2026-11-26T07:47:06.861559+00:00",
+ "completed": true,
+ "rows": [
+  {
+   "unit": "task0_state0",
+   "base_task": 0,
+   "task_id": 0,
+   "task": "LIVING_ROOM_SCENE2_put_both_the_alphabet_soup_and_the_tomato_sauce_in_the_basket",
+   "instruction": "put both the alphabet soup and the tomato sauce in the basket",
+   "labels": [
+    "soup",
+    "tomato"
+   ],
+   "approach": {
+    "soup": {
+     "endpoint_goal_error_m": 0.0015687763802216604,
+     "endpoint_target_xy_distance_m": 0.0013167237946733906,
+     "endpoint_other_xy_distance_m": 0.20914274839863214,
+     "maximum_object_translation_m": 3.851086116668512e-15,
+     "robot_scene_contact_substeps": 0,
+     "target_xy_separation_m": 0.20846847274783017
+    },
+    "tomato": {
+     "endpoint_goal_error_m": 0.0002941212674811009,
+     "endpoint_target_xy_distance_m": 0.00024601929994852483,
+     "endpoint_other_xy_distance_m": 0.2085157115890708,
+     "maximum_object_translation_m": 3.851086116668512e-15,
+     "robot_scene_contact_substeps": 0,
+     "target_xy_separation_m": 0.20846847274783017
+    }
+   },
+   "seeds": {
+    "0": {
+     "axis_shift_m": {
+      "native": -0.13756754957886835,
+      "soup": -0.13889110343681563,
+      "tomato": 0.026795501928350906
+     },
+     "toward_shown_m": 0.16568660536516652,
+     "endpoint_separation_m": 0.16613952821661368,
+     "closer_to_shown": {
+      "soup": true,
+      "tomato": true
+     },
+     "action_abs_diff_executed": {
+      "soup-native": 0.11724853515625,
+      "tomato-native": 0.20623866489955356,
+      "tomato-soup": 0.10542079380580358
+     },
+     "termination": {
+      "native": "chunk_complete",
+      "soup": "chunk_complete",
+      "tomato": "chunk_complete"
+     }
+    },
+    "1": {
+     "axis_shift_m": {
+      "native": -0.13772048344749832,
+      "soup": -0.13889010858464132,
+      "tomato": 0.02598599670269421
+     },
+     "toward_shown_m": 0.16487610528733554,
+     "endpoint_separation_m": 0.16532802590012693,
+     "closer_to_shown": {
+      "soup": true,
+      "tomato": true
+     },
+     "action_abs_diff_executed": {
+      "soup-native": 0.11996808733258929,
+      "tomato-native": 0.2090175083705357,
+      "tomato-soup": 0.10429251534598215
+     },
+     "termination": {
+      "native": "chunk_complete",
+      "soup": "chunk_complete",
+      "tomato": "chunk_complete"
+     }
+    }
+   },
+   "anchor_error": {
+    "0/soup": 0.0,
+    "0/tomato": 0.0,
+    "1/soup": 0.0,
+    "1/tomato": 0.0
+   },
+   "seconds": 44.41990220732987
+  },
+  {
+   "unit": "task0_state1",
+   "base_task": 0,
+   "task_id": 0,
+   "task": "LIVING_ROOM_SCENE2_put_both_the_alphabet_soup_and_the_tomato_sauce_in_the_basket",
+   "instruction": "put both the alphabet soup and the tomato sauce in the basket",
+   "labels": [
+    "soup",
+    "tomato"
+   ],
+   "approach": {
+    "soup": {
+     "endpoint_goal_error_m": 0.0008809276644341076,
+     "endpoint_target_xy_distance_m": 0.0007429300866530571,
+     "endpoint_other_xy_distance_m": 0.17265115308850512,
+     "maximum_object_translation_m": 5.551115123125783e-15,
+     "robot_scene_contact_substeps": 0,
+     "target_xy_separation_m": 0.17233562546680484
+    },
+    "tomato": {
+     "endpoint_goal_error_m": 0.0001541676997898785,
+     "endpoint_target_xy_distance_m": 0.00012850257218297465,
+     "endpoint_other_xy_distance_m": 0.1723322943845569,
+     "maximum_object_translation_m": 5.551115123125783e-15,
+     "robot_scene_contact_substeps": 0,
+     "target_xy_separation_m": 0.17233562546680484
+    }
+   },
+   "seeds": {
+    "0": {
+     "axis_shift_m": {
+      "native": -0.14655849191271772,
+      "soup": -0.14203219336110365,
+      "tomato": 0.0024214954020908884
+     },
+     "toward_shown_m": 0.14445368876319453,
+     "endpoint_separation_m": 0.14447527149187334,
+     "closer_to_shown": {
+      "soup": true,
+      "tomato": true
+     },
+     "action_abs_diff_executed": {
+      "soup-native": 0.09628208705357143,
+      "tomato-native": 0.15925641741071428,
+      "tomato-soup": 0.08962925502232143
+     },
+     "termination": {
+      "native": "chunk_complete",
+      "soup": "chunk_complete",
+      "tomato": "chunk_complete"
+     }
+    },
+    "1": {
+     "axis_shift_m": {
+      "native": -0.14678076166511492,
+      "soup": -0.14165686237407357,
+      "tomato": 0.00239655722997406
+     },
+     "toward_shown_m": 0.14405341960404763,
+     "endpoint_separation_m": 0.14406141224146232,
+     "closer_to_shown": {
+      "soup": true,
+      "tomato": true
+     },
+     "action_abs_diff_executed": {
+      "soup-native": 0.081463623046875,
+      "tomato-native": 0.14442879813058035,
+      "tomato-soup": 0.08892429896763393
+     },
+     "termination": {
+      "native": "chunk_complete",
+      "soup": "chunk_complete",
+      "tomato": "chunk_complete"
+     }
+    }
+   },
+   "anchor_error": {
+    "0/soup": 0.0,
+    "0/tomato": 0.0,
+    "1/soup": 0.0,
+    "1/tomato": 0.0
+   },
+   "seconds": 41.25558726582676
+  },
+  {
+   "unit": "task0_state2",
+   "base_task": 0,
+   "task_id": 0,
+   "task": "LIVING_ROOM_SCENE2_put_both_the_alphabet_soup_and_the_tomato_sauce_in_the_basket",
+   "instruction": "put both the alphabet soup and the tomato sauce in the basket",
+   "labels": [
+    "soup",
+    "tomato"
+   ],
+   "approach": {
+    "soup": {
+     "endpoint_goal_error_m": 0.000608505030487104,
+     "endpoint_target_xy_distance_m": 0.0005220721194704753,
+     "endpoint_other_xy_distance_m": 0.16474505127912817,
+     "maximum_object_translation_m": 1.5543122344752192e-13,
+     "robot_scene_contact_substeps": 0,
+     "target_xy_separation_m": 0.16445165766695252
+    },
+    "tomato": {
+     "endpoint_goal_error_m": 0.00010452675589483412,
+     "endpoint_target_xy_distance_m": 8.511471596046423e-05,
+     "endpoint_other_xy_distance_m": 0.164448757815618,
+     "maximum_object_translation_m": 1.5543122344752192e-13,
+     "robot_scene_contact_substeps": 0,
+     "target_xy_separation_m": 0.16445165766695252
+    }
+   },
+   "seeds": {
+    "0": {
+     "axis_shift_m": {
+      "native": -0.1276640055616741,
+      "soup": -0.12452055001058884,
+      "tomato": 0.009526681712153982
+     },
+     "toward_shown_m": 0.13404723172274283,
+     "endpoint_separation_m": 0.13455256465538504,
+     "closer_to_shown": {
+      "soup": true,
+      "tomato": true
+     },
+     "action_abs_diff_executed": {
+      "soup-native": 0.1412013462611607,
+      "tomato-native": 0.20647495814732142,
+      "tomato-soup": 0.09558890206473214
+     },
+     "termination": {
+      "native": "chunk_complete",
+      "soup": "chunk_complete",
+      "tomato": "chunk_complete"
+     }
+    },
+    "1": {
+     "axis_shift_m": {
+      "native": -0.12341008110182902,
+      "soup": -0.12391626810242878,
+      "tomato": 0.009082947239287256
+     },
+     "toward_shown_m": 0.13299921534171605,
+     "endpoint_separation_m": 0.13339848589888245,
+     "closer_to_shown": {
+      "soup": true,
+      "tomato": true
+     },
+     "action_abs_diff_executed": {
+      "soup-native": 0.14619053431919643,
+      "tomato-native": 0.20996311732700892,
+      "tomato-soup": 0.09489964076450892
+     },
+     "termination": {
+      "native": "chunk_complete",
+      "soup": "chunk_complete",
+      "tomato": "chunk_complete"
+     }
+    }
+   },
+   "anchor_error": {
+    "0/soup": 0.0,
+    "0/tomato": 0.0,
+    "1/soup": 0.0,
+    "1/tomato": 0.0
+   },
+   "seconds": 41.02836105786264
+  },
+  {
+   "unit": "task0_state3",
+   "base_task": 0,
+   "task_id": 0,
+   "task": "LIVING_ROOM_SCENE2_put_both_the_alphabet_soup_and_the_tomato_sauce_in_the_basket",
+   "instruction": "put both the alphabet soup and the tomato sauce in the basket",
+   "labels": [
+    "soup",
+    "tomato"
+   ],
+   "approach": {
+    "soup": {
+     "endpoint_goal_error_m": 0.0018412444297970366,
+     "endpoint_target_xy_distance_m": 0.001549638607583692,
+     "endpoint_other_xy_distance_m": 0.2332221840020645,
+     "maximum_object_translation_m": 0.0,
+     "robot_scene_contact_substeps": 0,
+     "target_xy_separation_m": 0.2325276735694939
+    },
+    "tomato": {
+     "endpoint_goal_error_m": 0.00013290960388406185,
+     "endpoint_target_xy_distance_m": 0.00011229612998639288,
+     "endpoint_other_xy_distance_m": 0.2325783466171388,
+     "maximum_object_translation_m": 0.0,
+     "robot_scene_contact_substeps": 0,
+     "target_xy_separation_m": 0.2325276735694939
+    }
+   },
+   "seeds": {
+    "0": {
+     "axis_shift_m": {
+      "native": -0.14933091023402134,
+      "soup": -0.1601921158271641,
+      "tomato": 0.03354536651054777
+     },
+     "toward_shown_m": 0.19373748233771187,
+     "endpoint_separation_m": 0.19410181031073118,
+     "closer_to_shown": {
+      "soup": true,
+      "tomato": true
+     },
+     "action_abs_diff_executed": {
+      "soup-native": 0.089410400390625,
+      "tomato-native": 0.18283909388950892,
+      "tomato-soup": 0.1137481689453125
+     },
+     "termination": {
+      "native": "chunk_complete",
+      "soup": "chunk_complete",
+      "tomato": "chunk_complete"
+     }
+    },
+    "1": {
+     "axis_shift_m": {
+      "native": -0.14748803152131432,
+      "soup": -0.16009199272536662,
+      "tomato": 0.03266686299580384
+     },
+     "toward_shown_m": 0.19275885572117046,
+     "endpoint_separation_m": 0.19311554196018313,
+     "closer_to_shown": {
+      "soup": true,
+      "tomato": true
+     },
+     "action_abs_diff_executed": {
+      "soup-native": 0.09119698660714286,
+      "tomato-native": 0.18042515345982144,
+      "tomato-soup": 0.11255057198660715
+     },
+     "termination": {
+      "native": "chunk_complete",
+      "soup": "chunk_complete",
+      "tomato": "chunk_complete"
+     }
+    }
+   },
+   "anchor_error": {
+    "0/soup": 0.0,
+    "0/tomato": 0.0,
+    "1/soup": 0.0,
+    "1/tomato": 0.0
+   },
+   "seconds": 40.92431133100763
+  },
+  {
+   "unit": "task0_state4",
+   "base_task": 0,
+   "task_id": 0,
+   "task": "LIVING_ROOM_SCENE2_put_both_the_alphabet_soup_and_the_tomato_sauce_in_the_basket",
+   "instruction": "put both the alphabet soup and the tomato sauce in the basket",
+   "labels": [
+    "soup",
+    "tomato"
+   ],
+   "approach": {
+    "soup": {
+     "endpoint_goal_error_m": 0.0017380972179572493,
+     "endpoint_target_xy_distance_m": 0.001465677237247021,
+     "endpoint_other_xy_distance_m": 0.21107406549964725,
+     "maximum_object_translation_m": 5.551115123125783e-15,
+     "robot_scene_contact_substeps": 0,
+     "target_xy_separation_m": 0.21016455617360633
+    },
+    "tomato": {
+     "endpoint_goal_error_m": 8.844633090249173e-05,
+     "endpoint_target_xy_distance_m": 7.796112036527243e-05,
+     "endpoint_other_xy_distance_m": 0.2101981270556373,
+     "maximum_object_translation_m": 5.551115123125783e-15,
+     "robot_scene_contact_substeps": 0,
+     "target_xy_separation_m": 0.21016455617360633
+    }
+   },
+   "seeds": {
+    "0": {
+     "axis_shift_m": {
+      "native": -0.17008157525147036,
+      "soup": -0.17570849682198342,
+      "tomato": -0.00033836596386781106
+     },
+     "toward_shown_m": 0.17537013085811562,
+     "endpoint_separation_m": 0.17563725302760444,
+     "closer_to_shown": {
+      "soup": true,
+      "tomato": true
+     },
+     "action_abs_diff_executed": {
+      "soup-native": 0.07859758649553572,
+      "tomato-native": 0.16254054478236607,
+      "tomato-soup": 0.0984222412109375
+     },
+     "termination": {
+      "native": "chunk_complete",
+      "soup": "chunk_complete",
+      "tomato": "chunk_complete"
+     }
+    },
+    "1": {
+     "axis_shift_m": {
+      "native": -0.16909315334402758,
+      "soup": -0.17585780027754322,
+      "tomato": -0.00015035735325246352
+     },
+     "toward_shown_m": 0.17570744292429075,
+     "endpoint_separation_m": 0.17597335370411504,
+     "closer_to_shown": {
+      "soup": true,
+      "tomato": true
+     },
+     "action_abs_diff_executed": {
+      "soup-native": 0.07135707310267857,
+      "tomato-native": 0.158392333984375,
+      "tomato-soup": 0.09766060965401786
+     },
+     "termination": {
+      "native": "chunk_complete",
+      "soup": "chunk_complete",
+      "tomato": "chunk_complete"
+     }
+    }
+   },
+   "anchor_error": {
+    "0/soup": 0.0,
+    "0/tomato": 0.0,
+    "1/soup": 0.0,
+    "1/tomato": 0.0
+   },
+   "seconds": 40.55121889989823
+  },
+  {
+   "unit": "task1_state0",
+   "base_task": 1,
+   "task_id": 1,
+   "task": "LIVING_ROOM_SCENE2_put_both_the_cream_cheese_box_and_the_butter_in_the_basket",
+   "instruction": "put both the cream cheese box and the butter in the basket",
+   "labels": [
+    "cream_cheese",
+    "butter"
+   ],
+   "approach": {
+    "cream_cheese": {
+     "endpoint_goal_error_m": 0.0095071129044277,
+     "endpoint_target_xy_distance_m": 0.00777117311665557,
+     "endpoint_other_xy_distance_m": 0.24905522927577836,
+     "maximum_object_translation_m": 0.0,
+     "robot_scene_contact_substeps": 0,
+     "target_xy_separation_m": 0.24427300861008316
+    },
+    "butter": {
+     "endpoint_goal_error_m": 0.002399530404416928,
+     "endpoint_target_xy_distance_m": 0.001997449319476222,
+     "endpoint_other_xy_distance_m": 0.24429479041972735,
+     "maximum_object_translation_m": 0.0,
+     "robot_scene_contact_substeps": 0,
+     "target_xy_separation_m": 0.24427300861008316
+    }
+   },
+   "seeds": {
+    "0": {
+     "axis_shift_m": {
+      "native": -0.18632402550072122,
+      "cream_cheese": -0.20513978163172247,
+      "butter": -0.014918068355763169
+     },
+     "toward_shown_m": 0.1902217132759593,
+     "endpoint_separation_m": 0.19149780669838512,
+     "closer_to_shown": {
+      "cream_cheese": true,
+      "butter": true
+     },
+     "action_abs_diff_executed": {
+      "cream_cheese-native": 0.07742047991071428,
+      "butter-native": 0.16882411411830356,
+      "butter-cream_cheese": 0.107489013671875
+     },
+     "termination": {
+      "native": "chunk_complete",
+      "cream_cheese": "chunk_complete",
+      "butter": "chunk_complete"
+     }
+    },
+    "1": {
+     "axis_shift_m": {
+      "native": -0.18418214278956657,
+      "cream_cheese": -0.20499085192626137,
+      "butter": -0.015668329699217533
+     },
+     "toward_shown_m": 0.18932252222704385,
+     "endpoint_separation_m": 0.1904961656287592,
+     "closer_to_shown": {
+      "cream_cheese": true,
+      "butter": true
+     },
+     "action_abs_diff_executed": {
+      "cream_cheese-native": 0.08648507254464285,
+      "butter-native": 0.16257498604910714,
+      "butter-cream_cheese": 0.10685860770089285
+     },
+     "termination": {
+      "native": "chunk_complete",
+      "cream_cheese": "chunk_complete",
+      "butter": "chunk_complete"
+     }
+    }
+   },
+   "anchor_error": {
+    "0/cream_cheese": 0.0,
+    "0/butter": 0.0,
+    "1/cream_cheese": 0.0,
+    "1/butter": 0.0
+   },
+   "seconds": 40.192943634931
+  },
+  {
+   "unit": "task1_state1",
+   "base_task": 1,
+   "task_id": 1,
+   "task": "LIVING_ROOM_SCENE2_put_both_the_cream_cheese_box_and_the_butter_in_the_basket",
+   "instruction": "put both the cream cheese box and the butter in the basket",
+   "labels": [
+    "cream_cheese",
+    "butter"
+   ],
+   "approach": {
+    "cream_cheese": {
+     "endpoint_goal_error_m": 0.005414419784890177,
+     "endpoint_target_xy_distance_m": 0.0046895189488361235,
+     "endpoint_other_xy_distance_m": 0.281474577545957,
+     "maximum_object_translation_m": 0.0,
+     "robot_scene_contact_substeps": 0,
+     "target_xy_separation_m": 0.2842086870576193
+    },
+    "butter": {
+     "endpoint_goal_error_m": 0.0009402436979814587,
+     "endpoint_target_xy_distance_m": 0.0007938172551399616,
+     "endpoint_other_xy_distance_m": 0.28439045131942015,
+     "maximum_object_translation_m": 0.0,
+     "robot_scene_contact_substeps": 0,
+     "target_xy_separation_m": 0.2842086870576193
+    }
+   },
+   "seeds": {
+    "0": {
+     "axis_shift_m": {
+      "native": -0.21938598384748495,
+      "cream_cheese": -0.24208949853279668,
+      "butter": -0.019067619618736296
+     },
+     "toward_shown_m": 0.2230218789140604,
+     "endpoint_separation_m": 0.22374955580577127,
+     "closer_to_shown": {
+      "cream_cheese": true,
+      "butter": true
+     },
+     "action_abs_diff_executed": {
+      "cream_cheese-native": 0.10525251116071428,
+      "butter-native": 0.15146658761160714,
+      "butter-cream_cheese": 0.10728062220982143
+     },
+     "termination": {
+      "native": "chunk_complete",
+      "cream_cheese": "chunk_complete",
+      "butter": "chunk_complete"
+     }
+    },
+    "1": {
+     "axis_shift_m": {
+      "native": -0.22043392806275428,
+      "cream_cheese": -0.24218287025980229,
+      "butter": -0.019509162419441235
+     },
+     "toward_shown_m": 0.22267370784036106,
+     "endpoint_separation_m": 0.22329591672157748,
+     "closer_to_shown": {
+      "cream_cheese": true,
+      "butter": true
+     },
+     "action_abs_diff_executed": {
+      "cream_cheese-native": 0.10479213169642858,
+      "butter-native": 0.16145368303571428,
+      "butter-cream_cheese": 0.10778982979910715
+     },
+     "termination": {
+      "native": "chunk_complete",
+      "cream_cheese": "chunk_complete",
+      "butter": "chunk_complete"
+     }
+    }
+   },
+   "anchor_error": {
+    "0/cream_cheese": 0.0,
+    "0/butter": 0.0,
+    "1/cream_cheese": 0.0,
+    "1/butter": 0.0
+   },
+   "seconds": 40.42391747189686
+  },
+  {
+   "unit": "task1_state2",
+   "base_task": 1,
+   "task_id": 1,
+   "task": "LIVING_ROOM_SCENE2_put_both_the_cream_cheese_box_and_the_butter_in_the_basket",
+   "instruction": "put both the cream cheese box and the butter in the basket",
+   "labels": [
+    "cream_cheese",
+    "butter"
+   ],
+   "approach": {
+    "cream_cheese": {
+     "endpoint_goal_error_m": 0.007410003150105661,
+     "endpoint_target_xy_distance_m": 0.005752720433208761,
+     "endpoint_other_xy_distance_m": 0.29080587711779693,
+     "maximum_object_translation_m": 5.551115123125783e-15,
+     "robot_scene_contact_substeps": 0,
+     "target_xy_separation_m": 0.2865649051617393
+    },
+    "butter": {
+     "endpoint_goal_error_m": 0.0011334375418153256,
+     "endpoint_target_xy_distance_m": 0.0009532805181081593,
+     "endpoint_other_xy_distance_m": 0.2865994922283718,
+     "maximum_object_translation_m": 5.551115123125783e-15,
+     "robot_scene_contact_substeps": 0,
+     "target_xy_separation_m": 0.2865649051617393
+    }
+   },
+   "seeds": {
+    "0": {
+     "axis_shift_m": {
+      "native": -0.23554870790773266,
+      "cream_cheese": -0.24706296091604085,
+      "butter": -0.030177753696352293
+     },
+     "toward_shown_m": 0.21688520721968857,
+     "endpoint_separation_m": 0.21816415323771707,
+     "closer_to_shown": {
+      "cream_cheese": true,
+      "butter": true
+     },
+     "action_abs_diff_executed": {
+      "cream_cheese-native": 0.06920209612165179,
+      "butter-native": 0.16699000767299108,
+      "butter-cream_cheese": 0.11146153041294643
+     },
+     "termination": {
+      "native": "chunk_complete",
+      "cream_cheese": "chunk_complete",
+      "butter": "chunk_complete"
+     }
+    },
+    "1": {
+     "axis_shift_m": {
+      "native": -0.23361666599908723,
+      "cream_cheese": -0.2474846981419184,
+      "butter": -0.030617471037316327
+     },
+     "toward_shown_m": 0.21686722710460207,
+     "endpoint_separation_m": 0.2179940091688168,
+     "closer_to_shown": {
+      "cream_cheese": true,
+      "butter": true
+     },
+     "action_abs_diff_executed": {
+      "cream_cheese-native": 0.07159596851893833,
+      "butter-native": 0.1632419994899205,
+      "butter-cream_cheese": 0.11193411690848214
+     },
+     "termination": {
+      "native": "chunk_complete",
+      "cream_cheese": "chunk_complete",
+      "butter": "chunk_complete"
+     }
+    }
+   },
+   "anchor_error": {
+    "0/cream_cheese": 0.0,
+    "0/butter": 0.0,
+    "1/cream_cheese": 0.0,
+    "1/butter": 0.0
+   },
+   "seconds": 43.21425409195945
+  },
+  {
+   "unit": "task1_state3",
+   "base_task": 1,
+   "task_id": 1,
+   "task": "LIVING_ROOM_SCENE2_put_both_the_cream_cheese_box_and_the_butter_in_the_basket",
+   "instruction": "put both the cream cheese box and the butter in the basket",
+   "labels": [
+    "cream_cheese",
+    "butter"
+   ],
+   "approach": {
+    "cream_cheese": {
+     "endpoint_goal_error_m": 0.006836577468648012,
+     "endpoint_target_xy_distance_m": 0.005142025259772398,
+     "endpoint_other_xy_distance_m": 0.26130095313738994,
+     "maximum_object_translation_m": 5.551115123125783e-15,
+     "robot_scene_contact_substeps": 0,
+     "target_xy_separation_m": 0.258945693963823
+    },
+    "butter": {
+     "endpoint_goal_error_m": 0.004311727968324947,
+     "endpoint_target_xy_distance_m": 0.0035690663111171013,
+     "endpoint_other_xy_distance_m": 0.2589011500844582,
+     "maximum_object_translation_m": 5.551115123125783e-15,
+     "robot_scene_contact_substeps": 0,
+     "target_xy_separation_m": 0.258945693963823
+    }
+   },
+   "seeds": {
+    "0": {
+     "axis_shift_m": {
+      "native": -0.22044072890088742,
+      "cream_cheese": -0.2406009480968184,
+      "butter": -0.03931912629320788
+     },
+     "toward_shown_m": 0.2012818218036105,
+     "endpoint_separation_m": 0.20225432578102867,
+     "closer_to_shown": {
+      "cream_cheese": true,
+      "butter": true
+     },
+     "action_abs_diff_executed": {
+      "cream_cheese-native": 0.08452410016741072,
+      "butter-native": 0.17740565708705358,
+      "butter-cream_cheese": 0.10819266183035714
+     },
+     "termination": {
+      "native": "chunk_complete",
+      "cream_cheese": "chunk_complete",
+      "butter": "chunk_complete"
+     }
+    },
+    "1": {
+     "axis_shift_m": {
+      "native": -0.22055142901639496,
+      "cream_cheese": -0.2406291468710768,
+      "butter": -0.03963503797557484
+     },
+     "toward_shown_m": 0.20099410889550196,
+     "endpoint_separation_m": 0.20186275489276045,
+     "closer_to_shown": {
+      "cream_cheese": true,
+      "butter": true
+     },
+     "action_abs_diff_executed": {
+      "cream_cheese-native": 0.08764125279017858,
+      "butter-native": 0.1735874720982143,
+      "butter-cream_cheese": 0.10721435546875
+     },
+     "termination": {
+      "native": "chunk_complete",
+      "cream_cheese": "chunk_complete",
+      "butter": "chunk_complete"
+     }
+    }
+   },
+   "anchor_error": {
+    "0/cream_cheese": 0.0,
+    "0/butter": 0.0,
+    "1/cream_cheese": 0.0,
+    "1/butter": 0.0
+   },
+   "seconds": 41.52843229006976
+  },
+  {
+   "unit": "task1_state4",
+   "base_task": 1,
+   "task_id": 1,
+   "task": "LIVING_ROOM_SCENE2_put_both_the_cream_cheese_box_and_the_butter_in_the_basket",
+   "instruction": "put both the cream cheese box and the butter in the basket",
+   "labels": [
+    "cream_cheese",
+    "butter"
+   ],
+   "approach": {
+    "cream_cheese": {
+     "endpoint_goal_error_m": 0.008973183720416734,
+     "endpoint_target_xy_distance_m": 0.007408413990208869,
+     "endpoint_other_xy_distance_m": 0.22540560143354332,
+     "maximum_object_translation_m": 5.551115123125783e-15,
+     "robot_scene_contact_substeps": 0,
+     "target_xy_separation_m": 0.2210383013174191
+    },
+    "butter": {
+     "endpoint_goal_error_m": 0.002411479132828926,
+     "endpoint_target_xy_distance_m": 0.002006865099759908,
+     "endpoint_other_xy_distance_m": 0.22110613241458973,
+     "maximum_object_translation_m": 5.551115123125783e-15,
+     "robot_scene_contact_substeps": 0,
+     "target_xy_separation_m": 0.2210383013174191
+    }
+   },
+   "seeds": {
+    "0": {
+     "axis_shift_m": {
+      "native": -0.18386408632126,
+      "cream_cheese": -0.19897528922055405,
+      "butter": -0.024916008526265097
+     },
+     "toward_shown_m": 0.17405928069428894,
+     "endpoint_separation_m": 0.17516707435260198,
+     "closer_to_shown": {
+      "cream_cheese": true,
+      "butter": true
+     },
+     "action_abs_diff_executed": {
+      "cream_cheese-native": 0.09354509626116071,
+      "butter-native": 0.18422502790178572,
+      "butter-cream_cheese": 0.098773193359375
+     },
+     "termination": {
+      "native": "chunk_complete",
+      "cream_cheese": "chunk_complete",
+      "butter": "chunk_complete"
+     }
+    },
+    "1": {
+     "axis_shift_m": {
+      "native": -0.18134361356486112,
+      "cream_cheese": -0.19881719765691747,
+      "butter": -0.024988276551819857
+     },
+     "toward_shown_m": 0.17382892110509762,
+     "endpoint_separation_m": 0.17480469198213608,
+     "closer_to_shown": {
+      "cream_cheese": true,
+      "butter": true
+     },
+     "action_abs_diff_executed": {
+      "cream_cheese-native": 0.08709280831473214,
+      "butter-native": 0.17770560128348215,
+      "butter-cream_cheese": 0.09774867466517857
+     },
+     "termination": {
+      "native": "chunk_complete",
+      "cream_cheese": "chunk_complete",
+      "butter": "chunk_complete"
+     }
+    }
+   },
+   "anchor_error": {
+    "0/cream_cheese": 0.0,
+    "0/butter": 0.0,
+    "1/cream_cheese": 0.0,
+    "1/butter": 0.0
+   },
+   "seconds": 40.94202325399965
+  },
+  {
+   "unit": "task2_state0",
+   "base_task": 2,
+   "task_id": 2,
+   "task": "KITCHEN_SCENE3_turn_on_the_stove_and_put_the_moka_pot_on_it",
+   "instruction": "turn on the stove and put the moka pot on it",
+   "labels": [
+    "moka_pot",
+    "frypan"
+   ],
+   "approach": {
+    "moka_pot": {
+     "endpoint_goal_error_m": 0.019636529580573787,
+     "endpoint_target_xy_distance_m": 0.019579686467669492,
+     "endpoint_other_xy_distance_m": 0.2781109140029523,
+     "maximum_object_translation_m": 0.0,
+     "robot_scene_contact_substeps": 0,
+     "target_xy_separation_m": 0.28481208503002875
+    },
+    "frypan": {
+     "endpoint_goal_error_m": 0.05590165397231474,
+     "endpoint_target_xy_distance_m": 0.05587416082500482,
+     "endpoint_other_xy_distance_m": 0.23275873595568183,
+     "maximum_object_translation_m": 0.0,
+     "robot_scene_contact_substeps": 0,
+     "target_xy_separation_m": 0.28481208503002875
+    }
+   },
+   "rejected": "approach limits: frypan",
+   "seconds": 5.284134679939598
+  },
+  {
+   "unit": "task2_state1",
+   "base_task": 2,
+   "task_id": 2,
+   "task": "KITCHEN_SCENE3_turn_on_the_stove_and_put_the_moka_pot_on_it",
+   "instruction": "turn on the stove and put the moka pot on it",
+   "labels": [
+    "moka_pot",
+    "frypan"
+   ],
+   "approach": {
+    "moka_pot": {
+     "endpoint_goal_error_m": 0.05234915892722115,
+     "endpoint_target_xy_distance_m": 0.0523268555435291,
+     "endpoint_other_xy_distance_m": 0.28396065839095364,
+     "maximum_object_translation_m": 0.0,
+     "robot_scene_contact_substeps": 0,
+     "target_xy_separation_m": 0.29710867816815856
+    },
+    "frypan": {
+     "endpoint_goal_error_m": 0.027931421559168824,
+     "endpoint_target_xy_distance_m": 0.027772344392882363,
+     "endpoint_other_xy_distance_m": 0.2700637483057856,
+     "maximum_object_translation_m": 0.0,
+     "robot_scene_contact_substeps": 0,
+     "target_xy_separation_m": 0.29710867816815856
+    }
+   },
+   "rejected": "approach limits: moka_pot, frypan",
+   "seconds": 4.373937912750989
+  },
+  {
+   "unit": "task2_state2",
+   "base_task": 2,
+   "task_id": 2,
+   "task": "KITCHEN_SCENE3_turn_on_the_stove_and_put_the_moka_pot_on_it",
+   "instruction": "turn on the stove and put the moka pot on it",
+   "labels": [
+    "moka_pot",
+    "frypan"
+   ],
+   "approach": {
+    "moka_pot": {
+     "endpoint_goal_error_m": 0.04433744842774055,
+     "endpoint_target_xy_distance_m": 0.04431258691337713,
+     "endpoint_other_xy_distance_m": 0.24360499696011004,
+     "maximum_object_translation_m": 1.599198204416119e-17,
+     "robot_scene_contact_substeps": 0,
+     "target_xy_separation_m": 0.2547755471083487
+    },
+    "frypan": {
+     "endpoint_goal_error_m": 0.006633526541118052,
+     "endpoint_target_xy_distance_m": 0.0059009407308531475,
+     "endpoint_other_xy_distance_m": 0.2489644652779906,
+     "maximum_object_translation_m": 1.6046192152785466e-17,
+     "robot_scene_contact_substeps": 0,
+     "target_xy_separation_m": 0.2547755471083487
+    }
+   },
+   "rejected": "approach limits: moka_pot",
+   "seconds": 4.4353034710511565
+  },
+  {
+   "unit": "task2_state3",
+   "base_task": 2,
+   "task_id": 2,
+   "task": "KITCHEN_SCENE3_turn_on_the_stove_and_put_the_moka_pot_on_it",
+   "instruction": "turn on the stove and put the moka pot on it",
+   "labels": [
+    "moka_pot",
+    "frypan"
+   ],
+   "approach": {
+    "moka_pot": {
+     "endpoint_goal_error_m": 0.044595492504734706,
+     "endpoint_target_xy_distance_m": 0.044569436432715485,
+     "endpoint_other_xy_distance_m": 0.24444279707636474,
+     "maximum_object_translation_m": 0.0,
+     "robot_scene_contact_substeps": 0,
+     "target_xy_separation_m": 0.25967651513832557
+    },
+    "frypan": {
+     "endpoint_goal_error_m": 0.01108829469159457,
+     "endpoint_target_xy_distance_m": 0.010620249277438648,
+     "endpoint_other_xy_distance_m": 0.24906382031290958,
+     "maximum_object_translation_m": 0.0,
+     "robot_scene_contact_substeps": 0,
+     "target_xy_separation_m": 0.25967651513832557
+    }
+   },
+   "rejected": "approach limits: moka_pot",
+   "seconds": 4.4296643869020045
+  },
+  {
+   "unit": "task2_state4",
+   "base_task": 2,
+   "task_id": 2,
+   "task": "KITCHEN_SCENE3_turn_on_the_stove_and_put_the_moka_pot_on_it",
+   "instruction": "turn on the stove and put the moka pot on it",
+   "labels": [
+    "moka_pot",
+    "frypan"
+   ],
+   "approach": {
+    "moka_pot": {
+     "endpoint_goal_error_m": 0.02059551952437987,
+     "endpoint_target_xy_distance_m": 0.020540560017216453,
+     "endpoint_other_xy_distance_m": 0.2790706382527681,
+     "maximum_object_translation_m": 0.0,
+     "robot_scene_contact_substeps": 0,
+     "target_xy_separation_m": 0.2850202068930087
+    },
+    "frypan": {
+     "endpoint_goal_error_m": 0.0317943870874179,
+     "endpoint_target_xy_distance_m": 0.031684108754219675,
+     "endpoint_other_xy_distance_m": 0.2541989641973096,
+     "maximum_object_translation_m": 0.0,
+     "robot_scene_contact_substeps": 0,
+     "target_xy_separation_m": 0.2850202068930087
+    }
+   },
+   "rejected": "approach limits: moka_pot, frypan",
+   "seconds": 4.415337280835956
+  },
+  {
+   "unit": "task3_state0",
+   "base_task": 3,
+   "task_id": 3,
+   "task": "KITCHEN_SCENE4_put_the_black_bowl_in_the_bottom_drawer_of_the_cabinet_and_close_it",
+   "instruction": "put the black bowl in the bottom drawer of the cabinet and close it",
+   "labels": [
+    "bowl",
+    "wine_bottle"
+   ],
+   "approach": {
+    "bowl": {
+     "endpoint_goal_error_m": 0.05271729500345852,
+     "endpoint_target_xy_distance_m": 0.05270327453465258,
+     "endpoint_other_xy_distance_m": 0.18759595106413923,
+     "maximum_object_translation_m": 0.0,
+     "robot_scene_contact_substeps": 0,
+     "target_xy_separation_m": 0.2306953405609204
+    },
+    "wine_bottle": {
+     "endpoint_goal_error_m": 0.0005853821178505894,
+     "endpoint_target_xy_distance_m": 0.0005145449523789582,
+     "endpoint_other_xy_distance_m": 0.23043502596133253,
+     "maximum_object_translation_m": 0.0,
+     "robot_scene_contact_substeps": 0,
+     "target_xy_separation_m": 0.2306953405609204
+    }
+   },
+   "rejected": "approach limits: bowl",
+   "seconds": 6.403545050881803
+  },
+  {
+   "unit": "task3_state1",
+   "base_task": 3,
+   "task_id": 3,
+   "task": "KITCHEN_SCENE4_put_the_black_bowl_in_the_bottom_drawer_of_the_cabinet_and_close_it",
+   "instruction": "put the black bowl in the bottom drawer of the cabinet and close it",
+   "labels": [
+    "bowl",
+    "wine_bottle"
+   ],
+   "approach": {
+    "bowl": {
+     "endpoint_goal_error_m": 0.017927880122512,
+     "endpoint_target_xy_distance_m": 0.01789040356666612,
+     "endpoint_other_xy_distance_m": 0.20728364199380162,
+     "maximum_object_translation_m": 0.0,
+     "robot_scene_contact_substeps": 0,
+     "target_xy_separation_m": 0.22197458608995874
+    },
+    "wine_bottle": {
+     "endpoint_goal_error_m": 0.0005567917438177461,
+     "endpoint_target_xy_distance_m": 0.0004885147540002379,
+     "endpoint_other_xy_distance_m": 0.22175708998994628,
+     "maximum_object_translation_m": 0.0,
+     "robot_scene_contact_substeps": 0,
+     "target_xy_separation_m": 0.22197458608995874
+    }
+   },
+   "seeds": {
+    "0": {
+     "axis_shift_m": {
+      "native": -0.14879261515290074,
+      "bowl": -0.19020055631661384,
+      "wine_bottle": -0.02907017510262137
+     },
+     "toward_shown_m": 0.16113038121399248,
+     "endpoint_separation_m": 0.16165883845488663,
+     "closer_to_shown": {
+      "bowl": true,
+      "wine_bottle": true
+     },
+     "action_abs_diff_executed": {
+      "bowl-native": 0.16646379743303572,
+      "wine_bottle-native": 0.22721644810267858,
+      "wine_bottle-bowl": 0.11207101004464286
+     },
+     "termination": {
+      "native": "chunk_complete",
+      "bowl": "chunk_complete",
+      "wine_bottle": "chunk_complete"
+     }
+    },
+    "1": {
+     "axis_shift_m": {
+      "native": -0.15504212055256766,
+      "bowl": -0.19019905293402722,
+      "wine_bottle": -0.029619220669886263
+     },
+     "toward_shown_m": 0.16057983226414096,
+     "endpoint_separation_m": 0.1609893903029483,
+     "closer_to_shown": {
+      "bowl": true,
+      "wine_bottle": true
+     },
+     "action_abs_diff_executed": {
+      "bowl-native": 0.15494384765625,
+      "wine_bottle-native": 0.21940394810267858,
+      "wine_bottle-bowl": 0.11195940290178572
+     },
+     "termination": {
+      "native": "chunk_complete",
+      "bowl": "chunk_complete",
+      "wine_bottle": "chunk_complete"
+     }
+    }
+   },
+   "anchor_error": {
+    "0/bowl": 0.0,
+    "0/wine_bottle": 0.0,
+    "1/bowl": 0.0,
+    "1/wine_bottle": 0.0
+   },
+   "seconds": 46.15774786006659
+  },
+  {
+   "unit": "task3_state2",
+   "base_task": 3,
+   "task_id": 3,
+   "task": "KITCHEN_SCENE4_put_the_black_bowl_in_the_bottom_drawer_of_the_cabinet_and_close_it",
+   "instruction": "put the black bowl in the bottom drawer of the cabinet and close it",
+   "labels": [
+    "bowl",
+    "wine_bottle"
+   ],
+   "approach": {
+    "bowl": {
+     "endpoint_goal_error_m": 0.027094192009979718,
+     "endpoint_target_xy_distance_m": 0.027062984549640012,
+     "endpoint_other_xy_distance_m": 0.19543452047826618,
+     "maximum_object_translation_m": 0.0,
+     "robot_scene_contact_substeps": 0,
+     "target_xy_separation_m": 0.21796015620134354
+    },
+    "wine_bottle": {
+     "endpoint_goal_error_m": 0.0004992072440104762,
+     "endpoint_target_xy_distance_m": 0.0004419616822444854,
+     "endpoint_other_xy_distance_m": 0.2177857509115984,
+     "maximum_object_translation_m": 0.0,
+     "robot_scene_contact_substeps": 0,
+     "target_xy_separation_m": 0.21796015620134354
+    }
+   },
+   "rejected": "approach limits: bowl",
+   "seconds": 6.477888418361545
+  },
+  {
+   "unit": "task3_state3",
+   "base_task": 3,
+   "task_id": 3,
+   "task": "KITCHEN_SCENE4_put_the_black_bowl_in_the_bottom_drawer_of_the_cabinet_and_close_it",
+   "instruction": "put the black bowl in the bottom drawer of the cabinet and close it",
+   "labels": [
+    "bowl",
+    "wine_bottle"
+   ],
+   "approach": {
+    "bowl": {
+     "endpoint_goal_error_m": 0.025394749571022064,
+     "endpoint_target_xy_distance_m": 0.025360676542443155,
+     "endpoint_other_xy_distance_m": 0.17096582241134528,
+     "maximum_object_translation_m": 0.0,
+     "robot_scene_contact_substeps": 0,
+     "target_xy_separation_m": 0.19421175829594853
+    },
+    "wine_bottle": {
+     "endpoint_goal_error_m": 0.0004587758927261183,
+     "endpoint_target_xy_distance_m": 0.0004023202661035504,
+     "endpoint_other_xy_distance_m": 0.19396282490214928,
+     "maximum_object_translation_m": 0.0,
+     "robot_scene_contact_substeps": 0,
+     "target_xy_separation_m": 0.19421175829594853
+    }
+   },
+   "rejected": "approach limits: bowl",
+   "seconds": 6.41893609194085
+  },
+  {
+   "unit": "task3_state4",
+   "base_task": 3,
+   "task_id": 3,
+   "task": "KITCHEN_SCENE4_put_the_black_bowl_in_the_bottom_drawer_of_the_cabinet_and_close_it",
+   "instruction": "put the black bowl in the bottom drawer of the cabinet and close it",
+   "labels": [
+    "bowl",
+    "wine_bottle"
+   ],
+   "approach": {
+    "bowl": {
+     "endpoint_goal_error_m": 0.04155168179489939,
+     "endpoint_target_xy_distance_m": 0.041530935403072435,
+     "endpoint_other_xy_distance_m": 0.17646158016668992,
+     "maximum_object_translation_m": 0.0,
+     "robot_scene_contact_substeps": 0,
+     "target_xy_separation_m": 0.20954458049491909
+    },
+    "wine_bottle": {
+     "endpoint_goal_error_m": 0.0005230962104097943,
+     "endpoint_target_xy_distance_m": 0.00045999153293957055,
+     "endpoint_other_xy_distance_m": 0.209378912229757,
+     "maximum_object_translation_m": 0.0,
+     "robot_scene_contact_substeps": 0,
+     "target_xy_separation_m": 0.20954458049491909
+    }
+   },
+   "rejected": "approach limits: bowl",
+   "seconds": 6.397812780924141
+  },
+  {
+   "unit": "task4_state0",
+   "base_task": 4,
+   "task_id": 4,
+   "task": "LIVING_ROOM_SCENE5_put_the_white_mug_on_the_left_plate_and_put_the_yellow_and_white_mug_on_the_right_plate",
+   "instruction": "put the white mug on the left plate and put the yellow and white mug on the right plate",
+   "labels": [
+    "white_mug",
+    "yellow_mug"
+   ],
+   "approach": {
+    "white_mug": {
+     "endpoint_goal_error_m": 0.0013572384594427906,
+     "endpoint_target_xy_distance_m": 0.001178933488088579,
+     "endpoint_other_xy_distance_m": 0.24164953250126556,
+     "maximum_object_translation_m": 0.0,
+     "robot_scene_contact_substeps": 0,
+     "target_xy_separation_m": 0.24132037248632726
+    },
+    "yellow_mug": {
+     "endpoint_goal_error_m": 0.0005766598520244318,
+     "endpoint_target_xy_distance_m": 0.0004965076639808087,
+     "endpoint_other_xy_distance_m": 0.24165902572113032,
+     "maximum_object_translation_m": 0.0,
+     "robot_scene_contact_substeps": 0,
+     "target_xy_separation_m": 0.24132037248632726
+    }
+   },
+   "seeds": {
+    "0": {
+     "axis_shift_m": {
+      "native": -0.11902991301228784,
+      "white_mug": -0.14278343313743344,
+      "yellow_mug": 0.04371101781558889
+     },
+     "toward_shown_m": 0.18649445095302233,
+     "endpoint_separation_m": 0.18679668430194354,
+     "closer_to_shown": {
+      "white_mug": true,
+      "yellow_mug": true
+     },
+     "action_abs_diff_executed": {
+      "white_mug-native": 0.08930140904017857,
+      "yellow_mug-native": 0.1758056640625,
+      "yellow_mug-white_mug": 0.14219273158482143
+     },
+     "termination": {
+      "native": "chunk_complete",
+      "white_mug": "chunk_complete",
+      "yellow_mug": "chunk_complete"
+     }
+    },
+    "1": {
+     "axis_shift_m": {
+      "native": -0.11589187090647417,
+      "white_mug": -0.14190612487146054,
+      "yellow_mug": 0.0430863513130441
+     },
+     "toward_shown_m": 0.18499247618450465,
+     "endpoint_separation_m": 0.1853602157155823,
+     "closer_to_shown": {
+      "white_mug": true,
+      "yellow_mug": true
+     },
+     "action_abs_diff_executed": {
+      "white_mug-native": 0.09173453194754465,
+      "yellow_mug-native": 0.167303466796875,
+      "yellow_mug-white_mug": 0.14138837541852678
+     },
+     "termination": {
+      "native": "chunk_complete",
+      "white_mug": "chunk_complete",
+      "yellow_mug": "chunk_complete"
+     }
+    }
+   },
+   "anchor_error": {
+    "0/white_mug": 0.0,
+    "0/yellow_mug": 0.0,
+    "1/white_mug": 0.0,
+    "1/yellow_mug": 0.0
+   },
+   "seconds": 88.96686747530475
+  },
+  {
+   "unit": "task4_state1",
+   "base_task": 4,
+   "task_id": 4,
+   "task": "LIVING_ROOM_SCENE5_put_the_white_mug_on_the_left_plate_and_put_the_yellow_and_white_mug_on_the_right_plate",
+   "instruction": "put the white mug on the left plate and put the yellow and white mug on the right plate",
+   "labels": [
+    "white_mug",
+    "yellow_mug"
+   ],
+   "approach": {
+    "white_mug": {
+     "endpoint_goal_error_m": 0.0021195751545432925,
+     "endpoint_target_xy_distance_m": 0.0018402542164168989,
+     "endpoint_other_xy_distance_m": 0.25867693524050067,
+     "maximum_object_translation_m": 0.0,
+     "robot_scene_contact_substeps": 0,
+     "target_xy_separation_m": 0.2581844001384626
+    },
+    "yellow_mug": {
+     "endpoint_goal_error_m": 0.0002753736846334835,
+     "endpoint_target_xy_distance_m": 0.00024197157504776709,
+     "endpoint_other_xy_distance_m": 0.2584118743690049,
+     "maximum_object_translation_m": 0.0,
+     "robot_scene_contact_substeps": 0,
+     "target_xy_separation_m": 0.2581844001384626
+    }
+   },
+   "seeds": {
+    "0": {
+     "axis_shift_m": {
+      "native": -0.1325768102785054,
+      "white_mug": -0.1602791968595199,
+      "yellow_mug": 0.04026036940258271
+     },
+     "toward_shown_m": 0.20053956626210262,
+     "endpoint_separation_m": 0.20067784506941266,
+     "closer_to_shown": {
+      "white_mug": true,
+      "yellow_mug": true
+     },
+     "action_abs_diff_executed": {
+      "white_mug-native": 0.10700509207589286,
+      "yellow_mug-native": 0.17764979771205358,
+      "yellow_mug-white_mug": 0.14487217494419644
+     },
+     "termination": {
+      "native": "chunk_complete",
+      "white_mug": "chunk_complete",
+      "yellow_mug": "chunk_complete"
+     }
+    },
+    "1": {
+     "axis_shift_m": {
+      "native": -0.129455788743843,
+      "white_mug": -0.15969431385453195,
+      "yellow_mug": 0.03941981361445479
+     },
+     "toward_shown_m": 0.19911412746898674,
+     "endpoint_separation_m": 0.1992735217819633,
+     "closer_to_shown": {
+      "white_mug": true,
+      "yellow_mug": true
+     },
+     "action_abs_diff_executed": {
+      "white_mug-native": 0.10499747140066965,
+      "yellow_mug-native": 0.1717193603515625,
+      "yellow_mug-white_mug": 0.14448939732142857
+     },
+     "termination": {
+      "native": "chunk_complete",
+      "white_mug": "chunk_complete",
+      "yellow_mug": "chunk_complete"
+     }
+    }
+   },
+   "anchor_error": {
+    "0/white_mug": 0.0,
+    "0/yellow_mug": 0.0,
+    "1/white_mug": 0.0,
+    "1/yellow_mug": 0.0
+   },
+   "seconds": 89.21929448703304
+  },
+  {
+   "unit": "task4_state2",
+   "base_task": 4,
+   "task_id": 4,
+   "task": "LIVING_ROOM_SCENE5_put_the_white_mug_on_the_left_plate_and_put_the_yellow_and_white_mug_on_the_right_plate",
+   "instruction": "put the white mug on the left plate and put the yellow and white mug on the right plate",
+   "labels": [
+    "white_mug",
+    "yellow_mug"
+   ],
+   "approach": {
+    "white_mug": {
+     "endpoint_goal_error_m": 0.0018801650928150857,
+     "endpoint_target_xy_distance_m": 0.0016249791074164747,
+     "endpoint_other_xy_distance_m": 0.263131498340711,
+     "maximum_object_translation_m": 0.0,
+     "robot_scene_contact_substeps": 0,
+     "target_xy_separation_m": 0.2626388907773829
+    },
+    "yellow_mug": {
+     "endpoint_goal_error_m": 0.0001606829804874495,
+     "endpoint_target_xy_distance_m": 0.0001573096985389536,
+     "endpoint_other_xy_distance_m": 0.26276723021351733,
+     "maximum_object_translation_m": 0.0,
+     "robot_scene_contact_substeps": 0,
+     "target_xy_separation_m": 0.2626388907773829
+    }
+   },
+   "seeds": {
+    "0": {
+     "axis_shift_m": {
+      "native": -0.1345668658489568,
+      "white_mug": -0.16377509383533884,
+      "yellow_mug": 0.03568025951419873
+     },
+     "toward_shown_m": 0.19945535334953757,
+     "endpoint_separation_m": 0.1995442416640902,
+     "closer_to_shown": {
+      "white_mug": true,
+      "yellow_mug": true
+     },
+     "action_abs_diff_executed": {
+      "white_mug-native": 0.09732012067522322,
+      "yellow_mug-native": 0.1720149448939732,
+      "yellow_mug-white_mug": 0.13606480189732142
+     },
+     "termination": {
+      "native": "chunk_complete",
+      "white_mug": "chunk_complete",
+      "yellow_mug": "chunk_complete"
+     }
+    },
+    "1": {
+     "axis_shift_m": {
+      "native": -0.1360514602981561,
+      "white_mug": -0.16351785270479657,
+      "yellow_mug": 0.03489521091352821
+     },
+     "toward_shown_m": 0.19841306361832478,
+     "endpoint_separation_m": 0.19850873544039868,
+     "closer_to_shown": {
+      "white_mug": true,
+      "yellow_mug": true
+     },
+     "action_abs_diff_executed": {
+      "white_mug-native": 0.09696698869977678,
+      "yellow_mug-native": 0.17150094168526786,
+      "yellow_mug-white_mug": 0.13532060895647322
+     },
+     "termination": {
+      "native": "chunk_complete",
+      "white_mug": "chunk_complete",
+      "yellow_mug": "chunk_complete"
+     }
+    }
+   },
+   "anchor_error": {
+    "0/white_mug": 0.0,
+    "0/yellow_mug": 0.0,
+    "1/white_mug": 0.0,
+    "1/yellow_mug": 0.0
+   },
+   "seconds": 89.08088780986145
+  },
+  {
+   "unit": "task4_state3",
+   "base_task": 4,
+   "task_id": 4,
+   "task": "LIVING_ROOM_SCENE5_put_the_white_mug_on_the_left_plate_and_put_the_yellow_and_white_mug_on_the_right_plate",
+   "instruction": "put the white mug on the left plate and put the yellow and white mug on the right plate",
+   "labels": [
+    "white_mug",
+    "yellow_mug"
+   ],
+   "approach": {
+    "white_mug": {
+     "endpoint_goal_error_m": 0.0019410945233500846,
+     "endpoint_target_xy_distance_m": 0.0016935144898863647,
+     "endpoint_other_xy_distance_m": 0.2836149349374433,
+     "maximum_object_translation_m": 0.0,
+     "robot_scene_contact_substeps": 0,
+     "target_xy_separation_m": 0.2830014650966636
+    },
+    "yellow_mug": {
+     "endpoint_goal_error_m": 0.0007038530527078533,
+     "endpoint_target_xy_distance_m": 0.0006091394643387803,
+     "endpoint_other_xy_distance_m": 0.2833791453853198,
+     "maximum_object_translation_m": 0.0,
+     "robot_scene_contact_substeps": 0,
+     "target_xy_separation_m": 0.2830014650966636
+    }
+   },
+   "seeds": {
+    "0": {
+     "axis_shift_m": {
+      "native": -0.13801578461154357,
+      "white_mug": -0.17559617018990165,
+      "yellow_mug": 0.0569973798102363
+     },
+     "toward_shown_m": 0.23259355000013796,
+     "endpoint_separation_m": 0.23264587150676794,
+     "closer_to_shown": {
+      "white_mug": true,
+      "yellow_mug": true
+     },
+     "action_abs_diff_executed": {
+      "white_mug-native": 0.08823896135602678,
+      "yellow_mug-native": 0.17642604282924107,
+      "yellow_mug-white_mug": 0.15671648297991073
+     },
+     "termination": {
+      "native": "chunk_complete",
+      "white_mug": "chunk_complete",
+      "yellow_mug": "chunk_complete"
+     }
+    },
+    "1": {
+     "axis_shift_m": {
+      "native": -0.1357019871215697,
+      "white_mug": -0.17600226325708407,
+      "yellow_mug": 0.05620827307311421
+     },
+     "toward_shown_m": 0.23221053633019828,
+     "endpoint_separation_m": 0.23225784497666646,
+     "closer_to_shown": {
+      "white_mug": true,
+      "yellow_mug": true
+     },
+     "action_abs_diff_executed": {
+      "white_mug-native": 0.08750479561941964,
+      "yellow_mug-native": 0.17363412039620535,
+      "yellow_mug-white_mug": 0.1557346888950893
+     },
+     "termination": {
+      "native": "chunk_complete",
+      "white_mug": "chunk_complete",
+      "yellow_mug": "chunk_complete"
+     }
+    }
+   },
+   "anchor_error": {
+    "0/white_mug": 0.0,
+    "0/yellow_mug": 0.0,
+    "1/white_mug": 0.0,
+    "1/yellow_mug": 0.0
+   },
+   "seconds": 89.47053236607462
+  },
+  {
+   "unit": "task4_state4",
+   "base_task": 4,
+   "task_id": 4,
+   "task": "LIVING_ROOM_SCENE5_put_the_white_mug_on_the_left_plate_and_put_the_yellow_and_white_mug_on_the_right_plate",
+   "instruction": "put the white mug on the left plate and put the yellow and white mug on the right plate",
+   "labels": [
+    "white_mug",
+    "yellow_mug"
+   ],
+   "approach": {
+    "white_mug": {
+     "endpoint_goal_error_m": 0.0014475619797328534,
+     "endpoint_target_xy_distance_m": 0.0012504596292337107,
+     "endpoint_other_xy_distance_m": 0.24775883483072575,
+     "maximum_object_translation_m": 0.0,
+     "robot_scene_contact_substeps": 0,
+     "target_xy_separation_m": 0.2474897600056018
+    },
+    "yellow_mug": {
+     "endpoint_goal_error_m": 0.0006816084119803548,
+     "endpoint_target_xy_distance_m": 0.0005896825473746008,
+     "endpoint_other_xy_distance_m": 0.24788498923484711,
+     "maximum_object_translation_m": 0.0,
+     "robot_scene_contact_substeps": 0,
+     "target_xy_separation_m": 0.2474897600056018
+    }
+   },
+   "seeds": {
+    "0": {
+     "axis_shift_m": {
+      "native": -0.12813429446980296,
+      "white_mug": -0.15283480632715138,
+      "yellow_mug": 0.04240185344306944
+     },
+     "toward_shown_m": 0.1952366597702208,
+     "endpoint_separation_m": 0.1954044186697098,
+     "closer_to_shown": {
+      "white_mug": true,
+      "yellow_mug": true
+     },
+     "action_abs_diff_executed": {
+      "white_mug-native": 0.09104832240513393,
+      "yellow_mug-native": 0.18451799665178573,
+      "yellow_mug-white_mug": 0.15390668596540177
+     },
+     "termination": {
+      "native": "chunk_complete",
+      "white_mug": "chunk_complete",
+      "yellow_mug": "chunk_complete"
+     }
+    },
+    "1": {
+     "axis_shift_m": {
+      "native": -0.12854224275546783,
+      "white_mug": -0.15238512188691547,
+      "yellow_mug": 0.042193299248314164
+     },
+     "toward_shown_m": 0.19457842113522963,
+     "endpoint_separation_m": 0.1947942695025229,
+     "closer_to_shown": {
+      "white_mug": true,
+      "yellow_mug": true
+     },
+     "action_abs_diff_executed": {
+      "white_mug-native": 0.08865225655691965,
+      "yellow_mug-native": 0.17393101283482143,
+      "yellow_mug-white_mug": 0.1529353550502232
+     },
+     "termination": {
+      "native": "chunk_complete",
+      "white_mug": "chunk_complete",
+      "yellow_mug": "chunk_complete"
+     }
+    }
+   },
+   "anchor_error": {
+    "0/white_mug": 0.0,
+    "0/yellow_mug": 0.0,
+    "1/white_mug": 0.0,
+    "1/yellow_mug": 0.0
+   },
+   "seconds": 89.2400140305981
+  },
+  {
+   "unit": "task5_state0",
+   "base_task": 5,
+   "task_id": 5,
+   "task": "STUDY_SCENE1_pick_up_the_book_and_place_it_in_the_back_compartment_of_the_caddy",
+   "instruction": "pick up the book and place it in the back compartment of the caddy",
+   "labels": [
+    "book",
+    "mug"
+   ],
+   "approach": {
+    "book": {
+     "endpoint_goal_error_m": 0.0024884064054205377,
+     "endpoint_target_xy_distance_m": 0.002170100871728709,
+     "endpoint_other_xy_distance_m": 0.18638604559840646,
+     "maximum_object_translation_m": 0.0,
+     "robot_scene_contact_substeps": 0,
+     "target_xy_separation_m": 0.1861668447470863
+    },
+    "mug": {
+     "endpoint_goal_error_m": 0.004729650038625097,
+     "endpoint_target_xy_distance_m": 0.0035517548429531373,
+     "endpoint_other_xy_distance_m": 0.1878436680106398,
+     "maximum_object_translation_m": 0.0,
+     "robot_scene_contact_substeps": 0,
+     "target_xy_separation_m": 0.1861668447470863
+    }
+   },
+   "seeds": {
+    "0": {
+     "axis_shift_m": {
+      "native": -0.07600607514173868,
+      "book": -0.09007707707425877,
+      "mug": 0.058935306466958506
+     },
+     "toward_shown_m": 0.14901238354121726,
+     "endpoint_separation_m": 0.14934075875032446,
+     "closer_to_shown": {
+      "book": true,
+      "mug": true
+     },
+     "action_abs_diff_executed": {
+      "book-native": 0.11092354910714286,
+      "mug-native": 0.16200823102678572,
+      "mug-book": 0.08818010602678572
+     },
+     "termination": {
+      "native": "chunk_complete",
+      "book": "chunk_complete",
+      "mug": "chunk_complete"
+     }
+    },
+    "1": {
+     "axis_shift_m": {
+      "native": -0.07744096179470658,
+      "book": -0.08989301022931456,
+      "mug": 0.05955232123832055
+     },
+     "toward_shown_m": 0.1494453314676351,
+     "endpoint_separation_m": 0.14970404762918743,
+     "closer_to_shown": {
+      "book": true,
+      "mug": true
+     },
+     "action_abs_diff_executed": {
+      "book-native": 0.11631480625697545,
+      "mug-native": 0.15847080775669642,
+      "mug-book": 0.08813138689313615
+     },
+     "termination": {
+      "native": "chunk_complete",
+      "book": "chunk_complete",
+      "mug": "chunk_complete"
+     }
+    }
+   },
+   "anchor_error": {
+    "0/book": 0.0,
+    "0/mug": 0.0,
+    "1/book": 0.0,
+    "1/mug": 0.0
+   },
+   "seconds": 58.57834856910631
+  },
+  {
+   "unit": "task5_state1",
+   "base_task": 5,
+   "task_id": 5,
+   "task": "STUDY_SCENE1_pick_up_the_book_and_place_it_in_the_back_compartment_of_the_caddy",
+   "instruction": "pick up the book and place it in the back compartment of the caddy",
+   "labels": [
+    "book",
+    "mug"
+   ],
+   "approach": {
+    "book": {
+     "endpoint_goal_error_m": 0.004507058231732778,
+     "endpoint_target_xy_distance_m": 0.0038368292100180957,
+     "endpoint_other_xy_distance_m": 0.16618094134304523,
+     "maximum_object_translation_m": 1.938999871835691e-08,
+     "robot_scene_contact_substeps": 0,
+     "target_xy_separation_m": 0.16733719005637934
+    },
+    "mug": {
+     "endpoint_goal_error_m": 0.01692578857300648,
+     "endpoint_target_xy_distance_m": 0.016886248073032746,
+     "endpoint_other_xy_distance_m": 0.1567237712182909,
+     "maximum_object_translation_m": 1.938999871835691e-08,
+     "robot_scene_contact_substeps": 0,
+     "target_xy_separation_m": 0.16733719005637934
+    }
+   },
+   "seeds": {
+    "0": {
+     "axis_shift_m": {
+      "native": -0.019824969357120126,
+      "book": -0.02674350945113848,
+      "mug": 0.09209030035808696
+     },
+     "toward_shown_m": 0.11883380980922545,
+     "endpoint_separation_m": 0.12024754195310311,
+     "closer_to_shown": {
+      "book": true,
+      "mug": true
+     },
+     "action_abs_diff_executed": {
+      "book-native": 0.08667340959821429,
+      "mug-native": 0.11742815290178571,
+      "mug-book": 0.074609375
+     },
+     "termination": {
+      "native": "chunk_complete",
+      "book": "chunk_complete",
+      "mug": "chunk_complete"
+     }
+    },
+    "1": {
+     "axis_shift_m": {
+      "native": -0.017441991918475463,
+      "book": -0.02617448724831356,
+      "mug": 0.0927199281414401
+     },
+     "toward_shown_m": 0.11889441538975366,
+     "endpoint_separation_m": 0.12021834407825552,
+     "closer_to_shown": {
+      "book": true,
+      "mug": true
+     },
+     "action_abs_diff_executed": {
+      "book-native": 0.08926871163504464,
+      "mug-native": 0.1138885498046875,
+      "mug-book": 0.07549176897321429
+     },
+     "termination": {
+      "native": "chunk_complete",
+      "book": "chunk_complete",
+      "mug": "chunk_complete"
+     }
+    }
+   },
+   "anchor_error": {
+    "0/book": 0.0,
+    "0/mug": 0.0,
+    "1/book": 0.0,
+    "1/mug": 0.0
+   },
+   "seconds": 58.52948595676571
+  },
+  {
+   "unit": "task5_state2",
+   "base_task": 5,
+   "task_id": 5,
+   "task": "STUDY_SCENE1_pick_up_the_book_and_place_it_in_the_back_compartment_of_the_caddy",
+   "instruction": "pick up the book and place it in the back compartment of the caddy",
+   "labels": [
+    "book",
+    "mug"
+   ],
+   "approach": {
+    "book": {
+     "endpoint_goal_error_m": 0.00815565765365849,
+     "endpoint_target_xy_distance_m": 0.006274891990447002,
+     "endpoint_other_xy_distance_m": 0.14891069504900353,
+     "maximum_object_translation_m": 0.003935011357091784,
+     "robot_scene_contact_substeps": 328,
+     "target_xy_separation_m": 0.1510711664437161
+    },
+    "mug": {
+     "endpoint_goal_error_m": 0.0019344253562734333,
+     "endpoint_target_xy_distance_m": 0.0013009240260104635,
+     "endpoint_other_xy_distance_m": 0.15015208711974756,
+     "maximum_object_translation_m": 0.0,
+     "robot_scene_contact_substeps": 0,
+     "target_xy_separation_m": 0.1510711664437161
+    }
+   },
+   "rejected": "approach limits: book",
+   "seconds": 8.12846408225596
+  },
+  {
+   "unit": "task5_state3",
+   "base_task": 5,
+   "task_id": 5,
+   "task": "STUDY_SCENE1_pick_up_the_book_and_place_it_in_the_back_compartment_of_the_caddy",
+   "instruction": "pick up the book and place it in the back compartment of the caddy",
+   "labels": [
+    "book",
+    "mug"
+   ],
+   "approach": {
+    "book": {
+     "endpoint_goal_error_m": 0.00143349777940238,
+     "endpoint_target_xy_distance_m": 0.0012375991893202314,
+     "endpoint_other_xy_distance_m": 0.16660157569060915,
+     "maximum_object_translation_m": 0.0,
+     "robot_scene_contact_substeps": 0,
+     "target_xy_separation_m": 0.16700917512453234
+    },
+    "mug": {
+     "endpoint_goal_error_m": 0.0037743128393411627,
+     "endpoint_target_xy_distance_m": 0.0037027704657369115,
+     "endpoint_other_xy_distance_m": 0.16423850911410678,
+     "maximum_object_translation_m": 0.0,
+     "robot_scene_contact_substeps": 0,
+     "target_xy_separation_m": 0.16700917512453234
+    }
+   },
+   "seeds": {
+    "0": {
+     "axis_shift_m": {
+      "native": -0.0018043149005123361,
+      "book": -0.025643066753526143,
+      "mug": 0.100996739236171
+     },
+     "toward_shown_m": 0.12663980598969715,
+     "endpoint_separation_m": 0.12739705500754642,
+     "closer_to_shown": {
+      "book": true,
+      "mug": true
+     },
+     "action_abs_diff_executed": {
+      "book-native": 0.11638619559151786,
+      "mug-native": 0.14103044782366073,
+      "mug-book": 0.07919573102678572
+     },
+     "termination": {
+      "native": "chunk_complete",
+      "book": "chunk_complete",
+      "mug": "chunk_complete"
+     }
+    },
+    "1": {
+     "axis_shift_m": {
+      "native": 0.0008027054610344894,
+      "book": -0.02446223262786833,
+      "mug": 0.10155145566592923
+     },
+     "toward_shown_m": 0.12601368829379755,
+     "endpoint_separation_m": 0.12664984263910442,
+     "closer_to_shown": {
+      "book": true,
+      "mug": true
+     },
+     "action_abs_diff_executed": {
+      "book-native": 0.11394609723772321,
+      "mug-native": 0.13800789969308036,
+      "mug-book": 0.07945731026785714
+     },
+     "termination": {
+      "native": "chunk_complete",
+      "book": "chunk_complete",
+      "mug": "chunk_complete"
+     }
+    }
+   },
+   "anchor_error": {
+    "0/book": 0.0,
+    "0/mug": 0.0,
+    "1/book": 0.0,
+    "1/mug": 0.0
+   },
+   "seconds": 58.27872320311144
+  },
+  {
+   "unit": "task5_state4",
+   "base_task": 5,
+   "task_id": 5,
+   "task": "STUDY_SCENE1_pick_up_the_book_and_place_it_in_the_back_compartment_of_the_caddy",
+   "instruction": "pick up the book and place it in the back compartment of the caddy",
+   "labels": [
+    "book",
+    "mug"
+   ],
+   "approach": {
+    "book": {
+     "endpoint_goal_error_m": 0.003303548381018597,
+     "endpoint_target_xy_distance_m": 0.002831102201025404,
+     "endpoint_other_xy_distance_m": 0.15335258088292789,
+     "maximum_object_translation_m": 1.961992934844093e-08,
+     "robot_scene_contact_substeps": 0,
+     "target_xy_separation_m": 0.1535703168359677
+    },
+    "mug": {
+     "endpoint_goal_error_m": 0.005095124385083628,
+     "endpoint_target_xy_distance_m": 0.003917236016198379,
+     "endpoint_other_xy_distance_m": 0.1553491305010026,
+     "maximum_object_translation_m": 1.961992934844093e-08,
+     "robot_scene_contact_substeps": 0,
+     "target_xy_separation_m": 0.1535703168359677
+    }
+   },
+   "seeds": {
+    "0": {
+     "axis_shift_m": {
+      "native": -0.05785471406024551,
+      "book": -0.07075950670287456,
+      "mug": 0.050624292477734534
+     },
+     "toward_shown_m": 0.1213837991806091,
+     "endpoint_separation_m": 0.12154188843866341,
+     "closer_to_shown": {
+      "book": true,
+      "mug": true
+     },
+     "action_abs_diff_executed": {
+      "book-native": 0.10050833565848215,
+      "mug-native": 0.1345493861607143,
+      "mug-book": 0.074456787109375
+     },
+     "termination": {
+      "native": "chunk_complete",
+      "book": "chunk_complete",
+      "mug": "chunk_complete"
+     }
+    },
+    "1": {
+     "axis_shift_m": {
+      "native": -0.05751528660328232,
+      "book": -0.07047542220586864,
+      "mug": 0.051109914561511254
+     },
+     "toward_shown_m": 0.1215853367673799,
+     "endpoint_separation_m": 0.12171644799266353,
+     "closer_to_shown": {
+      "book": true,
+      "mug": true
+     },
+     "action_abs_diff_executed": {
+      "book-native": 0.09982386997767857,
+      "mug-native": 0.130633544921875,
+      "mug-book": 0.07483171735491072
+     },
+     "termination": {
+      "native": "chunk_complete",
+      "book": "chunk_complete",
+      "mug": "chunk_complete"
+     }
+    }
+   },
+   "anchor_error": {
+    "0/book": 0.0,
+    "0/mug": 0.0,
+    "1/book": 0.0,
+    "1/mug": 0.0
+   },
+   "seconds": 58.44369738502428
+  },
+  {
+   "unit": "task6_state0",
+   "base_task": 6,
+   "task_id": 6,
+   "task": "LIVING_ROOM_SCENE6_put_the_white_mug_on_the_plate_and_put_the_chocolate_pudding_to_the_right_of_the_plate",
+   "instruction": "put the white mug on the plate and put the chocolate pudding to the right of the plate",
+   "labels": [
+    "white_mug",
+    "pudding"
+   ],
+   "approach": {
+    "white_mug": {
+     "endpoint_goal_error_m": 0.0007448767468876816,
+     "endpoint_target_xy_distance_m": 0.0006363846407379729,
+     "endpoint_other_xy_distance_m": 0.25925717115291175,
+     "maximum_object_translation_m": 0.0,
+     "robot_scene_contact_substeps": 0,
+     "target_xy_separation_m": 0.2590373515937663
+    },
+    "pudding": {
+     "endpoint_goal_error_m": 0.000745001225093403,
+     "endpoint_target_xy_distance_m": 0.0006420071595264105,
+     "endpoint_other_xy_distance_m": 0.2594598759608496,
+     "maximum_object_translation_m": 0.0,
+     "robot_scene_contact_substeps": 0,
+     "target_xy_separation_m": 0.2590373515937663
+    }
+   },
+   "seeds": {
+    "0": {
+     "axis_shift_m": {
+      "native": -0.09982315000173064,
+      "white_mug": -0.12265688752660588,
+      "pudding": 0.06381568676685556
+     },
+     "toward_shown_m": 0.18647257429346142,
+     "endpoint_separation_m": 0.18662765563223657,
+     "closer_to_shown": {
+      "white_mug": true,
+      "pudding": true
+     },
+     "action_abs_diff_executed": {
+      "white_mug-native": 0.10044206891741071,
+      "pudding-native": 0.1864506312779018,
+      "pudding-white_mug": 0.14429539271763392
+     },
+     "termination": {
+      "native": "chunk_complete",
+      "white_mug": "chunk_complete",
+      "pudding": "chunk_complete"
+     }
+    },
+    "1": {
+     "axis_shift_m": {
+      "native": -0.09459380847857739,
+      "white_mug": -0.122115570811443,
+      "pudding": 0.06313474676193029
+     },
+     "toward_shown_m": 0.1852503175733733,
+     "endpoint_separation_m": 0.18544064301050514,
+     "closer_to_shown": {
+      "white_mug": true,
+      "pudding": true
+     },
+     "action_abs_diff_executed": {
+      "white_mug-native": 0.10296369280133928,
+      "pudding-native": 0.1751220703125,
+      "pudding-white_mug": 0.14301321847098214
+     },
+     "termination": {
+      "native": "chunk_complete",
+      "white_mug": "chunk_complete",
+      "pudding": "chunk_complete"
+     }
+    }
+   },
+   "anchor_error": {
+    "0/white_mug": 0.0,
+    "0/pudding": 0.0,
+    "1/white_mug": 0.0,
+    "1/pudding": 0.0
+   },
+   "seconds": 66.1442589322105
+  },
+  {
+   "unit": "task6_state1",
+   "base_task": 6,
+   "task_id": 6,
+   "task": "LIVING_ROOM_SCENE6_put_the_white_mug_on_the_plate_and_put_the_chocolate_pudding_to_the_right_of_the_plate",
+   "instruction": "put the white mug on the plate and put the chocolate pudding to the right of the plate",
+   "labels": [
+    "white_mug",
+    "pudding"
+   ],
+   "approach": {
+    "white_mug": {
+     "endpoint_goal_error_m": 0.001415313014779853,
+     "endpoint_target_xy_distance_m": 0.001229780055702965,
+     "endpoint_other_xy_distance_m": 0.25230486654591633,
+     "maximum_object_translation_m": 0.0,
+     "robot_scene_contact_substeps": 0,
+     "target_xy_separation_m": 0.25196249591315295
+    },
+    "pudding": {
+     "endpoint_goal_error_m": 0.0007036322112818907,
+     "endpoint_target_xy_distance_m": 0.0006040428214449989,
+     "endpoint_other_xy_distance_m": 0.25234733950245253,
+     "maximum_object_translation_m": 0.0,
+     "robot_scene_contact_substeps": 0,
+     "target_xy_separation_m": 0.25196249591315295
+    }
+   },
+   "seeds": {
+    "0": {
+     "axis_shift_m": {
+      "native": -0.12770101241669846,
+      "white_mug": -0.14762448096502012,
+      "pudding": 0.03931568379286557
+     },
+     "toward_shown_m": 0.1869401647578857,
+     "endpoint_separation_m": 0.18723248718122412,
+     "closer_to_shown": {
+      "white_mug": true,
+      "pudding": true
+     },
+     "action_abs_diff_executed": {
+      "white_mug-native": 0.07431640625,
+      "pudding-native": 0.17064208984375,
+      "pudding-white_mug": 0.14888567243303572
+     },
+     "termination": {
+      "native": "chunk_complete",
+      "white_mug": "chunk_complete",
+      "pudding": "chunk_complete"
+     }
+    },
+    "1": {
+     "axis_shift_m": {
+      "native": -0.12562357808657904,
+      "white_mug": -0.1471519350871386,
+      "pudding": 0.03870965078078173
+     },
+     "toward_shown_m": 0.18586158586792034,
+     "endpoint_separation_m": 0.18624277628293576,
+     "closer_to_shown": {
+      "white_mug": true,
+      "pudding": true
+     },
+     "action_abs_diff_executed": {
+      "white_mug-native": 0.07654157366071429,
+      "pudding-native": 0.16286446707589286,
+      "pudding-white_mug": 0.14803292410714286
+     },
+     "termination": {
+      "native": "chunk_complete",
+      "white_mug": "chunk_complete",
+      "pudding": "chunk_complete"
+     }
+    }
+   },
+   "anchor_error": {
+    "0/white_mug": 0.0,
+    "0/pudding": 0.0,
+    "1/white_mug": 0.0,
+    "1/pudding": 0.0
+   },
+   "seconds": 66.01454820064828
+  },
+  {
+   "unit": "task6_state2",
+   "base_task": 6,
+   "task_id": 6,
+   "task": "LIVING_ROOM_SCENE6_put_the_white_mug_on_the_plate_and_put_the_chocolate_pudding_to_the_right_of_the_plate",
+   "instruction": "put the white mug on the plate and put the chocolate pudding to the right of the plate",
+   "labels": [
+    "white_mug",
+    "pudding"
+   ],
+   "approach": {
+    "white_mug": {
+     "endpoint_goal_error_m": 0.0018159975115502771,
+     "endpoint_target_xy_distance_m": 0.0015673547448808605,
+     "endpoint_other_xy_distance_m": 0.27966978080707694,
+     "maximum_object_translation_m": 8.673617379884035e-19,
+     "robot_scene_contact_substeps": 0,
+     "target_xy_separation_m": 0.27918782967026556
+    },
+    "pudding": {
+     "endpoint_goal_error_m": 0.00043153112657470024,
+     "endpoint_target_xy_distance_m": 0.00038340442314822816,
+     "endpoint_other_xy_distance_m": 0.2794838204722061,
+     "maximum_object_translation_m": 0.0,
+     "robot_scene_contact_substeps": 0,
+     "target_xy_separation_m": 0.27918782967026556
+    }
+   },
+   "seeds": {
+    "0": {
+     "axis_shift_m": {
+      "native": -0.11208467637054387,
+      "white_mug": -0.14705949451104988,
+      "pudding": 0.05323611544775795
+     },
+     "toward_shown_m": 0.20029560995880782,
+     "endpoint_separation_m": 0.200315437017931,
+     "closer_to_shown": {
+      "white_mug": true,
+      "pudding": true
+     },
+     "action_abs_diff_executed": {
+      "white_mug-native": 0.11741681780133928,
+      "pudding-native": 0.1822239467075893,
+      "pudding-white_mug": 0.13708670479910715
+     },
+     "termination": {
+      "native": "chunk_complete",
+      "white_mug": "chunk_complete",
+      "pudding": "chunk_complete"
+     }
+    },
+    "1": {
+     "axis_shift_m": {
+      "native": -0.11107055022457793,
+      "white_mug": -0.1470322108894848,
+      "pudding": 0.05302601567316011
+     },
+     "toward_shown_m": 0.20005822656264488,
+     "endpoint_separation_m": 0.20007493372726493,
+     "closer_to_shown": {
+      "white_mug": true,
+      "pudding": true
+     },
+     "action_abs_diff_executed": {
+      "white_mug-native": 0.11325334821428572,
+      "pudding-native": 0.17176339285714284,
+      "pudding-white_mug": 0.13609444754464287
+     },
+     "termination": {
+      "native": "chunk_complete",
+      "white_mug": "chunk_complete",
+      "pudding": "chunk_complete"
+     }
+    }
+   },
+   "anchor_error": {
+    "0/white_mug": 0.0,
+    "0/pudding": 0.0,
+    "1/white_mug": 0.0,
+    "1/pudding": 0.0
+   },
+   "seconds": 66.03436385421082
+  },
+  {
+   "unit": "task6_state3",
+   "base_task": 6,
+   "task_id": 6,
+   "task": "LIVING_ROOM_SCENE6_put_the_white_mug_on_the_plate_and_put_the_chocolate_pudding_to_the_right_of_the_plate",
+   "instruction": "put the white mug on the plate and put the chocolate pudding to the right of the plate",
+   "labels": [
+    "white_mug",
+    "pudding"
+   ],
+   "approach": {
+    "white_mug": {
+     "endpoint_goal_error_m": 0.0009711487934988064,
+     "endpoint_target_xy_distance_m": 0.0008319094094206824,
+     "endpoint_other_xy_distance_m": 0.2433752807827127,
+     "maximum_object_translation_m": 0.0,
+     "robot_scene_contact_substeps": 0,
+     "target_xy_separation_m": 0.2431085732408882
+    },
+    "pudding": {
+     "endpoint_goal_error_m": 0.0002977366127910107,
+     "endpoint_target_xy_distance_m": 0.0002685621642417473,
+     "endpoint_other_xy_distance_m": 0.24333699203420056,
+     "maximum_object_translation_m": 0.0,
+     "robot_scene_contact_substeps": 0,
+     "target_xy_separation_m": 0.2431085732408882
+    }
+   },
+   "seeds": {
+    "0": {
+     "axis_shift_m": {
+      "native": -0.10273634348047285,
+      "white_mug": -0.12766976208542583,
+      "pudding": 0.050041556826638044
+     },
+     "toward_shown_m": 0.17771131891206388,
+     "endpoint_separation_m": 0.1777246291885265,
+     "closer_to_shown": {
+      "white_mug": true,
+      "pudding": true
+     },
+     "action_abs_diff_executed": {
+      "white_mug-native": 0.10874546595982143,
+      "pudding-native": 0.17292567661830358,
+      "pudding-white_mug": 0.13335048130580357
+     },
+     "termination": {
+      "native": "chunk_complete",
+      "white_mug": "chunk_complete",
+      "pudding": "chunk_complete"
+     }
+    },
+    "1": {
+     "axis_shift_m": {
+      "native": -0.10440586921633173,
+      "white_mug": -0.12707196243501662,
+      "pudding": 0.049809443560861984
+     },
+     "toward_shown_m": 0.1768814059958786,
+     "endpoint_separation_m": 0.17691029460868468,
+     "closer_to_shown": {
+      "white_mug": true,
+      "pudding": true
+     },
+     "action_abs_diff_executed": {
+      "white_mug-native": 0.10526297433035714,
+      "pudding-native": 0.16670445033482142,
+      "pudding-white_mug": 0.13199637276785714
+     },
+     "termination": {
+      "native": "chunk_complete",
+      "white_mug": "chunk_complete",
+      "pudding": "chunk_complete"
+     }
+    }
+   },
+   "anchor_error": {
+    "0/white_mug": 0.0,
+    "0/pudding": 0.0,
+    "1/white_mug": 0.0,
+    "1/pudding": 0.0
+   },
+   "seconds": 66.16807298269123
+  },
+  {
+   "unit": "task6_state4",
+   "base_task": 6,
+   "task_id": 6,
+   "task": "LIVING_ROOM_SCENE6_put_the_white_mug_on_the_plate_and_put_the_chocolate_pudding_to_the_right_of_the_plate",
+   "instruction": "put the white mug on the plate and put the chocolate pudding to the right of the plate",
+   "labels": [
+    "white_mug",
+    "pudding"
+   ],
+   "approach": {
+    "white_mug": {
+     "endpoint_goal_error_m": 0.0006782086229669315,
+     "endpoint_target_xy_distance_m": 0.0005823229694211864,
+     "endpoint_other_xy_distance_m": 0.22432831810748702,
+     "maximum_object_translation_m": 8.239936510889834e-18,
+     "robot_scene_contact_substeps": 0,
+     "target_xy_separation_m": 0.2241167498499009
+    },
+    "pudding": {
+     "endpoint_goal_error_m": 0.00017298004875012464,
+     "endpoint_target_xy_distance_m": 0.0001686815513147504,
+     "endpoint_other_xy_distance_m": 0.22425234082581658,
+     "maximum_object_translation_m": 8.239936510889834e-18,
+     "robot_scene_contact_substeps": 0,
+     "target_xy_separation_m": 0.2241167498499009
+    }
+   },
+   "seeds": {
+    "0": {
+     "axis_shift_m": {
+      "native": -0.0918107405727412,
+      "white_mug": -0.1127767623459071,
+      "pudding": 0.046063538497638515
+     },
+     "toward_shown_m": 0.1588403008435456,
+     "endpoint_separation_m": 0.1588766796319111,
+     "closer_to_shown": {
+      "white_mug": true,
+      "pudding": true
+     },
+     "action_abs_diff_executed": {
+      "white_mug-native": 0.10979788643973214,
+      "pudding-native": 0.1603759765625,
+      "pudding-white_mug": 0.13089686802455358
+     },
+     "termination": {
+      "native": "chunk_complete",
+      "white_mug": "chunk_complete",
+      "pudding": "chunk_complete"
+     }
+    },
+    "1": {
+     "axis_shift_m": {
+      "native": -0.09101715848825012,
+      "white_mug": -0.11226349442737094,
+      "pudding": 0.04597820368618245
+     },
+     "toward_shown_m": 0.15824169811355338,
+     "endpoint_separation_m": 0.15831262253268966,
+     "closer_to_shown": {
+      "white_mug": true,
+      "pudding": true
+     },
+     "action_abs_diff_executed": {
+      "white_mug-native": 0.10740879603794642,
+      "pudding-native": 0.15884530203683037,
+      "pudding-white_mug": 0.13011692592075894
+     },
+     "termination": {
+      "native": "chunk_complete",
+      "white_mug": "chunk_complete",
+      "pudding": "chunk_complete"
+     }
+    }
+   },
+   "anchor_error": {
+    "0/white_mug": 0.0,
+    "0/pudding": 0.0,
+    "1/white_mug": 0.0,
+    "1/pudding": 0.0
+   },
+   "seconds": 66.02353308117017
+  },
+  {
+   "unit": "task7_state0",
+   "base_task": 7,
+   "task_id": 7,
+   "task": "LIVING_ROOM_SCENE1_put_both_the_alphabet_soup_and_the_cream_cheese_box_in_the_basket",
+   "instruction": "put both the alphabet soup and the cream cheese box in the basket",
+   "labels": [
+    "soup",
+    "cream_cheese"
+   ],
+   "approach": {
+    "soup": {
+     "endpoint_goal_error_m": 0.003032029699254318,
+     "endpoint_target_xy_distance_m": 0.0024909963386155936,
+     "endpoint_other_xy_distance_m": 0.23247167747038427,
+     "maximum_object_translation_m": 7.355227538141662e-16,
+     "robot_scene_contact_substeps": 0,
+     "target_xy_separation_m": 0.23017178126912374
+    },
+    "cream_cheese": {
+     "endpoint_goal_error_m": 0.0002543536907660283,
+     "endpoint_target_xy_distance_m": 0.00021345151312151118,
+     "endpoint_other_xy_distance_m": 0.2300493159153843,
+     "maximum_object_translation_m": 7.355227538141662e-16,
+     "robot_scene_contact_substeps": 0,
+     "target_xy_separation_m": 0.23017178126912374
+    }
+   },
+   "seeds": {
+    "0": {
+     "axis_shift_m": {
+      "native": -0.16701678743108514,
+      "soup": -0.14998395831009034,
+      "cream_cheese": 0.02631187055840631
+     },
+     "toward_shown_m": 0.17629582886849665,
+     "endpoint_separation_m": 0.1783840827536103,
+     "closer_to_shown": {
+      "soup": true,
+      "cream_cheese": true
+     },
+     "action_abs_diff_executed": {
+      "soup-native": 0.08545619419642857,
+      "cream_cheese-native": 0.23786795479910713,
+      "cream_cheese-soup": 0.17482386997767857
+     },
+     "termination": {
+      "native": "chunk_complete",
+      "soup": "chunk_complete",
+      "cream_cheese": "chunk_complete"
+     }
+    },
+    "1": {
+     "axis_shift_m": {
+      "native": -0.1654322613908538,
+      "soup": -0.15020863331810105,
+      "cream_cheese": 0.024719811405678596
+     },
+     "toward_shown_m": 0.17492844472377966,
+     "endpoint_separation_m": 0.17673513462316434,
+     "closer_to_shown": {
+      "soup": true,
+      "cream_cheese": true
+     },
+     "action_abs_diff_executed": {
+      "soup-native": 0.094561767578125,
+      "cream_cheese-native": 0.24678955078125,
+      "cream_cheese-soup": 0.1751979282924107
+     },
+     "termination": {
+      "native": "chunk_complete",
+      "soup": "chunk_complete",
+      "cream_cheese": "chunk_complete"
+     }
+    }
+   },
+   "anchor_error": {
+    "0/soup": 0.0,
+    "0/cream_cheese": 0.0,
+    "1/soup": 0.0,
+    "1/cream_cheese": 0.0
+   },
+   "seconds": 34.44695183262229
+  },
+  {
+   "unit": "task7_state1",
+   "base_task": 7,
+   "task_id": 7,
+   "task": "LIVING_ROOM_SCENE1_put_both_the_alphabet_soup_and_the_cream_cheese_box_in_the_basket",
+   "instruction": "put both the alphabet soup and the cream cheese box in the basket",
+   "labels": [
+    "soup",
+    "cream_cheese"
+   ],
+   "approach": {
+    "soup": {
+     "endpoint_goal_error_m": 0.005338430130496256,
+     "endpoint_target_xy_distance_m": 0.004360170579180914,
+     "endpoint_other_xy_distance_m": 0.27619353403545494,
+     "maximum_object_translation_m": 0.0,
+     "robot_scene_contact_substeps": 0,
+     "target_xy_separation_m": 0.27200400105483813
+    },
+    "cream_cheese": {
+     "endpoint_goal_error_m": 0.0010422489660102683,
+     "endpoint_target_xy_distance_m": 0.0008925909164863478,
+     "endpoint_other_xy_distance_m": 0.27276832936701145,
+     "maximum_object_translation_m": 0.0,
+     "robot_scene_contact_substeps": 0,
+     "target_xy_separation_m": 0.27200400105483813
+    }
+   },
+   "seeds": {
+    "0": {
+     "axis_shift_m": {
+      "native": -0.1798223900649272,
+      "soup": -0.1634564464920581,
+      "cream_cheese": 0.03967080193111844
+     },
+     "toward_shown_m": 0.20312724842317653,
+     "endpoint_separation_m": 0.20519408030940145,
+     "closer_to_shown": {
+      "soup": true,
+      "cream_cheese": true
+     },
+     "action_abs_diff_executed": {
+      "soup-native": 0.10819789341517858,
+      "cream_cheese-native": 0.2320835658482143,
+      "cream_cheese-soup": 0.17896030970982144
+     },
+     "termination": {
+      "native": "chunk_complete",
+      "soup": "chunk_complete",
+      "cream_cheese": "chunk_complete"
+     }
+    },
+    "1": {
+     "axis_shift_m": {
+      "native": -0.17728913469631605,
+      "soup": -0.16338789025565412,
+      "cream_cheese": 0.03888158936174384
+     },
+     "toward_shown_m": 0.20226947961739794,
+     "endpoint_separation_m": 0.20419135749103784,
+     "closer_to_shown": {
+      "soup": true,
+      "cream_cheese": true
+     },
+     "action_abs_diff_executed": {
+      "soup-native": 0.13171909877232144,
+      "cream_cheese-native": 0.2341273716517857,
+      "cream_cheese-soup": 0.17887834821428572
+     },
+     "termination": {
+      "native": "chunk_complete",
+      "soup": "chunk_complete",
+      "cream_cheese": "chunk_complete"
+     }
+    }
+   },
+   "anchor_error": {
+    "0/soup": 0.0,
+    "0/cream_cheese": 0.0,
+    "1/soup": 0.0,
+    "1/cream_cheese": 0.0
+   },
+   "seconds": 34.21635494893417
+  },
+  {
+   "unit": "task7_state2",
+   "base_task": 7,
+   "task_id": 7,
+   "task": "LIVING_ROOM_SCENE1_put_both_the_alphabet_soup_and_the_cream_cheese_box_in_the_basket",
+   "instruction": "put both the alphabet soup and the cream cheese box in the basket",
+   "labels": [
+    "soup",
+    "cream_cheese"
+   ],
+   "approach": {
+    "soup": {
+     "endpoint_goal_error_m": 0.0038985189872031475,
+     "endpoint_target_xy_distance_m": 0.0031871787854857213,
+     "endpoint_other_xy_distance_m": 0.25620647429012744,
+     "maximum_object_translation_m": 0.0,
+     "robot_scene_contact_substeps": 0,
+     "target_xy_separation_m": 0.2532382947215707
+    },
+    "cream_cheese": {
+     "endpoint_goal_error_m": 0.0002249978375750692,
+     "endpoint_target_xy_distance_m": 0.00020040388465797796,
+     "endpoint_other_xy_distance_m": 0.2534069741957472,
+     "maximum_object_translation_m": 0.0,
+     "robot_scene_contact_substeps": 0,
+     "target_xy_separation_m": 0.2532382947215707
+    }
+   },
+   "seeds": {
+    "0": {
+     "axis_shift_m": {
+      "native": -0.1683802958426485,
+      "soup": -0.15090334255863713,
+      "cream_cheese": 0.03824918122097647
+     },
+     "toward_shown_m": 0.1891525237796136,
+     "endpoint_separation_m": 0.19143108793234218,
+     "closer_to_shown": {
+      "soup": true,
+      "cream_cheese": true
+     },
+     "action_abs_diff_executed": {
+      "soup-native": 0.08905290876116072,
+      "cream_cheese-native": 0.22490408761160716,
+      "cream_cheese-soup": 0.18195364815848214
+     },
+     "termination": {
+      "native": "chunk_complete",
+      "soup": "chunk_complete",
+      "cream_cheese": "chunk_complete"
+     }
+    },
+    "1": {
+     "axis_shift_m": {
+      "native": -0.1679309759428977,
+      "soup": -0.15095787743104414,
+      "cream_cheese": 0.036577192731506884
+     },
+     "toward_shown_m": 0.18753507016255103,
+     "endpoint_separation_m": 0.18962662932560204,
+     "closer_to_shown": {
+      "soup": true,
+      "cream_cheese": true
+     },
+     "action_abs_diff_executed": {
+      "soup-native": 0.10306047712053572,
+      "cream_cheese-native": 0.223468017578125,
+      "cream_cheese-soup": 0.18147059849330358
+     },
+     "termination": {
+      "native": "chunk_complete",
+      "soup": "chunk_complete",
+      "cream_cheese": "chunk_complete"
+     }
+    }
+   },
+   "anchor_error": {
+    "0/soup": 0.0,
+    "0/cream_cheese": 0.0,
+    "1/soup": 0.0,
+    "1/cream_cheese": 0.0
+   },
+   "seconds": 34.22928794287145
+  },
+  {
+   "unit": "task7_state3",
+   "base_task": 7,
+   "task_id": 7,
+   "task": "LIVING_ROOM_SCENE1_put_both_the_alphabet_soup_and_the_cream_cheese_box_in_the_basket",
+   "instruction": "put both the alphabet soup and the cream cheese box in the basket",
+   "labels": [
+    "soup",
+    "cream_cheese"
+   ],
+   "approach": {
+    "soup": {
+     "endpoint_goal_error_m": 0.005654115726393437,
+     "endpoint_target_xy_distance_m": 0.0046181659004227915,
+     "endpoint_other_xy_distance_m": 0.30241048641607204,
+     "maximum_object_translation_m": 0.0,
+     "robot_scene_contact_substeps": 0,
+     "target_xy_separation_m": 0.29815908436486493
+    },
+    "cream_cheese": {
+     "endpoint_goal_error_m": 0.000796599534445712,
+     "endpoint_target_xy_distance_m": 0.0006843562878599973,
+     "endpoint_other_xy_distance_m": 0.29863997210745113,
+     "maximum_object_translation_m": 0.0,
+     "robot_scene_contact_substeps": 0,
+     "target_xy_separation_m": 0.29815908436486493
+    }
+   },
+   "seeds": {
+    "0": {
+     "axis_shift_m": {
+      "native": -0.15617854043647175,
+      "soup": -0.1579419286786064,
+      "cream_cheese": 0.05577316808276308
+     },
+     "toward_shown_m": 0.2137150967613695,
+     "endpoint_separation_m": 0.2153637195541393,
+     "closer_to_shown": {
+      "soup": true,
+      "cream_cheese": true
+     },
+     "action_abs_diff_executed": {
+      "soup-native": 0.08711460658482142,
+      "cream_cheese-native": 0.24709123883928572,
+      "cream_cheese-soup": 0.18744942801339284
+     },
+     "termination": {
+      "native": "chunk_complete",
+      "soup": "chunk_complete",
+      "cream_cheese": "chunk_complete"
+     }
+    },
+    "1": {
+     "axis_shift_m": {
+      "native": -0.16103142712191496,
+      "soup": -0.15795668955355743,
+      "cream_cheese": 0.05453232028672757
+     },
+     "toward_shown_m": 0.21248900984028501,
+     "endpoint_separation_m": 0.21402801360913065,
+     "closer_to_shown": {
+      "soup": true,
+      "cream_cheese": true
+     },
+     "action_abs_diff_executed": {
+      "soup-native": 0.09189976283482143,
+      "cream_cheese-native": 0.2486572265625,
+      "cream_cheese-soup": 0.18777378627232144
+     },
+     "termination": {
+      "native": "chunk_complete",
+      "soup": "chunk_complete",
+      "cream_cheese": "chunk_complete"
+     }
+    }
+   },
+   "anchor_error": {
+    "0/soup": 0.0,
+    "0/cream_cheese": 0.0,
+    "1/soup": 0.0,
+    "1/cream_cheese": 0.0
+   },
+   "seconds": 34.34756191819906
+  },
+  {
+   "unit": "task7_state4",
+   "base_task": 7,
+   "task_id": 7,
+   "task": "LIVING_ROOM_SCENE1_put_both_the_alphabet_soup_and_the_cream_cheese_box_in_the_basket",
+   "instruction": "put both the alphabet soup and the cream cheese box in the basket",
+   "labels": [
+    "soup",
+    "cream_cheese"
+   ],
+   "approach": {
+    "soup": {
+     "endpoint_goal_error_m": 0.006241257950816557,
+     "endpoint_target_xy_distance_m": 0.00510311818734456,
+     "endpoint_other_xy_distance_m": 0.28501821533459876,
+     "maximum_object_translation_m": 3.577867169202165e-18,
+     "robot_scene_contact_substeps": 0,
+     "target_xy_separation_m": 0.2802317923150118
+    },
+    "cream_cheese": {
+     "endpoint_goal_error_m": 0.00023559587551511872,
+     "endpoint_target_xy_distance_m": 0.00020721735548284145,
+     "endpoint_other_xy_distance_m": 0.28040985623074804,
+     "maximum_object_translation_m": 3.3610267347050637e-18,
+     "robot_scene_contact_substeps": 0,
+     "target_xy_separation_m": 0.2802317923150118
+    }
+   },
+   "seeds": {
+    "0": {
+     "axis_shift_m": {
+      "native": -0.17700592703868978,
+      "soup": -0.17765053749451776,
+      "cream_cheese": 0.03509603068874824
+     },
+     "toward_shown_m": 0.21274656818326598,
+     "endpoint_separation_m": 0.21496430809507028,
+     "closer_to_shown": {
+      "soup": true,
+      "cream_cheese": true
+     },
+     "action_abs_diff_executed": {
+      "soup-native": 0.06376953125,
+      "cream_cheese-native": 0.22223946707589284,
+      "cream_cheese-soup": 0.18961181640625
+     },
+     "termination": {
+      "native": "chunk_complete",
+      "soup": "chunk_complete",
+      "cream_cheese": "chunk_complete"
+     }
+    },
+    "1": {
+     "axis_shift_m": {
+      "native": -0.17618038612504727,
+      "soup": -0.17738508254854476,
+      "cream_cheese": 0.033661897100453086
+     },
+     "toward_shown_m": 0.21104697964899785,
+     "endpoint_separation_m": 0.21311558419191756,
+     "closer_to_shown": {
+      "soup": true,
+      "cream_cheese": true
+     },
+     "action_abs_diff_executed": {
+      "soup-native": 0.06164463588169643,
+      "cream_cheese-native": 0.2245152064732143,
+      "cream_cheese-soup": 0.189361572265625
+     },
+     "termination": {
+      "native": "chunk_complete",
+      "soup": "chunk_complete",
+      "cream_cheese": "chunk_complete"
+     }
+    }
+   },
+   "anchor_error": {
+    "0/soup": 0.0,
+    "0/cream_cheese": 0.0,
+    "1/soup": 0.0,
+    "1/cream_cheese": 0.0
+   },
+   "seconds": 34.44971917569637
+  },
+  {
+   "unit": "task8_state0",
+   "base_task": 8,
+   "task_id": 8,
+   "task": "KITCHEN_SCENE8_put_both_moka_pots_on_the_stove",
+   "instruction": "put both moka pots on the stove",
+   "labels": [
+    "moka_pot_1",
+    "moka_pot_2"
+   ],
+   "approach": {
+    "moka_pot_1": {
+     "endpoint_goal_error_m": 0.01621844814961517,
+     "endpoint_target_xy_distance_m": 0.015865522701895427,
+     "endpoint_other_xy_distance_m": 0.21984460596665023,
+     "maximum_object_translation_m": 0.0,
+     "robot_scene_contact_substeps": 0,
+     "target_xy_separation_m": 0.2354951435191364
+    },
+    "moka_pot_2": {
+     "endpoint_goal_error_m": 0.032079258432938615,
+     "endpoint_target_xy_distance_m": 0.03204229343640231,
+     "endpoint_other_xy_distance_m": 0.2243960708571464,
+     "maximum_object_translation_m": 0.0,
+     "robot_scene_contact_substeps": 0,
+     "target_xy_separation_m": 0.2354951435191364
+    }
+   },
+   "rejected": "approach limits: moka_pot_2",
+   "seconds": 4.389929602853954
+  },
+  {
+   "unit": "task8_state1",
+   "base_task": 8,
+   "task_id": 8,
+   "task": "KITCHEN_SCENE8_put_both_moka_pots_on_the_stove",
+   "instruction": "put both moka pots on the stove",
+   "labels": [
+    "moka_pot_1",
+    "moka_pot_2"
+   ],
+   "approach": {
+    "moka_pot_1": {
+     "endpoint_goal_error_m": 0.013683143984716284,
+     "endpoint_target_xy_distance_m": 0.013239168088250044,
+     "endpoint_other_xy_distance_m": 0.2165374745461097,
+     "maximum_object_translation_m": 0.0,
+     "robot_scene_contact_substeps": 0,
+     "target_xy_separation_m": 0.22977330341997698
+    },
+    "moka_pot_2": {
+     "endpoint_goal_error_m": 0.023554111847488523,
+     "endpoint_target_xy_distance_m": 0.023503154889324685,
+     "endpoint_other_xy_distance_m": 0.22346045164386588,
+     "maximum_object_translation_m": 0.0,
+     "robot_scene_contact_substeps": 0,
+     "target_xy_separation_m": 0.22977330341997698
+    }
+   },
+   "rejected": "approach limits: moka_pot_2",
+   "seconds": 4.399299633689225
+  },
+  {
+   "unit": "task8_state2",
+   "base_task": 8,
+   "task_id": 8,
+   "task": "KITCHEN_SCENE8_put_both_moka_pots_on_the_stove",
+   "instruction": "put both moka pots on the stove",
+   "labels": [
+    "moka_pot_1",
+    "moka_pot_2"
+   ],
+   "approach": {
+    "moka_pot_1": {
+     "endpoint_goal_error_m": 0.01649064212284794,
+     "endpoint_target_xy_distance_m": 0.016322548518202383,
+     "endpoint_other_xy_distance_m": 0.1960109627147588,
+     "maximum_object_translation_m": 0.0,
+     "robot_scene_contact_substeps": 0,
+     "target_xy_separation_m": 0.21186284488850793
+    },
+    "moka_pot_2": {
+     "endpoint_goal_error_m": 0.03807457289688624,
+     "endpoint_target_xy_distance_m": 0.03804593866089874,
+     "endpoint_other_xy_distance_m": 0.2024973021910303,
+     "maximum_object_translation_m": 0.0,
+     "robot_scene_contact_substeps": 0,
+     "target_xy_separation_m": 0.21186284488850793
+    }
+   },
+   "rejected": "approach limits: moka_pot_2",
+   "seconds": 4.470501068048179
+  },
+  {
+   "unit": "task8_state3",
+   "base_task": 8,
+   "task_id": 8,
+   "task": "KITCHEN_SCENE8_put_both_moka_pots_on_the_stove",
+   "instruction": "put both moka pots on the stove",
+   "labels": [
+    "moka_pot_1",
+    "moka_pot_2"
+   ],
+   "approach": {
+    "moka_pot_1": {
+     "endpoint_goal_error_m": 0.015393674764104203,
+     "endpoint_target_xy_distance_m": 0.015298659353689582,
+     "endpoint_other_xy_distance_m": 0.15920808728800434,
+     "maximum_object_translation_m": 0.0,
+     "robot_scene_contact_substeps": 0,
+     "target_xy_separation_m": 0.1734879675886123
+    },
+    "moka_pot_2": {
+     "endpoint_goal_error_m": 0.03745405970907847,
+     "endpoint_target_xy_distance_m": 0.0374263726183253,
+     "endpoint_other_xy_distance_m": 0.16378274682698243,
+     "maximum_object_translation_m": 0.0,
+     "robot_scene_contact_substeps": 0,
+     "target_xy_separation_m": 0.1734879675886123
+    }
+   },
+   "rejected": "approach limits: moka_pot_2",
+   "seconds": 4.366009179037064
+  },
+  {
+   "unit": "task8_state4",
+   "base_task": 8,
+   "task_id": 8,
+   "task": "KITCHEN_SCENE8_put_both_moka_pots_on_the_stove",
+   "instruction": "put both moka pots on the stove",
+   "labels": [
+    "moka_pot_1",
+    "moka_pot_2"
+   ],
+   "approach": {
+    "moka_pot_1": {
+     "endpoint_goal_error_m": 0.009047618738028906,
+     "endpoint_target_xy_distance_m": 0.008260437599417605,
+     "endpoint_other_xy_distance_m": 0.18423659902367795,
+     "maximum_object_translation_m": 0.0,
+     "robot_scene_contact_substeps": 0,
+     "target_xy_separation_m": 0.19249185551847012
+    },
+    "moka_pot_2": {
+     "endpoint_goal_error_m": 0.0411104270661836,
+     "endpoint_target_xy_distance_m": 0.04108029358007012,
+     "endpoint_other_xy_distance_m": 0.1774213924377535,
+     "maximum_object_translation_m": 0.0,
+     "robot_scene_contact_substeps": 0,
+     "target_xy_separation_m": 0.19249185551847012
+    }
+   },
+   "rejected": "approach limits: moka_pot_2",
+   "seconds": 4.362582596950233
+  },
+  {
+   "unit": "task9_state0",
+   "base_task": 9,
+   "task_id": 9,
+   "task": "KITCHEN_SCENE6_put_the_yellow_and_white_mug_in_the_microwave_and_close_it",
+   "instruction": "put the yellow and white mug in the microwave and close it",
+   "labels": [
+    "yellow_mug",
+    "white_mug"
+   ],
+   "approach": {
+    "yellow_mug": {
+     "endpoint_goal_error_m": 0.003108911001591648,
+     "endpoint_target_xy_distance_m": 0.0018129745626344262,
+     "endpoint_other_xy_distance_m": 0.23860261169517047,
+     "maximum_object_translation_m": 0.0,
+     "robot_scene_contact_substeps": 0,
+     "target_xy_separation_m": 0.2380894540846306
+    },
+    "white_mug": {
+     "endpoint_goal_error_m": 0.006143374521131443,
+     "endpoint_target_xy_distance_m": 0.006138545826499373,
+     "endpoint_other_xy_distance_m": 0.23249934214782866,
+     "maximum_object_translation_m": 0.0,
+     "robot_scene_contact_substeps": 0,
+     "target_xy_separation_m": 0.2380894540846306
+    }
+   },
+   "seeds": {
+    "0": {
+     "axis_shift_m": {
+      "native": -0.017208995137604512,
+      "yellow_mug": -0.07226157404787573,
+      "white_mug": 0.13305557159058984
+     },
+     "toward_shown_m": 0.20531714563846556,
+     "endpoint_separation_m": 0.20729144275129402,
+     "closer_to_shown": {
+      "yellow_mug": true,
+      "white_mug": true
+     },
+     "action_abs_diff_executed": {
+      "yellow_mug-native": 0.17220110212053572,
+      "white_mug-native": 0.18507341657366072,
+      "white_mug-yellow_mug": 0.084100341796875
+     },
+     "termination": {
+      "native": "chunk_complete",
+      "yellow_mug": "chunk_complete",
+      "white_mug": "chunk_complete"
+     }
+    },
+    "1": {
+     "axis_shift_m": {
+      "native": -0.01653061255182782,
+      "yellow_mug": -0.07329815501953779,
+      "white_mug": 0.13292498236658135
+     },
+     "toward_shown_m": 0.20622313738611914,
+     "endpoint_separation_m": 0.2082232215561392,
+     "closer_to_shown": {
+      "yellow_mug": true,
+      "white_mug": true
+     },
+     "action_abs_diff_executed": {
+      "yellow_mug-native": 0.17100655691964287,
+      "white_mug-native": 0.1889749799455915,
+      "white_mug-yellow_mug": 0.08383821759905134
+     },
+     "termination": {
+      "native": "chunk_complete",
+      "yellow_mug": "chunk_complete",
+      "white_mug": "chunk_complete"
+     }
+    }
+   },
+   "anchor_error": {
+    "0/yellow_mug": 0.0,
+    "0/white_mug": 0.0,
+    "1/yellow_mug": 0.0,
+    "1/white_mug": 0.0
+   },
+   "seconds": 52.08669114485383
+  },
+  {
+   "unit": "task9_state1",
+   "base_task": 9,
+   "task_id": 9,
+   "task": "KITCHEN_SCENE6_put_the_yellow_and_white_mug_in_the_microwave_and_close_it",
+   "instruction": "put the yellow and white mug in the microwave and close it",
+   "labels": [
+    "yellow_mug",
+    "white_mug"
+   ],
+   "approach": {
+    "yellow_mug": {
+     "endpoint_goal_error_m": 0.022973069163112505,
+     "endpoint_target_xy_distance_m": 0.022941409748077603,
+     "endpoint_other_xy_distance_m": 0.2766517696627549,
+     "maximum_object_translation_m": 0.0,
+     "robot_scene_contact_substeps": 0,
+     "target_xy_separation_m": 0.2858146746493203
+    },
+    "white_mug": {
+     "endpoint_goal_error_m": 0.005172287413617173,
+     "endpoint_target_xy_distance_m": 0.00505810997292328,
+     "endpoint_other_xy_distance_m": 0.2808718172031424,
+     "maximum_object_translation_m": 0.0,
+     "robot_scene_contact_substeps": 0,
+     "target_xy_separation_m": 0.2858146746493203
+    }
+   },
+   "rejected": "approach limits: yellow_mug",
+   "seconds": 7.354967540130019
+  },
+  {
+   "unit": "task9_state2",
+   "base_task": 9,
+   "task_id": 9,
+   "task": "KITCHEN_SCENE6_put_the_yellow_and_white_mug_in_the_microwave_and_close_it",
+   "instruction": "put the yellow and white mug in the microwave and close it",
+   "labels": [
+    "yellow_mug",
+    "white_mug"
+   ],
+   "approach": {
+    "yellow_mug": {
+     "endpoint_goal_error_m": 0.0023208627111318864,
+     "endpoint_target_xy_distance_m": 0.0008667293333792831,
+     "endpoint_other_xy_distance_m": 0.2419697189167662,
+     "maximum_object_translation_m": 0.0,
+     "robot_scene_contact_substeps": 0,
+     "target_xy_separation_m": 0.24183696274737554
+    },
+    "white_mug": {
+     "endpoint_goal_error_m": 0.0077880022168438775,
+     "endpoint_target_xy_distance_m": 0.007784894460000151,
+     "endpoint_other_xy_distance_m": 0.23474242946691537,
+     "maximum_object_translation_m": 0.0,
+     "robot_scene_contact_substeps": 0,
+     "target_xy_separation_m": 0.24183696274737554
+    }
+   },
+   "seeds": {
+    "0": {
+     "axis_shift_m": {
+      "native": -0.021418653450270837,
+      "yellow_mug": -0.0738156983424814,
+      "white_mug": 0.13293969454769156
+     },
+     "toward_shown_m": 0.20675539289017297,
+     "endpoint_separation_m": 0.20836913083825276,
+     "closer_to_shown": {
+      "yellow_mug": true,
+      "white_mug": true
+     },
+     "action_abs_diff_executed": {
+      "yellow_mug-native": 0.1673243931361607,
+      "white_mug-native": 0.18219866071428573,
+      "white_mug-yellow_mug": 0.08492344447544643
+     },
+     "termination": {
+      "native": "chunk_complete",
+      "yellow_mug": "chunk_complete",
+      "white_mug": "chunk_complete"
+     }
+    },
+    "1": {
+     "axis_shift_m": {
+      "native": -0.027709585093581977,
+      "yellow_mug": -0.07521739944833714,
+      "white_mug": 0.13271270717603792
+     },
+     "toward_shown_m": 0.20793010662437506,
+     "endpoint_separation_m": 0.20954871658695098,
+     "closer_to_shown": {
+      "yellow_mug": true,
+      "white_mug": true
+     },
+     "action_abs_diff_executed": {
+      "yellow_mug-native": 0.16848667689732144,
+      "white_mug-native": 0.1875441414969308,
+      "white_mug-yellow_mug": 0.08530916486467634
+     },
+     "termination": {
+      "native": "chunk_complete",
+      "yellow_mug": "chunk_complete",
+      "white_mug": "chunk_complete"
+     }
+    }
+   },
+   "anchor_error": {
+    "0/yellow_mug": 0.0,
+    "0/white_mug": 0.0,
+    "1/yellow_mug": 0.0,
+    "1/white_mug": 0.0
+   },
+   "seconds": 52.1112567409873
+  },
+  {
+   "unit": "task9_state3",
+   "base_task": 9,
+   "task_id": 9,
+   "task": "KITCHEN_SCENE6_put_the_yellow_and_white_mug_in_the_microwave_and_close_it",
+   "instruction": "put the yellow and white mug in the microwave and close it",
+   "labels": [
+    "yellow_mug",
+    "white_mug"
+   ],
+   "approach": {
+    "yellow_mug": {
+     "endpoint_goal_error_m": 0.09511998904115357,
+     "endpoint_target_xy_distance_m": 0.061013834383572295,
+     "endpoint_other_xy_distance_m": 0.3277603615307879,
+     "maximum_object_translation_m": 0.025306007104034658,
+     "robot_scene_contact_substeps": 0,
+     "target_xy_separation_m": 0.26913470286130203
+    },
+    "white_mug": {
+     "endpoint_goal_error_m": 0.009319354895956417,
+     "endpoint_target_xy_distance_m": 0.009310871491070344,
+     "endpoint_other_xy_distance_m": 0.261012321537917,
+     "maximum_object_translation_m": 0.0,
+     "robot_scene_contact_substeps": 0,
+     "target_xy_separation_m": 0.26913470286130203
+    }
+   },
+   "rejected": "approach limits: yellow_mug",
+   "seconds": 7.310853737872094
+  },
+  {
+   "unit": "task9_state4",
+   "base_task": 9,
+   "task_id": 9,
+   "task": "KITCHEN_SCENE6_put_the_yellow_and_white_mug_in_the_microwave_and_close_it",
+   "instruction": "put the yellow and white mug in the microwave and close it",
+   "labels": [
+    "yellow_mug",
+    "white_mug"
+   ],
+   "approach": {
+    "yellow_mug": {
+     "endpoint_goal_error_m": 0.01613280264043207,
+     "endpoint_target_xy_distance_m": 0.016090029284346843,
+     "endpoint_other_xy_distance_m": 0.2587300250700516,
+     "maximum_object_translation_m": 0.0,
+     "robot_scene_contact_substeps": 0,
+     "target_xy_separation_m": 0.26518110970928654
+    },
+    "white_mug": {
+     "endpoint_goal_error_m": 0.03318612964905695,
+     "endpoint_target_xy_distance_m": 0.03317233705022108,
+     "endpoint_other_xy_distance_m": 0.2349988509266854,
+     "maximum_object_translation_m": 0.0,
+     "robot_scene_contact_substeps": 0,
+     "target_xy_separation_m": 0.26518110970928654
+    }
+   },
+   "rejected": "approach limits: white_mug",
+   "seconds": 7.3223463972099125
+  }
+ ],
+ "duration_seconds": 1847.7513649309985
+}

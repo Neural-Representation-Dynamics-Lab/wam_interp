@@ -1,0 +1,1542 @@
+[
+ {
+  "task_id": 0,
+  "mask": "future1_mask",
+  "percent": 5,
+  "executed": 0.00272391177713871,
+  "later": 0.0015242935623973608
+ },
+ {
+  "task_id": 0,
+  "mask": "future1_mask",
+  "percent": 10,
+  "executed": 0.00227399542927742,
+  "later": 0.0015163669595494866
+ },
+ {
+  "task_id": 0,
+  "mask": "future1_mask",
+  "percent": 15,
+  "executed": 0.0018484933534637094,
+  "later": 0.0015821580309420824
+ },
+ {
+  "task_id": 0,
+  "mask": "future1_mask",
+  "percent": 20,
+  "executed": 0.0026332309935241938,
+  "later": 0.002439820906147361
+ },
+ {
+  "task_id": 0,
+  "mask": "future1_mask",
+  "percent": 25,
+  "executed": 0.002643694169819355,
+  "later": 0.0038111303001642227
+ },
+ {
+  "task_id": 0,
+  "mask": "future1_mask",
+  "percent": 30,
+  "executed": 0.0046595982275903225,
+  "later": 0.005080978386104107
+ },
+ {
+  "task_id": 0,
+  "mask": "future1_mask",
+  "percent": 35,
+  "executed": 0.004481724463403225,
+  "later": 0.005141220986843109
+ },
+ {
+  "task_id": 0,
+  "mask": "future1_mask",
+  "percent": 40,
+  "executed": 0.004854910541325808,
+  "later": 0.005362374242395163
+ },
+ {
+  "task_id": 0,
+  "mask": "future1_mask",
+  "percent": 45,
+  "executed": 0.004237583838403225,
+  "later": 0.005777730606496334
+ },
+ {
+  "task_id": 0,
+  "mask": "future1_mask",
+  "percent": 50,
+  "executed": 0.01869070902466774,
+  "later": 0.009454900398850441
+ },
+ {
+  "task_id": 0,
+  "mask": "future1_mask",
+  "percent": 55,
+  "executed": 0.01854073628783226,
+  "later": 0.009833001531660557
+ },
+ {
+  "task_id": 0,
+  "mask": "future1_mask",
+  "percent": 60,
+  "executed": 0.01835239864885807,
+  "later": 0.010768741369247437
+ },
+ {
+  "task_id": 0,
+  "mask": "future1_mask",
+  "percent": 65,
+  "executed": 0.02192382887005806,
+  "later": 0.01615053601562977
+ },
+ {
+  "task_id": 0,
+  "mask": "future1_mask",
+  "percent": 70,
+  "executed": 0.0260184146463871,
+  "later": 0.017827417701482773
+ },
+ {
+  "task_id": 0,
+  "mask": "future1_mask",
+  "percent": 75,
+  "executed": 0.02716587670147419,
+  "later": 0.018149636685848236
+ },
+ {
+  "task_id": 0,
+  "mask": "future1_mask",
+  "percent": 80,
+  "executed": 0.02756696380674839,
+  "later": 0.018641088157892227
+ },
+ {
+  "task_id": 0,
+  "mask": "future1_mask",
+  "percent": 85,
+  "executed": 0.03279157355427742,
+  "later": 0.02015349082648754
+ },
+ {
+  "task_id": 0,
+  "mask": "future1_mask",
+  "percent": 90,
+  "executed": 0.05708007887005806,
+  "later": 0.020847072824835777
+ },
+ {
+  "task_id": 0,
+  "mask": "future1_mask",
+  "percent": 95,
+  "executed": 0.0599365234375,
+  "later": 0.021393615752458572
+ },
+ {
+  "task_id": 0,
+  "mask": "future1_mask",
+  "percent": 96,
+  "executed": 0.11203090101480484,
+  "later": 0.02992149442434311
+ },
+ {
+  "task_id": 0,
+  "mask": "future1_mask",
+  "percent": 98,
+  "executed": 0.11243373155593872,
+  "later": 0.030126795172691345
+ },
+ {
+  "task_id": 0,
+  "mask": "future1_mask",
+  "percent": 100,
+  "executed": 0.1123744398355484,
+  "later": 0.030152160674333572
+ },
+ {
+  "task_id": 0,
+  "mask": "current_mask",
+  "percent": 5,
+  "executed": 0.0024169920943677425,
+  "later": 0.004642635118216276
+ },
+ {
+  "task_id": 0,
+  "mask": "current_mask",
+  "percent": 10,
+  "executed": 0.002811104990541935,
+  "later": 0.004979121033102274
+ },
+ {
+  "task_id": 0,
+  "mask": "current_mask",
+  "percent": 15,
+  "executed": 0.00276227667927742,
+  "later": 0.005546272732317448
+ },
+ {
+  "task_id": 0,
+  "mask": "current_mask",
+  "percent": 20,
+  "executed": 0.0035121373366564512,
+  "later": 0.00533542362973094
+ },
+ {
+  "task_id": 0,
+  "mask": "current_mask",
+  "percent": 25,
+  "executed": 0.0064034597016870975,
+  "later": 0.00630564521998167
+ },
+ {
+  "task_id": 0,
+  "mask": "current_mask",
+  "percent": 30,
+  "executed": 0.006678990088403225,
+  "later": 0.006381344515830278
+ },
+ {
+  "task_id": 0,
+  "mask": "current_mask",
+  "percent": 35,
+  "executed": 0.00634068064391613,
+  "later": 0.0067820362746715546
+ },
+ {
+  "task_id": 0,
+  "mask": "current_mask",
+  "percent": 40,
+  "executed": 0.00638602115213871,
+  "later": 0.006837919354438782
+ },
+ {
+  "task_id": 0,
+  "mask": "current_mask",
+  "percent": 45,
+  "executed": 0.0068359375,
+  "later": 0.007163704372942448
+ },
+ {
+  "task_id": 0,
+  "mask": "current_mask",
+  "percent": 50,
+  "executed": 0.0071777342818677425,
+  "later": 0.006892216857522726
+ },
+ {
+  "task_id": 0,
+  "mask": "current_mask",
+  "percent": 55,
+  "executed": 0.0073486329056322575,
+  "later": 0.006087662186473608
+ },
+ {
+  "task_id": 0,
+  "mask": "current_mask",
+  "percent": 60,
+  "executed": 0.007435826119035482,
+  "later": 0.0061819893307983875
+ },
+ {
+  "task_id": 0,
+  "mask": "current_mask",
+  "percent": 65,
+  "executed": 0.00788225419819355,
+  "later": 0.0064071062952280045
+ },
+ {
+  "task_id": 0,
+  "mask": "current_mask",
+  "percent": 70,
+  "executed": 0.007571847178041935,
+  "later": 0.007185898721218109
+ },
+ {
+  "task_id": 0,
+  "mask": "current_mask",
+  "percent": 75,
+  "executed": 0.008143833838403225,
+  "later": 0.0072354404255747795
+ },
+ {
+  "task_id": 0,
+  "mask": "current_mask",
+  "percent": 80,
+  "executed": 0.008677455596625805,
+  "later": 0.0074843368493020535
+ },
+ {
+  "task_id": 0,
+  "mask": "current_mask",
+  "percent": 85,
+  "executed": 0.008677455596625805,
+  "later": 0.00767140556126833
+ },
+ {
+  "task_id": 0,
+  "mask": "current_mask",
+  "percent": 90,
+  "executed": 0.008959961123764515,
+  "later": 0.007818048819899559
+ },
+ {
+  "task_id": 0,
+  "mask": "current_mask",
+  "percent": 95,
+  "executed": 0.00887276791036129,
+  "later": 0.007970239967107773
+ },
+ {
+  "task_id": 0,
+  "mask": "current_mask",
+  "percent": 96,
+  "executed": 0.00910993292927742,
+  "later": 0.007785153109580278
+ },
+ {
+  "task_id": 0,
+  "mask": "current_mask",
+  "percent": 98,
+  "executed": 0.009371512569487095,
+  "later": 0.007794665172696114
+ },
+ {
+  "task_id": 0,
+  "mask": "current_mask",
+  "percent": 100,
+  "executed": 0.009570312686264515,
+  "later": 0.007688051555305719
+ },
+ {
+  "task_id": 2,
+  "mask": "future1_mask",
+  "percent": 5,
+  "executed": 0.002680315403267741,
+  "later": 0.001393503975123167
+ },
+ {
+  "task_id": 2,
+  "mask": "future1_mask",
+  "percent": 10,
+  "executed": 0.0027744837570935488,
+  "later": 0.0013946929248049855
+ },
+ {
+  "task_id": 2,
+  "mask": "future1_mask",
+  "percent": 15,
+  "executed": 0.002899169921875,
+  "later": 0.0016095050377771258
+ },
+ {
+  "task_id": 2,
+  "mask": "future1_mask",
+  "percent": 20,
+  "executed": 0.004398019053041935,
+  "later": 0.003529734443873167
+ },
+ {
+  "task_id": 2,
+  "mask": "future1_mask",
+  "percent": 25,
+  "executed": 0.00447126105427742,
+  "later": 0.004477364476770163
+ },
+ {
+  "task_id": 2,
+  "mask": "future1_mask",
+  "percent": 30,
+  "executed": 0.0042855399660766125,
+  "later": 0.004578825552016497
+ },
+ {
+  "task_id": 2,
+  "mask": "future1_mask",
+  "percent": 35,
+  "executed": 0.0050484794192016125,
+  "later": 0.006635789759457111
+ },
+ {
+  "task_id": 2,
+  "mask": "future1_mask",
+  "percent": 40,
+  "executed": 0.005207170732319355,
+  "later": 0.007172423414885998
+ },
+ {
+  "task_id": 2,
+  "mask": "future1_mask",
+  "percent": 45,
+  "executed": 0.005337960552424192,
+  "later": 0.007456989958882332
+ },
+ {
+  "task_id": 2,
+  "mask": "future1_mask",
+  "percent": 50,
+  "executed": 0.006558663677424192,
+  "later": 0.011471439152956009
+ },
+ {
+  "task_id": 2,
+  "mask": "future1_mask",
+  "percent": 55,
+  "executed": 0.00726318359375,
+  "later": 0.012433337047696114
+ },
+ {
+  "task_id": 2,
+  "mask": "future1_mask",
+  "percent": 60,
+  "executed": 0.009012277238070965,
+  "later": 0.014125279150903225
+ },
+ {
+  "task_id": 2,
+  "mask": "future1_mask",
+  "percent": 65,
+  "executed": 0.00972028449177742,
+  "later": 0.014558866620063782
+ },
+ {
+  "task_id": 2,
+  "mask": "future1_mask",
+  "percent": 70,
+  "executed": 0.012806919403374195,
+  "later": 0.016206815838813782
+ },
+ {
+  "task_id": 2,
+  "mask": "future1_mask",
+  "percent": 75,
+  "executed": 0.0157470703125,
+  "later": 0.016778327524662018
+ },
+ {
+  "task_id": 2,
+  "mask": "future1_mask",
+  "percent": 80,
+  "executed": 0.01637224480509758,
+  "later": 0.017016125842928886
+ },
+ {
+  "task_id": 2,
+  "mask": "future1_mask",
+  "percent": 85,
+  "executed": 0.0200064517557621,
+  "later": 0.019050896167755127
+ },
+ {
+  "task_id": 2,
+  "mask": "future1_mask",
+  "percent": 90,
+  "executed": 0.09325997531414032,
+  "later": 0.027784669771790504
+ },
+ {
+  "task_id": 2,
+  "mask": "future1_mask",
+  "percent": 95,
+  "executed": 0.10183802992105484,
+  "later": 0.028737254440784454
+ },
+ {
+  "task_id": 2,
+  "mask": "future1_mask",
+  "percent": 96,
+  "executed": 0.10302734375,
+  "later": 0.028926899656653404
+ },
+ {
+  "task_id": 2,
+  "mask": "future1_mask",
+  "percent": 98,
+  "executed": 0.10338658094406128,
+  "later": 0.029020432382822037
+ },
+ {
+  "task_id": 2,
+  "mask": "future1_mask",
+  "percent": 100,
+  "executed": 0.10345633327960968,
+  "later": 0.029022810980677605
+ },
+ {
+  "task_id": 2,
+  "mask": "current_mask",
+  "percent": 5,
+  "executed": 0.0009974888525903225,
+  "later": 0.0009008630295284092
+ },
+ {
+  "task_id": 2,
+  "mask": "current_mask",
+  "percent": 10,
+  "executed": 0.0024727957788854837,
+  "later": 0.0033597080036997795
+ },
+ {
+  "task_id": 2,
+  "mask": "current_mask",
+  "percent": 15,
+  "executed": 0.002971540205180645,
+  "later": 0.003338305978104472
+ },
+ {
+  "task_id": 2,
+  "mask": "current_mask",
+  "percent": 20,
+  "executed": 0.003007289255037904,
+  "later": 0.0037302784621715546
+ },
+ {
+  "task_id": 2,
+  "mask": "current_mask",
+  "percent": 25,
+  "executed": 0.00309012271463871,
+  "later": 0.004100056365132332
+ },
+ {
+  "task_id": 2,
+  "mask": "current_mask",
+  "percent": 30,
+  "executed": 0.0035051617305725813,
+  "later": 0.00417575566098094
+ },
+ {
+  "task_id": 2,
+  "mask": "current_mask",
+  "percent": 35,
+  "executed": 0.0032784598879516125,
+  "later": 0.0038002310320734978
+ },
+ {
+  "task_id": 2,
+  "mask": "current_mask",
+  "percent": 40,
+  "executed": 0.0035984583664685488,
+  "later": 0.004072313196957111
+ },
+ {
+  "task_id": 2,
+  "mask": "current_mask",
+  "percent": 45,
+  "executed": 0.003739711130037904,
+  "later": 0.0041182879358530045
+ },
+ {
+  "task_id": 2,
+  "mask": "current_mask",
+  "percent": 50,
+  "executed": 0.006747000385075808,
+  "later": 0.004424256272614002
+ },
+ {
+  "task_id": 2,
+  "mask": "current_mask",
+  "percent": 55,
+  "executed": 0.0067923408932983875,
+  "later": 0.004897872917354107
+ },
+ {
+  "task_id": 2,
+  "mask": "current_mask",
+  "percent": 60,
+  "executed": 0.006527273915708065,
+  "later": 0.004999333992600441
+ },
+ {
+  "task_id": 2,
+  "mask": "current_mask",
+  "percent": 65,
+  "executed": 0.006500244140625,
+  "later": 0.005285089835524559
+ },
+ {
+  "task_id": 2,
+  "mask": "current_mask",
+  "percent": 70,
+  "executed": 0.0062273298390209675,
+  "later": 0.005502081476151943
+ },
+ {
+  "task_id": 2,
+  "mask": "current_mask",
+  "percent": 75,
+  "executed": 0.005615234375,
+  "later": 0.006054766941815615
+ },
+ {
+  "task_id": 2,
+  "mask": "current_mask",
+  "percent": 80,
+  "executed": 0.00588204525411129,
+  "later": 0.006040102336555719
+ },
+ {
+  "task_id": 2,
+  "mask": "current_mask",
+  "percent": 85,
+  "executed": 0.007015555165708065,
+  "later": 0.005767029710114002
+ },
+ {
+  "task_id": 2,
+  "mask": "current_mask",
+  "percent": 90,
+  "executed": 0.00827811099588871,
+  "later": 0.006257094442844391
+ },
+ {
+  "task_id": 2,
+  "mask": "current_mask",
+  "percent": 95,
+  "executed": 0.008684431202709675,
+  "later": 0.006354393903166056
+ },
+ {
+  "task_id": 2,
+  "mask": "current_mask",
+  "percent": 96,
+  "executed": 0.00970546156167984,
+  "later": 0.006264823023229837
+ },
+ {
+  "task_id": 2,
+  "mask": "current_mask",
+  "percent": 98,
+  "executed": 0.009935651905834675,
+  "later": 0.006311788223683834
+ },
+ {
+  "task_id": 2,
+  "mask": "current_mask",
+  "percent": 100,
+  "executed": 0.00981096550822258,
+  "later": 0.006188330706208944
+ },
+ {
+  "task_id": 4,
+  "mask": "future1_mask",
+  "percent": 5,
+  "executed": 0.00288347527384758,
+  "later": 0.001623376621864736
+ },
+ {
+  "task_id": 4,
+  "mask": "future1_mask",
+  "percent": 10,
+  "executed": 0.002849469892680645,
+  "later": 0.0016344739124178886
+ },
+ {
+  "task_id": 4,
+  "mask": "future1_mask",
+  "percent": 15,
+  "executed": 0.0029357909224927425,
+  "later": 0.0018136160215362906
+ },
+ {
+  "task_id": 4,
+  "mask": "future1_mask",
+  "percent": 20,
+  "executed": 0.0051627024076879025,
+  "later": 0.002583293244242668
+ },
+ {
+  "task_id": 4,
+  "mask": "future1_mask",
+  "percent": 25,
+  "executed": 0.0057163783349096775,
+  "later": 0.003008953994140029
+ },
+ {
+  "task_id": 4,
+  "mask": "future1_mask",
+  "percent": 30,
+  "executed": 0.00626395083963871,
+  "later": 0.003754058387130499
+ },
+ {
+  "task_id": 4,
+  "mask": "future1_mask",
+  "percent": 35,
+  "executed": 0.0058000837452709675,
+  "later": 0.0037096692249178886
+ },
+ {
+  "task_id": 4,
+  "mask": "future1_mask",
+  "percent": 40,
+  "executed": 0.004917689599096775,
+  "later": 0.0036082081496715546
+ },
+ {
+  "task_id": 4,
+  "mask": "future1_mask",
+  "percent": 45,
+  "executed": 0.004946463275700808,
+  "later": 0.004531661979854107
+ },
+ {
+  "task_id": 4,
+  "mask": "future1_mask",
+  "percent": 50,
+  "executed": 0.014345877803862095,
+  "later": 0.007242574356496334
+ },
+ {
+  "task_id": 4,
+  "mask": "future1_mask",
+  "percent": 55,
+  "executed": 0.015035574324429035,
+  "later": 0.006916789337992668
+ },
+ {
+  "task_id": 4,
+  "mask": "future1_mask",
+  "percent": 60,
+  "executed": 0.01700177788734436,
+  "later": 0.007692807819694281
+ },
+ {
+  "task_id": 4,
+  "mask": "future1_mask",
+  "percent": 65,
+  "executed": 0.01972133107483387,
+  "later": 0.01398735586553812
+ },
+ {
+  "task_id": 4,
+  "mask": "future1_mask",
+  "percent": 70,
+  "executed": 0.02058367058634758,
+  "later": 0.018998580053448677
+ },
+ {
+  "task_id": 4,
+  "mask": "future1_mask",
+  "percent": 75,
+  "executed": 0.02049560472369194,
+  "later": 0.01945594698190689
+ },
+ {
+  "task_id": 4,
+  "mask": "future1_mask",
+  "percent": 80,
+  "executed": 0.02069440484046936,
+  "later": 0.019780145958065987
+ },
+ {
+  "task_id": 4,
+  "mask": "future1_mask",
+  "percent": 85,
+  "executed": 0.02479073591530323,
+  "later": 0.019631918519735336
+ },
+ {
+  "task_id": 4,
+  "mask": "future1_mask",
+  "percent": 90,
+  "executed": 0.04062151163816452,
+  "later": 0.022023387253284454
+ },
+ {
+  "task_id": 4,
+  "mask": "future1_mask",
+  "percent": 95,
+  "executed": 0.04238978773355484,
+  "later": 0.02232380583882332
+ },
+ {
+  "task_id": 4,
+  "mask": "future1_mask",
+  "percent": 96,
+  "executed": 0.09048984944820404,
+  "later": 0.029092367738485336
+ },
+ {
+  "task_id": 4,
+  "mask": "future1_mask",
+  "percent": 98,
+  "executed": 0.09081944078207016,
+  "later": 0.02933175303041935
+ },
+ {
+  "task_id": 4,
+  "mask": "future1_mask",
+  "percent": 100,
+  "executed": 0.09083601087331772,
+  "later": 0.02943400666117668
+ },
+ {
+  "task_id": 4,
+  "mask": "current_mask",
+  "percent": 5,
+  "executed": 0.0016810825327411294,
+  "later": 0.0012373491190373898
+ },
+ {
+  "task_id": 4,
+  "mask": "current_mask",
+  "percent": 10,
+  "executed": 0.001739501953125,
+  "later": 0.001424417831003666
+ },
+ {
+  "task_id": 4,
+  "mask": "current_mask",
+  "percent": 15,
+  "executed": 0.0025268555618822575,
+  "later": 0.0019903802312910557
+ },
+ {
+  "task_id": 4,
+  "mask": "current_mask",
+  "percent": 20,
+  "executed": 0.0028660364914685488,
+  "later": 0.0021623882930725813
+ },
+ {
+  "task_id": 4,
+  "mask": "current_mask",
+  "percent": 25,
+  "executed": 0.004649134818464518,
+  "later": 0.003062062431126833
+ },
+ {
+  "task_id": 4,
+  "mask": "current_mask",
+  "percent": 30,
+  "executed": 0.005087716039270163,
+  "later": 0.003061269875615835
+ },
+ {
+  "task_id": 4,
+  "mask": "current_mask",
+  "percent": 35,
+  "executed": 0.0052315848879516125,
+  "later": 0.0033497996628284454
+ },
+ {
+  "task_id": 4,
+  "mask": "current_mask",
+  "percent": 40,
+  "executed": 0.005154855083674192,
+  "later": 0.0034029080998152494
+ },
+ {
+  "task_id": 4,
+  "mask": "current_mask",
+  "percent": 45,
+  "executed": 0.005160958506166935,
+  "later": 0.003582842880859971
+ },
+ {
+  "task_id": 4,
+  "mask": "current_mask",
+  "percent": 50,
+  "executed": 0.006854684092104435,
+  "later": 0.0034013227559626102
+ },
+ {
+  "task_id": 4,
+  "mask": "current_mask",
+  "percent": 55,
+  "executed": 0.0071507045067846775,
+  "later": 0.003620890900492668
+ },
+ {
+  "task_id": 4,
+  "mask": "current_mask",
+  "percent": 60,
+  "executed": 0.0074558802880346775,
+  "later": 0.003549551125615835
+ },
+ {
+  "task_id": 4,
+  "mask": "current_mask",
+  "percent": 65,
+  "executed": 0.00821097195148468,
+  "later": 0.004033869132399559
+ },
+ {
+  "task_id": 4,
+  "mask": "current_mask",
+  "percent": 70,
+  "executed": 0.00858241505920887,
+  "later": 0.0042795948684215546
+ },
+ {
+  "task_id": 4,
+  "mask": "current_mask",
+  "percent": 75,
+  "executed": 0.00919320248067379,
+  "later": 0.004273253493010998
+ },
+ {
+  "task_id": 4,
+  "mask": "current_mask",
+  "percent": 80,
+  "executed": 0.01017783023416996,
+  "later": 0.004915311932563782
+ },
+ {
+  "task_id": 4,
+  "mask": "current_mask",
+  "percent": 85,
+  "executed": 0.010776628740131855,
+  "later": 0.004775010049343109
+ },
+ {
+  "task_id": 4,
+  "mask": "current_mask",
+  "percent": 90,
+  "executed": 0.01331176795065403,
+  "later": 0.0052561573684215546
+ },
+ {
+  "task_id": 4,
+  "mask": "current_mask",
+  "percent": 95,
+  "executed": 0.013492693193256855,
+  "later": 0.005379813257604837
+ },
+ {
+  "task_id": 4,
+  "mask": "current_mask",
+  "percent": 96,
+  "executed": 0.012425449676811695,
+  "later": 0.00518798828125
+ },
+ {
+  "task_id": 4,
+  "mask": "current_mask",
+  "percent": 98,
+  "executed": 0.012594168074429035,
+  "later": 0.0059885792434215546
+ },
+ {
+  "task_id": 4,
+  "mask": "current_mask",
+  "percent": 100,
+  "executed": 0.01247558556497097,
+  "later": 0.005788827780634165
+ },
+ {
+  "task_id": 6,
+  "mask": "future1_mask",
+  "percent": 5,
+  "executed": 0.0023018973879516125,
+  "later": 0.0017264230409637094
+ },
+ {
+  "task_id": 6,
+  "mask": "future1_mask",
+  "percent": 10,
+  "executed": 0.0025756836403161287,
+  "later": 0.001623376621864736
+ },
+ {
+  "task_id": 6,
+  "mask": "future1_mask",
+  "percent": 15,
+  "executed": 0.0033046177122741938,
+  "later": 0.0017961774719879031
+ },
+ {
+  "task_id": 6,
+  "mask": "future1_mask",
+  "percent": 20,
+  "executed": 0.0048967632465064526,
+  "later": 0.002433479530736804
+ },
+ {
+  "task_id": 6,
+  "mask": "future1_mask",
+  "percent": 25,
+  "executed": 0.0050868443213403225,
+  "later": 0.003050172468647361
+ },
+ {
+  "task_id": 6,
+  "mask": "future1_mask",
+  "percent": 30,
+  "executed": 0.0053658620454370975,
+  "later": 0.0033846767619252205
+ },
+ {
+  "task_id": 6,
+  "mask": "future1_mask",
+  "percent": 35,
+  "executed": 0.005871581844985485,
+  "later": 0.0033624821808189154
+ },
+ {
+  "task_id": 6,
+  "mask": "future1_mask",
+  "percent": 40,
+  "executed": 0.006016322411596775,
+  "later": 0.003459187224507332
+ },
+ {
+  "task_id": 6,
+  "mask": "future1_mask",
+  "percent": 45,
+  "executed": 0.0069562639109790325,
+  "later": 0.006655210163444281
+ },
+ {
+  "task_id": 6,
+  "mask": "future1_mask",
+  "percent": 50,
+  "executed": 0.01991141214966774,
+  "later": 0.008320597931742668
+ },
+ {
+  "task_id": 6,
+  "mask": "future1_mask",
+  "percent": 55,
+  "executed": 0.02036307193338871,
+  "later": 0.00906966533511877
+ },
+ {
+  "task_id": 6,
+  "mask": "future1_mask",
+  "percent": 60,
+  "executed": 0.02107282355427742,
+  "later": 0.009419230744242668
+ },
+ {
+  "task_id": 6,
+  "mask": "future1_mask",
+  "percent": 65,
+  "executed": 0.02281145378947258,
+  "later": 0.014607219025492668
+ },
+ {
+  "task_id": 6,
+  "mask": "future1_mask",
+  "percent": 70,
+  "executed": 0.02414550818502903,
+  "later": 0.01813299022614956
+ },
+ {
+  "task_id": 6,
+  "mask": "future1_mask",
+  "percent": 75,
+  "executed": 0.02529645711183548,
+  "later": 0.01828121766448021
+ },
+ {
+  "task_id": 6,
+  "mask": "future1_mask",
+  "percent": 80,
+  "executed": 0.02575509250164032,
+  "later": 0.01841834932565689
+ },
+ {
+  "task_id": 6,
+  "mask": "future1_mask",
+  "percent": 85,
+  "executed": 0.02922188863158226,
+  "later": 0.018686270341277122
+ },
+ {
+  "task_id": 6,
+  "mask": "future1_mask",
+  "percent": 90,
+  "executed": 0.04257463663816452,
+  "later": 0.020864510908722878
+ },
+ {
+  "task_id": 6,
+  "mask": "future1_mask",
+  "percent": 95,
+  "executed": 0.05020054429769516,
+  "later": 0.021680954843759537
+ },
+ {
+  "task_id": 6,
+  "mask": "future1_mask",
+  "percent": 96,
+  "executed": 0.10346679389476776,
+  "later": 0.028363116085529327
+ },
+ {
+  "task_id": 6,
+  "mask": "future1_mask",
+  "percent": 98,
+  "executed": 0.10375279188156128,
+  "later": 0.028737254440784454
+ },
+ {
+  "task_id": 6,
+  "mask": "future1_mask",
+  "percent": 100,
+  "executed": 0.10346679389476776,
+  "later": 0.02847726084291935
+ },
+ {
+  "task_id": 6,
+  "mask": "current_mask",
+  "percent": 5,
+  "executed": 0.0014927455922588706,
+  "later": 0.001104974071495235
+ },
+ {
+  "task_id": 6,
+  "mask": "current_mask",
+  "percent": 10,
+  "executed": 0.0020054408814758062,
+  "later": 0.0012650922872126102
+ },
+ {
+  "task_id": 6,
+  "mask": "current_mask",
+  "percent": 15,
+  "executed": 0.0019321986474096775,
+  "later": 0.0016138646751642227
+ },
+ {
+  "task_id": 6,
+  "mask": "current_mask",
+  "percent": 20,
+  "executed": 0.0020420618820935488,
+  "later": 0.0016867897938936949
+ },
+ {
+  "task_id": 6,
+  "mask": "current_mask",
+  "percent": 25,
+  "executed": 0.004000418353825808,
+  "later": 0.0027759105432778597
+ },
+ {
+  "task_id": 6,
+  "mask": "current_mask",
+  "percent": 30,
+  "executed": 0.00393589586019516,
+  "later": 0.0026078657247126102
+ },
+ {
+  "task_id": 6,
+  "mask": "current_mask",
+  "percent": 35,
+  "executed": 0.0037405830807983875,
+  "later": 0.0031294389627873898
+ },
+ {
+  "task_id": 6,
+  "mask": "current_mask",
+  "percent": 40,
+  "executed": 0.00474504753947258,
+  "later": 0.003568575019016862
+ },
+ {
+  "task_id": 6,
+  "mask": "current_mask",
+  "percent": 45,
+  "executed": 0.004727608989924192,
+  "later": 0.003570160362869501
+ },
+ {
+  "task_id": 6,
+  "mask": "current_mask",
+  "percent": 50,
+  "executed": 0.0058611189015209675,
+  "later": 0.003841251600533724
+ },
+ {
+  "task_id": 6,
+  "mask": "current_mask",
+  "percent": 55,
+  "executed": 0.006351144053041935,
+  "later": 0.003820642363280058
+ },
+ {
+  "task_id": 6,
+  "mask": "current_mask",
+  "percent": 60,
+  "executed": 0.00612618587911129,
+  "later": 0.003825398162007332
+ },
+ {
+  "task_id": 6,
+  "mask": "current_mask",
+  "percent": 65,
+  "executed": 0.00640869140625,
+  "later": 0.004080635961145163
+ },
+ {
+  "task_id": 6,
+  "mask": "current_mask",
+  "percent": 70,
+  "executed": 0.006839425303041935,
+  "later": 0.004354897886514664
+ },
+ {
+  "task_id": 6,
+  "mask": "current_mask",
+  "percent": 75,
+  "executed": 0.0066999164409935474,
+  "later": 0.004526113625615835
+ },
+ {
+  "task_id": 6,
+  "mask": "current_mask",
+  "percent": 80,
+  "executed": 0.0070399693213403225,
+  "later": 0.00474409619346261
+ },
+ {
+  "task_id": 6,
+  "mask": "current_mask",
+  "percent": 85,
+  "executed": 0.007809012196958065,
+  "later": 0.004952567163854837
+ },
+ {
+  "task_id": 6,
+  "mask": "current_mask",
+  "percent": 90,
+  "executed": 0.007761927787214518,
+  "later": 0.005393288563936949
+ },
+ {
+  "task_id": 6,
+  "mask": "current_mask",
+  "percent": 95,
+  "executed": 0.007244001142680645,
+  "later": 0.005660416092723608
+ },
+ {
+  "task_id": 6,
+  "mask": "current_mask",
+  "percent": 96,
+  "executed": 0.007137625478208065,
+  "later": 0.00571193965151906
+ },
+ {
+  "task_id": 6,
+  "mask": "current_mask",
+  "percent": 98,
+  "executed": 0.007397460751235485,
+  "later": 0.0057388897985219955
+ },
+ {
+  "task_id": 6,
+  "mask": "current_mask",
+  "percent": 100,
+  "executed": 0.007275390438735485,
+  "later": 0.005742060486227274
+ },
+ {
+  "task_id": 8,
+  "mask": "future1_mask",
+  "percent": 5,
+  "executed": 0.01541922427713871,
+  "later": 0.0028678597882390022
+ },
+ {
+  "task_id": 8,
+  "mask": "future1_mask",
+  "percent": 10,
+  "executed": 0.01690848171710968,
+  "later": 0.0035669896751642227
+ },
+ {
+  "task_id": 8,
+  "mask": "future1_mask",
+  "percent": 15,
+  "executed": 0.01631905697286129,
+  "later": 0.0034560165368020535
+ },
+ {
+  "task_id": 8,
+  "mask": "future1_mask",
+  "percent": 20,
+  "executed": 0.01612723246216774,
+  "later": 0.004201121162623167
+ },
+ {
+  "task_id": 8,
+  "mask": "future1_mask",
+  "percent": 25,
+  "executed": 0.01719098724424839,
+  "later": 0.0043929461389780045
+ },
+ {
+  "task_id": 8,
+  "mask": "future1_mask",
+  "percent": 30,
+  "executed": 0.01658063568174839,
+  "later": 0.004304167348891497
+ },
+ {
+  "task_id": 8,
+  "mask": "future1_mask",
+  "percent": 35,
+  "executed": 0.01581333763897419,
+  "later": 0.004308923613280058
+ },
+ {
+  "task_id": 8,
+  "mask": "future1_mask",
+  "percent": 40,
+  "executed": 0.015551757998764515,
+  "later": 0.003833324881270528
+ },
+ {
+  "task_id": 8,
+  "mask": "future1_mask",
+  "percent": 45,
+  "executed": 0.015330287627875805,
+  "later": 0.004186853300780058
+ },
+ {
+  "task_id": 8,
+  "mask": "future1_mask",
+  "percent": 50,
+  "executed": 0.02344098687171936,
+  "later": 0.0057198661379516125
+ },
+ {
+  "task_id": 8,
+  "mask": "future1_mask",
+  "percent": 55,
+  "executed": 0.02503138966858387,
+  "later": 0.005808644462376833
+ },
+ {
+  "task_id": 8,
+  "mask": "future1_mask",
+  "percent": 60,
+  "executed": 0.02881905622780323,
+  "later": 0.007386046461760998
+ },
+ {
+  "task_id": 8,
+  "mask": "future1_mask",
+  "percent": 65,
+  "executed": 0.02837262861430645,
+  "later": 0.007844999432563782
+ },
+ {
+  "task_id": 8,
+  "mask": "future1_mask",
+  "percent": 70,
+  "executed": 0.02946079708635807,
+  "later": 0.007625431288033724
+ },
+ {
+  "task_id": 8,
+  "mask": "future1_mask",
+  "percent": 75,
+  "executed": 0.02952008880674839,
+  "later": 0.007568359375
+ },
+ {
+  "task_id": 8,
+  "mask": "future1_mask",
+  "percent": 80,
+  "executed": 0.02972935326397419,
+  "later": 0.0075509208254516125
+ },
+ {
+  "task_id": 8,
+  "mask": "future1_mask",
+  "percent": 85,
+  "executed": 0.03443777933716774,
+  "later": 0.008832658641040325
+ },
+ {
+  "task_id": 8,
+  "mask": "future1_mask",
+  "percent": 90,
+  "executed": 0.05020751804113388,
+  "later": 0.012429770082235336
+ },
+ {
+  "task_id": 8,
+  "mask": "future1_mask",
+  "percent": 95,
+  "executed": 0.05277535691857338,
+  "later": 0.012012828141450882
+ },
+ {
+  "task_id": 8,
+  "mask": "future1_mask",
+  "percent": 96,
+  "executed": 0.06205880269408226,
+  "later": 0.016114074736833572
+ },
+ {
+  "task_id": 8,
+  "mask": "future1_mask",
+  "percent": 98,
+  "executed": 0.06189705803990364,
+  "later": 0.016105353832244873
+ },
+ {
+  "task_id": 8,
+  "mask": "future1_mask",
+  "percent": 100,
+  "executed": 0.06172877550125122,
+  "later": 0.016152914613485336
+ },
+ {
+  "task_id": 8,
+  "mask": "current_mask",
+  "percent": 5,
+  "executed": 0.0016566684935241938,
+  "later": 0.0011176567059010267
+ },
+ {
+  "task_id": 8,
+  "mask": "current_mask",
+  "percent": 10,
+  "executed": 0.002183314645662904,
+  "later": 0.002105316612869501
+ },
+ {
+  "task_id": 8,
+  "mask": "current_mask",
+  "percent": 15,
+  "executed": 0.00276227667927742,
+  "later": 0.002084707375615835
+ },
+ {
+  "task_id": 8,
+  "mask": "current_mask",
+  "percent": 20,
+  "executed": 0.00611049123108387,
+  "later": 0.0026379870250821114
+ },
+ {
+  "task_id": 8,
+  "mask": "current_mask",
+  "percent": 25,
+  "executed": 0.00724051333963871,
+  "later": 0.002813958562910557
+ },
+ {
+  "task_id": 8,
+  "mask": "current_mask",
+  "percent": 30,
+  "executed": 0.007648576982319355,
+  "later": 0.002663352293893695
+ },
+ {
+  "task_id": 8,
+  "mask": "current_mask",
+  "percent": 35,
+  "executed": 0.007167271338403225,
+  "later": 0.002821885049343109
+ },
+ {
+  "task_id": 8,
+  "mask": "current_mask",
+  "percent": 40,
+  "executed": 0.006710379384458065,
+  "later": 0.002728350693359971
+ },
+ {
+  "task_id": 8,
+  "mask": "current_mask",
+  "percent": 45,
+  "executed": 0.0071044922806322575,
+  "later": 0.0027093267999589443
+ },
+ {
+  "task_id": 8,
+  "mask": "current_mask",
+  "percent": 50,
+  "executed": 0.010257394053041935,
+  "later": 0.002866274444386363
+ },
+ {
+  "task_id": 8,
+  "mask": "current_mask",
+  "percent": 55,
+  "executed": 0.01459612138569355,
+  "later": 0.0027235946618020535
+ },
+ {
+  "task_id": 8,
+  "mask": "current_mask",
+  "percent": 60,
+  "executed": 0.01514369435608387,
+  "later": 0.0028852983377873898
+ },
+ {
+  "task_id": 8,
+  "mask": "current_mask",
+  "percent": 65,
+  "executed": 0.014491490088403225,
+  "later": 0.002533355262130499
+ },
+ {
+  "task_id": 8,
+  "mask": "current_mask",
+  "percent": 70,
+  "executed": 0.015140206553041935,
+  "later": 0.0070784930139780045
+ },
+ {
+  "task_id": 8,
+  "mask": "current_mask",
+  "percent": 75,
+  "executed": 0.01570172980427742,
+  "later": 0.007045201025903225
+ },
+ {
+  "task_id": 8,
+  "mask": "current_mask",
+  "percent": 80,
+  "executed": 0.01573311910033226,
+  "later": 0.00673923222348094
+ },
+ {
+  "task_id": 8,
+  "mask": "current_mask",
+  "percent": 85,
+  "executed": 0.013333565555512905,
+  "later": 0.0074740322306752205
+ },
+ {
+  "task_id": 8,
+  "mask": "current_mask",
+  "percent": 90,
+  "executed": 0.01650739461183548,
+  "later": 0.008998326025903225
+ },
+ {
+  "task_id": 8,
+  "mask": "current_mask",
+  "percent": 95,
+  "executed": 0.01649344339966774,
+  "later": 0.008870706893503666
+ },
+ {
+  "task_id": 8,
+  "mask": "current_mask",
+  "percent": 96,
+  "executed": 0.02151227742433548,
+  "later": 0.009109298698604107
+ },
+ {
+  "task_id": 8,
+  "mask": "current_mask",
+  "percent": 98,
+  "executed": 0.02142159640789032,
+  "later": 0.008987228386104107
+ },
+ {
+  "task_id": 8,
+  "mask": "current_mask",
+  "percent": 100,
+  "executed": 0.02165178582072258,
+  "later": 0.009013386443257332
+ }
+]

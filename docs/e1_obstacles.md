@@ -1,5 +1,7 @@
 # E1 obstacle interventions on LIBERO
 
+Read the [results, sign audit, and interpretation across E1 properties](e1_obstacles_result.md).
+
 Does a visible obstacle in a model's future change its initial reach toward the open side? This is a first-chunk LIBERO experiment. A positive signed lateral displacement means the gripper moved away from the obstructed side. The primary comparison changes the future while the current scene, instruction, action seed and robot state are fixed.
 
 ## Conditions and measurement

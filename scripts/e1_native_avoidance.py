@@ -4,6 +4,7 @@ import argparse
 import hashlib
 import json
 from dataclasses import replace
+from functools import partial
 from pathlib import Path
 
 import numpy as np
@@ -135,6 +136,13 @@ def compare(clear, live, off, replay, off_replay, witnesses, box, design):
     }
 
 
+def cached_episode(folder, episode, name, placement, replay=None):
+    receipt = folder / (name + ".json")
+    if not receipt.exists():
+        save(receipt, episode(placement, replay=replay))
+    return json.loads(receipt.read_bytes())
+
+
 def main():
     p = argparse.ArgumentParser(description=__doc__)
     p.add_argument(
@@ -162,14 +170,8 @@ def main():
             folder = args.out / f"task_{case['task']}_state_{case['state']}_seed_{seed}"
             folder.mkdir(exist_ok=True)
 
-            def execute(name, placement, replay=None):
-                receipt = folder / (name + ".json")
-                if not receipt.exists():
-                    values = run_episode(
-                        api, task, state, case, seed, placement, spec, replay
-                    )
-                    save(receipt, values)
-                return json.loads(receipt.read_bytes())
+            episode = partial(run_episode, api, task, state, case, seed, design=spec)
+            execute = partial(cached_episode, folder, episode)
 
             clear = execute("clear", "clear")
             for side in ("minus", "plus"):

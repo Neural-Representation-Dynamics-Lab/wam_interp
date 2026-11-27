@@ -34,7 +34,7 @@ from wam_interp.evaluations.LIBERO_PLUS import LiberoPlusEvalConfig, evaluate_li
 from wam_interp.evaluations.LIBERO_PLUS.environment import identify_benchmark
 from wam_interp.evaluations.provenance import model_provenance, package_versions, report_path, write_report
 from wam_interp.interventions.future_conditioning import (
-    CONDITIONS, MASKS, FasterWAMFutureAblation, FutureAblationPolicy,
+    CONDITIONS, MASKS, PARTIAL_MASKS, PARTIAL_PERCENTS, FasterWAMFutureAblation, FutureAblationPolicy,
 )
 from wam_interp.models.fasterwam.libero_plus_adapter import FasterWAMLiberoPlusAdapter
 from wam_interp.models.fasterwam.loader import compose_fasterwam_config, load_fasterwam
@@ -57,7 +57,10 @@ CATEGORIES = ("Background Textures", "Camera Viewpoints", "Language Instructions
 # Faster-WAM's LIBERO episode settings, as in scripts/evaluate_benchmark.py.
 PROTOCOL = {"action_horizon": 32, "replan_steps": 10, "num_steps_wait": 30, "camera_resolution": 256}
 MASK_SPANS = {"current_mask": "latent frame 0", "future_mask": "latent frames 1-2",
-              "future1_mask": "latent frame 1", "future2_mask": "latent frame 2"}
+              "future1_mask": "latent frame 1", "future2_mask": "latent frame 2",
+              **{f"{name}_{p}": f"{p}% of {frame}, fixed positions shared by frames 0 and 1"
+                 for name, frame in (("current_mask", "latent frame 0"), ("future1_mask", "latent frame 1"))
+                 for p in PARTIAL_PERCENTS}}
 
 
 def load_adapter(args):
@@ -143,6 +146,8 @@ def run_checks(adapter, latent_frames, args):
         (a is None and b is None) or (torch.equal(a["k"], b["k"]) and torch.equal(a["v"], b["v"]))
         for a, b in zip(normal_cache, ablation.last_cache))
     passed = all(checks.values())
+    video_seq_len = next(layer for layer in normal_cache if layer is not None)["k"].shape[1]
+    checks["partial_columns"] = {c: ablation.columns(c, video_seq_len).tolist() for c in PARTIAL_MASKS}
     policy.resample_offset = args.resample_offset
     checks["action_abs_diff"] = policy.predict_action(request).metadata["future_ablation"]["action_abs_diff"]
     args.output_dir.mkdir(parents=True, exist_ok=True)
@@ -184,7 +189,8 @@ def main(argv=None):
         policy = FutureAblationPolicy(adapter, ablation, condition, probes=probes if condition == "normal" else (),
                                       executed_steps=PROTOCOL["replan_steps"], resample_offset=args.resample_offset)
         metadata = {"experiment": "E7 future-conditioning ablation", "arm": args.arm, "condition": condition,
-                    "probes": list(policy.probes), "mask_spans": MASK_SPANS, "resample_offset": args.resample_offset,
+                    "probes": list(policy.probes), "mask_spans": MASK_SPANS,
+                    "partial_subset_seed": ablation.subset_seed, "resample_offset": args.resample_offset,
                     "checkpoint_revision": args.checkpoint_revision, "fasterwam_task_config": args.task_config,
                     "id_states": args.id_states if args.arm == "id" else None, "ood_cells": cells,
                     "sample_seed": args.sample_seed if cells else None}

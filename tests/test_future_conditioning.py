@@ -7,7 +7,9 @@ from types import SimpleNamespace
 import pytest
 import torch
 
-from wam_interp.interventions.future_conditioning import FasterWAMFutureAblation, FutureAblationPolicy
+from wam_interp.interventions.future_conditioning import (
+    PARTIAL_PERCENTS, FasterWAMFutureAblation, FutureAblationPolicy,
+)
 from wam_interp.types import InferenceResult
 
 VIDEO_LEN, ACTION_LEN = 6, 2  # 3 latent frames of 2 tokens
@@ -76,6 +78,30 @@ def test_masks_drop_keys_only_from_action_rows_of_condition_layers(condition, co
         kept = [c for c in range(VIDEO_LEN) if not columns[0] <= c < columns[1]]
         assert mask[VIDEO_LEN:, kept].all()
     assert adapter.base_mask.all()
+
+
+def test_partial_mask_drops_only_its_columns_from_action_rows():
+    adapter, ablation, policy = make_policy("future1_mask_50")
+    policy.predict_action(Request(seed=7))
+    dropped = ablation.columns("future1_mask_50", VIDEO_LEN).tolist()
+    assert len(dropped) == 1 and 2 <= dropped[0] < 4
+    for layer in adapter.model.mot.condition_layer_set:
+        mask = adapter.model.mot.seen["masks"][layer]
+        kept = [c for c in range(VIDEO_LEN + ACTION_LEN) if c not in dropped]
+        assert not mask[VIDEO_LEN:, dropped].any() and mask[VIDEO_LEN:, kept].all() and mask[:VIDEO_LEN].all()
+
+
+def test_partial_masks_are_nested_and_match_across_frames():
+    _, ablation, _ = make_policy()
+    frame = 98
+    columns = {(name, p): ablation.columns(f"{name}_{p}", 3 * frame).tolist()
+               for name in ("current_mask", "future1_mask") for p in PARTIAL_PERCENTS}
+    for p in PARTIAL_PERCENTS:
+        assert len(columns["future1_mask", p]) == int(p * frame / 100 + 0.5)
+        assert [c + frame for c in columns["current_mask", p]] == columns["future1_mask", p]
+        assert all(frame <= c < 2 * frame for c in columns["future1_mask", p])
+    for smaller, larger in zip(PARTIAL_PERCENTS, PARTIAL_PERCENTS[1:]):
+        assert set(columns["future1_mask", smaller]) < set(columns["future1_mask", larger])
 
 
 def test_resample_keeps_current_positions_and_swaps_in_donor_future():

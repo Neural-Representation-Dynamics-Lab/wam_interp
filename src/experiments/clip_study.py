@@ -3,7 +3,7 @@
 import hashlib
 import json
 import random
-from contextlib import contextmanager
+from contextlib import contextmanager, nullcontext
 from pathlib import Path
 
 import numpy as np
@@ -28,18 +28,39 @@ def save(path, value):
 
 
 @contextmanager
-def start(futures, task, state, index, *, task_id=5, seed=0):
+def start(
+    futures,
+    task,
+    state,
+    index,
+    *,
+    task_id=5,
+    seed=0,
+    xml_processor=None,
+    warmup_context=None,
+):
     random.seed(0)
     np.random.seed(0)
     env = create_libero_environment(task, 256, 0)
-    meta = {"instruction": task.language, "metadata": {"task_id": task_id, "initial_state_index": index}}
+    meta = {
+        "instruction": task.language,
+        "metadata": {"task_id": task_id, "initial_state_index": index},
+    }
     try:
+        if xml_processor is not None:
+            original = env.env._xml_processor
+            env.env.set_xml_processor(
+                (lambda xml: xml_processor(original(xml)))
+                if original
+                else xml_processor
+            )
         obs = reset_to_initial_state(env, state, **meta)
-        for _ in range(30):
-            step = step_libero(env, LIBERO_DUMMY_ACTION, **meta)
-            if step.done or step.success:
-                raise RuntimeError("Task ended during reset")
-            obs = step.observation
+        with warmup_context(env) if warmup_context else nullcontext():
+            for _ in range(30):
+                step = step_libero(env, LIBERO_DUMMY_ACTION, **meta)
+                if step.done or step.success:
+                    raise RuntimeError("Task ended during reset")
+                obs = step.observation
         if futures is None:
             yield env, meta, obs, None
             return
@@ -48,7 +69,9 @@ def start(futures, task, state, index, *, task_id=5, seed=0):
         if begin:
             begin(obs)
         config = LiberoEvalConfig(inference_options={"condition": "idm"})
-        request = _request_for_call(config, adapter, adapter.prepare_observation(obs), seed, 0)
+        request = _request_for_call(
+            config, adapter, adapter.prepare_observation(obs), seed, 0
+        )
         yield env, meta, obs, request
     finally:
         env.close()

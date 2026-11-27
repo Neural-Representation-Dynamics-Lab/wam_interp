@@ -42,7 +42,16 @@ def scene(api, task, state, idx, task_id, seed, box):
 
 
 def rollout(
-    env, meta, obs, actions, *, frames=False, barrier=False, robot_only=False, stride=4
+    env,
+    meta,
+    obs,
+    actions,
+    *,
+    frames=False,
+    barrier=False,
+    robot_only=False,
+    stride=4,
+    on_step=None,
 ):
     """Log any obstacle contact at physics substeps, including contact with other objects."""
     sim = env.sim
@@ -74,6 +83,8 @@ def rollout(
         for step_number, cmd in enumerate(actions, 1):
             result = step_libero(env, cmd, **meta)
             current = result.observation
+            if on_step is not None:
+                on_step(result, cmd)
             positions.append(current.state["eef_position"].copy())
             qpos.append(sim.data.qpos.copy())
             if frames and step_number % stride == 0:

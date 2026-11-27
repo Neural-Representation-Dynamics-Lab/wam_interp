@@ -1,0 +1,322 @@
+[
+  {
+    "variant": 9,
+    "category": "Background Textures",
+    "level": 4,
+    "base_task": "KITCHEN_SCENE3_turn_on_the_stove_and_put_the_moka_pot_on_it_table_19",
+    "seed": 9000069,
+    "termination": "max_steps",
+    "policy_steps": 700,
+    "fasterwam_success": false
+  },
+  {
+    "variant": 10,
+    "category": "Background Textures",
+    "level": 4,
+    "base_task": "KITCHEN_SCENE3_turn_on_the_stove_and_put_the_moka_pot_on_it_table_2",
+    "seed": 10000072,
+    "termination": "max_steps",
+    "policy_steps": 700,
+    "fasterwam_success": true
+  },
+  {
+    "variant": 23,
+    "category": "Background Textures",
+    "level": 4,
+    "base_task": "KITCHEN_SCENE3_turn_on_the_stove_and_put_the_moka_pot_on_it_tb_18",
+    "seed": 23000111,
+    "termination": "max_steps",
+    "policy_steps": 700,
+    "fasterwam_success": false
+  },
+  {
+    "variant": 26,
+    "category": "Background Textures",
+    "level": 4,
+    "base_task": "KITCHEN_SCENE3_turn_on_the_stove_and_put_the_moka_pot_on_it_tb_21",
+    "seed": 26000120,
+    "termination": "max_steps",
+    "policy_steps": 700,
+    "fasterwam_success": false
+  },
+  {
+    "variant": 142,
+    "category": "Background Textures",
+    "level": 2,
+    "base_task": "LIVING_ROOM_SCENE1_put_both_the_alphabet_soup_and_the_cream_cheese_box_in_the_basket_table_3",
+    "seed": 142000468,
+    "termination": "max_steps",
+    "policy_steps": 700,
+    "fasterwam_success": false
+  },
+  {
+    "variant": 160,
+    "category": "Background Textures",
+    "level": 2,
+    "base_task": "LIVING_ROOM_SCENE2_put_both_the_cream_cheese_box_and_the_butter_in_the_basket_table_12",
+    "seed": 160000522,
+    "termination": "max_steps",
+    "policy_steps": 700,
+    "fasterwam_success": false
+  },
+  {
+    "variant": 216,
+    "category": "Background Textures",
+    "level": 2,
+    "base_task": "LIVING_ROOM_SCENE5_put_the_white_mug_on_the_left_plate_and_put_the_yellow_and_white_mug_on_the_right_plate_table_9",
+    "seed": 216000690,
+    "termination": "max_steps",
+    "policy_steps": 700,
+    "fasterwam_success": false
+  },
+  {
+    "variant": 230,
+    "category": "Background Textures",
+    "level": 2,
+    "base_task": "LIVING_ROOM_SCENE5_put_the_white_mug_on_the_left_plate_and_put_the_yellow_and_white_mug_on_the_right_plate_tb_22",
+    "seed": 230000732,
+    "termination": "max_steps",
+    "policy_steps": 700,
+    "fasterwam_success": false
+  },
+  {
+    "variant": 232,
+    "category": "Background Textures",
+    "level": 4,
+    "base_task": "LIVING_ROOM_SCENE5_put_the_white_mug_on_the_left_plate_and_put_the_yellow_and_white_mug_on_the_right_plate_tb_4",
+    "seed": 232000738,
+    "termination": "max_steps",
+    "policy_steps": 700,
+    "fasterwam_success": false
+  },
+  {
+    "variant": 264,
+    "category": "Background Textures",
+    "level": 2,
+    "base_task": "LIVING_ROOM_SCENE6_put_the_white_mug_on_the_plate_and_put_the_chocolate_pudding_to_the_right_of_the_plate_tb_19",
+    "seed": 264000834,
+    "termination": "max_steps",
+    "policy_steps": 700,
+    "fasterwam_success": false
+  },
+  {
+    "variant": 271,
+    "category": "Background Textures",
+    "level": 4,
+    "base_task": "LIVING_ROOM_SCENE6_put_the_white_mug_on_the_plate_and_put_the_chocolate_pudding_to_the_right_of_the_plate_tb_5",
+    "seed": 271000855,
+    "termination": "max_steps",
+    "policy_steps": 700,
+    "fasterwam_success": false
+  },
+  {
+    "variant": 311,
+    "category": "Robot Initial States",
+    "level": 4,
+    "base_task": "LIVING_ROOM_SCENE2_put_both_the_alphabet_soup_and_the_tomato_sauce_in_the_basket_view_0_0_100_0_0_initstate_301",
+    "seed": 311000975,
+    "termination": "max_steps",
+    "policy_steps": 700,
+    "fasterwam_success": false
+  },
+  {
+    "variant": 445,
+    "category": "Robot Initial States",
+    "level": 4,
+    "base_task": "KITCHEN_SCENE4_put_the_black_bowl_in_the_bottom_drawer_of_the_cabinet_and_close_it_view_0_0_100_0_0_initstate_414",
+    "seed": 445001377,
+    "termination": "max_steps",
+    "policy_steps": 700,
+    "fasterwam_success": false
+  },
+  {
+    "variant": 705,
+    "category": "Camera Viewpoints",
+    "level": 2,
+    "base_task": "LIVING_ROOM_SCENE2_put_both_the_cream_cheese_box_and_the_butter_in_the_basket_view_0_0_100_4_10_initstate_0",
+    "seed": 705002157,
+    "termination": "max_steps",
+    "policy_steps": 700,
+    "fasterwam_success": true
+  },
+  {
+    "variant": 722,
+    "category": "Camera Viewpoints",
+    "level": 2,
+    "base_task": "LIVING_ROOM_SCENE2_put_both_the_cream_cheese_box_and_the_butter_in_the_basket_view_25_0_100_0_0_initstate_0",
+    "seed": 722002208,
+    "termination": "max_steps",
+    "policy_steps": 700,
+    "fasterwam_success": true
+  },
+  {
+    "variant": 923,
+    "category": "Camera Viewpoints",
+    "level": 4,
+    "base_task": "LIVING_ROOM_SCENE6_put_the_white_mug_on_the_plate_and_put_the_chocolate_pudding_to_the_right_of_the_plate_view_0_0_162_0_0_initstate_0",
+    "seed": 923002811,
+    "termination": "max_steps",
+    "policy_steps": 700,
+    "fasterwam_success": true
+  },
+  {
+    "variant": 936,
+    "category": "Camera Viewpoints",
+    "level": 2,
+    "base_task": "LIVING_ROOM_SCENE6_put_the_white_mug_on_the_plate_and_put_the_chocolate_pudding_to_the_right_of_the_plate_view_0_0_100_352_354_initstate_0",
+    "seed": 936002850,
+    "termination": "max_steps",
+    "policy_steps": 700,
+    "fasterwam_success": true
+  },
+  {
+    "variant": 1084,
+    "category": "Camera Viewpoints",
+    "level": 4,
+    "base_task": "KITCHEN_SCENE6_put_the_yellow_and_white_mug_in_the_microwave_and_close_it_view_347_15_100_0_0_initstate_0",
+    "seed": 1084003294,
+    "termination": "max_steps",
+    "policy_steps": 700,
+    "fasterwam_success": false
+  },
+  {
+    "variant": 1091,
+    "category": "Camera Viewpoints",
+    "level": 4,
+    "base_task": "KITCHEN_SCENE6_put_the_yellow_and_white_mug_in_the_microwave_and_close_it_view_351_15_100_0_0_initstate_0",
+    "seed": 1091003315,
+    "termination": "max_steps",
+    "policy_steps": 700,
+    "fasterwam_success": true
+  },
+  {
+    "variant": 1093,
+    "category": "Camera Viewpoints",
+    "level": 4,
+    "base_task": "KITCHEN_SCENE6_put_the_yellow_and_white_mug_in_the_microwave_and_close_it_view_352_15_100_0_0_initstate_0",
+    "seed": 1093003321,
+    "termination": "max_steps",
+    "policy_steps": 700,
+    "fasterwam_success": true
+  },
+  {
+    "variant": 1432,
+    "category": "Language Instructions",
+    "level": 4,
+    "base_task": "KITCHEN_SCENE8_put_both_moka_pots_on_the_stove_language_33_view_0_0_100_0_0_initstate_0",
+    "seed": 1432004338,
+    "termination": "max_steps",
+    "policy_steps": 700,
+    "fasterwam_success": true
+  },
+  {
+    "variant": 1545,
+    "category": "Sensor Noise",
+    "level": 4,
+    "base_task": "LIVING_ROOM_SCENE2_put_both_the_cream_cheese_box_and_the_butter_in_the_basket_view_0_0_100_0_0_initstate_0_noise_20",
+    "seed": 1545004677,
+    "termination": "max_steps",
+    "policy_steps": 700,
+    "fasterwam_success": false
+  },
+  {
+    "variant": 1550,
+    "category": "Sensor Noise",
+    "level": 4,
+    "base_task": "LIVING_ROOM_SCENE2_put_both_the_cream_cheese_box_and_the_butter_in_the_basket_view_0_0_100_0_0_initstate_0_noise_30",
+    "seed": 1550004692,
+    "termination": "max_steps",
+    "policy_steps": 700,
+    "fasterwam_success": false
+  },
+  {
+    "variant": 1682,
+    "category": "Sensor Noise",
+    "level": 2,
+    "base_task": "LIVING_ROOM_SCENE5_put_the_white_mug_on_the_left_plate_and_put_the_yellow_and_white_mug_on_the_right_plate_view_0_0_100_0_0_initstate_0_noise_24",
+    "seed": 1682005088,
+    "termination": "max_steps",
+    "policy_steps": 700,
+    "fasterwam_success": true
+  },
+  {
+    "variant": 1685,
+    "category": "Sensor Noise",
+    "level": 2,
+    "base_task": "LIVING_ROOM_SCENE5_put_the_white_mug_on_the_left_plate_and_put_the_yellow_and_white_mug_on_the_right_plate_view_0_0_100_0_0_initstate_0_noise_27",
+    "seed": 1685005097,
+    "termination": "max_steps",
+    "policy_steps": 700,
+    "fasterwam_success": false
+  },
+  {
+    "variant": 1767,
+    "category": "Sensor Noise",
+    "level": 4,
+    "base_task": "LIVING_ROOM_SCENE6_put_the_white_mug_on_the_plate_and_put_the_chocolate_pudding_to_the_right_of_the_plate_view_0_0_100_0_0_initstate_0_noise_14",
+    "seed": 1767005343,
+    "termination": "max_steps",
+    "policy_steps": 700,
+    "fasterwam_success": false
+  },
+  {
+    "variant": 1993,
+    "category": "Objects Layout",
+    "level": 2,
+    "base_task": "KITCHEN_SCENE6_put_the_yellow_and_white_mug_in_the_microwave_and_close_it_add_22",
+    "seed": 1993006021,
+    "termination": "max_steps",
+    "policy_steps": 700,
+    "fasterwam_success": true
+  },
+  {
+    "variant": 2298,
+    "category": "Light Conditions",
+    "level": 4,
+    "base_task": "KITCHEN_SCENE4_put_the_black_bowl_in_the_bottom_drawer_of_the_cabinet_and_close_it_light_2",
+    "seed": 2298006936,
+    "termination": "max_steps",
+    "policy_steps": 700,
+    "fasterwam_success": true
+  },
+  {
+    "variant": 2362,
+    "category": "Light Conditions",
+    "level": 4,
+    "base_task": "KITCHEN_SCENE6_put_the_yellow_and_white_mug_in_the_microwave_and_close_it_light_40",
+    "seed": 2362007128,
+    "termination": "max_steps",
+    "policy_steps": 700,
+    "fasterwam_success": true
+  },
+  {
+    "variant": 2370,
+    "category": "Light Conditions",
+    "level": 4,
+    "base_task": "KITCHEN_SCENE6_put_the_yellow_and_white_mug_in_the_microwave_and_close_it_light_5",
+    "seed": 2370007152,
+    "termination": "max_steps",
+    "policy_steps": 700,
+    "fasterwam_success": true
+  },
+  {
+    "variant": 2433,
+    "category": "Light Conditions",
+    "level": 2,
+    "base_task": "LIVING_ROOM_SCENE5_put_the_white_mug_on_the_left_plate_and_put_the_yellow_and_white_mug_on_the_right_plate_light_10",
+    "seed": 2433007341,
+    "termination": "max_steps",
+    "policy_steps": 700,
+    "fasterwam_success": true
+  },
+  {
+    "variant": 2459,
+    "category": "Light Conditions",
+    "level": 2,
+    "base_task": "LIVING_ROOM_SCENE5_put_the_white_mug_on_the_left_plate_and_put_the_yellow_and_white_mug_on_the_right_plate_light_44",
+    "seed": 2459007419,
+    "termination": "max_steps",
+    "policy_steps": 700,
+    "fasterwam_success": true
+  }
+]

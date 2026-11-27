@@ -1,0 +1,45 @@
+{
+  "schema_version": 1,
+  "purpose": "E7 content arm: replace Fast-WAM's imagined future with a scripted pre-contact approach to one of two objects, in and out of distribution, and measure whether the executed chunk moves toward the object the future shows.",
+  "pilot": {
+    "backend": "fastwam_optional_idm",
+    "precision": "bfloat16",
+    "device": "cuda",
+    "repository_root": ".",
+    "suite": "libero_10",
+    "environment_seed": 0,
+    "camera_resolution": 256,
+    "warmup_steps": 30,
+    "execute_steps": 32,
+    "inference_steps": 10,
+    "behavior_axis": 1,
+    "identity_atol": 1e-05,
+    "candidate_seeds": [0, 1],
+    "property": "first_approach_target",
+    "frame_steps": [0, 4, 8, 12, 16, 20, 24, 28, 32]
+  },
+  "reference": {
+    "control_steps": 32,
+    "hover_above_object_center_m": 0.14,
+    "controller": {"ramp_steps": 16, "max_command": 0.6},
+    "approach_limits": {"endpoint_goal_error_m": 0.02, "maximum_object_translation_m": 0.001, "target_margin_m": 0.1}
+  },
+  "pairs": {
+    "0": {"soup": "alphabet_soup_1", "tomato": "tomato_sauce_1"},
+    "1": {"cream_cheese": "cream_cheese_1", "butter": "butter_1"},
+    "2": {"moka_pot": "moka_pot_1", "frypan": "chefmate_8_frypan_1"},
+    "3": {"bowl": "akita_black_bowl_1", "wine_bottle": "wine_bottle_1"},
+    "4": {"white_mug": "porcelain_mug_1", "yellow_mug": "white_yellow_mug_1"},
+    "5": {"book": "black_book_1", "mug": "white_yellow_mug_1"},
+    "6": {"white_mug": "porcelain_mug_1", "pudding": "chocolate_pudding_1"},
+    "7": {"soup": "alphabet_soup_1", "cream_cheese": "cream_cheese_1"},
+    "8": {"moka_pot_1": "moka_pot_1", "moka_pot_2": "moka_pot_2"},
+    "9": {"yellow_mug": "white_yellow_mug_1", "white_mug": "porcelain_mug_1"}
+  },
+  "pair_note": "Tasks 0, 1, 4, 6, 7 and 8 pair two objects the task moves; tasks 2, 3, 5 and 9 pair the task's object with a distractor in the scene.",
+  "action_seeds": [0, 1],
+  "id_states": 5,
+  "ood": {"levels": [2, 4], "variants_per_cell": 10, "sample_seed": 0},
+  "primary_measure": "Endpoint of the end effector after the 32-control chunk under the second object's future minus under the first object's future, projected on the tabletop XY direction from the first object to the second. Positive means the chunk moves toward the object the future shows.",
+  "validity": "A start is used only if both scripted approaches pass the E1 approach limits and the scripted run starts from the same observation as the policy."
+}

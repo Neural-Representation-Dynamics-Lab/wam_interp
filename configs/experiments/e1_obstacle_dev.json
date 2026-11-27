@@ -1,0 +1,6 @@
+{
+  "split": "development",
+  "tasks": [0, 3],
+  "states": {"0": [0, 1, 2, 3], "3": [0, 1]},
+  "seeds": [0]
+}

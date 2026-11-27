@@ -70,7 +70,13 @@ class FutureAdapter:
 
     @property
     def supports_clip(self):
+        """Accepts an already assembled uint8 RGB montage through from_clip()."""
         return self.backend in ("fastwam", "longwam")
+
+    @property
+    def supports_prepared_frames(self):
+        """The selected site supports a clean-video donor from native camera tensors."""
+        return self.backend != "fasterwam" and (self.backend != "openwam" or self.stage > 0)
 
     def _schedule(self, request):
         if request.condition != self.capability.condition or request.compile_action_infer:
@@ -150,6 +156,34 @@ class FutureAdapter:
             ]
             video = video.to(model.torch_dtype) * (2.0 / 255.0) - 1.0
             return self._from_prepared_video(request, video, noise_seed)
+
+    def from_prepared_frames(self, request, frames, *, noise_seed=None):
+        """Construct a LIBERO donor from native prepared image tensors, anchor first.
+
+        Sample each backend's native video times. For OpenWAM select a noninitial
+        denoising stage. Use an explicit matched noise seed for Long-WAM IDM.
+        """
+        import torch
+
+        if self.backend == "fasterwam":
+            raise NotImplementedError(
+                "The native one-pass cache uses sigma=1; a matched clean-video edit has zero signal"
+            )
+        if self.backend == "openwam" and not 0 < self.stage < request.num_inference_steps:
+            raise ValueError("OpenWAM requires a noninitial stage within the requested schedule")
+        if len(frames) < 2 or not torch.equal(frames[0], request.observation.image):
+            raise ValueError("Expected prepared frames starting at the recipient observation")
+        if self.backend in ("fastwam", "longwam"):
+            with torch.inference_mode():
+                return self._from_prepared_video(request, torch.stack(frames, dim=2), noise_seed)
+        if noise_seed is not None:
+            raise ValueError("The cache donor reuses the native recipient noise")
+        from .clip_cache import lingbot_clip, openwam_clip
+
+        context = lingbot_clip if self.backend == "lingbot_va" else openwam_clip
+        with context(self, request, frames):
+            _, donor = self.capture(request)
+        return donor
 
     def from_camera_frames(self, request, frames, *, noise_seed):
         """Use the native Long-WAM RoboTwin preprocessing for every raw camera triplet."""

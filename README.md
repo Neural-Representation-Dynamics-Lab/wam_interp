@@ -17,6 +17,8 @@ The main design rule is: **a benchmark evaluator controls the benchmark; a model
 
 ## Repository map
 
+The [E1 obstacle results](docs/e1_obstacles_result.md) cover the five backends, the independent sign check, and the native avoidance pilot.
+
 E1 research tooling now has a [modular handoff](docs/e1_multimodel.md),
 [current experiment TODO list](docs/e1_next_steps_20261122.md), and
 [literature/code review](docs/e1_research_review_20261122.md).

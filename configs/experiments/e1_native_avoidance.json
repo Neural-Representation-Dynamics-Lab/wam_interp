@@ -1,0 +1,219 @@
+{
+  "backend": "fastwam",
+  "condition": "idm",
+  "policy_seeds": [
+    2,
+    12
+  ],
+  "replan_every": 8,
+  "max_controls": 48,
+  "min_clearance_gain_mm": 5.0,
+  "max_offroute_rms_mm": 5.0,
+  "witness_biases": [
+    0.18,
+    0.35,
+    0.55
+  ],
+  "cases": [
+    {
+      "task": 0,
+      "state": 0,
+      "instruction": "put both the alphabet soup and the tomato sauce in the basket",
+      "clear_anchor": "70a6bc494eecd9b922940d1eeaeac19f41f84a47070cdabe024cadd9358f4de0",
+      "placements": {
+        "minus": {
+          "geometry": {
+            "center": [
+              -0.054388444097868416,
+              -0.14322599272905456,
+              0.6158919519267297
+            ],
+            "forward": [
+              0.0684690517479602,
+              -0.9976532408370832
+            ],
+            "half_sizes": [
+              0.012,
+              0.037,
+              0.012
+            ],
+            "side": -1,
+            "off_route": false
+          },
+          "anchor": "f0bcc54c7cd3833d6f426be706f4daeeccd68d51b303944e146485073c57488a",
+          "changed_pixels_frame0": 1323,
+          "changed_area_ratio": null
+        },
+        "plus": {
+          "geometry": {
+            "center": [
+              -0.006501088537688427,
+              -0.13993947824515246,
+              0.6158919519267297
+            ],
+            "forward": [
+              0.0684690517479602,
+              -0.9976532408370832
+            ],
+            "half_sizes": [
+              0.012,
+              0.037,
+              0.012
+            ],
+            "side": 1,
+            "off_route": false
+          },
+          "anchor": "4fcdb49810e32ae6ee4d713e3251e2aa27200a555a0dd11e8fee25755b68c1e4",
+          "changed_pixels_frame0": 1484,
+          "changed_area_ratio": null
+        },
+        "off_minus": {
+          "geometry": {
+            "center": [
+              -0.06328942082510325,
+              -0.013531071420233742,
+              0.6158919519267297
+            ],
+            "forward": [
+              0.0684690517479602,
+              -0.9976532408370832
+            ],
+            "half_sizes": [
+              0.012,
+              0.037,
+              0.012
+            ],
+            "side": -1,
+            "off_route": true
+          },
+          "anchor": "0858e797eeab19f5ca679086dc4f17aad21888f241147054224352ac7c23bb95",
+          "changed_pixels_frame0": 1500,
+          "changed_area_ratio": 0.5744976816074189
+        },
+        "off_plus": {
+          "geometry": {
+            "center": [
+              -0.015402065264923253,
+              -0.010244556936331639,
+              0.6158919519267297
+            ],
+            "forward": [
+              0.0684690517479602,
+              -0.9976532408370832
+            ],
+            "half_sizes": [
+              0.012,
+              0.037,
+              0.012
+            ],
+            "side": 1,
+            "off_route": true
+          },
+          "anchor": "843d87426a7a6a4a85d2573ce34aa67a78eb290661a2c632044389a89bd1646d",
+          "changed_pixels_frame0": 1686,
+          "changed_area_ratio": 0.4378629978992462
+        }
+      }
+    },
+    {
+      "task": 3,
+      "state": 0,
+      "instruction": "put the black bowl in the bottom drawer of the cabinet and close it",
+      "clear_anchor": "57dd3ab25f3a11c413b5be16c5f1c0de06c19a687a0ad053808ffd89c71849f8",
+      "placements": {
+        "minus": {
+          "geometry": {
+            "center": [
+              -0.040544957568373646,
+              -0.09142957940383394,
+              1.1263329067749912
+            ],
+            "forward": [
+              0.9590777509488218,
+              -0.28314283963213693
+            ],
+            "half_sizes": [
+              0.012,
+              0.037,
+              0.012
+            ],
+            "side": -1,
+            "off_route": false
+          },
+          "anchor": "b9e43a10a66d5633063a2577909c243236e0957923d3a3b3373ddfafda66f824",
+          "changed_pixels_frame0": 360,
+          "changed_area_ratio": null
+        },
+        "plus": {
+          "geometry": {
+            "center": [
+              -0.02695410126603107,
+              -0.04539384735829048,
+              1.1263329067749912
+            ],
+            "forward": [
+              0.9590777509488218,
+              -0.28314283963213693
+            ],
+            "half_sizes": [
+              0.012,
+              0.037,
+              0.012
+            ],
+            "side": 1,
+            "off_route": false
+          },
+          "anchor": "92f2e38ba4908988abd22a042272d1f678e7048f40e02a2aacb7752cfe70b908",
+          "changed_pixels_frame0": 332,
+          "changed_area_ratio": null
+        },
+        "off_minus": {
+          "geometry": {
+            "center": [
+              0.0457720400170203,
+              -0.11691243497072626,
+              1.1263329067749912
+            ],
+            "forward": [
+              0.9590777509488218,
+              -0.28314283963213693
+            ],
+            "half_sizes": [
+              0.012,
+              0.037,
+              0.012
+            ],
+            "side": -1,
+            "off_route": true
+          },
+          "anchor": "7934e10fc9ceb8772ad169a963e77d2a9dbf37552e48e3b9dcbc21faf2cd65df",
+          "changed_pixels_frame0": 378,
+          "changed_area_ratio": 0.5795434436382941
+        },
+        "off_plus": {
+          "geometry": {
+            "center": [
+              0.05936289631936288,
+              -0.0708767029251828,
+              1.1263329067749912
+            ],
+            "forward": [
+              0.9590777509488218,
+              -0.28314283963213693
+            ],
+            "half_sizes": [
+              0.012,
+              0.037,
+              0.012
+            ],
+            "side": 1,
+            "off_route": true
+          },
+          "anchor": "02a72f4befa10bb0fc3da247ca8738dfb935e00af308950b0045f846816d5722",
+          "changed_pixels_frame0": 396,
+          "changed_area_ratio": 0.7463294354989353
+        }
+      }
+    }
+  ]
+}

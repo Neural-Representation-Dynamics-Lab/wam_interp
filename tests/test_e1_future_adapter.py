@@ -138,3 +138,25 @@ def test_held_out_direction_gate_uses_only_development_templates():
     assert not scores["arm"]["passed"]
     assert scores["mug"]["correct"] == 0 and not scores["mug"]["passed"]
     assert not score_directions(records[:2])["book"]["passed"]
+
+
+def test_prepared_frames_match_rgb_donor_and_reject_one_pass():
+    model = Stub("fastwam")
+    model.model.vae = SimpleNamespace(model=SimpleNamespace(encode=lambda video, scale: video), scale=1)
+    api = FutureAdapter(model)
+    rgb = np.zeros((3,2,2,3), dtype=np.uint8)
+    rgb[1:] = 255
+    frames = [torch.from_numpy(x).permute(2,0,1)[None].float().mul(2/255).sub(1) for x in rgb]
+    req = request("idm", frames[0])
+    assert torch.equal(api.from_clip(req,rgb).parts[0], api.from_prepared_frames(req,frames).parts[0])
+    with pytest.raises(ValueError,match="recipient observation"):
+        api.from_prepared_frames(req,frames[::-1])
+    with pytest.raises(NotImplementedError,match="sigma=1"):
+        FutureAdapter(Stub("fasterwam")).from_prepared_frames(request("one_pass_future_cache"),frames)
+
+
+def test_prepared_video_capability_depends_on_openwam_stage():
+    assert FutureAdapter(Stub("lingbot_va")).supports_prepared_frames
+    assert not FutureAdapter(Stub("fasterwam")).supports_prepared_frames
+    assert not FutureAdapter(Stub("openwam")).supports_prepared_frames
+    assert FutureAdapter(Stub("openwam"), stage=1).supports_prepared_frames

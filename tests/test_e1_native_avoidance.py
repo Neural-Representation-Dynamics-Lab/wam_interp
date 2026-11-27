@@ -1,5 +1,7 @@
 """Regression checks for the native pilot's physical and matched-control gates."""
 
+import hashlib
+import sys
 from pathlib import Path
 
 import numpy as np
@@ -54,3 +56,29 @@ def test_witness_bias_is_mirrored_and_preserves_input(pilot):
         assert np.allclose(biased[:20, 1], -0.35 * side)
         assert not biased[20:].any()
     assert not commands.any()
+
+
+def test_score_only_accepts_windows_newlines_and_requires_receipts(
+    tmp_path, pilot, monkeypatch
+):
+    design = (
+        Path(__file__).resolve().parents[1]
+        / "configs/experiments/e1_native_avoidance.json"
+    )
+    lf = design.read_bytes().replace(b"\r\n", b"\n")
+    spec = tmp_path / "design.json"
+    spec.write_bytes(lf.replace(b"\n", b"\r\n"))
+    (tmp_path / "design.sha256").write_text(hashlib.sha256(lf).hexdigest())
+    monkeypatch.setattr(
+        sys,
+        "argv",
+        ["pilot", "--score-only", "--design", str(spec), "--out", str(tmp_path)],
+    )
+    monkeypatch.setattr(
+        pilot, "load", lambda *_: pytest.fail("CPU scoring loaded the policy")
+    )
+    monkeypatch.setattr(
+        pilot, "_get_suite", lambda *_: pytest.fail("CPU scoring loaded the simulator")
+    )
+    with pytest.raises(FileNotFoundError, match="Missing pilot episode"):
+        pilot.main()

@@ -18,7 +18,7 @@ from wam_interp.experiments.obstacle_libero import rollout, scene
 
 
 def run_episode(api, task, state, case, seed, placement, design, replay=None):
-    record = case["placements"].get(placement)
+    record = None if placement == "clear" else case["placements"][placement]
     box = Barrier(**record["geometry"]) if record else None
     expected = record["anchor"] if record else case["clear_anchor"]
     horizon = design["max_controls"] if replay is None else len(replay)
@@ -139,6 +139,8 @@ def compare(clear, live, off, replay, off_replay, witnesses, box, design):
 def cached_episode(folder, episode, name, placement, replay=None):
     receipt = folder / (name + ".json")
     if not receipt.exists():
+        if episode is None:
+            raise FileNotFoundError(f"Missing pilot episode: {receipt}")
         save(receipt, episode(placement, replay=replay))
     return json.loads(receipt.read_bytes())
 
@@ -151,26 +153,39 @@ def main():
         default=Path("configs/experiments/e1_native_avoidance.json"),
     )
     p.add_argument("--out", type=Path, required=True)
+    p.add_argument(
+        "--score-only", action="store_true", help="Recompute from saved episodes on CPU"
+    )
     args = p.parse_args()
-    spec = json.loads(args.design.read_bytes())
+    # Git checkouts can use CRLF on Windows. Hash the registered LF text on both hosts.
+    design_bytes = args.design.read_bytes().replace(b"\r\n", b"\n")
+    spec = json.loads(design_bytes)
     args.out.mkdir(parents=True, exist_ok=True)
-    digest = hashlib.sha256(args.design.read_bytes()).hexdigest()
+    digest = hashlib.sha256(design_bytes).hexdigest()
     manifest = args.out / "design.sha256"
+    if args.score_only and not manifest.is_file():
+        raise FileNotFoundError(f"Missing pilot design hash: {manifest}")
     if manifest.exists() and manifest.read_text().strip() != digest:
         raise ValueError("This directory contains a different pilot design")
-    manifest.write_text(digest + "\n")
-    suite = _get_suite("libero_10")
-    api = load("fastwam")
+    if not args.score_only:
+        manifest.write_text(digest + "\n")
+        suite = _get_suite("libero_10")
+        api = load("fastwam")
     summary = {"design_sha256": digest, "cases": [], "positive_control": False}
     for case in spec["cases"]:
-        task = suite.get_task(case["task"])
-        state = initial_states_for_task(suite, case["task"])[case["state"]]
+        if not args.score_only:
+            task = suite.get_task(case["task"])
+            state = initial_states_for_task(suite, case["task"])[case["state"]]
         result = {"task": case["task"], "state": case["state"], "comparisons": []}
         for seed in spec["policy_seeds"]:
             folder = args.out / f"task_{case['task']}_state_{case['state']}_seed_{seed}"
             folder.mkdir(exist_ok=True)
 
-            episode = partial(run_episode, api, task, state, case, seed, design=spec)
+            episode = None
+            if not args.score_only:
+                episode = partial(
+                    run_episode, api, task, state, case, seed, design=spec
+                )
             execute = partial(cached_episode, folder, episode)
 
             clear = execute("clear", "clear")

@@ -46,13 +46,31 @@ python scripts/e1_obstacle_sign_audit.py --report results/obstacle_reproduction/
 |---|---|---|
 | Depicted arm motion | Shift the executed reach with edited motion. | With their own source videos on three LIBERO tasks, FastWAM shifted +26.15 mm (47/48 starts) and Long-WAM +6.61 mm (48/48). Only 11/48 Long-WAM starts qualified with shared FastWAM footage. [Study design](e1_confirmation.md) |
 | Irrelevant appearance | Preserve the trajectory within a predefined bound. | Under the registered room-wall tint, mean trajectory RMS was 1.03 mm for FastWAM and 0.29 mm for Long-WAM on own footage. Both upper bounds were below 5 mm. Stronger tabletop tints in a separate experiment changed reaches. [Visual replication](e1_visual_replication.md) |
-| Target region and language | Reach toward the depicted approach. | Native donor swaps changed actions; donor prompt and scene information can travel together. Scripted RGB removed donor language, while depicted arm motion and target region still varied together. [Simulator-video test](e1_simulator_video.md) |
+| Target region and language | Reach toward the depicted approach. | Native donor swaps changed actions. Donor prompt and scene information can travel together. Scripted RGB removed donor language, while depicted arm motion and target region still varied together. [Simulator-video test](e1_simulator_video.md) |
 | Object identity | Reverse the instructed target after exchanging complete visual assets. | The native behavioral positive control passed in 0/2 development layouts. Target-specific future use remains unresolved. [Identity protocol](e1_object_identity.md) |
 | Object location | Follow the target more than the distractor with depicted arm motion held fixed. | Seven of ten two-seed held-out starts qualified. Signed shifts were −3.73 mm for the book and −7.20 mm for the mug. In a separate physical relocation, 0/8 arrangement–seed cases met the native first-chunk target-following criterion. [Fixed-motion results](e1_a100_fixed_motion_results.md) · [Physical relocation](e1_physical_relocation.md) |
 | Obstacles | Steer toward the open side and preserve the reach for an off-route obstacle. | The mean future-only effect went toward the barrier side. Both placements shifted the 3D endpoint. The native replanning positive control has a separate protocol and result below. |
 | Spatial relations, reachability, object state, interaction dynamics | Select an available route, change approach to a reachable goal, skip a completed action, or compensate for a slip, respectively. | The studies above do not independently isolate these properties. A validated live-scene response and matched visual edit would make each test interpretable. |
-| Blending and donor searches | Diagnose intervention magnitude, coherence and stimulus availability. | Blends vary several properties; an unsuccessful donor search leaves the semantic hypothesis unresolved. [Equal-norm diagnostic](e1_equal_norm.md) |
+| Blending and donor searches | Diagnose intervention magnitude, coherence and stimulus availability. | Blends vary several properties. An unsuccessful donor search leaves the semantic hypothesis unresolved. [Equal-norm diagnostic](e1_equal_norm.md) |
 
 ## Native avoidance pilot
 
 The [prospective pilot](e1_native_avoidance.md) tests the model’s own plans under repeated observation of a real obstacle. Its conditions, clearance and contact rules, appearance control, and stopping rule were fixed before the new policy runs.
+
+
+**Neither scene passed the native positive control.** A scripted detour crossed the barrier plane without robot contact on every side and seed (8/8). Replaying the unobstructed commands into the on-route barrier produced contact in 8/8. Six comparisons also passed the off-route replay requirement. With its normal observations and native futures, FastWAM contacted the on-route solid in every comparison, including all six physically qualified comparisons.
+
+| LIBERO task | Seed | Barrier side | Physical checks | First native contact (control) | Clearance gain (mm) | Off-route trajectory RMS (mm) |
+|---|---:|---|---|---:|---:|---:|
+| 0 | 2 | minus | Pass | 32 | -1.32 | 9.89 |
+| 0 | 2 | plus | Pass | 33 | +0.46 | 7.41 |
+| 0 | 12 | minus | Pass | 33 | -0.24 | 6.53 |
+| 0 | 12 | plus | Pass | 33 | -0.33 | 6.42 |
+| 3 | 2 | minus | Pass | 33 | +7.27 | 6.26 |
+| 3 | 2 | plus | Off-route replay hit | 31 | -5.58 | 11.76 |
+| 3 | 12 | minus | Pass | 30 | +7.45 | 6.88 |
+| 3 | 12 | plus | Off-route replay hit | 30 | -0.90 | 11.02 |
+
+Both seeds used the same development start per task. Seeds and mirror conditions are paired repeats. On task 3's minus side the gripper reference point gained more than 7 mm of minimum clearance, yet a robot geometry contacted the bar. All eight native reaches crossed the center plane. All eight off-route RMS shifts exceeded the prospective 5 mm bound. The 48-control horizon measures the initial approach with replanning. It does not establish eventual task success or what these policies would do in a different barrier layout.
+
+The study ran 50 policy or replay episodes on an NVIDIA A100-SXM4 40 GB using BF16, MuJoCo 3.3.2 and robosuite 1.4.1. The pilot protocol was frozen in commit `aecbca0` (design SHA-256 `d0d198ba219bbcb29af00d7bc9958a0edae37e15579d149cf8d6e8e30acee10a`). Independent inspection of the saved commands, trajectories, contact steps and gate decisions confirmed all eight comparisons. The four-arm experiment with future replacement at each replan was conditional on passing this screen and did not advance. This decision applies to these two fixtures.

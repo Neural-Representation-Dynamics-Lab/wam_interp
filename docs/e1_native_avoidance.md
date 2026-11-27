@@ -14,6 +14,7 @@ In the [obstacle study environment](e1_obstacles.md), run from the repository ro
 
 ```bash
 python scripts/e1_native_avoidance.py --out results/e1_native_avoidance
+python scripts/e1_native_avoidance.py --score-only --out results/e1_native_avoidance
 ```
 
-The [design](../configs/experiments/e1_native_avoidance.json) fixes the exact geometry and reset hashes. The runner verifies each starting observation and writes a per-branch receipt and a study summary. Reuse a results folder only with the same code, checkpoint and design.
+The [design](../configs/experiments/e1_native_avoidance.json) fixes the exact geometry and reset hashes. The runner verifies each starting observation and writes a per-branch receipt and a study summary. The second command recomputes the summary on CPU for a completed run. Reuse a results folder only with the same code, checkpoint and design.
